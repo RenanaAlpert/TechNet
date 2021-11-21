@@ -1,4 +1,4 @@
-package com.example.tecknet;
+package com.example.tecknet.model;
 
 public class User {
 

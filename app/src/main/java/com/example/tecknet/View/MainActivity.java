@@ -1,4 +1,4 @@
-package com.example.tecknet;
+package com.example.tecknet.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
+
+import com.example.tecknet.R;
 
 public class MainActivity extends AppCompatActivity {
 
