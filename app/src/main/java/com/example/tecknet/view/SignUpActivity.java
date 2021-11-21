@@ -1,4 +1,4 @@
-package com.example.tecknet.View;
+package com.example.tecknet.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
