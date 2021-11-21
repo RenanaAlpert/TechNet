@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1035556344010",
+    "project_id": "tecknet-42d12",
+    "storage_bucket": "tecknet-42d12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035556344010:android:203ca6a8a19ee81e122433",
+        "android_client_info": {
+          "package_name": "com.example.tecknet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035556344010-gtmakjha19flemalcbb09611q3pjgf6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWZqAntpytCI0FuHkLLxv5hcGff_YV5Lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035556344010-gtmakjha19flemalcbb09611q3pjgf6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

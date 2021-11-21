@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TeckNet</string>
+    <string name="email">מייל</string>
+    <string name="FirstName">שם פרטי</string>
+    <string name="LastName">שם משפחה</string>
+    <string name="pass">סיסמה</string>
+
+    <string-array name="role">
+        <item>בחר</item>
+        <item>אב בית</item>
+        <item>טכנאי</item>
+    </string-array>
+</resources>
