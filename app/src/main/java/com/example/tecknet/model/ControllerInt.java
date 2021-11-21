@@ -1,7 +1,6 @@
-package com.example.tecknet;
+package com.example.tecknet.model;
 
-import com.example.tecknet.model.MalfunctionDetails;
-import com.example.tecknet.model.User;
+import com.example.tecknet.model.*;
 
 import java.util.ArrayList;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  */
 public interface ControllerInt {
     /**
-     *  Get user from data base by email and passward
+     *  Get user from data base by email and password
      * @param Email
      * @param password
      * @return
@@ -30,7 +29,7 @@ public interface ControllerInt {
      * @param amount   - mount of MalfunctionDetails to get from data base
      * @return   malfunctions tech opened is assigned to
      */
-    ArrayList<MalfunctionDetails> get_tech_malfunction(Technician tech, int amount);
+    ArrayList<MalfunctionDetails> get_tech_malfunction(TechnicianInt tech, int amount);
 
     /**
      *  Get malfunctions mm opened from database
@@ -39,7 +38,7 @@ public interface ControllerInt {
      * @param all   - if true bring every MalfunctionDetails mm opened, else bring only the one that wasn't closed
      * @return    malfunctions mm opened
      */
-    ArrayList<MalfunctionDetails> get_mm_malfunction(MaintenanceMan mm, int amount,boolean all);
+    ArrayList<MalfunctionDetails> get_mm_malfunction(MaintenanceManInt mm, int amount,boolean all);
 
     /**
      * Get all un-assigned  malfunction from database
@@ -48,14 +47,14 @@ public interface ControllerInt {
      * @return
      */
 
-    ArrayList<MalfunctionDetails> get_open_malfunction(Technician tech, int amount);
+    ArrayList<MalfunctionDetails> get_open_malfunction(TechnicianInt tech, int amount);
 
     /**
      *  Add  MalfuntionDetails to data base
      * @param user
      * @param mal
      */
-    void set_malfunction(User user, MalfuntionDetails mal);
+    void set_malfunction(User user, MalfunctionDetails mal);
 
 
 
