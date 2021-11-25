@@ -1,6 +1,6 @@
 package com.example.tecknet.model;
 
-public class MalfunctionDetails {
+public class MalfunctionDetails implements MalfunctionDetailsInt{
     static long malfunction_counter=0;
     long mal_id;
     /**

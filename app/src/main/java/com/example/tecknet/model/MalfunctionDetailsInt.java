@@ -5,37 +5,27 @@ package com.example.tecknet.model;
  */
 public interface MalfunctionDetailsInt {
 
-    /**
-     * @return the id of the malfunction
-     */
-    public long get_Malfunction_id();
+    public long getMal_id();
 
-    //public void set_Malfunction_id(long malfunction_id);
+    public void setMal_id(long mal_id);
 
-    /**
-     * @return the details about the malfunction
-     */
-    public String get_Text_mal_details();
+    public String getExplanation();
 
-    /**
-     * @param text_mal_details - the details about the malfunction
-     */
-    public void set_Text_mal_details(String text_mal_details);
+    public void setExplanation(String explanation);
 
-    /**
-     * @return if there is technician that dealing with the malfunction or not
-     */
-    public boolean is_taken_by_technician();
+    public long getInstitution();
 
-    /**
-     * @param taken_by_technician - if there is technician that dealing with the malfunction or not
-     */
-    public void set_Is_taken_by_technician(boolean taken_by_technician);
+    public void setInstitution(long institution);
 
-    /**
-     * @return the technician id of the technician that dealing with this malfunction
-     */
-    public long get_Technician_id();
+    public boolean isIs_open();
 
-    //public void set_Technician_id(long technician_id);
+    public void setIs_open(boolean is_open);
+
+    public long getProduct_id();
+
+    public void setProduct_id(long product_id);
+
+    public long getTech();
+
+    public void setTech(long tech);
 }

@@ -54,7 +54,7 @@ public interface ControllerInt {
 //     * @param user
 //     * @param mal
 //     */
-    void set_malfunction(User user, MalfunctionDetails mal);
+    void set_malfunction(MalfunctionDetails mal);
 
 
 
