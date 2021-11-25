@@ -82,6 +82,7 @@ public class Controller implements ControllerInt{
     @Override
     public void set_malfunction(MalfunctionDetails mal) {
         conect_db("mals");
-
+        String malId = String.valueOf(mal.mal_id);
+        reference.child(malId).setValue(mal);
     }
 }
