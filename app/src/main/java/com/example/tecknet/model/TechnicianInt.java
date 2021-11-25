@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Interface of technician
  */
-public interface TechnicianInt {
+public interface TechnicianInt extends UserInt {
 
     /**
      * @return the technician's work area
