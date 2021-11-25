@@ -29,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 //import com.google.firebase.auth.AuthResult;
 //import com.google.firebase.auth.FirebaseAuth;
 
+import com.example.tecknet.model.*;
+
 public class LoginActivity extends AppCompatActivity {
     EditText phone , pass;
     TextView forgetPass;
@@ -83,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(phone).exists()){
                     if(!phone.isEmpty()){
-                        UserHelperClass user = snapshot.child(phone).getValue(UserHelperClass.class);
+                        UserInt user = snapshot.child(phone).getValue(UserInt.class);
                         if(user.getPass().equals(pass)){
                             Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext() , MainActivity.class));

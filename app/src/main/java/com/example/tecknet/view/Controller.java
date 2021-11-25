@@ -26,6 +26,8 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.tecknet.model.*;
+
 public class Controller {
 
     FirebaseDatabase rootNode;
@@ -42,7 +44,7 @@ public class Controller {
     public void add_to_database(String fNames ,String lNames ,String emailS
                                ,String role, String passwordS ,String phoneS ){
 
-        UserHelperClass helper = new UserHelperClass(fNames , lNames ,passwordS , emailS , phoneS);
+        user helper = new user(fNames , lNames ,passwordS , emailS , phoneS);
         reference.child(phoneS).setValue(helper);
 
     }

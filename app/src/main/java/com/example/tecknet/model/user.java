@@ -1,12 +1,12 @@
-package com.example.tecknet.view;
+package com.example.tecknet.model;
 
-public class UserHelperClass {
+public class user implements UserInt{
     private String firstName , lastName , pass, email ,phone;
 
-    public UserHelperClass(){
+    public user(){
 
     }
-    public UserHelperClass(String firstName, String lastName, String pass, String email ,String phone) {
+    public user(String firstName, String lastName, String pass, String email ,String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pass = pass;
