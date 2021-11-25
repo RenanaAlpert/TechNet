@@ -20,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//  when User click Login at main screen ->
+    //  when User click Login at main screen ->
 //  move to login screen
     public void onClickLogin(View view) {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
     }
-//   when User click SignUp at main screen ->
+    //   when User click SignUp at main screen ->
 //   move to SignUp screen
     public void OnClickSignUp(View view) {
         Intent intent = new Intent(MainActivity.this, SignUpActivity.class);

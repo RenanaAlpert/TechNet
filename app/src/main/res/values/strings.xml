@@ -19,6 +19,11 @@
     <string name="model">דגם:</string>
     <string name="hint_edt_model">דגם</string>
 
+
+
+    <string name="phone">טלפון</string>
+
+
     <string-array name="role">
         <item>בחר</item>
         <item>אב בית</item>

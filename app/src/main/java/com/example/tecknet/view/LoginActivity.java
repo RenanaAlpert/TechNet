@@ -2,9 +2,14 @@ package com.example.tecknet.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,28 +17,36 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.google.android.gms.tasks.OnCompleteListener;
+//import com.google.android.gms.tasks.Task;
 import com.example.tecknet.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+//import com.google.firebase.auth.AuthResult;
+//import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText email , pass;
+    EditText phone , pass;
     TextView forgetPass;
     Button login;
-    FirebaseAuth fAuth;
     ProgressBar pBar;
-
+    DatabaseReference dbRef;
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email = (EditText)findViewById(R.id.email);
+        phone = (EditText)findViewById(R.id.phone);
         pass = (EditText) findViewById(R.id.pass);
         forgetPass = findViewById(R.id.forget_pass);
         login =(Button)findViewById(R.id.button);
+        pBar = findViewById(R.id.progressBar);
+        dbRef = FirebaseDatabase.getInstance().getReference("users");
         //animation
 //        ObjectAnimator obgAn = ObjectAnimator.ofFloat(email , "translationY", 400f , 0f);
 //        obgAn.setDuration(3500);
@@ -47,37 +60,53 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailS = email.getText().toString().trim(); //email string
-                String passwordS = pass.getText().toString().trim(); // password string
-                if(emailS.isEmpty()){
-                    email.setError("Enter email!!!");
+                String phoneS = phone.getText().toString(); //phone string
+                String passwordS = pass.getText().toString(); // password string
+                if(phoneS.isEmpty()){
+                    phone.setError("Enter phone number!");
                     return;
                 }
                 if(passwordS.isEmpty()){
                     pass.setError("Enter password!");
                     return;
                 }
-                pBar.setVisibility(View.VISIBLE); //on the login pic
+//                pBar.setVisibility(View.VISIBLE); //on the login pic
+                login(phoneS,passwordS);
 
-                //enter the details to the database
-                fAuth.signInWithEmailAndPassword(emailS,passwordS).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        //if the user detail sava on firebase
-                        if(task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this , "enter" , Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    public void login(String phone , String pass){
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child(phone).exists()){
+                    if(!phone.isEmpty()){
+                        UserHelperClass user = snapshot.child(phone).getValue(UserHelperClass.class);
+                        if(user.getPass().equals(pass)){
+                            Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext() , MainActivity.class));
-                            //MainActivity is temp, we need to change to the next screen
-                        }
 
+                        }
                         else {
-                            Toast.makeText(LoginActivity.this , "ERROR!" + task.getException().getMessage() ,
-                                    Toast.LENGTH_SHORT).show();
-                            //to do view gonw
+                            Toast.makeText(LoginActivity.this , "Password incorrect!" , Toast.LENGTH_LONG).show();
                         }
                     }
-                });
+                    else{
+                        Toast.makeText(LoginActivity.this , "User is not register" , Toast.LENGTH_LONG).show();
 
+                    }
+                }
+                else {
+                    Toast.makeText(LoginActivity.this , "User is not register" , Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("TAG",error.getMessage());
             }
         });
     }
