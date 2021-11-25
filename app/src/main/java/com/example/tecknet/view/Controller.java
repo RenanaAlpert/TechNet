@@ -42,7 +42,7 @@ public class Controller {
     public void add_to_database(String fNames ,String lNames ,String emailS
                                ,String role, String passwordS ,String phoneS ){
 
-        UserHelperClass helper = new UserHelperClass(fNames , lNames ,passwordS , emailS , phoneS);
+        UserHelperClass helper = new UserHelperClass(fNames , lNames ,passwordS , emailS , role, phoneS);
         reference.child(phoneS).setValue(helper);
 
     }

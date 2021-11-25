@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeckNet">
         <activity
+            android:name=".view.MaintenanceManDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SignUpActivity"
             android:exported="false" />
         <activity

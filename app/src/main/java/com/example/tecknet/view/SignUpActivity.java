@@ -25,8 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText email ,fName ,lName ,pass ,phone;
     Spinner role;
     Button signUp;
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
+
     ProgressBar pBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,6 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Controller c = new Controller();
-                pBar = findViewById(R.id.progressBar);
 
                 String fNames = fName.getText().toString();
                 String lNames = lName.getText().toString();
