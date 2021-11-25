@@ -4,15 +4,17 @@ public class MalfunctionDetails {
     static long malfunction_counter=0;
     long malfunction_id;
     /**
-     * TODO: add product_id and connect between invantory to malfunctions
+     * TODO: add product_id and connect between inventory to malfunctions
      * text_mal_details is only temporary
      */
     String text_mal_details;
     boolean taken_by_technician;
     long technician_id;
+    Contact contact;
 
-    public MalfunctionDetails(String text_mal_details) {
+    public MalfunctionDetails(String text_mal_details,Contact contact) {
         this.malfunction_id=malfunction_counter;
+        this.contact=new Contact(contact);
         malfunction_counter++;
         this.text_mal_details = text_mal_details;
         this.taken_by_technician=false;
