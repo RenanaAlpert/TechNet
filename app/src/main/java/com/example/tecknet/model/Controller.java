@@ -1,8 +1,14 @@
 package com.example.tecknet.model;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class Controller implements ControllerInt{
+
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 //    /**
 //     * Get user from data base by email and password
 //     *
@@ -63,14 +69,19 @@ public class Controller implements ControllerInt{
 //        return null;
 //    }
 
+    private void conect_db(String db){
+        rootNode = FirebaseDatabase.getInstance(); //connect to firebase
+        reference = rootNode.getReference(db);
+    }
+
     /**
      * Add  MalfuntionDetails to data base
      *
-     * @param user
      * @param mal
      */
     @Override
-    public void set_malfunction(User user, MalfunctionDetails mal) {
+    public void set_malfunction(MalfunctionDetails mal) {
+        conect_db("mals");
 
     }
 }

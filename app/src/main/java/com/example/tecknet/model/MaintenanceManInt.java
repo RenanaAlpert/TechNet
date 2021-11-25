@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Interface of maintenanceMAn
  */
-public interface MaintenanceManInt {
+public interface MaintenanceManInt extends UserInt {
 
     /**
      * @return 1 if it's sent, 0 if not
