@@ -39,7 +39,7 @@ public class MalfunctionReport extends AppCompatActivity {
                 String detailFaultS = type.getText().toString();
 
                 //call renna function to add to database
-                
+
             }
         });
     }

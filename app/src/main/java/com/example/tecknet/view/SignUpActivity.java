@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class SignUpActivity extends AppCompatActivity {
     EditText email ,fName ,lName ,pass ,phone;
     Spinner role;
-    Button signUp;
+    Button next;
 
     ProgressBar pBar;
     @Override
@@ -38,10 +38,10 @@ public class SignUpActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.pass);
         role = (Spinner) findViewById(R.id.role);
         phone = (EditText) findViewById(R.id.phone);
-        signUp = (Button) findViewById(R.id.button) ;
+        next = (Button) findViewById(R.id.button) ;
 
         pBar = findViewById(R.id.progressBar);
-        signUp.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -50,23 +50,23 @@ public class SignUpActivity extends AppCompatActivity {
                 String fNames = fName.getText().toString();
                 String lNames = lName.getText().toString();
                 String emailS = email.getText().toString();
-                String roles = role.getSelectedItem().toString();
+                String roleS = role.getSelectedItem().toString();
                 String passwordS = pass.getText().toString();
                 String phoneS = phone.getText().toString();
+                UserHelperClass user = new UserHelperClass(fNames, lNames,passwordS, emailS,roleS, phoneS);
 
-                boolean ans = check_if_entered_details(fNames,lNames ,emailS,roles,passwordS,phoneS);
+                boolean ans = check_if_entered_details(fNames,lNames ,emailS,roleS,passwordS,phoneS);
                 pBar.setVisibility(View.VISIBLE);//loading
 
                 if(ans) {
 //                    c.check_if_user_exist(phoneS);
-                    c.add_to_database(fNames, lNames, emailS,roles,passwordS, phoneS);
-                    signUp();
+                    c.add_to_database(user);
+
+                    if(roleS.equals("אב בית")) continue_to_institution_detail(user);
+                    else continue_to_tech_detail(user);
+
 
                 }
-//                else if(c.check_if_user_exist(phoneS)){
-//                    Toast.makeText(SignUpActivity.this , "User is already exist!" , Toast.LENGTH_LONG).show();
-//
-//                }
 
 
             }
@@ -121,8 +121,14 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * this function move to the next screen
      */
-    private void signUp() {
-        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+    private void continue_to_institution_detail( UserHelperClass user) {
+        Intent intent = new Intent(SignUpActivity.this, MaintenanceManDetailsActivity.class);
+        intent.putExtra("user" , user);
+        startActivity(intent);
+    }
+    private void continue_to_tech_detail( UserHelperClass user) {
+        Intent intent = new Intent(SignUpActivity.this, TechMenDetailsActivity.class);
+        intent.putExtra("user" , user);
         startActivity(intent);
     }
 }

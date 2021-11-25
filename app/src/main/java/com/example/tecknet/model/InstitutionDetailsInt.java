@@ -10,12 +10,17 @@ public interface InstitutionDetailsInt {
     /**
      * @return the id of the institution
      */
-    public int get_institution_Id();
+    public String getInstitution_id();
 
     /**
      * @return the name of the institution
      */
-    public String get_name();
+    public String getName();
+
+    /**
+     * @return the sity of the institution
+     */
+    public String get_sity();
 
     /**
      * @return the address of the institution
@@ -25,7 +30,7 @@ public interface InstitutionDetailsInt {
     /**
      * @return the region of the institution
      */
-    public region get_area();
+    public String get_area();
 
     /**
      * @return activity time of the institution

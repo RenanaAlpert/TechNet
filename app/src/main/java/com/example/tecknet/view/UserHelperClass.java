@@ -1,6 +1,9 @@
 package com.example.tecknet.view;
 
-public class UserHelperClass {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class UserHelperClass implements Parcelable {
     private String firstName , lastName , pass, email ,phone ,role ;
 
     public UserHelperClass(){
@@ -16,6 +19,27 @@ public class UserHelperClass {
         this.phone = phone;
     }
 
+
+    protected UserHelperClass(Parcel in) {
+        firstName = in.readString();
+        lastName = in.readString();
+        pass = in.readString();
+        email = in.readString();
+        phone = in.readString();
+        role = in.readString();
+    }
+
+    public static final Creator<UserHelperClass> CREATOR = new Creator<UserHelperClass>() {
+        @Override
+        public UserHelperClass createFromParcel(Parcel in) {
+            return new UserHelperClass(in);
+        }
+
+        @Override
+        public UserHelperClass[] newArray(int size) {
+            return new UserHelperClass[size];
+        }
+    };
 
     public String getFirstName() {
         return firstName;
@@ -55,5 +79,28 @@ public class UserHelperClass {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(pass);
+        dest.writeString(email);
+        dest.writeString(phone);
+        dest.writeString(role);
     }
 }

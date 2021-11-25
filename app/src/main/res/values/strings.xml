@@ -7,10 +7,12 @@
     <string name="report_malfunction">דיווח תקלה</string>
     <string name="school_detailes">פרטי בית הספר</string>
     <string name="institution_name">שם מוסד</string>
+    <string name="institution_Symbol_num">מספר מוסד</string>
     <string name="hint_edt_school_name">בית ספר</string>
     <string name="town">עיר:</string>
     <string name="hint_edt_town">עיר</string>
     <string name="street">רחוב:</string>
+    <string name="address">כתובת</string>
     <string name="hint_edt_street">רחוב</string>
     <string name="number">מספר:</string>
     <string name="malfunction_detailes_headline">פרטי התקלה</string>
@@ -22,6 +24,7 @@
     <string name="report">דיווח</string>
     <string name="institution_detailes">פרטי מוסד</string>
     <string name="Fill_institution_detailes">אנא מלא פרטי מוסד : </string>
+    <string name="signUp">הרשמה</string>
 
 
     <string name="phone">טלפון</string>
@@ -32,6 +35,22 @@
         <item>אב בית</item>
         <item>טכנאי</item>
     </string-array>
+
+    <string-array name="area">
+        <item>בחר</item>
+        <item>שומרון</item>
+        <item>ירושלים</item>
+        <item>יהודה</item>
+        <item>אילת</item>
+        <item>צפון</item>
+        <item>גולן</item>
+        <item>תל אביב</item>
+        <item>שרון</item>
+        <item>דרום</item>
+        <item>עמק הירדן</item>
+    </string-array>
+
+
     <string name="title_activity_maintenance_man">MaintenanceManActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
