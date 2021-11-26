@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import com.example.tecknet.model.*;
+
 public class Controller {
 
     FirebaseDatabase rootNode;
@@ -34,9 +36,7 @@ public class Controller {
         rootNode = FirebaseDatabase.getInstance(); //connect to firebase
         reference = rootNode.getReference("users");
     }
-    public void add_to_database(UserHelperClass user ){
-
-//        UserHelperClass helper = new UserHelperClass(fNames , lNames ,passwordS , emailS , role, phoneS);
+    public void add_to_database(UserInt user ){
         reference.child(user.getPhone()).setValue(user);
 
     }

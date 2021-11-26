@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
+import com.example.tecknet.model.UserInt;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -41,7 +42,7 @@ public class TechMenDetailsActivity extends AppCompatActivity {
                 String sArea = area.getSelectedItem().toString();
 
                 //user obj from the prev screen
-                UserHelperClass user = getIntent().getParcelableExtra("user");
+                UserInt user = getIntent().getParcelableExtra("user");
 
                 /**
                  * NOT GOOD WEY TO ENTER TECH ON HIS DATABASE!!!

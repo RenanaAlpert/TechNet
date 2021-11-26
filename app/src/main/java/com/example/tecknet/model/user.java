@@ -1,26 +1,24 @@
-package com.example.tecknet.view;
+package com.example.tecknet.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class UserHelperClass implements Parcelable {
-    private String firstName , lastName , pass, email ,phone ,role ;
+public class user implements UserInt , Parcelable {
+    private String firstName , lastName , pass, email ,phone ,role;
 
-    public UserHelperClass(){
+    public user(){
 
     }
-    public UserHelperClass(String firstName, String lastName, String pass, String email , String role ,
-                           String phone) {
+    public user(String firstName, String lastName, String pass, String email , String role, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pass = pass;
         this.email = email;
-        this.role = role;
         this.phone = phone;
+        this.role = role;
     }
 
-
-    protected UserHelperClass(Parcel in) {
+    protected user(Parcel in) {
         firstName = in.readString();
         lastName = in.readString();
         pass = in.readString();
@@ -29,15 +27,15 @@ public class UserHelperClass implements Parcelable {
         role = in.readString();
     }
 
-    public static final Creator<UserHelperClass> CREATOR = new Creator<UserHelperClass>() {
+    public static final Creator<user> CREATOR = new Creator<user>() {
         @Override
-        public UserHelperClass createFromParcel(Parcel in) {
-            return new UserHelperClass(in);
+        public user createFromParcel(Parcel in) {
+            return new user(in);
         }
 
         @Override
-        public UserHelperClass[] newArray(int size) {
-            return new UserHelperClass[size];
+        public user[] newArray(int size) {
+            return new user[size];
         }
     };
 
@@ -71,14 +69,6 @@ public class UserHelperClass implements Parcelable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getPhone() {

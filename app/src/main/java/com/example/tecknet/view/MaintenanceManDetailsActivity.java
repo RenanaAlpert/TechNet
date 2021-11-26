@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
+import com.example.tecknet.model.UserInt;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -65,7 +66,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                         sArea,"",sPhoneInc);
 
                 //user obj from the prev screen
-                UserHelperClass user = getIntent().getParcelableExtra("user");
+                UserInt user = getIntent().getParcelableExtra("user");
 
                 //todo move this to the controller
                 reference.child(instDetails.getInstitution_id()).setValue(instDetails);

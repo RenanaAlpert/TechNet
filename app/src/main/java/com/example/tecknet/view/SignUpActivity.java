@@ -1,5 +1,5 @@
 package com.example.tecknet.view;
-
+import com.example.tecknet.model.*;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,17 +9,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tecknet.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText email ,fName ,lName ,pass ,phone;
@@ -53,17 +46,17 @@ public class SignUpActivity extends AppCompatActivity {
                 String roleS = role.getSelectedItem().toString();
                 String passwordS = pass.getText().toString();
                 String phoneS = phone.getText().toString();
-                UserHelperClass user = new UserHelperClass(fNames, lNames,passwordS, emailS,roleS, phoneS);
+                user myUser = new user(fNames, lNames,passwordS, emailS,roleS, phoneS);
 
                 boolean ans = check_if_entered_details(fNames,lNames ,emailS,roleS,passwordS,phoneS);
                 pBar.setVisibility(View.VISIBLE);//loading
 
                 if(ans) {
 //                    c.check_if_user_exist(phoneS);
-                    c.add_to_database(user);
+                    c.add_to_database(myUser);
 
-                    if(roleS.equals("אב בית")) continue_to_institution_detail(user);
-                    else continue_to_tech_detail(user);
+                    if(roleS.equals("אב בית")) continue_to_institution_detail(myUser);
+                    else continue_to_tech_detail(myUser);
 
 
                 }
@@ -121,14 +114,14 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * this function move to the next screen
      */
-    private void continue_to_institution_detail( UserHelperClass user) {
+    private void continue_to_institution_detail( user myUser) {
         Intent intent = new Intent(SignUpActivity.this, MaintenanceManDetailsActivity.class);
-        intent.putExtra("user" , user);
+        intent.putExtra("user" ,  myUser);
         startActivity(intent);
     }
-    private void continue_to_tech_detail( UserHelperClass user) {
+    private void continue_to_tech_detail( user myUser) {
         Intent intent = new Intent(SignUpActivity.this, TechMenDetailsActivity.class);
-        intent.putExtra("user" , user);
+        intent.putExtra("user" , myUser);
         startActivity(intent);
     }
 }

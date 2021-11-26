@@ -5,23 +5,23 @@ package com.example.tecknet.model;
  */
 public interface UserInt {
 
-    /**
-     * @return id of the user
-     */
-    public int get_user_id();
+    public String getFirstName();
 
-    /**
-     * @return the first name of the user
-     */
-    public String get_first_name();
+    public void setFirstName(String firstName);
 
-    /**
-     * @return the last name of the user
-     */
-    public String get_last_name();
+    public String getLastName();
 
-    /**
-     * @return the phone number of the user
-     */
-    public String get_phone_number();
+    public void setLastName(String lastName);
+
+    public String getPass();
+
+    public void setPass(String pass);
+
+    public String getEmail();
+
+    public void setEmail(String email);
+
+    public String getPhone();
+
+    public void setPhone(String phone) ;
 }
