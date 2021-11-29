@@ -7,33 +7,35 @@ import com.example.tecknet.model.region;
  */
 public interface InstitutionDetailsInt {
 
-    /**
-     * @return the id of the institution
-     */
-    public int get_institution_Id();
+    public String getInstitution_id();
 
-    /**
-     * @return the name of the institution
-     */
-    public String get_name();
+    public void setInstitution_id(String institution_id);
 
-    /**
-     * @return the address of the institution
-     */
-    public String get_address();
+    public String getName();
 
-    /**
-     * @return the region of the institution
-     */
-    public region get_area();
+    public void setName(String name);
 
-    /**
-     * @return activity time of the institution
-     */
-    public String get_operation_hours();
+    public String getAddress();
 
-    /**
-     * @return the phone number of the institution
-     */
-    public String get_phone_number();
+    public void setAddress(String address);
+
+    public String getCity();
+
+    public void setCity(String city);
+
+    public region getArea();
+
+    public void setArea(region area);
+
+    public String getOperation_hours();
+
+    public void setOperation_hours(String operation_hours);
+
+    public String getPhone_number();
+
+    public void setPhone_number(String phone_number);
+
+    public String getContact();
+
+    public void setContact(String contact);
 }

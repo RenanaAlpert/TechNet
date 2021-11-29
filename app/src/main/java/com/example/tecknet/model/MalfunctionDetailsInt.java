@@ -13,9 +13,9 @@ public interface MalfunctionDetailsInt {
 
     public void setExplanation(String explanation);
 
-    public long getInstitution();
+    public String getInstitution();
 
-    public void setInstitution(long institution);
+    public void setInstitution(String institution);
 
     public boolean isIs_open();
 

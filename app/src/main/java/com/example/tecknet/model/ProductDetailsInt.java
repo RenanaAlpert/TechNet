@@ -7,48 +7,27 @@ import java.util.GregorianCalendar;
  */
 public interface ProductDetailsInt {
 
-    /**
-     * @return the id of the product
-     */
-    public int get_product_id();
+    public long getProduct_id();
 
-    /**
-     * @return the name of the product
-     */
-    public String get_product_name();
+    public void setProduct_id(long product_id);
 
-    /**
-     * @return the model of the product
-     */
-    public String get_type();
+    public String getDevice();
 
-    /**
-     * @return the product's year of manufacture
-     */
-    public int get_year_of_product();
+    public void setDevice(String device);
 
-    /**
-     * @return when bought the product
-     */
-    public GregorianCalendar get_date_of_purchase();
+    public String getCompany();
 
-    /**
-     * @return the Warranty Expiration Date
-     */
-    public GregorianCalendar get_date_of_responsibility();
+    public void setCompany(String company);
 
-    /**
-     * @param date - the date of the responsibility
-     */
-    public void set_date_of_responsibility(GregorianCalendar date);
+    public String getType();
 
-    /**
-     * @return if the product work or not
-     */
-    public boolean is_functioning();
+    public void setType(String type);
 
-    /**
-     * @param f - the functioning of the product
-     */
-    public void is_functioning(boolean f);
+    public String getYear_of_production();
+
+    public void setYear_of_production(String year_of_production);
+
+    public String getDate_of_responsibility();
+
+    public void setDate_of_responsibility(String date_of_responsibility);
 }

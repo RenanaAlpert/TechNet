@@ -8,14 +8,14 @@ public class MalfunctionDetails implements MalfunctionDetailsInt{
      * text_mal_details is only temporary
      */
     String explanation;
-    long institution;
+    String institution;
     boolean is_open;
     long product_id;
     long tech;
 
     public MalfunctionDetails(){}
 
-    public MalfunctionDetails(long product, long institution, String explain) {
+    public MalfunctionDetails(long product, String institution, String explain) {
         this.mal_id = ++malfunction_counter;
         this.institution = institution;
         this.explanation = explain;
@@ -48,11 +48,11 @@ public class MalfunctionDetails implements MalfunctionDetailsInt{
         this.explanation = explanation;
     }
 
-    public long getInstitution() {
+    public String getInstitution() {
         return institution;
     }
 
-    public void setInstitution(long institution) {
+    public void setInstitution(String institution) {
         this.institution = institution;
     }
 
