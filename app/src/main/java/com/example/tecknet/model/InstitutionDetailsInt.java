@@ -23,9 +23,9 @@ public interface InstitutionDetailsInt {
 
     public void setCity(String city);
 
-    public region getArea();
+    public String getArea();
 
-    public void setArea(region area);
+    public void setArea(String area);
 
     public String getOperation_hours();
 

@@ -1,12 +1,15 @@
 package com.example.tecknet.model;
 
-public class user implements UserInt{
-    private String firstName , lastName , pass, email ,phone, role;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class user implements UserInt , Parcelable {
+    private String firstName , lastName , pass, email ,phone ,role;
 
     public user(){
 
     }
-    public user(String firstName, String lastName, String pass, String email ,String phone, String role) {
+    public user(String firstName, String lastName, String pass, String email , String role, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pass = pass;
@@ -14,6 +17,27 @@ public class user implements UserInt{
         this.phone = phone;
         this.role = role;
     }
+
+    protected user(Parcel in) {
+        firstName = in.readString();
+        lastName = in.readString();
+        pass = in.readString();
+        email = in.readString();
+        phone = in.readString();
+        role = in.readString();
+    }
+
+    public static final Creator<user> CREATOR = new Creator<user>() {
+        @Override
+        public user createFromParcel(Parcel in) {
+            return new user(in);
+        }
+
+        @Override
+        public user[] newArray(int size) {
+            return new user[size];
+        }
+    };
 
     public String getFirstName() {
         return firstName;
@@ -47,21 +71,35 @@ public class user implements UserInt{
         this.email = email;
     }
 
-    @Override
     public String getPhone() {
         return phone;
     }
 
-    @Override
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+
     public String getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(pass);
+        dest.writeString(email);
+        dest.writeString(phone);
+        dest.writeString(role);
     }
 }

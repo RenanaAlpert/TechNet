@@ -62,8 +62,8 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                 String sPhoneInc = phoneInc.getText().toString();
 
                 //InstitutionDetails obj to add to Institution database
-                InstitutionDetails instDetails = new InstitutionDetails(sNumIns, sNameIns , sSityIns ,sAddressIns ,
-                        sArea,"",sPhoneInc);
+                InstitutionDetails instDetails = new InstitutionDetails(sNumIns, sNameIns  ,sAddressIns ,sSityIns,
+                        sArea,"",sPhoneInc ,"");
 
                 //user obj from the prev screen
                 UserInt user = getIntent().getParcelableExtra("user");

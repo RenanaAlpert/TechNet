@@ -27,7 +27,7 @@ public class Controller{
         r.child(phone).setValue(us);
     }
 
-    public static void set_institution(String symbol, String name, String address, String city, region area, String operation_hours, String phone_number, String phone_maintenance) {
+    public static void set_institution(String symbol, String name, String address, String city, String area, String operation_hours, String phone_number, String phone_maintenance) {
         DatabaseReference r = connect_db("institution");
         InstitutionDetailsInt ins = new InstitutionDetails(symbol, name, address, city, area, operation_hours, phone_number, phone_maintenance);
         r.child(symbol).setValue(ins);

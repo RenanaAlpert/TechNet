@@ -6,12 +6,12 @@ public class InstitutionDetails implements InstitutionDetailsInt{
     private String name;
     private String address;
     private String city;
-    private region area;
+    private String area;
     private String operation_hours;
     private String phone_number;
     private String contact;
 
-    public InstitutionDetails(String id, String name, String addr, String city, region area, String operation_hours, String phone, String phone_maintenance){
+    public InstitutionDetails(String id, String name, String addr, String city, String area, String operation_hours, String phone, String phone_maintenance){
         this.institution_id = id;
         this.name = name;
         this.address = addr;
@@ -54,11 +54,11 @@ public class InstitutionDetails implements InstitutionDetailsInt{
         this.city = city;
     }
 
-    public region getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(region area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
