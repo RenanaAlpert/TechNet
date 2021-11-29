@@ -24,4 +24,8 @@ public interface UserInt {
     public String getPhone();
 
     public void setPhone(String phone) ;
+
+    public String getRole();
+
+    public void setRole(String role);
 }

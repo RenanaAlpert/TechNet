@@ -24,14 +24,6 @@ public class MalfunctionDetails implements MalfunctionDetailsInt{
         this.tech=-1;
     }
 
-    public static long getMalfunction_counter() {
-        return malfunction_counter;
-    }
-
-    public static void setMalfunction_counter(long malfunction_counter) {
-        MalfunctionDetails.malfunction_counter = malfunction_counter;
-    }
-
     public long getMal_id() {
         return mal_id;
     }

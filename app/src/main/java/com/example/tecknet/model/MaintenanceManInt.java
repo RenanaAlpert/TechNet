@@ -5,20 +5,13 @@ import java.util.Map;
 /**
  * Interface of maintenanceMAn
  */
-public interface MaintenanceManInt extends UserInt {
+public interface MaintenanceManInt {
 
-    /**
-     * @return 1 if it's sent, 0 if not
-     */
-    public int report_malfunction();
+    public String getPhone_number();
 
-    /**
-     * @return list of all the malfunction in treatment that the maintenanceMan report about them
-     */
-    public Map<Integer, MalfunctionDetailsInt> malfunction_in_treatment();
+    public void setPhone_number(String phone_number);
 
-    /**
-     * @return list of all the malfunction that not in treatment that the maintenanceMan report about them
-     */
-    public Map<Integer, MalfunctionDetailsInt> malfunction_not_in_treatment();
+    public String getInstitution();
+
+    public void setInstitution(String institution);
 }
