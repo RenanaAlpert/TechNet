@@ -2,91 +2,49 @@ package com.example.tecknet.model;
 
 public class InstitutionDetails implements InstitutionDetailsInt{
 
-    private String institution_id;
-    private String name;
-    private String address;
-    private String city;
-    private region area;
-    private String operation_hours;
-    private String phone_number;
-    private String contact;
+    private final int institution_id;
+    private final String name;
+    private final String address;
+    private final region area;
+    private final String operation_hours;
+    private final String phone_number;
 
-    public InstitutionDetails(){
-
-    }
-
-    public InstitutionDetails(String symbol, String name, String address, String city, region area, String operation_hours, String phone_number, String phone_maintenance){
-        this.institution_id = symbol;
+    public InstitutionDetails(int id, String name, String addr, region area, String operation_hours, String phone){
+        this.institution_id = id;
         this.name = name;
-        this.address = address;
-        this.city = city;
+        this.address = addr;
         this.area = area;
         this.operation_hours = operation_hours;
-        this.phone_number = phone_number;
-        this.contact = phone_maintenance;
+        this.phone_number = phone;
     }
 
-    public String getInstitution_id() {
-        return institution_id;
+    @Override
+    public int get_institution_Id() {
+        return this.institution_id;
     }
 
-    public void setInstitution_id(String institution_id) {
-        this.institution_id = institution_id;
+    @Override
+    public String get_name() {
+        return this.name;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String get_address() {
+        return this.address;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public region get_area() {
+        return this.area;
     }
 
-    public String getAddress() {
-        return address;
+    @Override
+    public String get_operation_hours() {
+        return this.operation_hours;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public region getArea() {
-        return area;
-    }
-
-    public void setArea(region area) {
-        this.area = area;
-    }
-
-    public String getOperation_hours() {
-        return operation_hours;
-    }
-
-    public void setOperation_hours(String operation_hours) {
-        this.operation_hours = operation_hours;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
+    @Override
+    public String get_phone_number() {
+        return this.phone_number;
     }
 }

@@ -1,18 +1,17 @@
 package com.example.tecknet.model;
 
 public class user implements UserInt{
-    private String firstName , lastName , pass, email ,phone, role;
+    private String firstName , lastName , pass, email ,phone;
 
     public user(){
 
     }
-    public user(String firstName, String lastName, String pass, String email ,String phone, String role) {
+    public user(String firstName, String lastName, String pass, String email ,String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pass = pass;
         this.email = email;
         this.phone = phone;
-        this.role = role;
     }
 
     public String getFirstName() {
@@ -41,22 +40,6 @@ public class user implements UserInt{
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public void setEmail(String email) {

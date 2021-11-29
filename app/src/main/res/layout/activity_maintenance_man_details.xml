@@ -1,33 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.SignUpActivity">
-
+    tools:context=".view.MaintenanceManDetailsActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fontFamily="serif"
+
         android:scaleType="centerCrop"
         android:src="@drawable/back"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".27"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/institution_detailes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/institution_detailes"
+        android:textStyle="bold"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/malfunction_detailes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="serif"
+        android:text="@string/Fill_institution_detailes"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/institution_detailes"
+        app:layout_constraintVertical_bias="0.027" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/institution_num"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:background="@drawable/edit_text_bg"
-        android:hint="@string/email"
+        android:hint="@string/institution_Symbol_num"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -35,104 +70,104 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172"
+        app:layout_constraintTop_toBottomOf="@+id/institution_detailes"
+        app:layout_constraintVertical_bias="0.092"
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/first_name"
+        android:id="@+id/institution_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_bg"
-        android:hint="@string/FirstName"
+        android:hint="@string/institution_name"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
-        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email"
-        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/institution_num"
+
         app:layout_constraintWidth_percent=".8" />
 
-    <!--
     <EditText
-        android:id="@+id/job"
+        android:id="@+id/sity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_text_bg"
-
-        android:hint="sign as "
+        android:hint="@string/town"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
-        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
         app:layout_constraintVertical_bias="0"
-        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pass"
-        app:layout_constraintWidth_percent=".8"/>
-    -->
+        app:layout_constraintTop_toBottomOf="@id/institution_name"
+        app:layout_constraintWidth_percent=".8" />
+
 
     <EditText
-        android:id="@+id/last_name"
+        android:id="@+id/address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_bg"
-        android:hint="@string/LastName"
+        android:hint="@string/address"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
-        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/first_name"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/sity"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
-        android:id="@+id/pass"
+    <Spinner
+        android:id="@+id/area"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_bg"
-        android:ems="10"
-        android:hint="@string/pass"
-        android:inputType="textWebPassword"
+        android:entries="@array/area"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
-        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/last_name"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintTop_toBottomOf="@+id/address"
+        app:layout_constraintWidth_percent=".8"></Spinner>
+
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/mobile_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_bg"
-        android:ems="10"
         android:hint="@string/phone"
-        android:minHeight="48dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
-        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pass"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/area"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
@@ -140,43 +175,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
-        android:text="המשך"
+        android:text="@string/signUp"
         android:textColor="@color/white"
+
         android:textSize="16sp"
         android:textStyle="bold"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".8"
+        app:layout_constraintTop_toTopOf="@id/mobile_number"
+        app:layout_constraintVertical_bias="0.5"
         app:layout_constraintWidth_percent=".8" />
-
-    <Spinner
-        android:id="@+id/role"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_bg"
-        android:entries="@array/role"
-        android:minHeight="48dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:spinnerMode="dialog"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone"
-        app:layout_constraintWidth_percent=".8"></Spinner>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:progressTint="#3B4DB1"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="180dp"
-        tools:layout_editor_absoluteY="630dp"
-        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

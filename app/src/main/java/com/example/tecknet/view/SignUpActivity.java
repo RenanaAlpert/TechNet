@@ -1,5 +1,5 @@
 package com.example.tecknet.view;
-
+import com.example.tecknet.model.*;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,24 +9,16 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tecknet.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class SignUpActivity extends AppCompatActivity {
     EditText email ,fName ,lName ,pass ,phone;
     Spinner role;
-    Button signUp;
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    Button next;
+
     ProgressBar pBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,36 +31,35 @@ public class SignUpActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.pass);
         role = (Spinner) findViewById(R.id.role);
         phone = (EditText) findViewById(R.id.phone);
-        signUp = (Button) findViewById(R.id.button) ;
+        next = (Button) findViewById(R.id.button) ;
 
         pBar = findViewById(R.id.progressBar);
-        signUp.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Controller c = new Controller();
-                pBar = findViewById(R.id.progressBar);
 
                 String fNames = fName.getText().toString();
                 String lNames = lName.getText().toString();
                 String emailS = email.getText().toString();
-                String roles = role.getSelectedItem().toString();
+                String roleS = role.getSelectedItem().toString();
                 String passwordS = pass.getText().toString();
                 String phoneS = phone.getText().toString();
+                user myUser = new user(fNames, lNames,passwordS, emailS,roleS, phoneS);
 
-                boolean ans = check_if_entered_details(fNames,lNames ,emailS,roles,passwordS,phoneS);
+                boolean ans = check_if_entered_details(fNames,lNames ,emailS,roleS,passwordS,phoneS);
                 pBar.setVisibility(View.VISIBLE);//loading
 
                 if(ans) {
 //                    c.check_if_user_exist(phoneS);
-                    c.add_to_database(fNames, lNames, emailS,roles,passwordS, phoneS);
-                    signUp();
+                    c.add_to_database(myUser);
+
+                    if(roleS.equals("אב בית")) continue_to_institution_detail(myUser);
+                    else continue_to_tech_detail(myUser);
+
 
                 }
-//                else if(c.check_if_user_exist(phoneS)){
-//                    Toast.makeText(SignUpActivity.this , "User is already exist!" , Toast.LENGTH_LONG).show();
-//
-//                }
 
 
             }
@@ -123,8 +114,14 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * this function move to the next screen
      */
-    private void signUp() {
-        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+    private void continue_to_institution_detail( user myUser) {
+        Intent intent = new Intent(SignUpActivity.this, MaintenanceManDetailsActivity.class);
+        intent.putExtra("user" ,  myUser);
+        startActivity(intent);
+    }
+    private void continue_to_tech_detail( user myUser) {
+        Intent intent = new Intent(SignUpActivity.this, TechMenDetailsActivity.class);
+        intent.putExtra("user" , myUser);
         startActivity(intent);
     }
 }

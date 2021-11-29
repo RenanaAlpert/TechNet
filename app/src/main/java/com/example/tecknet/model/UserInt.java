@@ -20,4 +20,8 @@ public interface UserInt {
     public String getEmail();
 
     public void setEmail(String email);
+
+    public String getPhone();
+
+    public void setPhone(String phone) ;
 }

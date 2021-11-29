@@ -20,11 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.tecknet.model.*;
 
@@ -41,11 +36,8 @@ public class Controller {
         rootNode = FirebaseDatabase.getInstance(); //connect to firebase
         reference = rootNode.getReference("users");
     }
-    public void add_to_database(String fNames ,String lNames ,String emailS
-                               ,String role, String passwordS ,String phoneS ){
-
-        user helper = new user(fNames , lNames ,passwordS , emailS , phoneS);
-        reference.child(phoneS).setValue(helper);
+    public void add_to_database(UserInt user ){
+        reference.child(user.getPhone()).setValue(user);
 
     }
     public boolean  check_if_user_exist(String phoneNum){
