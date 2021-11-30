@@ -13,8 +13,7 @@ import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.UserInt;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.tecknet.model.user;
 
 /**
  * this class implement the screen to fill Institution details
@@ -22,13 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 public class MaintenanceManDetailsActivity extends AppCompatActivity {
-    EditText numIns ,nameIns ,sityIns ,addressIns  ,phoneInc;
+    EditText numIns ,nameIns ,cityIns ,addressIns  ,phoneInc;
     Spinner area;
     Button signUp;
-
-    //need to move to controller
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
 
 
     @Override
@@ -36,13 +31,10 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenance_man_details);
 
-        //todo move this to the controller
-        rootNode = FirebaseDatabase.getInstance(); //connect to firebase
-        reference = rootNode.getReference("institution");
 
         numIns = (EditText) findViewById(R.id.institution_num);
         nameIns = (EditText) findViewById(R.id.institution_name);
-        sityIns = (EditText) findViewById(R.id.sity);
+        cityIns = (EditText) findViewById(R.id.sity);
         addressIns = (EditText) findViewById(R.id.address);
         area = (Spinner) findViewById(R.id.area);
         phoneInc = (EditText) findViewById(R.id.mobile_number);
@@ -56,24 +48,26 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
 
                 String sNumIns = numIns.getText().toString();
                 String sNameIns = nameIns.getText().toString();
-                String sSityIns = sityIns.getText().toString();
+                String sCityIns = cityIns.getText().toString();
                 String sAddressIns = addressIns.getText().toString();
                 String sArea = area.getSelectedItem().toString();
                 String sPhoneInc = phoneInc.getText().toString();
 
-                //InstitutionDetails obj to add to Institution database
-                InstitutionDetails instDetails = new InstitutionDetails(sNumIns, sNameIns  ,sAddressIns ,sSityIns,
-                        sArea,"",sPhoneInc ,"");
-
                 //user obj from the prev screen
-                UserInt user = getIntent().getParcelableExtra("user");
+                user myUser = getIntent().getParcelableExtra("user");
+                InstitutionDetails ins = new InstitutionDetails(sNumIns, sNameIns,sAddressIns,
+                        sCityIns, sArea, "", sPhoneInc, myUser.getPhone());
 
-                //todo move this to the controller
-                reference.child(instDetails.getInstitution_id()).setValue(instDetails);
-                reference.child(instDetails.getInstitution_id()).child("contact").setValue(user);
+
+                //call to controller
+                com.example.tecknet.model.Controller.set_institution(sNumIns, sNameIns,sAddressIns,
+                        sCityIns, sArea, "", sPhoneInc, myUser.getPhone()) ;
 
                 ///todo move to morias screen
-                Intent intent = new Intent(MaintenanceManDetailsActivity.this, MainActivity.class);
+                Intent intent = new Intent(MaintenanceManDetailsActivity.this, MalfunctionReport.class);
+                intent.putExtra("user" ,myUser);
+                intent.putExtra("institution" , ins);
+
                 startActivity(intent);
 
 

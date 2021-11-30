@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     ProgressBar pBar;
     DatabaseReference dbRef;
-//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                         if(user.getPass().equals(pass)){
                             Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext() , MainActivity.class));
-
                         }
                         else {
                             Toast.makeText(LoginActivity.this , "Password incorrect!" , Toast.LENGTH_LONG).show();
@@ -97,15 +95,12 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(LoginActivity.this , "User is not register" , Toast.LENGTH_LONG).show();
-
                     }
                 }
                 else {
                     Toast.makeText(LoginActivity.this , "User is not register" , Toast.LENGTH_LONG).show();
-
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("TAG",error.getMessage());

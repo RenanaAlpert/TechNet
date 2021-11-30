@@ -1,6 +1,9 @@
 package com.example.tecknet.model;
 
-public class InstitutionDetails implements InstitutionDetailsInt{
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class InstitutionDetails implements InstitutionDetailsInt , Parcelable {
 
     private String institution_id;
     private String name;
@@ -21,6 +24,29 @@ public class InstitutionDetails implements InstitutionDetailsInt{
         this.phone_number = phone;
         this.contact = phone_maintenance;
     }
+
+    protected InstitutionDetails(Parcel in) {
+        institution_id = in.readString();
+        name = in.readString();
+        address = in.readString();
+        city = in.readString();
+        area = in.readString();
+        operation_hours = in.readString();
+        phone_number = in.readString();
+        contact = in.readString();
+    }
+
+    public static final Creator<InstitutionDetails> CREATOR = new Creator<InstitutionDetails>() {
+        @Override
+        public InstitutionDetails createFromParcel(Parcel in) {
+            return new InstitutionDetails(in);
+        }
+
+        @Override
+        public InstitutionDetails[] newArray(int size) {
+            return new InstitutionDetails[size];
+        }
+    };
 
     public String getInstitution_id() {
         return institution_id;
@@ -84,5 +110,22 @@ public class InstitutionDetails implements InstitutionDetailsInt{
 
     public void setContact(String phone_maintenance) {
         this.contact = phone_maintenance;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(institution_id);
+        dest.writeString(name);
+        dest.writeString(address);
+        dest.writeString(city);
+        dest.writeString(area);
+        dest.writeString(operation_hours);
+        dest.writeString(phone_number);
+        dest.writeString(contact);
     }
 }

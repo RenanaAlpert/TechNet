@@ -21,13 +21,17 @@ public class Controller{
         return rootNode.getReference(db);
     }
 
-    public static void new_user(String first_name, String last_name, String phone, String mail, String password, String role) {
+    public static void new_user(String first_name, String last_name, String phone, String mail,
+                                String password, String role) {
         DatabaseReference r = connect_db("users");
         user us = new user(first_name , last_name ,password , mail , phone, role);
         r.child(phone).setValue(us);
     }
 
-    public static void set_institution(String symbol, String name, String address, String city, String area, String operation_hours, String phone_number, String phone_maintenance) {
+    public static void set_institution(String symbol, String name, String address, String city,
+                                       String area, String operation_hours, String phone_number,
+                                       String phone_maintenance) {
+
         DatabaseReference r = connect_db("institution");
         InstitutionDetailsInt ins = new InstitutionDetails(symbol, name, address, city, area, operation_hours, phone_number, phone_maintenance);
         r.child(symbol).setValue(ins);
@@ -38,7 +42,10 @@ public class Controller{
 
     public static void new_malfunction(String symbol, String device, String company, String type, String explain) {
         DatabaseReference r = connect_db("products");
+//        java.lang.IllegalArgumentException: Can't call equalTo() and startAt() combined
+//        error
         Query q = r.orderByValue().equalTo(device, device).equalTo(company, company).equalTo(type, type);
+//       here
         long product_id = Long.parseLong(Objects.requireNonNull(q.getRef().getKey()));
         MalfunctionDetailsInt mal = new MalfunctionDetails(product_id, symbol, explain);
         r = connect_db("mals");

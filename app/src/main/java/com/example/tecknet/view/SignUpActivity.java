@@ -20,6 +20,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button next;
 
     ProgressBar pBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Controller c = new Controller();
+//                Controller c = new Controller();
 
                 String fNames = fName.getText().toString();
                 String lNames = lName.getText().toString();
@@ -52,8 +53,9 @@ public class SignUpActivity extends AppCompatActivity {
                 pBar.setVisibility(View.VISIBLE);//loading
 
                 if(ans) {
-//                    c.check_if_user_exist(phoneS);
-                    c.add_to_database(myUser);
+//                    check_if_user_exist(phoneS);
+
+                    com.example.tecknet.model.Controller.new_user(fNames,lNames ,phoneS, emailS,passwordS, roleS);
 
                     if(roleS.equals("אב בית")) continue_to_institution_detail(myUser);
                     else continue_to_tech_detail(myUser);
