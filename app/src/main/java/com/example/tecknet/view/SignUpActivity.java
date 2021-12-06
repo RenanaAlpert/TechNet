@@ -47,12 +47,12 @@ public class SignUpActivity extends AppCompatActivity {
                 String roleS = role.getSelectedItem().toString();
                 String passwordS = pass.getText().toString();
                 String phoneS = phone.getText().toString();
-                user myUser = new user(fNames, lNames,passwordS, emailS,roleS, phoneS);
 
-                boolean ans = check_if_entered_details(fNames,lNames ,emailS,roleS,passwordS,phoneS);
+                boolean ans = check_if_entered_details(fNames,lNames ,emailS,roleS,passwordS, phoneS);
                 pBar.setVisibility(View.VISIBLE);//loading
 
                 if(ans) {
+                    user myUser = new user(fNames, lNames,passwordS, emailS,roleS, phoneS);
 //                    check_if_user_exist(phoneS);
 
                     com.example.tecknet.model.Controller.new_user(fNames,lNames ,phoneS, emailS,passwordS, roleS);
@@ -80,7 +80,10 @@ public class SignUpActivity extends AppCompatActivity {
      */
     private boolean check_if_entered_details(String fNames ,String lNames ,String emailS,
                                          String roleS,String passwordS ,String phoneS ){
-
+        if(emailS.isEmpty()){
+            email.setError("Please enter a email");
+            return false;
+        }
         if(fNames.isEmpty()){
             fName.setError("Please enter your first name");
             return false;
@@ -89,8 +92,12 @@ public class SignUpActivity extends AppCompatActivity {
             lName.setError("Please enter your last name");
             return false;
         }
-        if(emailS.isEmpty()){
-            email.setError("Please enter a email");
+        if(passwordS.isEmpty()){
+            pass.setError("Please enter a password");
+            return false;
+        }
+        if(phoneS.isEmpty()){
+            phone.setError("Please enter a phone number");
             return false;
         }
         if(roleS.equals("בחר")){
@@ -98,14 +105,6 @@ public class SignUpActivity extends AppCompatActivity {
             errorText.setError("");
             errorText.setTextColor(Color.RED);//just to highlight that this is an error
             errorText.setText("You need to choose your role!");//changes the selected item text to this
-            return false;
-        }
-        if(passwordS.isEmpty()){
-            pass.setError("Please enter a password");
-            return false;
-        }
-        if(phoneS.isEmpty()){
-            phone.setError("Please enter a phone number");
             return false;
         }
         return true;

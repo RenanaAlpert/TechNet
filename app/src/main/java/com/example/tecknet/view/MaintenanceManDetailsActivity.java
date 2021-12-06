@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
@@ -67,7 +68,9 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(MaintenanceManDetailsActivity.this, MalfunctionReport.class);
                 intent.putExtra("user" ,myUser);
                 intent.putExtra("institution" , ins);
-
+                //show msg to the screen
+                Toast.makeText(MaintenanceManDetailsActivity.this , "SignUp institution success" , Toast.LENGTH_LONG).show();
+                
                 startActivity(intent);
 
 

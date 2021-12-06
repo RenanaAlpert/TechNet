@@ -28,7 +28,7 @@ public abstract class Controller{
     public static void new_user(String first_name, String last_name, String phone, String mail,
                                 String password, String role) {
         DatabaseReference r = connect_db("users");
-        user us = new user(first_name , last_name ,password , mail , phone, role);
+        user us = new user(first_name , last_name ,password , mail , role,phone);
         r.child(phone).setValue(us);
     }
 

@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         pass = (EditText) findViewById(R.id.pass);
         forgetPass = findViewById(R.id.forget_pass);
         login =(Button)findViewById(R.id.button);
-        pBar = findViewById(R.id.progressBar);
+        pBar = findViewById(R.id.progressBarLogin);
         dbRef = FirebaseDatabase.getInstance().getReference("users");
         //animation
 //        ObjectAnimator obgAn = ObjectAnimator.ofFloat(email , "translationY", 400f , 0f);
@@ -71,8 +71,9 @@ public class LoginActivity extends AppCompatActivity {
                     pass.setError("Enter password!");
                     return;
                 }
-//                pBar.setVisibility(View.VISIBLE); //on the login pic
+                pBar.setVisibility(View.VISIBLE); //on the login pic
                 login(phoneS,passwordS);
+
 
 
             }

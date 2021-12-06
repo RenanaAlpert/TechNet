@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,24 +39,22 @@ public class MalfunctionReport extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //extract the report details from the user
                 String typeS = type.getText().toString();
                 String modelS = model.getText().toString();
                 String companyS= company.getText().toString();
                 String detailFaultS = detailFault.getText().toString();
 
+                //enter to InstitutionDetails object to insert to firebase
                 InstitutionDetails ins = getIntent().getParcelableExtra("institution");
+                //call to new_malfunction function from the controller
                 com.example.tecknet.model.Controller.new_malfunction(ins.getInstitution_id(),modelS,companyS,
                         typeS,detailFaultS);
 
+                //show msg to the screen
+                Toast.makeText(MalfunctionReport.this , "Report success" , Toast.LENGTH_LONG).show();
+                //todo move to the needed screen
                 startActivity(new Intent(MalfunctionReport.this , MainActivity.class));
-
-                //call renna function to add to database
-//                new_malfunction(String symbol -> need to extract
-//                , String device,OK
-//                String company-> need to add to report screen
-//                , String type,OK
-//                String explain OK)
-
             }
         });
     }

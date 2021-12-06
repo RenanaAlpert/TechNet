@@ -9,7 +9,8 @@ public class user implements UserInt , Parcelable {
     public user(){
 
     }
-    public user(String firstName, String lastName, String pass, String email , String role, String phone) {
+    public user(String firstName, String lastName, String pass, String email , String role,
+                String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pass = pass;
