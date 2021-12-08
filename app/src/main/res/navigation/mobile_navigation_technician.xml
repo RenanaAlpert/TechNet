@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.tecknet.view.home_technician.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home_technician" />
+
+    <fragment
+        android:id="@+id/nav_open_malfunction"
+        android:name="com.example.tecknet.view.open_malfunctions.OpenMalfunctionFragment"
+        android:label="@string/menu_open_malfunction"
+        tools:layout="@layout/fragment_open_malfunctions" />
+
+    <fragment
+        android:id="@+id/nav_my_malfunctions"
+        android:name="com.example.tecknet.view.my_malfunctions.MyMalfunctionsFragment"
+        android:label="@string/menu_my_malfunctions"
+        tools:layout="@layout/fragment_my_malfunctions" />
+</navigation>

@@ -26,6 +26,12 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.TeckNet.NoActionBar"/>
         <activity
+            android:name=".view.HomeTechnician"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.TeckNet.NoActionBar"/>
+
+        <activity
             android:name=".view.SignUpActivity"
             android:exported="false" />
         <activity

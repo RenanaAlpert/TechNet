@@ -27,16 +27,22 @@
     <string name="signUp">הרשמה</string>
     <string name="phone">טלפון</string>
 
-    <!-- Strings for side bar maintenance man -->
+    <!-- Strings for side bar-->
     <string name="menu_home">דף הבית</string>
-    <string name="menu_report_malfunction">דיווח תקלה</string>
-    <string name="menu_inventory">מלאי</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Strings for side bar maintenance man -->
+    <string name="menu_report_malfunction">דיווח תקלה</string>
+    <string name="menu_inventory">מלאי</string>
+
+    <!-- Strings for side bar technician man -->
+    <string name="menu_open_malfunction">תקלות פנויות</string>
+    <string name="menu_my_malfunctions">תקלות לטיפול</string>
 
     <string-array name="role">
         <item>בחר</item>
