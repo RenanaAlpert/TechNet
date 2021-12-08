@@ -4,8 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/drawable-v24/side_nav_bar_main_man.xml" value="0.1" />
+        <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.1" />
+        <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/activity_tech_men_details.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/app_bar_main_maintenance_man.xml" value="0.16" />
+        <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/app_bar_main_technician.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/content_main_maintenance_man.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/fragment_add_product_maintenance_man.xml" value="0.1" />
         <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/fragment_home_maintenance_man.xml" value="0.1" />
         <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.1" />
         <entry key="..\:/Users/User1/Desktop/software_engineering/app/src/main/res/layout/fragment_inventory_maintenance_man.xml" value="0.1" />

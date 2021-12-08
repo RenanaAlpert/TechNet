@@ -39,6 +39,8 @@
     <!-- Strings for side bar maintenance man -->
     <string name="menu_report_malfunction">דיווח תקלה</string>
     <string name="menu_inventory">מלאי</string>
+    <string name="menu_add_product">הוספת מוצר</string>
+
 
     <!-- Strings for side bar technician man -->
     <string name="menu_open_malfunction">תקלות פנויות</string>
