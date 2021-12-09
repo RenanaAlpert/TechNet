@@ -3,6 +3,9 @@ package com.example.tecknet.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class InstitutionDetails implements InstitutionDetailsInt , Parcelable {
 
     private String institution_id;
@@ -13,6 +16,7 @@ public class InstitutionDetails implements InstitutionDetailsInt , Parcelable {
     private String operation_hours;
     private String phone_number;
     private String contact;
+    private Map<Long, Long> inventory;
 
     public InstitutionDetails(String id, String name, String addr, String city, String area, String operation_hours, String phone, String phone_maintenance){
         this.institution_id = id;
@@ -23,6 +27,7 @@ public class InstitutionDetails implements InstitutionDetailsInt , Parcelable {
         this.operation_hours = operation_hours;
         this.phone_number = phone;
         this.contact = phone_maintenance;
+        this.inventory = new HashMap<>();
     }
 
     protected InstitutionDetails(Parcel in) {
@@ -66,6 +71,14 @@ public class InstitutionDetails implements InstitutionDetailsInt , Parcelable {
 
     public String getAddress() {
         return address;
+    }
+
+    public Map<Long, Long> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Map<Long, Long> inventory) {
+        this.inventory = inventory;
     }
 
     public void setAddress(String address) {
