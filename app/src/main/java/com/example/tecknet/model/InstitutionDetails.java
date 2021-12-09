@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InstitutionDetails implements InstitutionDetailsInt , Parcelable {
+public class InstitutionDetails implements InstitutionDetailsInt {
 
     private String institution_id;
     private String name;

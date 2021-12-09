@@ -1,5 +1,7 @@
 package com.example.tecknet.model;
 
+import android.os.Parcelable;
+
 import com.example.tecknet.model.region;
 
 import java.util.Map;
@@ -7,7 +9,7 @@ import java.util.Map;
 /**
  * Interface of institution details
  */
-public interface InstitutionDetailsInt {
+public interface InstitutionDetailsInt extends Parcelable {
 
     public String getInstitution_id();
 
