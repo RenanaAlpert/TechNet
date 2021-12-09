@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeckNet">
         <activity
-            android:name=".view.MalfunctionReport"
-            android:exported="false" />
-        <activity
             android:name=".view.TechMenDetailsActivity"
             android:exported="false" />
         <activity

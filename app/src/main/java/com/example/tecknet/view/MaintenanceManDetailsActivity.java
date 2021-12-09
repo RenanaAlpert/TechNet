@@ -33,13 +33,13 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_maintenance_man_details);
 
 
-        numIns = (EditText) findViewById(R.id.institution_num);
-        nameIns = (EditText) findViewById(R.id.institution_name);
-        cityIns = (EditText) findViewById(R.id.sity);
-        addressIns = (EditText) findViewById(R.id.address);
-        area = (Spinner) findViewById(R.id.area);
-        phoneInc = (EditText) findViewById(R.id.mobile_number);
-        signUp = (Button) findViewById(R.id.button) ;
+        numIns =  findViewById(R.id.institution_num);
+        nameIns = findViewById(R.id.institution_name);
+        cityIns =  findViewById(R.id.sity);
+        addressIns =  findViewById(R.id.address);
+        area =  findViewById(R.id.area);
+        phoneInc =  findViewById(R.id.mobile_number);
+        signUp = findViewById(R.id.button) ;
 
 
         signUp.setOnClickListener(new View.OnClickListener(){
@@ -65,7 +65,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                         sCityIns, sArea, "", sPhoneInc, myUser.getPhone()) ;
 
                 ///todo move to morias screen
-                Intent intent = new Intent(MaintenanceManDetailsActivity.this, MalfunctionReport.class);
+                Intent intent = new Intent(MaintenanceManDetailsActivity.this, HomeMaintenanceMan.class);
                 intent.putExtra("user" ,myUser);
                 intent.putExtra("institution" , ins);
                 //show msg to the screen
