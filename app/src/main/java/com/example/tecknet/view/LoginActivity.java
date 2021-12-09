@@ -88,7 +88,13 @@ public class LoginActivity extends AppCompatActivity {
                         UserInt user = snapshot.child(phone).getValue(user.class);
                         if(user.getPass().equals(pass)){
                             Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext() , MainActivity.class));
+
+                            if(user.getRole().equals("אב בית")){
+                                startActivity(new Intent(getApplicationContext() , HomeMaintenanceMan.class));
+                            }
+                            else {
+                                startActivity(new Intent(getApplicationContext() , HomeTechnician.class));
+                            }
                         }
                         else {
                             Toast.makeText(LoginActivity.this , "Password incorrect!" , Toast.LENGTH_LONG).show();

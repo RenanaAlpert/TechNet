@@ -44,6 +44,8 @@
         <entry key="..\:/Users/yuval/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_malfunction_report.xml" value="0.22" />
         <entry key="..\:/Users/yuval/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_sign_up.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/yuval/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_tech_men_details.xml" value="0.14990942028985507" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_home_maintenance_man.xml" value="0.1796875" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.1796875" />
       </map>
     </option>
   </component>
