@@ -53,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(ans) {
                     User myUser = new User(fNames, lNames,passwordS, emailS,roleS, phoneS);
-//                    check_if_user_exist(phoneS);
+//                  todo  check_if_user_exist(phoneS);
 
                     com.example.tecknet.model.Controller.new_user(fNames,lNames ,phoneS, emailS,passwordS, roleS);
 

@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.example.tecknet.R;
+import com.example.tecknet.model.InstitutionDetails;
+import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
+import com.example.tecknet.view.home_maintenance_man.HomeFragmentDirections;
+import com.example.tecknet.view.report_malfunction_maintenance_man.ReportMalfunctionFragmentArgs;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -33,7 +38,14 @@ public class HomeMaintenanceMan extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        UserInt user= getIntent().getParcelableExtra("User");
 
+        //InstitutionDetails ins= todo get ins from data base
+        //pass user forward
+        HomeFragmentDirections.PassUserInstNavReportMalfunction action= HomeFragmentDirections.passUserInstNavReportMalfunction();
+        action.setUser(user);
+        //pass instatution forward
+//        action.setInstitution()
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_report_malfunction, R.id.nav_inventory,R.id.nav_add_product)
                 .setOpenableLayout(drawer)

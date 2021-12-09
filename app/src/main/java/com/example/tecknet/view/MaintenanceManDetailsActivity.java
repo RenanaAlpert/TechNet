@@ -57,7 +57,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                 InstitutionDetails ins = new InstitutionDetails(sNumIns, sNameIns,sAddressIns,
                         sCityIns, sArea, "", sPhoneInc, myUser.getPhone());
 
-
+                //todo check sNumIns doesn't already exist
                 //call to controller
                 com.example.tecknet.model.Controller.set_institution(sNumIns, sNameIns,sAddressIns,
                         sCityIns, sArea, "", sPhoneInc, myUser.getPhone()) ;
@@ -65,7 +65,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                 ///todo move to morias screen
                 Intent intent = new Intent(MaintenanceManDetailsActivity.this, HomeMaintenanceMan.class);
                 intent.putExtra("User" ,myUser);
-                intent.putExtra("institution" , ins);
+//                intent.putExtra("institution" , ins);
                 //show msg to the screen
                 Toast.makeText(MaintenanceManDetailsActivity.this , "SignUp institution success" , Toast.LENGTH_LONG).show();
                 

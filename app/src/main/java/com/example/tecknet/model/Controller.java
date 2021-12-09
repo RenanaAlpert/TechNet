@@ -65,6 +65,7 @@ public abstract class Controller{
 
         DatabaseReference r = connect_db("institution");
         InstitutionDetailsInt ins = new InstitutionDetails(symbol, name, address, city, area, operation_hours, phone_number, phone_maintenance);
+       //todo check symble dosen't already exist
         r.child(symbol).setValue(ins);
         MaintenanceManInt mm = new MaintenanceMan(phone_maintenance, symbol);
         r = connect_db("maintenance");
