@@ -1,4 +1,4 @@
-package com.example.tecknet;
+package com.example.tecknet.model;
 
 import com.example.tecknet.model.MaintenanceManInt;
 

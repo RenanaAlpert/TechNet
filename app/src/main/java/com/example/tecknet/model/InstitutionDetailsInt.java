@@ -2,6 +2,8 @@ package com.example.tecknet.model;
 
 import com.example.tecknet.model.region;
 
+import java.util.Map;
+
 /**
  * Interface of institution details
  */
@@ -39,4 +41,7 @@ public interface InstitutionDetailsInt {
 
     public void setContact(String phone_maintenance);
 
+    public Map<Long, Long> getInventory();
+
+    public void setInventory(Map<Long, Long> inventory);
     }
