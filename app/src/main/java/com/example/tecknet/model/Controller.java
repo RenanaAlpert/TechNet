@@ -25,7 +25,7 @@ public abstract class Controller{
     }
 
     /**
-     * Add new user.
+     * Add new User.
      * @param first_name
      * @param last_name
      * @param phone
@@ -36,11 +36,11 @@ public abstract class Controller{
     public static void new_user(String first_name, String last_name, String phone, String mail,
                                 String password, String role) {
         DatabaseReference r = connect_db("users");
-        UserInt us = new user(first_name , last_name ,password , mail , phone, role);
+        UserInt us = new User(first_name , last_name ,password , mail , phone, role);
         r.child(phone).setValue(us);
     }
 
-    //yuval change and superet from the new user
+    //yuval change and superet from the new User
     public static void new_tech(String phone , String area){
         DatabaseReference r = connect_db("Technician");
         TechnicianInt t = new Technician(phone, area);
@@ -142,7 +142,7 @@ public abstract class Controller{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(phone).exists()){
                     if(!phone.isEmpty()){
-                        UserInt user = snapshot.child(phone).getValue(user.class);
+                        UserInt user = snapshot.child(phone).getValue(User.class);
                         if(user.getPass().equals(pass)){
                             flag[0] = true;
                         }

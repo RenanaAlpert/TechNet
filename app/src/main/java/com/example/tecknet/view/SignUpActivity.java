@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
                 pBar.setVisibility(View.VISIBLE);//loading
 
                 if(ans) {
-                    user myUser = new user(fNames, lNames,passwordS, emailS,roleS, phoneS);
+                    User myUser = new User(fNames, lNames,passwordS, emailS,roleS, phoneS);
 //                    check_if_user_exist(phoneS);
 
                     com.example.tecknet.model.Controller.new_user(fNames,lNames ,phoneS, emailS,passwordS, roleS);
@@ -69,13 +69,13 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * this function is private for check if the user enter his details
+     * this function is private for check if the User enter his details
      * @param fNames
      * @param lNames
      * @param emailS
      * @param passwordS
      * @param phoneS
-     * @return true if the user enter all the needed details
+     * @return true if the User enter all the needed details
      *         false if some detail is missing
      */
     private boolean check_if_entered_details(String fNames ,String lNames ,String emailS,
@@ -115,14 +115,14 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * this function move to the next screen
      */
-    private void continue_to_institution_detail( user myUser) {
+    private void continue_to_institution_detail( User myUser) {
         Intent intent = new Intent(SignUpActivity.this, MaintenanceManDetailsActivity.class);
-        intent.putExtra("user" ,  myUser);
+        intent.putExtra("User" ,  myUser);
         startActivity(intent);
     }
-    private void continue_to_tech_detail( user myUser) {
+    private void continue_to_tech_detail( User myUser) {
         Intent intent = new Intent(SignUpActivity.this, TechMenDetailsActivity.class);
-        intent.putExtra("user" , myUser);
+        intent.putExtra("User" , myUser);
         startActivity(intent);
     }
 }

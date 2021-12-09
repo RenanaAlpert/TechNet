@@ -41,8 +41,8 @@ public class TechMenDetailsActivity extends AppCompatActivity {
 
                 String sArea = area.getSelectedItem().toString();
 
-                //user obj from the prev screen
-                UserInt user = getIntent().getParcelableExtra("user");
+                //User obj from the prev screen
+                UserInt user = getIntent().getParcelableExtra("User");
 
                 /**
                  * NOT GOOD WEY TO ENTER TECH ON HIS DATABASE!!!

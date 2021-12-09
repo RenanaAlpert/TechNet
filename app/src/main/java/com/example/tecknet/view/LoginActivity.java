@@ -2,11 +2,7 @@ package com.example.tecknet.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +16,6 @@ import android.widget.Toast;
 //import com.google.android.gms.tasks.OnCompleteListener;
 //import com.google.android.gms.tasks.Task;
 import com.example.tecknet.R;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -85,14 +80,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(phone).exists()){
                     if(!phone.isEmpty()){
-                        user user = snapshot.child(phone).getValue(user.class);
+                        User user = snapshot.child(phone).getValue(User.class);
                         if(user.getPass().equals(pass)){
                             Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
 
 
                             if(user.getRole().equals("אב בית")){
                                 Intent intent = new Intent(getApplicationContext() , HomeMaintenanceMan.class);
-                                intent.putExtra("user" , user);
+                                intent.putExtra("User" , user);
                                 startActivity(intent);
                             }
                             else {

@@ -9,13 +9,25 @@
         android:id="@+id/nav_home"
         android:name="com.example.tecknet.view.home_maintenance_man.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home_maintenance_man" />
+        tools:layout="@layout/fragment_home_maintenance_man" >
+        <argument
+            android:name="user"
+            app:argType="com.example.tecknet.model.UserInt"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_report_malfunction"
         android:name="com.example.tecknet.view.report_malfunction_maintenance_man.ReportMalfunctionFragment"
         android:label="@string/menu_report_malfunction"
-        tools:layout="@layout/fragment_report_malfunction_maintenance_man" />
+        tools:layout="@layout/fragment_report_malfunction_maintenance_man" >
+        <argument
+            android:name="user"
+            app:argType="com.example.tecknet.model.UserInt"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_inventory"

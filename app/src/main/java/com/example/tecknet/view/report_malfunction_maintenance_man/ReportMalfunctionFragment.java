@@ -39,14 +39,15 @@ public class ReportMalfunctionFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //extract the report details from the user
+                //extract the report details from the User
                 String typeS = type.getText().toString();
                 String modelS = model.getText().toString();
                 String companyS = company.getText().toString();
                 String detailFaultS = detailFault.getText().toString();
 
                 //enter to InstitutionDetails object to insert to firebase
-                InstitutionDetails ins = requireActivity().getIntent().getParcelableExtra("institution");
+                InstitutionDetails ins= requireActivity().getParentActivityIntent().getParcelableExtra("institution");
+
                 //call to new_malfunction function from the controller
                 com.example.tecknet.model.Controller.new_malfunction(ins.getInstitution_id(), modelS, companyS,
                         typeS, detailFaultS);

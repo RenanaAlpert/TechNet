@@ -3,13 +3,13 @@ package com.example.tecknet.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class user implements UserInt , Parcelable {
+public class User implements UserInt {
     private String firstName , lastName , pass, email ,phone ,role;
 
-    public user(){
+    public User(){
 
     }
-    public user(String firstName, String lastName, String pass, String email , String role,
+    public User(String firstName, String lastName, String pass, String email , String role,
                 String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -19,7 +19,7 @@ public class user implements UserInt , Parcelable {
         this.role = role;
     }
 
-    protected user(Parcel in) {
+    protected User(Parcel in) {
         firstName = in.readString();
         lastName = in.readString();
         pass = in.readString();
@@ -28,15 +28,15 @@ public class user implements UserInt , Parcelable {
         role = in.readString();
     }
 
-    public static final Creator<user> CREATOR = new Creator<user>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
-        public user createFromParcel(Parcel in) {
-            return new user(in);
+        public User createFromParcel(Parcel in) {
+            return new User(in);
         }
 
         @Override
-        public user[] newArray(int size) {
-            return new user[size];
+        public User[] newArray(int size) {
+            return new User[size];
         }
     };
 

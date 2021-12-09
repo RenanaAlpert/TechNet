@@ -1,9 +1,11 @@
 package com.example.tecknet.model;
 
+import android.os.Parcelable;
+
 /**
- * Interface of user - maintenance & technician
+ * Interface of User - maintenance & technician
  */
-public interface UserInt {
+public interface UserInt extends Parcelable {
 
     public String getFirstName();
 

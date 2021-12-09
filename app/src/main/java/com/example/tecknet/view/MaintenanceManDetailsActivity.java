@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
-import com.example.tecknet.model.InstitutionDetailsInt;
-import com.example.tecknet.model.UserInt;
-import com.example.tecknet.model.user;
+import com.example.tecknet.model.User;
 
 /**
  * this class implement the screen to fill Institution details
@@ -54,8 +52,8 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                 String sArea = area.getSelectedItem().toString();
                 String sPhoneInc = phoneInc.getText().toString();
 
-                //user obj from the prev screen
-                user myUser = getIntent().getParcelableExtra("user");
+                //User obj from the prev screen
+                User myUser = getIntent().getParcelableExtra("User");
                 InstitutionDetails ins = new InstitutionDetails(sNumIns, sNameIns,sAddressIns,
                         sCityIns, sArea, "", sPhoneInc, myUser.getPhone());
 
@@ -66,7 +64,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
 
                 ///todo move to morias screen
                 Intent intent = new Intent(MaintenanceManDetailsActivity.this, HomeMaintenanceMan.class);
-                intent.putExtra("user" ,myUser);
+                intent.putExtra("User" ,myUser);
                 intent.putExtra("institution" , ins);
                 //show msg to the screen
                 Toast.makeText(MaintenanceManDetailsActivity.this , "SignUp institution success" , Toast.LENGTH_LONG).show();
