@@ -11,7 +11,7 @@ public interface TechnicianInt {
 
     public void setPhone_number(String phone_number);
 
-    public region getArea();
+    public String getArea();
 
-    public void setArea(region area);
+    public void setArea(String area);
 }

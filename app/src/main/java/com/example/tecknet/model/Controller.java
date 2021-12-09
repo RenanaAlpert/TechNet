@@ -38,12 +38,15 @@ public abstract class Controller{
         DatabaseReference r = connect_db("users");
         UserInt us = new user(first_name , last_name ,password , mail , phone, role);
         r.child(phone).setValue(us);
-        if(us.getRole().equals("Technician") || us.getRole().equals("טכנאי")){
-            TechnicianInt t = new Technician(phone, region.Sharon);
-            r = connect_db("Technician");
-            r.child(phone).setValue(t);
-        }
     }
+
+    //yuval change and superet from the new user
+    public static void new_tech(String phone , String area){
+        DatabaseReference r = connect_db("Technician");
+        TechnicianInt t = new Technician(phone, area);
+        r.child(phone).setValue(t);
+    }
+
 
     /**
      * Add institution
@@ -117,10 +120,12 @@ public abstract class Controller{
      * @param explain
      */
     public static void new_malfunction(String symbol, String device, String company, String type, String explain) {
-        long product_id = get_product_id(device, company, type);
-        MalfunctionDetailsInt mal = new MalfunctionDetails(product_id, symbol, explain);
+        MalfunctionDetailsInt mal = new MalfunctionDetails(-1, symbol, explain);
         DatabaseReference r = connect_db("mals");
         r.child(String.valueOf(mal.getMal_id())).setValue(mal);
+
+        ProductDetailsInt pd = new ProductDetails(device,company,type,"","");
+        r.child(String.valueOf(mal.getMal_id())).child("productDetails").setValue(pd);
     }
 
     /**

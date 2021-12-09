@@ -47,11 +47,7 @@ public class TechMenDetailsActivity extends AppCompatActivity {
                 /**
                  * NOT GOOD WEY TO ENTER TECH ON HIS DATABASE!!!
                  */
-                //todo move this to the controller
-                reference.child(user.getPhone()).setValue(sArea);
-                reference.child(user.getPhone()).setValue("mal");
-
-
+                com.example.tecknet.model.Controller.new_tech(user.getPhone() ,sArea);
 
                 ///todo move to morias screen
                 Intent intent = new Intent(TechMenDetailsActivity.this, MainActivity.class);

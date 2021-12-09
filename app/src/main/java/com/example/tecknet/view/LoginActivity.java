@@ -85,12 +85,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(phone).exists()){
                     if(!phone.isEmpty()){
-                        UserInt user = snapshot.child(phone).getValue(user.class);
+                        user user = snapshot.child(phone).getValue(user.class);
                         if(user.getPass().equals(pass)){
                             Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
 
+
                             if(user.getRole().equals("אב בית")){
-                                startActivity(new Intent(getApplicationContext() , HomeMaintenanceMan.class));
+                                Intent intent = new Intent(getApplicationContext() , HomeMaintenanceMan.class);
+                                intent.putExtra("user" , user);
+                                startActivity(intent);
                             }
                             else {
                                 startActivity(new Intent(getApplicationContext() , HomeTechnician.class));

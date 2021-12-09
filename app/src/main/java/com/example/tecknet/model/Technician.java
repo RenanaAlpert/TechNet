@@ -3,11 +3,11 @@ package com.example.tecknet.model;
 public class Technician implements TechnicianInt{
 
     private String phone_number;
-    private region area;
+    private String area;
 
     public Technician(){}
 
-    public Technician(String phone_number, region area){
+    public Technician(String phone_number, String area){
         this.phone_number = phone_number;
         this.area = area;
     }
@@ -20,11 +20,11 @@ public class Technician implements TechnicianInt{
         this.phone_number = phone_number;
     }
 
-    public region getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(region area) {
+    public void setArea(String area) {
         this.area = area;
     }
 }
