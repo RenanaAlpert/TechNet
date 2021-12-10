@@ -1,7 +1,7 @@
 package com.example.tecknet.model;
 
 public class MalfunctionDetails implements MalfunctionDetailsInt{
-    static long malfunction_counter=0;
+//    static long malfunction_counter=0;
     long mal_id;
     /**
      * TODO: add product_id and connect between inventory to malfunctions
@@ -16,7 +16,7 @@ public class MalfunctionDetails implements MalfunctionDetailsInt{
     public MalfunctionDetails(){}
 
     public MalfunctionDetails(long product, String institution, String explain) {
-        this.mal_id = ++malfunction_counter;
+//        this.mal_id = ++malfunction_counter;
         this.institution = institution;
         this.explanation = explain;
         this.is_open=false;

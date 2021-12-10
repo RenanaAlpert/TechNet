@@ -1,5 +1,6 @@
 package com.example.tecknet.view.report_malfunction_maintenance_man;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
 import com.example.tecknet.model.InstitutionDetails;
-import com.example.tecknet.view.home_maintenance_man.HomeFragmentArgs;
+
 
 
 public class ReportMalfunctionFragment extends Fragment {
@@ -51,25 +52,58 @@ public class ReportMalfunctionFragment extends Fragment {
                 String ins_id="444";
                 ins_id+= getArguments().getString("institution_symbol");
 
+                if(check_if_entered_details(typeS ,modelS,companyS, detailFaultS)) {
+                    //call to new_malfunction function from the controller
+                    com.example.tecknet.model.Controller.new_malfunction(ins_id, modelS, companyS,
+                            typeS, detailFaultS);
 
-                //call to new_malfunction function from the controller
-                com.example.tecknet.model.Controller.new_malfunction(ins_id, modelS, companyS,
-                        typeS, detailFaultS);
+                    clear_edit_text(); //clear from edit text
 
-                //show msg to the screen
-                Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
-                //todo move to the needed screen
-//                startActivity(new Intent(MalfunctionReport.this , MainActivity.class))
-        }
-    });
+                    //show msg to the screen
+                    Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
+                    //todo move to the needed screen
+                }
+            }
+        });
 
-
-    return root;
+        return root;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    /**
+     * Private function how clear the text from the edit text view
+     */
+    private void clear_edit_text(){
+        type.getText().clear();
+        model.getText().clear();
+        company.getText().clear();
+        detailFault.getText().clear();
+
+    }
+
+    private boolean check_if_entered_details(String typeS ,String modelS, String companyS, String detailFaultS){
+        if(typeS.isEmpty()){
+            type.setError("Please enter the device!!");
+            return false;
+        }
+        if(modelS.isEmpty()){
+            model.setError("Please enter th model!!");
+            return false;
+        }
+        if(companyS.isEmpty()){
+            company.setError("Please enter the company!!");
+            return false;
+        }
+        if(detailFaultS.isEmpty()){
+            detailFault.setError("Please enter report reason!!");
+            return false;
+        }
+        return true;
+
     }
 }

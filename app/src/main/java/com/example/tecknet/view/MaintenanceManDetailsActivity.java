@@ -62,7 +62,6 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                 com.example.tecknet.model.Controller.set_institution(sNumIns, sNameIns,sAddressIns,
                         sCityIns, sArea, "", sPhoneInc, myUser.getPhone()) ;
 
-                ///todo move to morias screen
                 Intent intent = new Intent(MaintenanceManDetailsActivity.this, HomeMaintenanceMan.class);
                 intent.putExtra("User" ,myUser);
 //                intent.putExtra("institution" , ins);
@@ -71,10 +70,8 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                 
                 startActivity(intent);
 
-
             }
         });
-
 
     }
 }

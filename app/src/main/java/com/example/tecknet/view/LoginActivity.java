@@ -68,8 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 pBar.setVisibility(View.VISIBLE); //on the login pic
                 login(phoneS,passwordS);
-
-
+                clear_login_editext(); //clear from the edit text
 
             }
         });
@@ -111,6 +110,14 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("TAG",error.getMessage());
             }
         });
+    }
+
+    /**
+     * Private function how clear the text from the edit text view
+     */
+    private void clear_login_editext(){
+        phone.getText().clear();
+        pass.getText().clear();
     }
 
 }

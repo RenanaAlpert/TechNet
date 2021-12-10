@@ -123,47 +123,15 @@ public abstract class Controller{
     public static void new_malfunction(String symbol, String device, String company, String type, String explain) {
         MalfunctionDetailsInt mal = new MalfunctionDetails(-1, symbol, explain);
         DatabaseReference r = connect_db("mals");
-        r.child(String.valueOf(mal.getMal_id())).setValue(mal);
+        // Generate a reference to a new location and add some data using push()
+        DatabaseReference newMalRef = r.push();
+        String malId = newMalRef.getKey(); //get string of the uniq key
 
+        newMalRef.setValue(mal); //add this to mal database
+        //add product detail to the mal
         ProductDetailsInt pd = new ProductDetails(device,company,type,"","");
-        r.child(String.valueOf(mal.getMal_id())).child("productDetails").setValue(pd);
+        r.child(malId).child("productDetails").setValue(pd);
     }
 
-    /**
-     * connect to the system
-     * @param phone
-     * @param pass
-     * @return
-     */
-    public static boolean login(String phone , String pass){
-        DatabaseReference r = connect_db("users");
-        final boolean[] flag = new boolean[1];
-        r.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(phone).exists()){
-                    if(!phone.isEmpty()){
-                        UserInt user = snapshot.child(phone).getValue(User.class);
-                        if(user.getPass().equals(pass)){
-                            flag[0] = true;
-                        }
-                        else {
-                            flag[0] = false;
-                        }
-                    }
-                    else{
-                        flag[0] = false;
-                    }
-                }
-                else {
-                    flag[0] = false;
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("TAG",error.getMessage());
-            }
-        });
-        return flag[0];
-    }
+
 }

@@ -55,7 +55,9 @@ public class SignUpActivity extends AppCompatActivity {
                     User myUser = new User(fNames, lNames,passwordS, emailS,roleS, phoneS);
 //                  todo  check_if_user_exist(phoneS);
 
+                    // call to new_user from controller hoe enter the new details of the user
                     com.example.tecknet.model.Controller.new_user(fNames,lNames ,phoneS, emailS,passwordS, roleS);
+                    clear_from_editext(); // clear from the edit text
 
                     if(roleS.equals("אב בית")) continue_to_institution_detail(myUser);
                     else continue_to_tech_detail(myUser);
@@ -124,5 +126,16 @@ public class SignUpActivity extends AppCompatActivity {
         Intent intent = new Intent(SignUpActivity.this, TechMenDetailsActivity.class);
         intent.putExtra("User" , myUser);
         startActivity(intent);
+    }
+
+    /**
+     * Private function how clear the text from the edit text view
+     */
+    private void clear_from_editext(){
+        email.getText().clear();
+        fName.getText().clear();
+        lName.getText().clear();
+        pass.getText().clear();
+        phone.getText().clear();
     }
 }

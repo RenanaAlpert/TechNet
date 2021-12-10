@@ -7,8 +7,6 @@ import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.view.home_maintenance_man.HomeFragmentDirections;
-import com.example.tecknet.view.report_malfunction_maintenance_man.ReportMalfunctionFragmentArgs;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
