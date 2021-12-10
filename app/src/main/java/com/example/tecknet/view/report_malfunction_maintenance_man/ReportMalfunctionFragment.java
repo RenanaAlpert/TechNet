@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
 import com.example.tecknet.model.InstitutionDetails;
+import com.example.tecknet.view.home_maintenance_man.HomeFragmentArgs;
 
 
 public class ReportMalfunctionFragment extends Fragment {
@@ -45,11 +47,13 @@ public class ReportMalfunctionFragment extends Fragment {
                 String companyS = company.getText().toString();
                 String detailFaultS = detailFault.getText().toString();
 
-                //enter to InstitutionDetails object to insert to firebase
-                InstitutionDetails ins= requireActivity().getParentActivityIntent().getParcelableExtra("institution");
+                //enter to ins_id to insert to firebase
+                String ins_id="444";
+                ins_id+= getArguments().getString("institution_symbol");
+
 
                 //call to new_malfunction function from the controller
-                com.example.tecknet.model.Controller.new_malfunction(ins.getInstitution_id(), modelS, companyS,
+                com.example.tecknet.model.Controller.new_malfunction(ins_id, modelS, companyS,
                         typeS, detailFaultS);
 
                 //show msg to the screen

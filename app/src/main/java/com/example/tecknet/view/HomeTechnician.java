@@ -27,15 +27,7 @@ public class HomeTechnician extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-//        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {//TODO EARASE
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(HomeTechnician.this, ReportMalfunctionFragment.class));
-//
-////                NavController navController = Navigation.findNavController(view);
-////                navController.navigate(R.id.action_nav_home_to_nav_report_malfunction2);
-//            }
-//        });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
