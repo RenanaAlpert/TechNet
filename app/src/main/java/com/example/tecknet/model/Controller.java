@@ -10,6 +10,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Controller{
@@ -165,5 +168,53 @@ public abstract class Controller{
             }
         });
         return flag[0];
+    }
+
+    public static Collection<MalfunctionDetailsInt> open_malfunction (){
+        Collection<MalfunctionDetailsInt> malsCol = new LinkedList<>();
+        DatabaseReference r = connect_db("Mals");
+        r.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    MalfunctionDetailsInt mal = ds.child(Objects.requireNonNull(ds.getKey())).getValue(MalfunctionDetails.class);
+                    assert mal != null;
+                    if(mal.isIs_open()){
+                        malsCol.add(mal);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG",databaseError.getMessage());
+            }
+        });
+        return malsCol;
+    }
+
+    public static Collection<MalfunctionDetailsInt> open_malfunction (String area){
+        Collection<MalfunctionDetailsInt> allMals = open_malfunction();
+        Collection<MalfunctionDetailsInt> malsInTheArea = new LinkedList<>();
+        for(MalfunctionDetailsInt m: allMals){
+            String ins = m.getInstitution();
+            DatabaseReference r = connect_db("institution").child(ins);
+            r.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String a = (String) dataSnapshot.child("area").getValue();
+                    assert a != null;
+                    if(a.equals(area)){
+                        malsInTheArea.add(m);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.d("TAG",databaseError.getMessage());
+                }
+            });
+        }
+        return  malsInTheArea;
     }
 }
