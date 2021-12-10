@@ -11,13 +11,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
 import com.example.tecknet.model.InstitutionDetails;
 
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
-import com.example.tecknet.view.home_maintenance_man.HomeFragmentArgs;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
