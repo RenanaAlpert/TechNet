@@ -11,10 +11,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
 
 public class SignUpActivity extends AppCompatActivity {
+
+    private UserViewModel uViewModel;
+
     EditText email ,fName ,lName ,pass ,phone;
     Spinner role;
     Button next;
@@ -53,6 +57,11 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(ans) {
                     User myUser = new User(fNames, lNames,passwordS, emailS,roleS, phoneS);
+
+//                    //add user to shared view model//todo erase
+//                    uViewModel = new ViewModelProvider(SignUpActivity.this).get(UserViewModel.class);
+//                    uViewModel.setItem(myUser);
+
 //                  todo  check_if_user_exist(phoneS);
 
                     com.example.tecknet.model.Controller.new_user(fNames,lNames ,phoneS, emailS,passwordS, roleS);

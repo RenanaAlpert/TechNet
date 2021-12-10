@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.tecknet.model.UserInt;
 
-public class ItemViewModel extends ViewModel {
+public class UserViewModel extends ViewModel {
     private final MutableLiveData<UserInt> selectedItem = new MutableLiveData<UserInt>();
-    public void selectItem(UserInt user) {
+    public void setItem(UserInt user) {
         selectedItem.setValue(user);
     }
-    public LiveData<UserInt> getSelectedItem() {
+    public LiveData<UserInt> getItem() {
         return selectedItem;
     }
 }

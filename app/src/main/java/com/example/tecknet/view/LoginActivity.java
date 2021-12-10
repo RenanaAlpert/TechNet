@@ -2,6 +2,7 @@ package com.example.tecknet.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.example.tecknet.model.*;
 
 public class LoginActivity extends AppCompatActivity {
+    private UserViewModel uViewModel;
     EditText phone , pass;
     TextView forgetPass;
     Button login;
@@ -81,6 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                 if(snapshot.child(phone).exists()){
                     if(!phone.isEmpty()){
                         User user = snapshot.child(phone).getValue(User.class);
+                        //add user to shared view model
+//                        uViewModel = new ViewModelProvider(LoginActivity.this).get(UserViewModel.class);
+//                        uViewModel.setItem(user); todo  erase
                         if(user.getPass().equals(pass)){
                             Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
 
