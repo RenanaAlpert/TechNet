@@ -6,9 +6,22 @@ import android.os.Parcelable;
 public class User implements UserInt {
     private String firstName , lastName , pass, email ,phone ,role;
 
+    /**
+     * default constructor
+     */
     public User(){
 
     }
+
+    /**
+     * parameter constructor
+     * @param firstName
+     * @param lastName
+     * @param pass
+     * @param email
+     * @param role
+     * @param phone
+     */
     public User(String firstName, String lastName, String pass, String email , String role,
                 String phone) {
         this.firstName = firstName;
@@ -17,6 +30,19 @@ public class User implements UserInt {
         this.email = email;
         this.phone = phone;
         this.role = role;
+    }
+
+    /**
+     * Copy constructor from interface
+     * @param user
+     */
+    public User(UserInt user) {
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.pass = user.getPass();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
+        this.role = user.getRole();
     }
 
     protected User(Parcel in) {

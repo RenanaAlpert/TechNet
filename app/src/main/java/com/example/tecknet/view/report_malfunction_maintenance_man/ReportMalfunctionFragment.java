@@ -1,6 +1,5 @@
 package com.example.tecknet.view.report_malfunction_maintenance_man;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +15,23 @@ import androidx.fragment.app.Fragment;
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
 import com.example.tecknet.model.InstitutionDetails;
 
+import com.example.tecknet.model.UserInt;
+import com.example.tecknet.view.UserViewModel;
+import com.example.tecknet.view.home_maintenance_man.HomeFragmentArgs;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class ReportMalfunctionFragment extends Fragment {
+    private String insSymbol;
 
+    private UserViewModel uViewModel;
+    private FirebaseDatabase rootNode;//todo move
+    private DatabaseReference dataRef;
     private FragmentReportMalfunctionMaintenanceManBinding binding;
     EditText type , model ,company , detailFault;
     Button reportBut;
@@ -28,6 +40,7 @@ public class ReportMalfunctionFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
 
+        //connect to edit_text user enters
         binding = FragmentReportMalfunctionMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -41,6 +54,35 @@ public class ReportMalfunctionFragment extends Fragment {
         reportBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //for connection to data base todo move
+                rootNode = FirebaseDatabase.getInstance();
+                dataRef = rootNode.getReference("institution");
+
+                //get user of this app
+                uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+                UserInt user=uViewModel.getItem().getValue();
+                assert user != null;
+                System.out.println("name: "+user.getFirstName());
+
+                //get from database the institution number / symbol
+                dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.child(user.getPhone()).exists()) {
+                            if (!(user.getPhone().isEmpty())) {
+                                insSymbol = dataSnapshot.child(user.getPhone()).getValue(InstitutionDetails.class).getInstitution_id();
+                                System.out.println("symbol: "+insSymbol);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+
+                });
+
 
                 //extract the report details from the User
                 String typeS = type.getText().toString();
@@ -66,7 +108,7 @@ public class ReportMalfunctionFragment extends Fragment {
             }
         });
 
-        return root;
+    return root;
     }
 
     @Override

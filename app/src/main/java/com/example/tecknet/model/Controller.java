@@ -10,22 +10,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Objects;
 
-public abstract class Controller{
+public abstract class Controller {
 
     /**
      * connect to the DB.
+     *
      * @param db
      * @return
      */
-    private static DatabaseReference connect_db(String db){
+    private static DatabaseReference connect_db(String db) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance(); //connect to firebase
         return rootNode.getReference(db);
     }
 
     /**
      * Add new User.
+     *
      * @param first_name
      * @param last_name
      * @param phone
@@ -36,12 +40,12 @@ public abstract class Controller{
     public static void new_user(String first_name, String last_name, String phone, String mail,
                                 String password, String role) {
         DatabaseReference r = connect_db("users");
-        UserInt us = new User(first_name , last_name ,password , mail , phone, role);
+        UserInt us = new User(first_name, last_name, password, mail, phone, role);
         r.child(phone).setValue(us);
     }
 
     //yuval change and superet from the new User
-    public static void new_tech(String phone , String area){
+    public static void new_tech(String phone, String area) {
         DatabaseReference r = connect_db("Technician");
         TechnicianInt t = new Technician(phone, area);
         r.child(phone).setValue(t);
@@ -50,6 +54,7 @@ public abstract class Controller{
 
     /**
      * Add institution
+     *
      * @param symbol
      * @param name
      * @param address
@@ -65,7 +70,7 @@ public abstract class Controller{
 
         DatabaseReference r = connect_db("institution");
         InstitutionDetailsInt ins = new InstitutionDetails(symbol, name, address, city, area, operation_hours, phone_number, phone_maintenance);
-       //todo check symble dosen't already exist
+        //todo check symble dosen't already exist
         r.child(symbol).setValue(ins);
         MaintenanceManInt mm = new MaintenanceMan(phone_maintenance, symbol);
         r = connect_db("maintenance");
@@ -74,21 +79,22 @@ public abstract class Controller{
 
     /**
      * Return the product_id
+     *
      * @param device
      * @param company
      * @param type
      * @return
      */
-    private static long get_product_id(String device, String company, String type){
+    private static long get_product_id(String device, String company, String type) {
         DatabaseReference r = connect_db("products");
         final long[] pid = new long[1];
         r.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     ProductDetailsInt product = ds.child(Objects.requireNonNull(ds.getKey())).getValue(ProductDetails.class);
                     assert product != null;
-                    if(product.getDevice().equals(device) && product.getCompany().equals(company) && product.getType().equals(type)){
+                    if (product.getDevice().equals(device) && product.getCompany().equals(company) && product.getType().equals(type)) {
                         pid[0] = product.getProduct_id();
                         break;
                     }
@@ -101,7 +107,7 @@ public abstract class Controller{
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("TAG",error.getMessage());
+                Log.d("TAG", error.getMessage());
             }
         });
         return pid[0];
@@ -114,6 +120,7 @@ public abstract class Controller{
 
     /**
      * open malfunction report
+     *
      * @param symbol
      * @param device
      * @param company
@@ -129,9 +136,55 @@ public abstract class Controller{
 
         newMalRef.setValue(mal); //add this to mal database
         //add product detail to the mal
-        ProductDetailsInt pd = new ProductDetails(device,company,type,"","");
+        ProductDetailsInt pd = new ProductDetails(device, company, type, "", "");
         r.child(malId).child("productDetails").setValue(pd);
     }
 
+    public static Collection<MalfunctionDetailsInt> open_malfunction (){
+        Collection<MalfunctionDetailsInt> malsCol = new LinkedList<>();
+        DatabaseReference r = connect_db("Mals");
+        r.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    MalfunctionDetailsInt mal = ds.child(Objects.requireNonNull(ds.getKey())).getValue(MalfunctionDetails.class);
+                    assert mal != null;
+                    if(mal.isIs_open()){
+                        malsCol.add(mal);
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG",databaseError.getMessage());
+            }
+        });
+        return malsCol;
+    }
+
+    public static Collection<MalfunctionDetailsInt> open_malfunction (String area){
+        Collection<MalfunctionDetailsInt> allMals = open_malfunction();
+        Collection<MalfunctionDetailsInt> malsInTheArea = new LinkedList<>();
+        for(MalfunctionDetailsInt m: allMals){
+            String ins = m.getInstitution();
+            DatabaseReference r = connect_db("institution").child(ins);
+            r.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String a = (String) dataSnapshot.child("area").getValue();
+                    assert a != null;
+                    if(a.equals(area)){
+                        malsInTheArea.add(m);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.d("TAG",databaseError.getMessage());
+                }
+            });
+        }
+        return  malsInTheArea;
+    }
 }
