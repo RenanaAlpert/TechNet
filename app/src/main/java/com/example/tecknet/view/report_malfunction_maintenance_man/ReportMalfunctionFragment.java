@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
 import com.example.tecknet.model.InstitutionDetails;
 
+import com.example.tecknet.model.MaintenanceMan;
+import com.example.tecknet.model.MaintenanceManInt;
+import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
 
@@ -27,11 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class ReportMalfunctionFragment extends Fragment {
-    private String insSymbol;
 
     private UserViewModel uViewModel;
-    private FirebaseDatabase rootNode;//todo move
-    private DatabaseReference dataRef;
     private FragmentReportMalfunctionMaintenanceManBinding binding;
     EditText type , model ,company , detailFault;
     Button reportBut;
@@ -55,35 +56,11 @@ public class ReportMalfunctionFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //for connection to data base todo move
-                rootNode = FirebaseDatabase.getInstance();
-                dataRef = rootNode.getReference("institution");
-
                 //get user of this app
                 uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
                 UserInt user=uViewModel.getItem().getValue();
                 System.out.println("report: "+requireActivity());
                 assert user != null;
-                System.out.println("name: "+user.getFirstName());
-
-                //get from database the institution number / symbol
-                dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.child(user.getPhone()).exists()) {
-                            if (!(user.getPhone().isEmpty())) {
-                                insSymbol = dataSnapshot.child(user.getPhone()).getValue(InstitutionDetails.class).getInstitution_id();
-                                System.out.println("symbol: "+insSymbol);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-
-                });
-
 
                 //extract the report details from the User
                 String typeS = type.getText().toString();
@@ -91,17 +68,16 @@ public class ReportMalfunctionFragment extends Fragment {
                 String companyS = company.getText().toString();
                 String detailFaultS = detailFault.getText().toString();
 
-
                 if(check_if_entered_details(typeS ,modelS,companyS, detailFaultS)) {
-                    //call to new_malfunction function from the controller
-                    com.example.tecknet.model.Controller.new_malfunction(insSymbol, modelS, companyS,
-                            typeS, detailFaultS);
+                    //call to this function from the controller how found the
+                    //institution id and call new_malfunction how add this mal to DB
+                    com.example.tecknet.model.Controller.add_mal_and_extricate_istituId(user.getPhone()
+                        ,modelS,companyS,typeS ,detailFaultS);
 
                     clear_edit_text(); //clear from edit text
 
                     //show msg to the screen
                     Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
-                    //todo move to the needed screen
                 }
             }
         });

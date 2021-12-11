@@ -40,7 +40,7 @@ public abstract class Controller {
     public static void new_user(String first_name, String last_name, String phone, String mail,
                                 String password, String role) {
         DatabaseReference r = connect_db("users");
-        UserInt us = new User(first_name, last_name, password, mail, phone, role);
+        UserInt us = new User(first_name, last_name, password, mail, role,phone);
         r.child(phone).setValue(us);
     }
 
@@ -138,6 +138,30 @@ public abstract class Controller {
         //add product detail to the mal
         ProductDetailsInt pd = new ProductDetails(device, company, type, "", "");
         r.child(malId).child("productDetails").setValue(pd);
+    }
+    public static void add_mal_and_extricate_istituId(String userPhone , String model , String company,
+                        String type , String detailFault){
+
+        DatabaseReference dataRef = connect_db("maintenance");
+        final String[] insSymbol = new String[1];
+
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(userPhone).exists()) {
+                    if (!(userPhone.isEmpty())) {
+                        insSymbol[0] = dataSnapshot.child(userPhone).getValue(MaintenanceMan.class).getInstitution();
+
+                        new_malfunction(insSymbol[0], model, company, type, detailFault);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
     }
 
     public static Collection<MalfunctionDetailsInt> open_malfunction (){

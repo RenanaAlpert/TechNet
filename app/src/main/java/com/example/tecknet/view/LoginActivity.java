@@ -78,29 +78,24 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(phone).exists()){
-                    if(!phone.isEmpty()){
-                        User user = snapshot.child(phone).getValue(User.class);
-                        if(user.getPass().equals(pass)){
-                            Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
+                    User user = snapshot.child(phone).getValue(User.class);
+                    if(user.getPass().equals(pass)){
+                        Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
 
-
-                            if(user.getRole().equals("אב בית")){
-                                Intent intent = new Intent(getApplicationContext() , HomeMaintenanceMan.class);
-                                intent.putExtra("User" , user);
-                                startActivity(intent);
-                            }
-                            else {
-                                startActivity(new Intent(getApplicationContext() , HomeTechnician.class));
-                            }
+                        if(user.getRole().equals("אב בית")){
+                            Intent intent = new Intent(getApplicationContext() , HomeMaintenanceMan.class);
+                            intent.putExtra("User" , user);
+                            startActivity(intent);
                         }
                         else {
-                            Toast.makeText(LoginActivity.this , "Password incorrect!" , Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext() , HomeTechnician.class));
                         }
                     }
-                    else{
-                        Toast.makeText(LoginActivity.this , "User is not register" , Toast.LENGTH_LONG).show();
+                    else {
+                        Toast.makeText(LoginActivity.this , "Password incorrect!" , Toast.LENGTH_LONG).show();
                     }
                 }
+
                 else {
                     Toast.makeText(LoginActivity.this , "User is not register" , Toast.LENGTH_LONG).show();
                 }

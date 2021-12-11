@@ -44,9 +44,6 @@ public class TechMenDetailsActivity extends AppCompatActivity {
                 //User obj from the prev screen
                 UserInt user = getIntent().getParcelableExtra("User");
 
-                /**
-                 * NOT GOOD WEY TO ENTER TECH ON HIS DATABASE!!!
-                 */
                 com.example.tecknet.model.Controller.new_tech(user.getPhone() ,sArea);
 
                 ///todo move to morias screen

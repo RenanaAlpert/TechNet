@@ -43,8 +43,6 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Controller c = new Controller();
-
                 String fNames = fName.getText().toString();
                 String lNames = lName.getText().toString();
                 String emailS = email.getText().toString();

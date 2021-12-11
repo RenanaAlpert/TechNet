@@ -21,7 +21,8 @@ public class MaintenanceMan implements MaintenanceManInt {
         this.phone_number = phone_number;
     }
 
-    public String getInstitution() {
+
+    public String getInstitution(){
         return institution;
     }
 
