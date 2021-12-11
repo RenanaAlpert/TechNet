@@ -90,13 +90,10 @@ public class ReportMalfunctionFragment extends Fragment {
                 String companyS = company.getText().toString();
                 String detailFaultS = detailFault.getText().toString();
 
-                //enter to ins_id to insert to firebase
-                String ins_id="444";
-                ins_id+= getArguments().getString("institution_symbol");
 
                 if(check_if_entered_details(typeS ,modelS,companyS, detailFaultS)) {
                     //call to new_malfunction function from the controller
-                    com.example.tecknet.model.Controller.new_malfunction(ins_id, modelS, companyS,
+                    com.example.tecknet.model.Controller.new_malfunction(insSymbol, modelS, companyS,
                             typeS, detailFaultS);
 
                     clear_edit_text(); //clear from edit text
