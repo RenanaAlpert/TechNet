@@ -49,7 +49,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
         //get user from login\signup
         UserInt user= getIntent().getParcelableExtra("User");
         //add user to shared view model so fregment can see it
-        passOnUViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        passOnUViewModel = new ViewModelProvider(HomeMaintenanceMan.this).get(UserViewModel.class);
         passOnUViewModel.setItem(user);
 
 
