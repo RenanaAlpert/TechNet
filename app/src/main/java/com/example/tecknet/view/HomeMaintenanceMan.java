@@ -59,7 +59,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
                 R.id.nav_home, R.id.nav_report_malfunction, R.id.nav_inventory,R.id.nav_add_product)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_main_man);
 //        navController.navigate(R.id.pass_nav_report_malfunction,bundle);
        navController.navigate(R.id.nav_home);
 
@@ -76,7 +76,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_main_man);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
