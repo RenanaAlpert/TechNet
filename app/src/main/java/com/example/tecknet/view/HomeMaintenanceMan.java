@@ -56,12 +56,12 @@ public class HomeMaintenanceMan extends AppCompatActivity {
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_report_malfunction, R.id.nav_inventory,R.id.nav_add_product)
+                R.id.nav_home_main_man, R.id.nav_report_malfunction, R.id.nav_inventory,R.id.nav_add_product)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_main_man);
 //        navController.navigate(R.id.pass_nav_report_malfunction,bundle);
-       navController.navigate(R.id.nav_home);
+ //      navController.navigate(R.id.nav_home);
 
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
