@@ -13,22 +13,30 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.databinding.FragmentHomeMaintenanceManBinding;
+import com.example.tecknet.model.UserInt;
+import com.example.tecknet.view.UserViewModel;
 
-public class HomeFragment extends Fragment {
-
-    private HomeViewModel homeViewModel;
+public class HomeFragmentMainMan extends Fragment {
+    private UserViewModel uViewModel;
+    private HomeViewModelMainMan homeViewModelMainMan;
     private FragmentHomeMaintenanceManBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModelMainMan =
+                new ViewModelProvider(this).get(HomeViewModelMainMan.class);
+        //get user of this app
+        uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        UserInt user=uViewModel.getItem().getValue();
+        System.out.println(user==null);
+//        String fullName= user.getFirstName()+" "+user.getLastName();
+//        System.out.println(fullName);
 
         binding = FragmentHomeMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        homeViewModelMainMan.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
