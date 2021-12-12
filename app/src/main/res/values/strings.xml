@@ -82,4 +82,7 @@
     <string name="title_activity_item_detail_host">ItemDetailHostActivity</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="connect">התחברות</string>
+    <string name="forgrtPass">שכחתי סיסמה</string>
+    <string name="nextScreen">הבא</string>
 </resources>
