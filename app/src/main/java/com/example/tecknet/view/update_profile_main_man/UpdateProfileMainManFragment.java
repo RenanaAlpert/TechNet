@@ -1,4 +1,4 @@
-package com.example.tecknet.view.open_malfunctions;
+package com.example.tecknet.view.update_profile_main_man;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.databinding.FragmentOpenMalfunctionsBinding;
+import com.example.tecknet.databinding.FragmentUpdateProfileMainManBinding;
 
-public class OpenMalfunctionFragment extends Fragment {
+public class UpdateProfileMainManFragment extends Fragment {
 
-    private OpenMalfunctionViewModel openMalfunctionViewModel;
-    private FragmentOpenMalfunctionsBinding binding;
+    private UpdateProfileMainManViewModel updateProfileMainManViewModel;
+    private FragmentUpdateProfileMainManBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        openMalfunctionViewModel =
-                new ViewModelProvider(this).get(OpenMalfunctionViewModel.class);
+        updateProfileMainManViewModel =
+                new ViewModelProvider(this).get(UpdateProfileMainManViewModel.class);
 
-        binding = FragmentOpenMalfunctionsBinding.inflate(inflater, container, false);
+        binding = FragmentUpdateProfileMainManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textReportMalfunction;
-
-        openMalfunctionViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textUpdateProfileMainMan;
+        updateProfileMainManViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

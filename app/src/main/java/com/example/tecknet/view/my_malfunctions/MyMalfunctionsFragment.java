@@ -27,7 +27,7 @@ public class MyMalfunctionsFragment extends Fragment {
         binding = FragmentMyMalfunctionsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
+        final TextView textView = binding.textMyMalfunctions;
         myMalfunctionsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

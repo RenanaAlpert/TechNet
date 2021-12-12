@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.my_malfunctions.MyMalfunctionsFragment">
+    tools:context=".view.update_profile_technician.UpdateProfileTechnicianFragment"
+    android:id="@+id/update_technician_fragment">
 
     <TextView
-        android:id="@+id/text_my_malfunctions"
+        android:id="@+id/text_update_profile_technician"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -22,4 +22,10 @@
         android:name="com.example.tecknet.view.my_malfunctions.MyMalfunctionsFragment"
         android:label="@string/menu_my_malfunctions"
         tools:layout="@layout/fragment_my_malfunctions" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/action_settings_technician"-->
+<!--        android:name="com.example.tecknet.view.my_malfunctions.MyMalfunctionsFragment"-->
+<!--        android:label="@string/action_update_profile"-->
+<!--        tools:layout="@layout/fragment_update_profile_technician" />-->
 </navigation>

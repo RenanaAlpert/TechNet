@@ -34,7 +34,9 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_move_to_update_profile">עדכון פרופיל</string>
+    <string name="action_disconnect">התנתק</string>
+
 
     <!-- Strings for side bar maintenance man -->
     <string name="menu_report_malfunction">דיווח תקלה</string>

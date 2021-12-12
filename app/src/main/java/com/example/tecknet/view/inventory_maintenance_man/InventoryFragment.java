@@ -27,7 +27,7 @@ public class InventoryFragment extends Fragment {
         binding = FragmentInventoryMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
+        final TextView textView = binding.textInventory;
         inventoryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
