@@ -27,7 +27,7 @@ tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragmen
     android:fontFamily="serif"
 
     android:scaleType="centerCrop"
-    android:src="@drawable/back"
+    android:src="@drawable/backgroundnew"
     android:textColor="@color/black"
     android:textStyle="bold"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +149,7 @@ tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragmen
     app:layout_constraintVertical_bias="0.0"
     app:layout_constraintWidth_percent=".8" />
 
-<Button
+<androidx.appcompat.widget.AppCompatButton
     android:id="@+id/button"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
