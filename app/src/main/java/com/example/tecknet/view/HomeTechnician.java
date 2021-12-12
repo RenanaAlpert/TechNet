@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toolbar;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,6 +19,9 @@ import com.example.tecknet.databinding.ActivityMainTechnicianBinding;
 import com.example.tecknet.model.UserInt;
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ * this is the activity that manage all technicians screens after login or sign up
+ */
 public class HomeTechnician extends AppCompatActivity {
     private UserViewModel passOnUViewModel;
     private AppBarConfiguration mAppBarConfiguration;
@@ -101,16 +103,7 @@ public class HomeTechnician extends AppCompatActivity {
         }
 
 
-
     }
-//    /**
-//     * when User click disconnect at main screen ->
-//     *  move to enter screen
-//     * @param view
-//     */
-//    public void onClickDisconnectTechnician(View view) {
-//
-//    }
 
 
 }

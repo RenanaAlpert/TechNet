@@ -4,13 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.tecknet.R;
-import com.example.tecknet.model.InstitutionDetails;
-import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -23,11 +19,11 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tecknet.databinding.ActivityMainMainManBinding;;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.tecknet.databinding.ActivityMainMainManBinding;
 
+/**
+ * this is the activity that manage all maintenance man screens after login or sign up
+ */
 public class HomeMaintenanceMan extends AppCompatActivity {
     private UserViewModel passOnUViewModel;
     private AppBarConfiguration mAppBarConfiguration;
@@ -96,7 +92,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
                 nullify();//empty all.
                 intent = new Intent(HomeMaintenanceMan.this, MainActivity.class);
                 startActivity(intent);
-                return true;//                return true;
+                return true;
 
             //todo add transition to add profile
 //            case R.id.action_move_to_update_profile_main_man: //move to update profile fragment
@@ -105,6 +101,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
 //                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
 //                // Commit the transaction
 //                fragmentTransaction.commit();//to do
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

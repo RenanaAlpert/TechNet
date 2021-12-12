@@ -28,8 +28,9 @@ public class HomeFragmentMainMan extends Fragment {
         //get user of this app
         uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user=uViewModel.getItem().getValue();
-        System.out.println("my activity: "+requireActivity());
-        System.out.println(user==null);
+        //todo fix print user name
+//        System.out.println("my activity: "+requireActivity());
+//        System.out.println(user==null);
 
 //        String fullName= user.getFirstName()+" "+user.getLastName();
 //        System.out.println(fullName);

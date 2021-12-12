@@ -59,8 +59,6 @@ public class ReportMalfunctionFragment extends Fragment {
                 //get user of this app
                 uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
                 UserInt user=uViewModel.getItem().getValue();
-                System.out.println("report: "+requireActivity());
-                assert user != null;
 
                 //extract the report details from the User
                 String typeS = type.getText().toString();

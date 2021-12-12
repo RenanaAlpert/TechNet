@@ -10,6 +10,9 @@ import android.view.View;
 
 import com.example.tecknet.R;
 
+/**
+ * this is the class that start the entire app
+ */
 public class MainActivity extends AppCompatActivity {
 
     public Button button;

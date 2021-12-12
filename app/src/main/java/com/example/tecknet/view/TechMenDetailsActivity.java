@@ -6,15 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.tecknet.R;
-import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.UserInt;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * This is a screen for entering additinal informaion when technition is signing up.
+ */
 public class TechMenDetailsActivity extends AppCompatActivity {
     Spinner area;
     Button signUp;
