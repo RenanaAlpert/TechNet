@@ -58,17 +58,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String phoneS = phone.getText().toString(); //phone string
                 String passwordS = pass.getText().toString(); // password string
-                if(phoneS.isEmpty()){
-                    phone.setError("Enter phone number!");
-                    return;
+
+                if(if_enter_details(phoneS,passwordS) && is_valid_detaild(phoneS)) {
+                    pBar.setVisibility(View.VISIBLE); //on the login pic
+                    login(phoneS, passwordS);
+                    clear_login_editext(); //clear from the edit text
                 }
-                if(passwordS.isEmpty()){
-                    pass.setError("Enter password!");
-                    return;
-                }
-                pBar.setVisibility(View.VISIBLE); //on the login pic
-                login(phoneS,passwordS);
-                clear_login_editext(); //clear from the edit text
+
 
             }
         });
@@ -92,12 +88,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                     else {
-                        Toast.makeText(LoginActivity.this , "Password incorrect!" , Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this , "שם משתמש או סיסמה אינם נכונים" , Toast.LENGTH_LONG).show();
                     }
                 }
 
                 else {
-                    Toast.makeText(LoginActivity.this , "User is not register" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this , "שם משתמש או סיסמה אינם נכונים" , Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -113,6 +109,40 @@ public class LoginActivity extends AppCompatActivity {
     private void clear_login_editext(){
         phone.getText().clear();
         pass.getText().clear();
+    }
+
+    /**
+     * this function check if the phone number is valide
+     * @param phoneS
+     * @return true if phone number is valid
+     *      else false
+     */
+    private boolean is_valid_detaild(String phoneS ){
+
+        if(!com.example.tecknet.model.ValidInputs.valid_phone(phoneS)){
+            phone.setError("מספר טלפון לא חוקי!");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * this function check if the user enter login details
+     * @param phoneS
+     * @param passwordS
+     * @return true if the user enter hus details
+     *      else false
+     */
+    private boolean if_enter_details(String phoneS, String passwordS){
+        if(phoneS.isEmpty()){
+            phone.setError("אנא הכנס מספר טלפון");
+            return false ;
+        }
+        if(passwordS.isEmpty()){
+            pass.setError("אנא הכנס סיסמה");
+            return false;
+        }
+        return true;
     }
 
 }

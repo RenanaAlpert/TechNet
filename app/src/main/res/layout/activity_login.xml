@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
         android:hint="@string/phone"
+        android:inputType="phone"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"

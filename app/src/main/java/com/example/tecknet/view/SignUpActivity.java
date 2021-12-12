@@ -51,10 +51,13 @@ public class SignUpActivity extends AppCompatActivity {
                 String phoneS = phone.getText().toString();
 
                 boolean ans = check_if_entered_details(fNames,lNames ,emailS,roleS,passwordS, phoneS);
-                pBar.setVisibility(View.VISIBLE);//loading
 
                 if(ans) {
-                    User myUser = new User(fNames, lNames,passwordS, emailS,roleS, phoneS);
+                    boolean valid = is_valid_detaild(emailS,phoneS);
+                    if(valid) {
+                        pBar.setVisibility(View.VISIBLE);//loading
+
+                        User myUser = new User(fNames, lNames, passwordS, emailS, roleS, phoneS);
 
 //                    //add user to shared view model//todo erase
 //                    uViewModel = new ViewModelProvider(SignUpActivity.this).get(UserViewModel.class);
@@ -62,17 +65,15 @@ public class SignUpActivity extends AppCompatActivity {
 
 //                  todo  check_if_user_exist(phoneS);
 
-                    // call to new_user from controller hoe enter the new details of the user
-                    com.example.tecknet.model.Controller.new_user(fNames,lNames ,phoneS, emailS,passwordS, roleS);
-                    clear_from_editext(); // clear from the edit text
+                        // call to new_user from controller hoe enter the new details of the user
+                        com.example.tecknet.model.Controller.new_user(fNames, lNames, phoneS, emailS, passwordS, roleS);
+                        clear_from_editext(); // clear from the edit text
 
-                    if(roleS.equals("אב בית")) continue_to_institution_detail(myUser);
-                    else continue_to_tech_detail(myUser);
-
+                        if (roleS.equals("אב בית")) continue_to_institution_detail(myUser);
+                        else continue_to_tech_detail(myUser);
+                    }
 
                 }
-
-
             }
         });
     }
@@ -90,36 +91,59 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean check_if_entered_details(String fNames ,String lNames ,String emailS,
                                          String roleS,String passwordS ,String phoneS ){
         if(emailS.isEmpty()){
-            email.setError("Please enter a email");
+            email.setError("אנא הכנס כתובת מייל");
             return false;
         }
         if(fNames.isEmpty()){
-            fName.setError("Please enter your first name");
+            fName.setError("אנא הכנס שם פרטי");
             return false;
         }
         if(lNames.isEmpty()){
-            lName.setError("Please enter your last name");
+            lName.setError("אנא הכנס שם משפחה");
             return false;
         }
         if(passwordS.isEmpty()){
-            pass.setError("Please enter a password");
+            pass.setError("אנא הכנס סיסמה");
             return false;
         }
         if(phoneS.isEmpty()){
-            phone.setError("Please enter a phone number");
+            phone.setError("אנא הכנס מספר טלפון");
             return false;
         }
         if(roleS.equals("בחר")){
             TextView errorText = (TextView)role.getSelectedView();
             errorText.setError("");
             errorText.setTextColor(Color.RED);//just to highlight that this is an error
-            errorText.setText("You need to choose your role!");//changes the selected item text to this
+            errorText.setText("אנא בחר תפקיד");//changes the selected item text to this
             return false;
         }
         return true;
 
 
     }
+
+    /**
+     * this function check if the phone number and mail address is valide
+     * @param phoneS
+     * @param emailS
+     * @return true if phone number & email is valid
+     *      else false
+     */
+    private boolean is_valid_detaild(String emailS ,String phoneS ){
+
+        if(!com.example.tecknet.model.ValidInputs.valid_email(emailS)){
+            email.setError("כתובת מייל לא חוקי!");
+            return false;
+
+        }
+        if(!com.example.tecknet.model.ValidInputs.valid_phone(phoneS)){
+            phone.setError("מספר טלפון לא חוקי!");
+            return false;
+
+        }
+        return true;
+    }
+
 
     /**
      * this function move to the next screen
