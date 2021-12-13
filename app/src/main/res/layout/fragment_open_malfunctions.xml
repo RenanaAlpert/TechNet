@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".view.open_malfunctions.OpenMalfunctionFragment">
 
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
         android:id="@+id/text_report_malfunction"
         android:layout_width="match_parent"

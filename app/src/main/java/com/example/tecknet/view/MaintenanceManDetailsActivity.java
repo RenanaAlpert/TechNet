@@ -67,7 +67,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                     com.example.tecknet.model.Controller.set_institution(sNumIns, sNameIns, sAddressIns,
                             sCityIns, sArea, "", sPhoneInc, myUser.getPhone());
 
-                    Intent intent = new Intent(MaintenanceManDetailsActivity.this, HomeMaintenanceMan.class);
+                    Intent intent = new Intent(MaintenanceManDetailsActivity.this, MainActivity.class);
                     intent.putExtra("User", myUser);
                     //show msg to the screen
                     Toast.makeText(MaintenanceManDetailsActivity.this, "SignUp institution success", Toast.LENGTH_LONG).show();

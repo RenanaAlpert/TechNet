@@ -3,7 +3,9 @@ package com.example.tecknet.model;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Controller {
@@ -164,14 +167,14 @@ public abstract class Controller {
         });
     }
 
-    public static Collection<MalfunctionDetailsInt> open_malfunction (){
-        Collection<MalfunctionDetailsInt> malsCol = new LinkedList<>();
-        DatabaseReference r = connect_db("Mals");
-        r.addListenerForSingleValueEvent(new ValueEventListener() {
+    public static List<MalfunctionDetailsInt> open_malfunction (){
+        List<MalfunctionDetailsInt> malsCol = new LinkedList<>();
+        DatabaseReference r = connect_db("mals");
+        r.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    MalfunctionDetailsInt mal = ds.child(Objects.requireNonNull(ds.getKey())).getValue(MalfunctionDetails.class);
+                    MalfunctionDetailsInt mal = ds.getValue(MalfunctionDetails.class);
                     assert mal != null;
                     if(mal.isIs_open()){
                         malsCol.add(mal);
@@ -184,6 +187,7 @@ public abstract class Controller {
                 Log.d("TAG",databaseError.getMessage());
             }
         });
+        assert !malsCol.isEmpty();
         return malsCol;
     }
 
@@ -210,5 +214,22 @@ public abstract class Controller {
             });
         }
         return  malsInTheArea;
+    }
+
+    public static ProductDetailsInt get_product(long id){
+        DatabaseReference r = connect_db("products");
+        final ProductDetailsInt[] p = new ProductDetailsInt[1];
+        r.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                p[0] = dataSnapshot.child(String.valueOf(id)).getValue(ProductDetails.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return p[0];
     }
 }
