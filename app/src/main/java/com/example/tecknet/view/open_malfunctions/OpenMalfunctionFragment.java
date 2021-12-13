@@ -60,14 +60,14 @@ public class OpenMalfunctionFragment extends Fragment {
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(), android.R.layout.simple_list_item_1);
                 ListView list = (ListView) root.findViewById(R.id.listview);
-                DatabaseReference rf = FirebaseDatabase.getInstance().getReference("products");
+//                DatabaseReference rf = FirebaseDatabase.getInstance().getReference("products");
                 for (MalfunctionDetailsInt mal: open_mals) {
-                    rf.addListenerForSingleValueEvent(new ValueEventListener() {
+                    r.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            ProductDetailsInt p = dataSnapshot.child(String.valueOf(mal.getProduct_id())).getValue(ProductDetails.class);
-                            assert p != null;
-                            adapter.add("institution: " + mal.getInstitution() + "\tdevice: " + p.getDevice() + "\tcompany: " + p.getCompany());
+//                            ProductDetailsInt p = dataSnapshot.child(String.valueOf(mal.getProduct_id())).getValue(ProductDetails.class);
+//                            assert p != null;
+                            adapter.add("institution: " + mal.getInstitution() + "\texplantion : " + mal.getExplanation());
 //                            adapter.add(p.getCompany());
                             list.setAdapter(adapter);
                         }
