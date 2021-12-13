@@ -45,14 +45,6 @@ public class OpenMalfunctionFragment extends Fragment {
         binding = FragmentOpenMalfunctionsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-//        final TextView textView = binding.textReportMalfunction;
-//
-//        openMalfunctionViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
 
         DatabaseReference r = FirebaseDatabase.getInstance().getReference("mals");
         r.addValueEventListener(new ValueEventListener() {
@@ -85,13 +77,7 @@ public class OpenMalfunctionFragment extends Fragment {
 
                         }
                     });
-//                    ProductDetailsInt product = Controller.get_product(mal.getProduct_id());
-//                    adapter.add(product.getDevice());
-//                    adapter.add(product.getCompany());
                 }
-
-//                ListView list = (ListView) root.findViewById(R.id.listview);
-//                list.setAdapter(adapter);
             }
 
             @Override
@@ -99,21 +85,6 @@ public class OpenMalfunctionFragment extends Fragment {
                 Log.d("TAG",databaseError.getMessage());
             }
         });
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_list_item_1);
-//        for (MalfunctionDetailsInt mal: open_mals) {
-////            System.out.println(mal.getProduct_id());
-//            ProductDetailsInt product = Controller.get_product(mal.getProduct_id());
-//            adapter.add(product.getDevice());
-//            adapter.add(product.getCompany());
-//        }
-////        adapter.add("shalom");
-////        adapter.add("nadav");
-////        adapter.add("hi");
-////        adapter.add("ariel");
-////        adapter.add("renana");
-////        }
-//        ListView list = (ListView) root.findViewById(R.id.listview);
-//        list.setAdapter(adapter);
         return root;
     }
 
