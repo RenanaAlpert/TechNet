@@ -19,7 +19,7 @@ public class MalfunctionDetails implements MalfunctionDetailsInt{
 //        this.mal_id = ++malfunction_counter;
         this.institution = institution;
         this.explanation = explain;
-        this.is_open=false;
+        this.is_open=true;
         this.product_id = product;
         this.tech=-1;
     }
