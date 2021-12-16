@@ -80,46 +80,6 @@ public abstract class Controller {
         r.child(phone_maintenance).setValue(mm);
     }
 
-    /**
-     * Return the product_id
-     *
-     * @param device
-     * @param company
-     * @param type
-     * @return
-     */
-    private static long get_product_id(String device, String company, String type) {
-        DatabaseReference r = connect_db("products");
-        final long[] pid = new long[1];
-        r.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    ProductDetailsInt product = ds.child(Objects.requireNonNull(ds.getKey())).getValue(ProductDetails.class);
-                    assert product != null;
-                    if (product.getDevice().equals(device) && product.getCompany().equals(company) && product.getType().equals(type)) {
-                        pid[0] = product.getProduct_id();
-                        break;
-                    }
-                    /*if(ds.child("device").equals(device) && ds.child("company").equals(company) && ds.child("type").equals(type)){
-                        pid[0] = Long.parseLong(Objects.requireNonNull(ds.getKey()));
-                        break;
-                    }*/
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("TAG", error.getMessage());
-            }
-        });
-        return pid[0];
-//        java.lang.IllegalArgumentException: Can't call equalTo() and startAt() combined
-//        error
-//        Query q = r.orderByValue().equalTo(device, device).equalTo(company, company).equalTo(type, type);
-//       here
-//        return Long.parseLong(Objects.requireNonNull(q.getRef().getKey()));
-    }
 
     /**
      * open malfunction report
@@ -164,6 +124,26 @@ public abstract class Controller {
 
             }
 
+        });
+    }
+
+    public static void add_product_inventory(String phone , ProductDetailsInt pd){
+        DatabaseReference dataRef = connect_db("maintenance");
+        final String[] insSymbol = new String[1];
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(phone).exists()) {
+                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
+                    DatabaseReference r = connect_db("institution");
+                    DatabaseReference newProdRef = r.child(insSymbol[0]).child("inventory").push(); // Generate a reference to a new location and add some data using push()
+                    String prodId = newProdRef.getKey(); //get string of the uniq key
+                    pd.setProduct_id(prodId);
+                    newProdRef.setValue(pd); //add this to mal database
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
 

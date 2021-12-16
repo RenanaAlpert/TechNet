@@ -85,4 +85,9 @@
     <string name="connect">התחברות</string>
     <string name="forgrtPass">שכחתי סיסמה</string>
     <string name="nextScreen">הבא</string>
+    <string name="device">דגם</string>
+    <string name="yearOfProduction">שנת יצור</string>
+    <string name="dateOfResponsibility">תאריך אחריות</string>
+    <string name="type">סוג</string>
+    <string name="OK">אישור</string>
 </resources>

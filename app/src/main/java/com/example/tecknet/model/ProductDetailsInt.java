@@ -7,9 +7,9 @@ import java.util.GregorianCalendar;
  */
 public interface ProductDetailsInt {
 
-    public long getProduct_id();
+    public String getProduct_id();
 
-    public void setProduct_id(long product_id);
+    public void setProduct_id(String product_id);
 
     public String getDevice();
 

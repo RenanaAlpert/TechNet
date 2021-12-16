@@ -2,18 +2,18 @@ package com.example.tecknet.model;
 
 public class ProductDetails implements ProductDetailsInt{
 
-    static long product_counter=0;
-    long product_id;
+    String product_id;
     String device;
     String company;
     String type;
     String year_of_production;
     String date_of_responsibility;
 
+
     public ProductDetails(){}
 
     public ProductDetails(String device, String company, String type, String year_of_production, String date_of_responsibility){
-        this.product_id = ++product_id;
+        this.product_id = "";
         this.device = device;
         this.company = company;
         this.type = type;
@@ -21,11 +21,11 @@ public class ProductDetails implements ProductDetailsInt{
         this.date_of_responsibility = date_of_responsibility;
     }
 
-    public long getProduct_id() {
+    public String getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(long product_id) {
+    public void setProduct_id(String product_id) {
         this.product_id = product_id;
     }
 

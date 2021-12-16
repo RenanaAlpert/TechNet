@@ -19,6 +19,7 @@ import com.example.tecknet.model.InstitutionDetails;
 
 import com.example.tecknet.model.MaintenanceMan;
 import com.example.tecknet.model.MaintenanceManInt;
+import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class ReportMalfunctionFragment extends Fragment {
@@ -45,7 +48,7 @@ public class ReportMalfunctionFragment extends Fragment {
         binding = FragmentReportMalfunctionMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
+//
         type = binding.phoneType;
         model = binding.model;
         company = binding.company;
