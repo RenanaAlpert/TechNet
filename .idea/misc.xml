@@ -3,6 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_maintenance_man_details.xml" value="0.18115942028985507" />
+        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_add_product_maintenance_man.xml" value="0.13949275362318841" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/activity_loading_screen.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.17760416666666667" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/activity_main_technician.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/activity_malfunction_details.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/app_bar_main_maintenance_man.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/app_bar_main_technician.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/content_main_maintenance_man.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/content_main_technician.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/fragment_open_malfunctions.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/fragment_update_profile_main_man.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/fragment_update_profile_technician.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/nav_header_main_maintenance_man.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/nav_header_main_technician.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/menu/activity_main_drawer_maintenance_man.xml" value="0.17447916666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/menu/activity_main_drawer_technician.xml" value="0.17447916666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/menu/main_maintenance_man.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/menu/main_technician.xml" value="0.25" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2046875" />
+        <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2046875" />
         <entry key="..\:/Users/User1/Documents/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/User1/Documents/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User1/Documents/software_engineering/app/src/main/res/layout/activity_malfunction_report.xml" value="0.20416666666666666" />
@@ -10,9 +32,6 @@
         <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.1308876811594203" />
         <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.1308876811594203" />
         <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/activity_maintenance_man_details.xml" value="0.14447463768115942" />
-        <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.14447463768115942" />
-        <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/fragment_open_malfunctions.xml" value="0.14447463768115942" />
         <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/menu/activity_main_drawer_maintenance_man.xml" value="0.165625" />
         <entry key="..\:/Users/yuval/AndroidStudioProjects/TeckNet/app/src/main/res/drawable/button_bg.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/yuval/AndroidStudioProjects/TeckNet/app/src/main/res/drawable/edit_text_bg.xml" value="0.19583333333333333" />

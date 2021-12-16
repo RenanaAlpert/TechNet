@@ -73,7 +73,7 @@ public class ReportMalfunctionFragment extends Fragment {
                     //call to this function from the controller how found the
                     //institution id and call new_malfunction how add this mal to DB
                     com.example.tecknet.model.Controller.add_mal_and_extricate_istituId(user.getPhone()
-                        ,modelS,companyS,typeS ,detailFaultS);
+                        ,typeS,companyS,modelS ,detailFaultS);
 
                     clear_edit_text(); //clear from edit text
 
