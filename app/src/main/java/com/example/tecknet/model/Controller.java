@@ -92,7 +92,7 @@ public abstract class Controller {
      */
     // TODO moriya fix
     public static void new_malfunction(String mal_creator, String symbol, String device, String company, String type, String explain) {
-        MalfunctionDetailsInt mal = new MalfunctionDetails(-1, symbol, explain,mal_creator);
+        MalfunctionDetailsInt mal = new MalfunctionDetails(-1, symbol, explain/*,mal_creator*/);
         DatabaseReference r = connect_db("mals");
 //        DatabaseReference dataRefMainMan = connect_db("maintenance");
 
