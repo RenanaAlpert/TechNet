@@ -1,17 +1,59 @@
 package com.example.tecknet.model;
 
 import com.example.tecknet.model.MaintenanceManInt;
+import com.example.tecknet.model.UserInt;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MaintenanceMan implements MaintenanceManInt {
 
     private String phone_number, institution;
+//    List<String> malfunctions_list;
+    UserInt user;
 
-    public MaintenanceMan(){}
+    public MaintenanceMan() {
+//        malfunctions_list = new ArrayList<>();
+    }
 
-    public MaintenanceMan(String phone_number, String institution){
+    public MaintenanceMan(UserInt user) {
+        this();
+        this.user = user;
+    }
+
+    public MaintenanceMan(String phone_number, String institution) {
+        this();
         this.phone_number = phone_number;
         this.institution = institution;
     }
+
+    public UserInt getUser() {
+        return user;
+    }
+
+    public void setUser(UserInt user) {
+        this.user = user;
+    }
+
+//    public List<String> getMalfunctions() {
+//        return malfunctions_list;
+//    }
+
+//    //todo not in interface
+//    public void addMalfunctions(String malfunction) {
+//        this.malfunctions_list.add(malfunction);
+//    }
+//
+//    public void removeMalfunction(String malfunction) {
+//        this.malfunctions_list.remove(malfunction);
+//    }
+//
+//
+//    public void setMalfunctions(ArrayList<String> malfunctions) {
+//        this.malfunctions_list.clear();
+//        this.malfunctions_list.addAll(malfunctions);
+//    }
+
 
     public String getPhone_number() {
         return phone_number;
@@ -22,7 +64,7 @@ public class MaintenanceMan implements MaintenanceManInt {
     }
 
 
-    public String getInstitution(){
+    public String getInstitution() {
         return institution;
     }
 

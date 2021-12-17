@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
 import com.example.tecknet.model.InstitutionDetails;
 
-import com.example.tecknet.model.MaintenanceMan;
 import com.example.tecknet.model.MaintenanceManInt;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.User;

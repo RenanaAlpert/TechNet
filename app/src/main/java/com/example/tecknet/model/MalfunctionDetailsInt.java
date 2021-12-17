@@ -28,4 +28,8 @@ public interface MalfunctionDetailsInt {
     public long getTech();
 
     public void setTech(long tech);
+
+    public String getMal_creator();
+
+    public void setMal_creator(String mal_creator);
 }

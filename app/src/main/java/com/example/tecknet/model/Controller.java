@@ -90,12 +90,22 @@ public abstract class Controller {
      * @param type
      * @param explain
      */
-    public static void new_malfunction(String symbol, String device, String company, String type, String explain) {
-        MalfunctionDetailsInt mal = new MalfunctionDetails(-1, symbol, explain);
+    // TODO moriya fix
+    public static void new_malfunction(String mal_creator, String symbol, String device, String company, String type, String explain) {
+        MalfunctionDetailsInt mal = new MalfunctionDetails(-1, symbol, explain,mal_creator);
         DatabaseReference r = connect_db("mals");
+//        DatabaseReference dataRefMainMan = connect_db("maintenance");
+
         // Generate a reference to a new location and add some data using push()
         DatabaseReference newMalRef = r.push();
         String malId = newMalRef.getKey(); //get string of the uniq key
+
+
+//        //add to maintenance man malfunction list
+//        DatabaseReference malfunctionListRef = dataRefMainMan.child(symbol).child("malfunctions_list").push(); // Generate a reference to a new location and add some data using push()
+//        String listMalId = malfunctionListRef.getKey(); //get string of the uniq key
+//        malfunctionListRef.setValue(listMalId); //add this to mal database
+
 
         newMalRef.setValue(mal); //add this to mal database
         //add product detail to the mal
@@ -115,7 +125,7 @@ public abstract class Controller {
                     if (!(userPhone.isEmpty())) {
                         insSymbol[0] = dataSnapshot.child(userPhone).getValue(MaintenanceMan.class).getInstitution();
 
-                        new_malfunction(insSymbol[0], model, company, type, detailFault);
+                        new_malfunction(userPhone,insSymbol[0], model, company, type, detailFault);
                     }
                 }
             }

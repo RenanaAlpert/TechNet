@@ -1,7 +1,7 @@
 package com.example.tecknet.model;
 
-public class MalfunctionDetails implements MalfunctionDetailsInt{
-//    static long malfunction_counter=0;
+public class MalfunctionDetails implements MalfunctionDetailsInt {
+    //    static long malfunction_counter=0;
     long mal_id;
     /**
      * TODO: add product_id and connect between inventory to malfunctions
@@ -12,16 +12,19 @@ public class MalfunctionDetails implements MalfunctionDetailsInt{
     boolean is_open;
     long product_id;
     long tech;
+    String mal_creator;
 
-    public MalfunctionDetails(){}
+    public MalfunctionDetails() {
+    }
 
-    public MalfunctionDetails(long product, String institution, String explain) {
+    public MalfunctionDetails(long product, String institution, String explain, String mal_creator) {
 //        this.mal_id = ++malfunction_counter;
         this.institution = institution;
         this.explanation = explain;
-        this.is_open=true;
+        this.mal_creator = mal_creator;
+        this.is_open = true;
         this.product_id = product;
-        this.tech=-1;
+        this.tech = -1;
     }
 
     public long getMal_id() {
@@ -58,6 +61,14 @@ public class MalfunctionDetails implements MalfunctionDetailsInt{
 
     public long getProduct_id() {
         return product_id;
+    }
+
+    public String getMal_creator() {
+        return mal_creator;
+    }
+
+    public void setMal_creator(String mal_creator) {
+        this.mal_creator = mal_creator;
     }
 
     public void setProduct_id(long product_id) {
