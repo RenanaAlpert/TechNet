@@ -13,8 +13,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public abstract class Controller {
@@ -91,20 +93,22 @@ public abstract class Controller {
      * @param explain
      */
     // TODO moriya fix
-    public static void new_malfunction(String mal_creator, String symbol, String device, String company, String type, String explain) {
+    public static void new_malfunction(String phoneMainMan, String symbol, String device, String company, String type, String explain) {
         MalfunctionDetailsInt mal = new MalfunctionDetails(-1, symbol, explain/*,mal_creator*/);
         DatabaseReference r = connect_db("mals");
-//        DatabaseReference dataRefMainMan = connect_db("maintenance");
+        DatabaseReference dataRefMainMan = connect_db("maintenance");
 
         // Generate a reference to a new location and add some data using push()
         DatabaseReference newMalRef = r.push();
         String malId = newMalRef.getKey(); //get string of the uniq key
 
 
-//        //add to maintenance man malfunction list
-//        DatabaseReference malfunctionListRef = dataRefMainMan.child(symbol).child("malfunctions_list").push(); // Generate a reference to a new location and add some data using push()
-//        String listMalId = malfunctionListRef.getKey(); //get string of the uniq key
-//        malfunctionListRef.setValue(listMalId); //add this to mal database
+        //add to maintenance man malfunction list
+        DatabaseReference malfunctionListRef = dataRefMainMan.child(phoneMainMan).child("malfunctions_list"); // Generate a reference to a new location and add some data using push()
+        String key = malfunctionListRef/*.child(malfunctionListRef.getKey())*/.push().getKey();
+        Map<String, Object> map = new HashMap<>();
+        map.put(key,malId );
+        malfunctionListRef.updateChildren(map);
 
 
         newMalRef.setValue(mal); //add this to mal database
