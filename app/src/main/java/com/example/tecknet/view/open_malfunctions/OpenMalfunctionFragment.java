@@ -62,7 +62,7 @@ public class OpenMalfunctionFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot das) {
                                 String device;
-                                if(mal.getProduct_id() == -1){
+                                if(mal.getProduct_id()==null){
 //                                device = ds.child("productDetails").child("device").getValue(String.class);
                                     device = das.child(ds.getKey() + "/productDetails/device").getValue(String.class);
                                 }

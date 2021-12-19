@@ -48,6 +48,18 @@ public abstract class Controller {
         UserInt us = new User(first_name, last_name, password, mail, role,phone);
         r.child(phone).setValue(us);
     }
+    public static void get_maintenance_man(UserInt user)
+    {
+        if(user!=null)
+        {
+            if(user.getRole()=="אב בית")//todo connect to string
+            {
+                DatabaseReference r = connect_db("maintenance");
+
+
+            }
+        }
+    }
 
     //yuval change and superet from the new User
     public static void new_tech(String phone, String area) {
@@ -94,7 +106,7 @@ public abstract class Controller {
      */
     // TODO moriya fix
     public static void new_malfunction(String phoneMainMan, String symbol, String device, String company, String type, String explain) {
-        MalfunctionDetailsInt mal = new MalfunctionDetails(-1, symbol, explain/*,mal_creator*/);
+        MalfunctionDetailsInt mal = new MalfunctionDetails(null, symbol, explain/*,mal_creator*/);
         DatabaseReference r = connect_db("mals");
         DatabaseReference dataRefMainMan = connect_db("maintenance");
 

@@ -90,4 +90,5 @@
     <string name="dateOfResponsibility">תאריך אחריות</string>
     <string name="type">סוג</string>
     <string name="OK">אישור</string>
+    <string name="my_malfunctions_reports">התקלות שפתחתי</string>
 </resources>

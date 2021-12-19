@@ -5,9 +5,9 @@ package com.example.tecknet.model;
  */
 public interface MalfunctionDetailsInt {
 
-    public long getMal_id();
+    public String getMal_id();
 
-    public void setMal_id(long mal_id);
+    public void setMal_id(String mal_id);
 
     public String getExplanation();
 
@@ -21,9 +21,9 @@ public interface MalfunctionDetailsInt {
 
     public void setIs_open(boolean is_open);
 
-    public long getProduct_id();
+    public String getProduct_id();
 
-    public void setProduct_id(long product_id);
+    public void setProduct_id(String product_id);
 
     public long getTech();
 

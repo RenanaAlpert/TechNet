@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.tecknet.R;
+import com.example.tecknet.model.MaintenanceManInt;
 import com.example.tecknet.model.UserInt;
 import com.google.android.material.navigation.NavigationView;
 
@@ -43,6 +44,8 @@ public class HomeMaintenanceMan extends AppCompatActivity {
 
         //get user from login\signup
         UserInt user = getIntent().getParcelableExtra("User");
+
+//        MaintenanceManInt mainMan=;
         //add utser to shared view model so fregment can see it
         passOnUViewModel = new ViewModelProvider(HomeMaintenanceMan.this).get(UserViewModel.class);
         passOnUViewModel.setItem(user);
@@ -50,7 +53,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_main_man, R.id.nav_report_malfunction, R.id.nav_inventory, R.id.nav_add_product)
+                R.id.nav_home_main_man, R.id.nav_report_malfunction,R.id.nav_main_man_malfunctions, R.id.nav_inventory, R.id.nav_add_product)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_main_man);

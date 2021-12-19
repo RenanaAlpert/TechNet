@@ -59,4 +59,9 @@
     <action
         android:id="@+id/pass_nav_report_malfunction"
         app:destination="@id/nav_report_malfunction" />
+    <fragment
+        android:id="@+id/nav_main_man_malfunctions"
+        android:name="com.example.tecknet.view.maintenance_man_malfunctions.MainManMalfunctionsFragment"
+        android:label="fragment_manaintance_man_malfunctions"
+        tools:layout="@layout/fragment_manaintance_man_malfunctions" />
 </navigation>
