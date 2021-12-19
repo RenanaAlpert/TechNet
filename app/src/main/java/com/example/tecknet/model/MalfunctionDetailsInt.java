@@ -25,9 +25,9 @@ public interface MalfunctionDetailsInt  {
 
     public void setProduct_id(String product_id);
 
-    public long getTech();
+    public String getTech();
 
-    public void setTech(long tech);
+    public void setTech(String tech);
 //
 //    public String getMal_creator();
 //

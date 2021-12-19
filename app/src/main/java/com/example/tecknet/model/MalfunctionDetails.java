@@ -11,16 +11,19 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
     String institution;
     boolean is_open;
     String product_id;
-    long tech;
+    String tech;
+//    String mal_creator;
 
-    public MalfunctionDetails(){}
+    public MalfunctionDetails() {
+    }
 
     public MalfunctionDetails(String product, String institution, String explain/*, String mal_creator*/) {
         this.institution = institution;
         this.explanation = explain;
-        this.is_open=true;
+      //  this.mal_creator = mal_creator;
+        this.is_open = true;
         this.product_id = product;
-        this.tech=-1;
+        this.tech = null;
     }
 
     public String getMal_id() {
@@ -71,11 +74,11 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
         this.product_id = product_id;
     }
 
-    public long getTech() {
+    public String getTech() {
         return tech;
     }
 
-    public void setTech(long tech) {
+    public void setTech(String tech) {
         this.tech = tech;
     }
 }

@@ -99,18 +99,7 @@ public abstract class Controller {
         r = connect_db("maintenance");
         r.child(phone_maintenance).setValue(mm);
     }
-//    public static void new_malfunction(String symbol, String device, String company, String type, String explain) {
-//        MalfunctionDetailsInt mal = new MalfunctionDetails(null, symbol, explain);
-//        DatabaseReference r = connect_db("mals");
-//        // Generate a reference to a new location and add some data using push()
-//        DatabaseReference newMalRef = r.push();
-//        String malId = newMalRef.getKey(); //get string of the uniq key
-//
-//        newMalRef.setValue(mal); //add this to mal database
-//        //add product detail to the mal
-//        ProductDetailsInt pd = new ProductDetails(device, company, type, "", "");
-//        r.child(malId).child("productDetails").setValue(pd);
-//    }
+
 
 
     /**
