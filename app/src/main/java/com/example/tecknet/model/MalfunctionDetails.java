@@ -18,7 +18,6 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
     }
 
     public MalfunctionDetails(String product, String institution, String explain/*, String mal_creator*/) {
-//        this.mal_id = ++malfunction_counter;
         this.institution = institution;
         this.explanation = explain;
       //  this.mal_creator = mal_creator;
