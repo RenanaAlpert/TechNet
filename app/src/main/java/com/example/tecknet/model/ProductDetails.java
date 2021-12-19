@@ -68,4 +68,9 @@ public class ProductDetails implements ProductDetailsInt{
     public void setDate_of_responsibility(String date_of_responsibility) {
         this.date_of_responsibility = date_of_responsibility;
     }
+    @Override
+    public String toString(){
+
+        return " סוג: " +type+", חברה : "+company+", דגם : "+ device+" . ";
+    }
 }

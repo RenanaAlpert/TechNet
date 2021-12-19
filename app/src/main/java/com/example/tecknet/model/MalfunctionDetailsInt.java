@@ -3,7 +3,7 @@ package com.example.tecknet.model;
 /**
  * Interface of the malfunction details
  */
-public interface MalfunctionDetailsInt {
+public interface MalfunctionDetailsInt  {
 
     public String getMal_id();
 

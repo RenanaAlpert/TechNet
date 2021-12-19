@@ -12,18 +12,15 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
     boolean is_open;
     String product_id;
     long tech;
-//    String mal_creator;
 
-    public MalfunctionDetails() {
-    }
+    public MalfunctionDetails(){}
 
     public MalfunctionDetails(String product, String institution, String explain/*, String mal_creator*/) {
         this.institution = institution;
         this.explanation = explain;
-      //  this.mal_creator = mal_creator;
-        this.is_open = true;
+        this.is_open=true;
         this.product_id = product;
-        this.tech = -1;
+        this.tech=-1;
     }
 
     public String getMal_id() {

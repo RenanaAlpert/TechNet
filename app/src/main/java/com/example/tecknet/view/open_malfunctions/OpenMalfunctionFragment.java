@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
 import com.example.tecknet.databinding.FragmentOpenMalfunctionsBinding;
+import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.MalfunctionDetails;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetails;

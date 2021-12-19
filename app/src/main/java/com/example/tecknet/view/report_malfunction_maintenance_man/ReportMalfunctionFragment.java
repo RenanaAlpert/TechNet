@@ -4,23 +4,32 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.tecknet.R;
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
+import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetails;
 
+import com.example.tecknet.model.MaintenanceMan;
 import com.example.tecknet.model.MaintenanceManInt;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
+import com.example.tecknet.view.LoginActivity;
+import com.example.tecknet.view.MainActivity;
 import com.example.tecknet.view.UserViewModel;
 
 import com.google.firebase.database.DataSnapshot;
@@ -36,9 +45,11 @@ public class ReportMalfunctionFragment extends Fragment {
 
     private UserViewModel uViewModel;
     private FragmentReportMalfunctionMaintenanceManBinding binding;
-    EditText type , model ,company , detailFault;
+    EditText detailFault;
     Button reportBut;
+    Button notInInv;
 
+    Spinner prodSpinner;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -47,39 +58,56 @@ public class ReportMalfunctionFragment extends Fragment {
         binding = FragmentReportMalfunctionMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-//
-        type = binding.phoneType;
-        model = binding.model;
-        company = binding.company;
         detailFault = binding.elsee;
         reportBut = binding.button ;
+        prodSpinner = binding.products;
 
-        reportBut.setOnClickListener(new View.OnClickListener() {
+        notInInv =binding.notInInventory;
+
+        uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        UserInt user=uViewModel.getItem().getValue();
+
+        //not working yet
+       /* notInInv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //get user of this app
-                uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-                UserInt user=uViewModel.getItem().getValue();
+                ReportNotInStockFragment fragment = new ReportNotInStockFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.report_malfunction_fragment, fragment).commit();
 
-                //extract the report details from the User
-                String typeS = type.getText().toString();
-                String modelS = model.getText().toString();
-                String companyS = company.getText().toString();
-                String detailFaultS = detailFault.getText().toString();
-
-                if(check_if_entered_details(typeS ,modelS,companyS, detailFaultS)) {
-                    //call to this function from the controller how found the
-                    //institution id and call new_malfunction how add this mal to DB
-                    com.example.tecknet.model.Controller.add_mal_and_extricate_istituId(user.getPhone()
-                        ,typeS,companyS,modelS ,detailFaultS);
-
-                    clear_edit_text(); //clear from edit text
-
-                    //show msg to the screen
-                    Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
-                }
             }
+        });*/
+        //show the inventory of this user in spinner
+        Controller.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
+
+        //if user select item
+        prodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //user click on report button
+                reportBut.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //extract the report details from the User
+                        String detailFaultS = detailFault.getText().toString();
+                        //check if the user entered details
+                        if(check_if_entered_details(detailFaultS)) {
+                            //extract the product the user chose
+                            ProductDetails prod = (ProductDetails) parent.getSelectedItem();
+                            //add this mal to database
+                            Controller.add_malfunction_with_exist_prod(prod, detailFaultS,user.getPhone());
+
+                            clear_edit_text();
+                            Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
     return root;
@@ -95,26 +123,13 @@ public class ReportMalfunctionFragment extends Fragment {
      * Private function how clear the text from the edit text view
      */
     private void clear_edit_text(){
-        type.getText().clear();
-        model.getText().clear();
-        company.getText().clear();
+
         detailFault.getText().clear();
 
     }
 
-    private boolean check_if_entered_details(String typeS ,String modelS, String companyS, String detailFaultS){
-        if(typeS.isEmpty()){
-            type.setError("Please enter the device!!");
-            return false;
-        }
-        if(modelS.isEmpty()){
-            model.setError("Please enter th model!!");
-            return false;
-        }
-        if(companyS.isEmpty()){
-            company.setError("Please enter the company!!");
-            return false;
-        }
+    private boolean check_if_entered_details(String detailFaultS){
+
         if(detailFaultS.isEmpty()){
             detailFault.setError("Please enter report reason!!");
             return false;
@@ -122,4 +137,5 @@ public class ReportMalfunctionFragment extends Fragment {
         return true;
 
     }
+
 }

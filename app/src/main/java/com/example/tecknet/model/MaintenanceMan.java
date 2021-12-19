@@ -1,10 +1,6 @@
 package com.example.tecknet.model;
 
 import com.example.tecknet.model.MaintenanceManInt;
-import com.example.tecknet.model.UserInt;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MaintenanceMan implements MaintenanceManInt {
 
@@ -64,7 +60,7 @@ public class MaintenanceMan implements MaintenanceManInt {
     }
 
 
-    public String getInstitution() {
+    public String getInstitution(){
         return institution;
     }
 

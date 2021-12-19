@@ -30,4 +30,7 @@ public interface ProductDetailsInt {
     public String getDate_of_responsibility();
 
     public void setDate_of_responsibility(String date_of_responsibility);
+    @Override
+    public String toString();
+
 }

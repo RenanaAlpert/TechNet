@@ -47,6 +47,26 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nav_report_malfunction_new"
+        android:name="com.example.tecknet.view.report_malfunction_maintenance_man.ReportNotInStockFragment"
+        android:label="דיווח תקלה לא במלאי"
+        tools:layout="@layout/fragment_report_not_in_stock" >
+        <argument
+            android:name="user"
+            app:argType="com.example.tecknet.model.UserInt"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="institution"
+            app:argType="com.example.tecknet.model.InstitutionDetailsInt"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="institution_symbol"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_inventory"
         android:name="com.example.tecknet.view.inventory_maintenance_man.InventoryFragment"
         android:label="@string/menu_inventory"

@@ -1,10 +1,15 @@
 package com.example.tecknet.model;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.tecknet.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -61,7 +67,7 @@ public abstract class Controller {
         }
     }
 
-    //yuval change and superet from the new User
+    //yuval change and superset from the new User
     public static void new_tech(String phone, String area) {
         DatabaseReference r = connect_db("Technician");
         TechnicianInt t = new Technician(phone, area);
@@ -140,9 +146,10 @@ public abstract class Controller {
 
 
         //add product detail to the mal
-        ProductDetailsInt pd = new ProductDetails(device, company, type, "", "");
+        ProductDetailsInt pd = new ProductDetails(type, company, device, "", "");
         r.child(malId).child("productDetails").setValue(pd);
     }
+
     public static void add_mal_and_extricate_istituId(String userPhone , String model , String company,
                         String type , String detailFault){
 
@@ -175,12 +182,13 @@ public abstract class Controller {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(phone).exists()) {
+                    //extract institution number
                     insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
                     DatabaseReference r = connect_db("institution");
                     DatabaseReference newProdRef = r.child(insSymbol[0]).child("inventory").push(); // Generate a reference to a new location and add some data using push()
                     String prodId = newProdRef.getKey(); //get string of the uniq key
                     pd.setProduct_id(prodId);
-                    newProdRef.setValue(pd); //add this to mal database
+                    newProdRef.setValue(pd); //add this to institution.inventory database
                 }
             }
             @Override
@@ -253,4 +261,112 @@ public abstract class Controller {
         });
         return p[0];
     }
+
+    /**
+     * this function find the user institution number and call
+     * show_spinner_products function to show the product in spinner on
+     * report malfunction fragment
+     * @param phone
+     * @param root
+     */
+    public static void what_insNum_show_spinner_products(Spinner areaSpinner , String phone , View root){
+        DatabaseReference dataRef = connect_db("maintenance");
+        final String[] insSymbol = new String[1];
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(phone).exists()) {
+                    //extract institution number
+                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
+                    show_spinner_products(areaSpinner , insSymbol[0] , root);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+    }
+
+    /**
+     * this function get the institution number and show in spinner the institution products
+     *
+     * @param insNumber
+     * @param root
+     */
+    private static void show_spinner_products(final Spinner areaSpinner, String insNumber , View root ){
+        DatabaseReference fDatabaseRoot = FirebaseDatabase.getInstance().getReference();
+
+        fDatabaseRoot.child("institution").child(insNumber).child("inventory").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // initialize the array
+                final List<ProductDetails> areas = new ArrayList<ProductDetails>();
+
+                for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
+                    ProductDetails p = areaSnapshot.getValue(ProductDetails.class);
+                    areas.add(p);
+                }
+
+                ArrayAdapter<ProductDetails> areasAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_spinner_item,areas);
+                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                areaSpinner.setAdapter(areasAdapter);
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /**
+     * this function get the product details and explanation of the problem and user.phone
+     * find the institution number.
+     * call new_malfunction_with_existProd that enter to database
+     * @param prod
+     * @param explain
+     * @param phone
+     */
+    public static void add_malfunction_with_exist_prod(ProductDetailsInt prod, String explain,String phone){
+        DatabaseReference dataRef = connect_db("maintenance");
+        final String[] insSymbol = new String[1];
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(phone).exists()) {
+                    //extract institution number
+                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
+                    new_malfunction_with_existProd(prod , explain ,insSymbol[0] );
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+    }
+
+    /**
+     * this function get product , explanation and institution number
+     * and enter the malfunction to database.
+     * connect to mals table
+     * get unique ID to this report
+     * set the MalfunctionDetails id to the given id
+     * add id to DB
+     * @param prod
+     * @param explain
+     * @param insNumber
+     */
+    private static void new_malfunction_with_existProd(ProductDetailsInt prod, String explain ,String insNumber) {
+        MalfunctionDetailsInt mal = new MalfunctionDetails(prod.getProduct_id(), insNumber, explain);
+        DatabaseReference r = connect_db("mals");
+        // Generate a reference to a new location and add some data using push()
+        DatabaseReference newMalRef = r.push();
+        String malId = newMalRef.getKey(); //get string of the uniq key
+        mal.setMal_id(malId);
+        newMalRef.setValue(mal); //add this to mal database
+    }
+
+
 }

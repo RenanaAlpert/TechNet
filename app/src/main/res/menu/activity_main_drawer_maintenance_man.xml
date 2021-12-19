@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_add_new_product"
             android:title="@string/my_malfunctions_reports" />
         <item
+            android:id="@+id/nav_report_malfunction_new"
+            android:icon="@drawable/ic_menu_report_malfunction"
+            android:title="דיווח תקלה לא במלאי" />
+        <item
             android:id="@+id/nav_inventory"
             android:icon="@drawable/ic_menu_inventory"
             android:title="@string/menu_inventory" />
