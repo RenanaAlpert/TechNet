@@ -91,4 +91,6 @@
     <string name="type">סוג</string>
     <string name="OK">אישור</string>
     <string name="my_malfunctions_reports">התקלות שפתחתי</string>
+    <string name="click_me">Click me!</string>
+    <string name="name_something">name something</string>
 </resources>
