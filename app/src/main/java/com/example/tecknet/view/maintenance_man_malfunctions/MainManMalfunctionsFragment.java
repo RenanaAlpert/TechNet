@@ -54,7 +54,7 @@ public class MainManMalfunctionsFragment extends Fragment {
                 r.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshotMals) {
-                        final String[] full_adapter_string = {null};
+                        final String[] full_adapter_string = {""};
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(), android.R.layout.simple_list_item_1);
                         DataSnapshot dsMainManMalsList = dataSnapshotMainMan.child(user.getPhone());
                         if (dsMainManMalsList.hasChild("malfunctions_list")) {
@@ -107,7 +107,7 @@ public class MainManMalfunctionsFragment extends Fragment {
 
                                     }
                                     adapter.add(full_adapter_string[0]);
-                                    full_adapter_string[0]=null;
+                                    full_adapter_string[0]="";
                                 }
 
                             }
