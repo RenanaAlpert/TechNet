@@ -47,21 +47,32 @@ public class OpenMalfunctionFragment extends Fragment {
                     MalfunctionDetailsInt mal = ds.getValue(MalfunctionDetails.class);
                     assert mal != null;
                     if(mal.isIs_open()){
-                        r.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot das) {
-                                String device;
-                                if(mal.getProduct_id()==null){
-//                                device = ds.child("productDetails").child("device").getValue(String.class);
-                                    device = das.child(ds.getKey() + "/productDetails/device").getValue(String.class);
-                                }
-                                else{
-                                    device = "מחשב";
-                                }
+//                        r.addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(@NonNull DataSnapshot das) {
+//                                String device;
+//                                if(mal.getProduct_id()==null){
+////                                device = ds.child("productDetails").child("device").getValue(String.class);
+//                                    device = das.child(ds.getKey() + "/productDetails/device").getValue(String.class);
+//                                }
+//                                else{
+//                                    device = das.child("technet-f44dd-default-rtdb/institution/" + mal.getInstitution() + "/inventory/" + mal.getProduct_id() + "/device").getValue(String.class);
+//                                }
                                 r.getDatabase().getReference("institution/" + mal.getInstitution()).addValueEventListener(new ValueEventListener() {
                                     @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        String area = dataSnapshot.child("area").getValue(String.class);
+                                    public void onDataChange(@NonNull DataSnapshot das) {
+                                        String device;
+                                        if(mal.getProduct_id()==null){
+        //                                device = ds.child("productDetails").child("device").getValue(String.class);
+                                            device = ds.child("/productDetails/device").getValue(String.class);
+                                        }
+                                        else{
+                                            device = das.child("inventory/" + mal.getProduct_id() + "/device").getValue(String.class);
+                                        }
+                                        if (device == null){
+                                            device = "לא קיים מוצר במערכת";
+                                        }
+                                        String area = das.child("area").getValue(String.class);
                                         adapter.add("אזור: " + area +"\nמוצר תקול: " + device);
                                         list.setAdapter(adapter);
                                     }
@@ -73,11 +84,11 @@ public class OpenMalfunctionFragment extends Fragment {
 //                            assert p != null;
 //                            adapter.add("institution: " + mal.getInstitution() + "\texplantion : " + mal.getExplanation());
 //                            adapter.add(p.getCompany());
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                            }
-                        });
+//                            }
+//                            @Override
+//                            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                            }
+//                        });
 //                        open_mals.add(mal);
                     }
                 }
