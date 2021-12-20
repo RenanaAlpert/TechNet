@@ -43,7 +43,7 @@ public interface InstitutionDetailsInt extends Parcelable {
 
     public void setContact(String phone_maintenance);
 
-    public Map<Long, Long> getInventory();
-
-    public void setInventory(Map<Long, Long> inventory);
+//    public Map<Long, Long> getInventory();
+//
+//    public void setInventory(Map<Long, Long> inventory);
     }

@@ -16,7 +16,9 @@ public class InstitutionDetails implements InstitutionDetailsInt {
     private String operation_hours;
     private String phone_number;
     private String contact;
-    private Map<Long, Long> inventory;
+//    private Map<Long, Long> inventory;
+
+    public InstitutionDetails(){}
 
     public InstitutionDetails(String id, String name, String addr, String city, String area, String operation_hours, String phone, String phone_maintenance){
         this.institution_id = id;
@@ -27,7 +29,7 @@ public class InstitutionDetails implements InstitutionDetailsInt {
         this.operation_hours = operation_hours;
         this.phone_number = phone;
         this.contact = phone_maintenance;
-        this.inventory = new HashMap<>();
+//        this.inventory = new HashMap<>();
     }
 
     protected InstitutionDetails(Parcel in) {
@@ -73,13 +75,13 @@ public class InstitutionDetails implements InstitutionDetailsInt {
         return address;
     }
 
-    public Map<Long, Long> getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Map<Long, Long> inventory) {
-        this.inventory = inventory;
-    }
+//    public Map<Long, Long> getInventory() {
+//        return inventory;
+//    }
+//
+//    public void setInventory(Map<Long, Long> inventory) {
+//        this.inventory = inventory;
+//    }
 
     public void setAddress(String address) {
         this.address = address;
