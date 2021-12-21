@@ -2,12 +2,7 @@ package com.example.tecknet.model;
 
 public class ProductDetails implements ProductDetailsInt ,Comparable {
 
-    String product_id;
-    String device;
-    String company;
-    String type;
-    String year_of_production;
-    String date_of_responsibility;
+    private String product_id ,device , company ,type ,year_of_production, date_of_responsibility;
 
 
     public ProductDetails(){}
@@ -71,8 +66,25 @@ public class ProductDetails implements ProductDetailsInt ,Comparable {
     @Override
     public String toString(){
 
-        return type+", חברה : "+company+", דגם : "+ device+" . ";
+        String productStr = "";
+        if(type!=null && !type.isEmpty()){
+            productStr = type +"\n";
+        }
+        if(device!=null && !device.isEmpty()){
+            productStr += " דגם : "+device;
+        }
+        if (company!=null && !company.isEmpty()){
+            productStr += ", חברה : "+ company;
+        }
+        if (year_of_production!=null && !year_of_production.isEmpty()){
+            productStr += ", שנת יצור : " + year_of_production;
+        }
+        if (date_of_responsibility!=null && !date_of_responsibility.equals("DD/MM/YYYY") && !date_of_responsibility.equals("")){
+            productStr += ", תאריך אחריות : "+date_of_responsibility;
+        }
+        return productStr;
     }
+
 
 //Comparable
     @Override

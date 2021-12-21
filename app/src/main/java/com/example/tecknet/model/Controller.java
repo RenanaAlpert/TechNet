@@ -260,7 +260,7 @@ public abstract class Controller {
      * @param phone
      * @param root
      */
-    public static void what_insNum_show_spinner_products(Spinner areaSpinner , String phone , View root){
+    public static void what_insNum_show_spinner_products(Spinner productSpinner , String phone , View root){
         DatabaseReference dataRef = connect_db("maintenance");
         final String[] insSymbol = new String[1];
         dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -269,7 +269,7 @@ public abstract class Controller {
                 if (dataSnapshot.child(phone).exists()) {
                     //extract institution number
                     insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
-                    show_spinner_products(areaSpinner , insSymbol[0] , root);
+                    show_spinner_products(productSpinner , insSymbol[0] , root);
                 }
             }
             @Override
@@ -284,23 +284,23 @@ public abstract class Controller {
      * @param insNumber
      * @param root
      */
-    private static void show_spinner_products(final Spinner areaSpinner, String insNumber , View root ){
+    private static void show_spinner_products(final Spinner productSpinner, String insNumber , View root ){
         DatabaseReference fDatabaseRoot = FirebaseDatabase.getInstance().getReference();
 
         fDatabaseRoot.child("institution").child(insNumber).child("inventory").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // initialize the array
-                final List<ProductDetails> areas = new ArrayList<ProductDetails>();
+                final List<ProductDetails> products = new ArrayList<ProductDetails>();
 
                 for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
                     ProductDetails p = areaSnapshot.getValue(ProductDetails.class);
-                    areas.add(p);
+                    products.add(p);
                 }
-
-                ArrayAdapter<ProductDetails> areasAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_spinner_item,areas);
-                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                areaSpinner.setAdapter(areasAdapter);
+                Collections.sort(products);
+                ArrayAdapter<ProductDetails> productsAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_spinner_item,products);
+                productsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                productSpinner.setAdapter(productsAdapter);
 
             }
 
@@ -421,32 +421,6 @@ public abstract class Controller {
             }
         });
     }
-
-    /**
-     * This function to use in  show_products function .
-     * @param prod
-     * @return String of the given product
-     */
-    private static String  create_string_from_product(ProductDetails prod){
-        String productStr = "";
-        if(prod.getType()!=null && !prod.getType().isEmpty()){
-            productStr = prod.getType() +"\n";
-        }
-        if(prod.getDevice()!=null && !prod.getDevice().isEmpty()){
-            productStr += " דגם : "+prod.getDevice();
-        }
-        if (prod.getCompany()!=null && !prod.getCompany().isEmpty()){
-            productStr += ", חברה : "+ prod.getCompany();
-        }
-        if (prod.getYear_of_production()!=null && !prod.getYear_of_production().isEmpty()){
-            productStr += ", שנת יצור : " + prod.getYear_of_production();
-        }
-        if (prod.getDate_of_responsibility()!=null && !prod.getDate_of_responsibility().equals("DD/MM/YYYY")){
-            productStr += ", תאריך אחריות : "+prod.getDate_of_responsibility();
-        }
-        return productStr;
-    }
-
     /**
      * This function delete this product from the user inventory DB
      * @param prod
