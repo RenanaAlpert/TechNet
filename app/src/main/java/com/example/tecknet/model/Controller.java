@@ -653,10 +653,11 @@ public abstract class Controller {
     }
 
     public static void take_malfunction(String tech, String mal){
-        DatabaseReference r = connect_db("Technician/" + tech);
+        DatabaseReference r = connect_db("Technician/" + tech +"/my_mals");
         r.push().setValue(mal);
-        r = connect_db("mals/" + mal + "/tech");
-        r.setValue(tech);
+        r = connect_db("mals/" + mal);
+        r.child("tech").setValue(tech);
+        r.child("is_open").setValue(false);
     }
 
 }

@@ -18,13 +18,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
+import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
+import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.malfunctionView;
 import com.example.tecknet.view.HomeTechnician;
+import com.example.tecknet.view.UserViewModel;
 import com.google.firebase.database.ValueEventListener;
 
 import java.net.InterfaceAddress;
@@ -41,6 +45,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         super(context, resource, obj);
         mContext = context;
         mResource = resource;
+
     }
 
     @SuppressLint("ViewHolder")
@@ -56,6 +61,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         MalfunctionDetailsInt mal = getItem(position).getMal();
         ProductDetailsInt product = getItem(position).getProduct();
         InstitutionDetailsInt ins = getItem(position).getIns();
+        UserInt user = getItem(position).getUser();
 
         tvName.setText(ins.getName());
         tvCity.setText(ins.getCity());
@@ -79,7 +85,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
                         .setPositiveButton("לטיפול", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                Controller.take_malfunction(user.getPhone(), mal.getMal_id());
                                 dialog.cancel();
                             }
                         })

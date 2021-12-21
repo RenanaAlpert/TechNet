@@ -3,13 +3,15 @@ package com.example.tecknet.model;
 public class malfunctionView {
 
     private MalfunctionDetailsInt mal;
-    InstitutionDetailsInt ins;
+    private InstitutionDetailsInt ins;
     private ProductDetailsInt product;
+    private UserInt user;
 
-    public malfunctionView(MalfunctionDetailsInt mal, ProductDetailsInt product, InstitutionDetailsInt ins) {
+    public malfunctionView(MalfunctionDetailsInt mal, ProductDetailsInt product, InstitutionDetailsInt ins, UserInt user) {
         this.mal = mal;
         this.product = product;
         this.ins = ins;
+        this.user = user;
     }
 
     public MalfunctionDetailsInt getMal() {
@@ -36,4 +38,11 @@ public class malfunctionView {
         this.ins = ins;
     }
 
+    public UserInt getUser() {
+        return user;
+    }
+
+    public void setUser(UserInt user) {
+        this.user = user;
+    }
 }

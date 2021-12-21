@@ -27,7 +27,9 @@ import com.example.tecknet.model.MalfunctionDetails;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.ProductDetailsInt;
+import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.malfunctionView;
+import com.example.tecknet.view.UserViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +47,7 @@ public class OpenMalfunctionFragment extends Fragment {
     private FragmentOpenMalfunctionsBinding binding;
     private View root;
     private ListView list;
+    private UserViewModel userView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class OpenMalfunctionFragment extends Fragment {
 //                new ViewModelProvider(this).get(OpenMalfunctionViewModel.class);
         binding = FragmentOpenMalfunctionsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
+
+        userView = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        UserInt user = userView.getItem().getValue();
 
         ArrayList<malfunctionView> arrMals = new ArrayList<>();
         list = (ListView) root.findViewById(R.id.listview);
@@ -75,7 +81,7 @@ public class OpenMalfunctionFragment extends Fragment {
                                 } else {
                                     p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
                                 }
-                                arrMals.add(new malfunctionView(mal, p, ins));
+                                arrMals.add(new malfunctionView(mal, p, ins, user));
                                 OpenMalfunctionsAdapter oma = new OpenMalfunctionsAdapter(root.getContext(), R.layout.fragment_open_malfunctions_row, arrMals);
                                 list.setAdapter(oma);
                             }
