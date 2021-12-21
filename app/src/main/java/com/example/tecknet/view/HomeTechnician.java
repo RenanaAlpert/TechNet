@@ -47,6 +47,7 @@ public class HomeTechnician extends AppCompatActivity{
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
+
         //get user from login\signup
         UserInt user= getIntent().getParcelableExtra("User");
         //add user to shared view model so fregment can see it

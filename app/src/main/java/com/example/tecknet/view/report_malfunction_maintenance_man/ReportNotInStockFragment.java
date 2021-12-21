@@ -91,7 +91,7 @@ public class ReportNotInStockFragment extends Fragment {
                 if(check_if_entered_details(typeS ,modelS,companyS, detailFaultS)) {
                     //call to this function from the controller how found the
                     //institution id and call new_malfunction how add this mal to DB
-                    Controller.add_mal_and_extricate_istituId(user.getPhone(),typeS,companyS,modelS ,detailFaultS);
+                    Controller.add_mal_and_extract_istituId(user.getPhone(),typeS,companyS,modelS ,detailFaultS);
 
                     clear_edit_text(); //clear from edit text
 

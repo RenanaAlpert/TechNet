@@ -85,7 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else {
-                            startActivity(new Intent(getApplicationContext() , HomeTechnician.class));
+                            Intent intent =new Intent(getApplicationContext() , HomeTechnician.class);
+                            intent.putExtra("User" , user);
+                            startActivity(intent);
                         }
                     }
                     else {

@@ -1,5 +1,8 @@
 package com.example.tecknet.view.maintenance_man_malfunctions;
 
+import static com.example.tecknet.model.Controller.add_adapter_malfunction_list;
+import static com.example.tecknet.model.Controller.get_malfunction_list;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,89 +48,11 @@ public class MainManMalfunctionsFragment extends Fragment {
         uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user = uViewModel.getItem().getValue();
         //get from data base
-        DatabaseReference r_main_man = FirebaseDatabase.getInstance().getReference("maintenance");
-        r_main_man.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshotMainMan) {
 
-                DatabaseReference r = FirebaseDatabase.getInstance().getReference("mals");
-                r.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshotMals) {
-                        final String[] full_adapter_string = {""};
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(), android.R.layout.simple_list_item_1);
-                        DataSnapshot dsMainManMalsList = dataSnapshotMainMan.child(user.getPhone());
-                        if (dsMainManMalsList.hasChild("malfunctions_list")) {
-                            for (DataSnapshot da_mal_id : dsMainManMalsList.child("malfunctions_list").getChildren()) {
-                                String mal_id = da_mal_id.getValue(String.class);
-                                assert dataSnapshotMals.hasChild(mal_id);
-                                MalfunctionDetailsInt mal = dataSnapshotMals.child(mal_id).getValue(MalfunctionDetails.class);
-                                assert mal != null;
-                                if (mal.isIs_open()) {
-                                    String explanation = mal.getExplanation();
-
-                                    ProductDetails prod;
-
-                                    if (mal.getProduct_id() == null) {
-                                        prod = dataSnapshotMals.child(mal_id).child("productDetails").getValue(ProductDetails.class);
-
-                                    } else {
-                                        //todo fix!!
-                                        prod = dataSnapshotMals.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
-                                    }
-//                                            if (device == null) {
-//                                                device = "לא קיים מוצר במערכת";
-//                                            }
-
-                                    full_adapter_string[0] +="סוג מוצר: " + prod.getType() + "\nדגם: " + prod.getDevice() + "\n";
-                                    full_adapter_string[0] +="חברה: " + prod.getCompany() + "\nפרטי התקלה: " + explanation+"\n";
-
-                                    final UserInt[] tech_u = new UserInt[1];
-                                    if (mal.getTech() == null) {
-                                        full_adapter_string[0] +="טכנאי: " + "לא הוקצה"+"\n";
-                                    } else {
-                                        //get tech
-
-                                        r.getDatabase().getReference("users").addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot ds_tech) {
-                                                tech_u[0] = ds_tech.child(mal.getTech()).getValue(User.class);
-                                                full_adapter_string[0] +="שם הטכנאי: " + tech_u[0].getFirstName() + " " + tech_u[0].getFirstName() + "\n";
-                                                full_adapter_string[0]+="מס' טלפון: " + tech_u[0].getPhone() + "\n" + "מייל: " + tech_u[0].getEmail()+"\n";
-//                                                adapter.add("שם הטכנאי: " + tech_u[0].getFirstName() + " " + tech_u[0].getFirstName() + "\n");
-//                                                adapter.add("מס' טלפון: " + tech_u[0].getPhone() + "\n" + "מייל: " + tech_u[0].getEmail());
-
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                Log.d("TAG", databaseError.getMessage());
-                                            }
-                                        });
-
-                                    }
-                                    adapter.add(full_adapter_string[0]);
-                                    full_adapter_string[0]="";
-                                }
-
-                            }
-                        }
-                        list.setAdapter(adapter);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.d("TAG", databaseError.getMessage());
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("TAG", databaseError.getMessage());
-            }
-        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(), android.R.layout.simple_list_item_1);
+        get_malfunction_list(user);
+        add_adapter_malfunction_list(adapter);
+        list.setAdapter(adapter);
 
         return root;
     }

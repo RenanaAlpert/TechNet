@@ -71,16 +71,16 @@ public class ProductDetails implements ProductDetailsInt ,Comparable {
             productStr = type +"\n";
         }
         if(device!=null && !device.isEmpty()){
-            productStr += " דגם : "+device;
+            productStr += " דגם : "+device+"\n";
         }
         if (company!=null && !company.isEmpty()){
-            productStr += ", חברה : "+ company;
+            productStr += " חברה : "+ company+"\n";
         }
         if (year_of_production!=null && !year_of_production.isEmpty()){
-            productStr += ", שנת יצור : " + year_of_production;
+            productStr += " שנת יצור : " + year_of_production+"\n";
         }
         if (date_of_responsibility!=null && !date_of_responsibility.equals("DD/MM/YYYY") && !date_of_responsibility.equals("")){
-            productStr += ", תאריך אחריות : "+date_of_responsibility;
+            productStr += " תאריך אחריות : "+date_of_responsibility+"\n";
         }
         return productStr;
     }
