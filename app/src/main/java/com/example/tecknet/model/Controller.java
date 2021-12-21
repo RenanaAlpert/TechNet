@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -258,7 +260,7 @@ public abstract class Controller {
      * @param phone
      * @param root
      */
-    public static void what_insNum_show_spinner_products(Spinner areaSpinner , String phone , View root){
+    public static void what_insNum_show_spinner_products(Spinner productSpinner , String phone , View root){
         DatabaseReference dataRef = connect_db("maintenance");
         final String[] insSymbol = new String[1];
         dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -267,7 +269,7 @@ public abstract class Controller {
                 if (dataSnapshot.child(phone).exists()) {
                     //extract institution number
                     insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
-                    show_spinner_products(areaSpinner , insSymbol[0] , root);
+                    show_spinner_products(productSpinner , insSymbol[0] , root);
                 }
             }
             @Override
@@ -282,23 +284,23 @@ public abstract class Controller {
      * @param insNumber
      * @param root
      */
-    private static void show_spinner_products(final Spinner areaSpinner, String insNumber , View root ){
+    private static void show_spinner_products(final Spinner productSpinner, String insNumber , View root ){
         DatabaseReference fDatabaseRoot = FirebaseDatabase.getInstance().getReference();
 
         fDatabaseRoot.child("institution").child(insNumber).child("inventory").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // initialize the array
-                final List<ProductDetails> areas = new ArrayList<ProductDetails>();
+                final List<ProductDetails> products = new ArrayList<ProductDetails>();
 
                 for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
                     ProductDetails p = areaSnapshot.getValue(ProductDetails.class);
-                    areas.add(p);
+                    products.add(p);
                 }
-
-                ArrayAdapter<ProductDetails> areasAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_spinner_item,areas);
-                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                areaSpinner.setAdapter(areasAdapter);
+                Collections.sort(products);
+                ArrayAdapter<ProductDetails> productsAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_spinner_item,products);
+                productsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                productSpinner.setAdapter(productsAdapter);
 
             }
 
@@ -357,5 +359,91 @@ public abstract class Controller {
         newMalRef.setValue(mal); //add this to mal database
     }
 
+    /**
+     * This function is call from 'inventory fragment' class to show to the maintenance man
+     * his inventory , here he extract his institution id -
+     * and call to show_products function to move on the product and show in screen.
+     * @param phone
+     * @param arrProd
+     * @param list
+     * @param root
+     */
+    public static void show_inventory(String phone , ArrayList<ProductDetails> arrProd , ListView list ,View root){
+        DatabaseReference dataRef = connect_db("maintenance");
+        final String[] insSymbol = new String[1];
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(phone).exists()) {
+                    //extract institution number
+                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
+                    show_products(insSymbol[0] , arrProd , list,root);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+    }
+
+    /**
+     * This function go to maintenance man inventory and set ListView to the product
+     * list .
+     * @param insNum
+     * @param arrProd
+     * @param list
+     * @param root
+     */
+    private static void show_products(String insNum , ArrayList<ProductDetails> arrProd ,ListView list ,View root)
+    {
+        DatabaseReference r = connect_db("institution").child(insNum).child("inventory");
+        r.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    ProductDetails prod = ds.getValue(ProductDetails.class);
+                    assert prod != null;
+//                    String productStr = create_string_from_product(prod);
+                    arrProd.add(prod);
+
+                }
+                if(!arrProd.isEmpty()) {
+                    Collections.sort(arrProd);
+                    ArrayAdapter<ProductDetails> areasAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_list_item_1, arrProd);
+                    list.setAdapter(areasAdapter);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG",databaseError.getMessage());
+            }
+        });
+    }
+    /**
+     * This function delete this product from the user inventory DB
+     * @param prod
+     * @param phone
+     */
+    public static void delete_product_from_inventory(ProductDetailsInt prod ,String phone){
+        DatabaseReference dataRef = connect_db("maintenance");
+        final String[] insSymbol = new String[1];
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(phone).exists()) {
+                    //extract institution number
+                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
+                    DatabaseReference r = connect_db("institution");
+                    r.child(insSymbol[0]) .child("inventory")
+                            .child(prod.getProduct_id()).removeValue();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+    }
 
 }
