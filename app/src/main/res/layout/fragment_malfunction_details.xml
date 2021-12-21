@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MalfunctionDetailsFragment">
+    tools:context=".view.open_malfunctions.MalfunctionDetailsFragment">
 
     <TextView
         android:id="@+id/School"
@@ -102,7 +102,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/Area"
+        android:id="@+id/Explain"
         android:layout_width="402dp"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
@@ -114,7 +114,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txtArea"
+        android:id="@+id/txtExplain"
         android:layout_width="402dp"
         android:layout_height="match_parent"
         android:layout_marginStart="122dp"

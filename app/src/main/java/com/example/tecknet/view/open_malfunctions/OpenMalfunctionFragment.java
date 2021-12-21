@@ -1,5 +1,6 @@
 package com.example.tecknet.view.open_malfunctions;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.tecknet.R;
 import com.example.tecknet.databinding.FragmentOpenMalfunctionsBinding;
@@ -37,19 +40,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class OpenMalfunctionFragment extends Fragment {
+public class OpenMalfunctionFragment extends Fragment implements OpenMalfunctionsAdapter.onClickButton {
     //    private OpenMalfunctionViewModel openMalfunctionViewModel;
     private FragmentOpenMalfunctionsBinding binding;
+    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 //        openMalfunctionViewModel =
 //                new ViewModelProvider(this).get(OpenMalfunctionViewModel.class);
         binding = FragmentOpenMalfunctionsBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
 
         ArrayList<malfunctionView> arrMals = new ArrayList<>();
         ListView list = (ListView) root.findViewById(R.id.listview);
+
+        OpenMalfunctionsAdapter.onClickButton listener = this;
 
         DatabaseReference r = FirebaseDatabase.getInstance().getReference("mals");
         r.addValueEventListener(new ValueEventListener() {
@@ -70,7 +76,7 @@ public class OpenMalfunctionFragment extends Fragment {
                                     p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
                                 }
                                 arrMals.add(new malfunctionView(mal, p, ins));
-                                OpenMalfunctionsAdapter oma = new OpenMalfunctionsAdapter(root.getContext(), R.layout.fragment_open_malfunctions_row, arrMals);
+                                OpenMalfunctionsAdapter oma = new OpenMalfunctionsAdapter(root.getContext(), R.layout.fragment_open_malfunctions_row, arrMals, listener);
                                 list.setAdapter(oma);
                             }
 
@@ -95,5 +101,23 @@ public class OpenMalfunctionFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void passfragment(MalfunctionDetailsInt mal, ProductDetailsInt product, InstitutionDetailsInt ins) {
+        Bundle bundle = new Bundle();
+        bundle.putString("name", ins.getName());
+        bundle.putString("area", ins.getArea());
+        bundle.putString("address", ins.getAddress() + " " + ins.getCity());
+        bundle.putString("device", product.getDevice());
+        bundle.putString("company", product.getCompany());
+        bundle.putString("type", product.getType());
+        bundle.putString("explain", mal.getExplanation());
+
+        Fragment details = MalfunctionDetailsFragment.newInstance();
+        details.setArguments(bundle);
+
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.malfunction_detailes_container, details).commit();
     }
 }

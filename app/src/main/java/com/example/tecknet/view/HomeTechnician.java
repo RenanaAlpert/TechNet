@@ -1,5 +1,6 @@
 package com.example.tecknet.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,13 +17,20 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.tecknet.R;
 import com.example.tecknet.databinding.ActivityMainTechnicianBinding;
+import com.example.tecknet.model.InstitutionDetailsInt;
+import com.example.tecknet.model.MalfunctionDetailsInt;
+import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
+import com.example.tecknet.model.malfunctionView;
+import com.example.tecknet.view.open_malfunctions.MalfunctionDetailsFragment;
+import com.example.tecknet.view.open_malfunctions.OpenMalfunctionFragment;
+import com.example.tecknet.view.open_malfunctions.OpenMalfunctionsAdapter;
 import com.google.android.material.navigation.NavigationView;
 
 /**
  * this is the activity that manage all technicians screens after login or sign up
  */
-public class HomeTechnician extends AppCompatActivity {
+public class HomeTechnician extends AppCompatActivity{
     private UserViewModel passOnUViewModel;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainTechnicianBinding binding;
@@ -54,9 +62,6 @@ public class HomeTechnician extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_technician);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
-
 
 
     }
@@ -101,9 +106,22 @@ public class HomeTechnician extends AppCompatActivity {
 
                 return super.onOptionsItemSelected(item);
         }
-
-
     }
 
+//    public void passFregment(String[] args){
+//        Bundle bundle = new Bundle();
+//        bundle.putString("name", args[0]);
+//        bundle.putString("area", args[1]);
+//        bundle.putString("address", args[2]);
+//        bundle.putString("device", args[3]);
+//        bundle.putString("company", args[4]);
+//        bundle.putString("type", args[5]);
+//        bundle.putString("explain", args[6]);
+//
+//        MalfunctionDetailsFragment details = new MalfunctionDetailsFragment();
+//        details.setArguments(bundle);
+//
+//        this.getFragmentManager().beginTransaction().replace(R.id.button, details).commit();
+//    }
 
 }

@@ -85,5 +85,11 @@
         android:layout_marginBottom="10dp"
         android:text="לפרטים" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/malfunction_detailes_container"
+        android:name="com.example.tecknet.view.open_malfunctions.MalfunctionDetailsFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </RelativeLayout>
