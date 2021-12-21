@@ -24,13 +24,11 @@ public class MalfunctionDetailsFragment extends Fragment {
     private String type;
     private String explain;
 
-    private FragmentOpenMalfunctionsBinding binding;
-
     public MalfunctionDetailsFragment() {
         // Required empty public constructor
     }
 
-    public static Fragment newInstance(){
+    public static MalfunctionDetailsFragment newInstance(){
 //            String institution_name, String area, String address,
 //            String device, String company, String type,
 //            String explain) {

@@ -2,7 +2,9 @@ package com.example.tecknet.view.open_malfunctions;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetailsInt;
@@ -29,21 +32,15 @@ import java.util.ArrayList;
 
 public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
 
-    public interface onClickButton{
-        public void passfragment(MalfunctionDetailsInt mal, ProductDetailsInt product, InstitutionDetailsInt ins);
-    }
-
 
     private Context mContext;
     private  int mResource;
-    private onClickButton listener;
 
 
-    public OpenMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<malfunctionView> obj, onClickButton listener) {
+    public OpenMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<malfunctionView> obj) {
         super(context, resource, obj);
         mContext = context;
         mResource = resource;
-        this.listener = listener;
     }
 
     @SuppressLint("ViewHolder")
@@ -69,7 +66,32 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
             @Override
             public void onClick(View v) {
 
-                listener.passfragment(mal, product, ins);
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                String message =
+                        "בית ספר: " + ins.getName() + "\n" +
+                        "כתובת: " + ins.getAddress() + " " + ins.getCity() + "\n" +
+                        "מכשיר: " + product.getDevice() + "\n" +
+                        "חברה: " + product.getCompany() + "\n" +
+                        "דגם: " + product.getType() + "\n" +
+                        "תיאור התקלה: " + mal.getExplanation();
+
+                builder.setMessage(message).setCancelable(false)
+                        .setPositiveButton("לטיפול", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.cancel();
+                            }
+                        })
+                        .setNegativeButton("חזור", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                builder.create().show();
+
+//                listener.passfragment(mal, product, ins);
 
 //                Bundle bundle = new Bundle();
 //                bundle.putString("name", ins.getName());
@@ -82,8 +104,8 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
 //
 //                Fragment details = MalfunctionDetailsFragment.newInstance();
 //                details.setArguments(bundle);
-
-//                ((Activity) mContext).getFragmentManager().beginTransaction().replace(R.id.malfunction_detailes_container, details).commit();
+//
+//                ((FragmentActivity)v.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.malfunction_detailes_container, details).commit();
             }
         });
 

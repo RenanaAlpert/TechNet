@@ -320,7 +320,7 @@ public abstract class Controller {
      * @param explain
      * @param phone
      */
-    public static void add_malfunction_with_exist_prod(ProductDetailsInt prod, String explain,String phone){
+    public static void add_malfunction_with_exist_prod(ProductDetailsInt prod, String explain ,String phone){
         DatabaseReference dataRef = connect_db("maintenance");
         final String[] insSymbol = new String[1];
         dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -444,6 +444,13 @@ public abstract class Controller {
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
 
+    }
+
+    public static void take_malfunction(String tech, String mal){
+        DatabaseReference r = connect_db("Technician/" + tech);
+        r.push().setValue(mal);
+        r = connect_db("mals/" + mal + "/tech");
+        r.setValue(tech);
     }
 
 }
