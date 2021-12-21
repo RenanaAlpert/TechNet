@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -357,5 +359,117 @@ public abstract class Controller {
         newMalRef.setValue(mal); //add this to mal database
     }
 
+    /**
+     * This function is call from 'inventory fragment' class to show to the maintenance man
+     * his inventory , here he extract his institution id -
+     * and call to show_products function to move on the product and show in screen.
+     * @param phone
+     * @param arrProd
+     * @param list
+     * @param root
+     */
+    public static void show_inventory(String phone , ArrayList<ProductDetails> arrProd , ListView list ,View root){
+        DatabaseReference dataRef = connect_db("maintenance");
+        final String[] insSymbol = new String[1];
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(phone).exists()) {
+                    //extract institution number
+                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
+                    show_products(insSymbol[0] , arrProd , list,root);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+    }
+
+    /**
+     * This function go to maintenance man inventory and set ListView to the product
+     * list .
+     * @param insNum
+     * @param arrProd
+     * @param list
+     * @param root
+     */
+    private static void show_products(String insNum , ArrayList<ProductDetails> arrProd ,ListView list ,View root)
+    {
+        DatabaseReference r = connect_db("institution").child(insNum).child("inventory");
+        r.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    ProductDetails prod = ds.getValue(ProductDetails.class);
+                    assert prod != null;
+//                    String productStr = create_string_from_product(prod);
+                    arrProd.add(prod);
+
+                }
+                if(!arrProd.isEmpty()) {
+                    Collections.sort(arrProd);
+                    ArrayAdapter<ProductDetails> areasAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_list_item_1, arrProd);
+                    list.setAdapter(areasAdapter);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("TAG",databaseError.getMessage());
+            }
+        });
+    }
+
+    /**
+     * This function to use in  show_products function .
+     * @param prod
+     * @return String of the given product
+     */
+    private static String  create_string_from_product(ProductDetails prod){
+        String productStr = "";
+        if(prod.getType()!=null && !prod.getType().isEmpty()){
+            productStr = prod.getType() +"\n";
+        }
+        if(prod.getDevice()!=null && !prod.getDevice().isEmpty()){
+            productStr += " דגם : "+prod.getDevice();
+        }
+        if (prod.getCompany()!=null && !prod.getCompany().isEmpty()){
+            productStr += ", חברה : "+ prod.getCompany();
+        }
+        if (prod.getYear_of_production()!=null && !prod.getYear_of_production().isEmpty()){
+            productStr += ", שנת יצור : " + prod.getYear_of_production();
+        }
+        if (prod.getDate_of_responsibility()!=null && !prod.getDate_of_responsibility().equals("DD/MM/YYYY")){
+            productStr += ", תאריך אחריות : "+prod.getDate_of_responsibility();
+        }
+        return productStr;
+    }
+
+    /**
+     * This function delete this product from the user inventory DB
+     * @param prod
+     * @param phone
+     */
+    public static void delete_product_from_inventory(ProductDetailsInt prod ,String phone){
+        DatabaseReference dataRef = connect_db("maintenance");
+        final String[] insSymbol = new String[1];
+        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(phone).exists()) {
+                    //extract institution number
+                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
+                    DatabaseReference r = connect_db("institution");
+                    r.child(insSymbol[0]) .child("inventory")
+                            .child(prod.getProduct_id()).removeValue();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+    }
 
 }

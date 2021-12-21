@@ -1,6 +1,6 @@
 package com.example.tecknet.model;
 
-public class ProductDetails implements ProductDetailsInt{
+public class ProductDetails implements ProductDetailsInt ,Comparable {
 
     String product_id;
     String device;
@@ -71,6 +71,14 @@ public class ProductDetails implements ProductDetailsInt{
     @Override
     public String toString(){
 
-        return " סוג: " +type+", חברה : "+company+", דגם : "+ device+" . ";
+        return type+", חברה : "+company+", דגם : "+ device+" . ";
+    }
+
+//Comparable
+    @Override
+    public int compareTo(Object other) {
+        String thisProd = toString();
+        String otherProd = ((ProductDetails) other).toString();
+        return thisProd.compareTo(otherProd);
     }
 }
