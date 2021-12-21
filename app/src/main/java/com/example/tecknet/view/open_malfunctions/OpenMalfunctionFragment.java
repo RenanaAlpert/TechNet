@@ -44,6 +44,7 @@ public class OpenMalfunctionFragment extends Fragment implements OpenMalfunction
     //    private OpenMalfunctionViewModel openMalfunctionViewModel;
     private FragmentOpenMalfunctionsBinding binding;
     private View root;
+    private ListView list;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class OpenMalfunctionFragment extends Fragment implements OpenMalfunction
         root = binding.getRoot();
 
         ArrayList<malfunctionView> arrMals = new ArrayList<>();
-        ListView list = (ListView) root.findViewById(R.id.listview);
+        list = (ListView) root.findViewById(R.id.listview);
 
         OpenMalfunctionsAdapter.onClickButton listener = this;
 
