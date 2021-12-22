@@ -10,7 +10,7 @@ public class MyMalfunctionsViewModel extends ViewModel {
 
     public MyMalfunctionsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is my malfunctions technician fragment");
+        mText.setValue("אין תקלות לטיפול");
     }
 
     public LiveData<String> getText() {

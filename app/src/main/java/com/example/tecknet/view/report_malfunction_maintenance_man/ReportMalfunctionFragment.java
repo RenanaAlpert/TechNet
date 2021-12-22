@@ -111,9 +111,9 @@ public class ReportMalfunctionFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot d: dataSnapshot.getChildren()){
-                                    final Notification ngr =
-                                            (NotificationManager) ReportMalfunctionFragment.this.getSystemService(Context.NOTIFICATION_SERVICE);
-                                    Notification note = new Notification(R.drawable.ic_launcher,)
+//                                    final Notification ngr =
+//                                            (NotificationManager) ReportMalfunctionFragment.this.getSystemService(Context.NOTIFICATION_SERVICE);
+//                                    Notification note = new Notification(R.drawable.ic_launcher,)
                                 }
                             }
 

@@ -35,15 +35,15 @@ import java.util.ArrayList;
 
 public class MyMalfunctionsFragment extends Fragment {
 
-//    private MyMalfunctionsViewModel myMalfunctionsViewModel;
+    private MyMalfunctionsViewModel myMalfunctionsViewModel;
     private FragmentMyMalfunctionsBinding binding;
     private View root;
     private ListView list;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        myMalfunctionsViewModel =
-//                new ViewModelProvider(this).get(MyMalfunctionsViewModel.class);
+        myMalfunctionsViewModel =
+                new ViewModelProvider(this).get(MyMalfunctionsViewModel.class);
 
         binding = FragmentMyMalfunctionsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
@@ -51,35 +51,67 @@ public class MyMalfunctionsFragment extends Fragment {
         UserViewModel userView = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user = userView.getItem().getValue();
 
-        ArrayList<malfunctionView> arrMals = new ArrayList<>();
-        list = (ListView) root.findViewById(R.id.listview);
+        list = (ListView) root.findViewById(R.id.mylistview);
 
+//        final TextView textView = binding.textMyMalfunctions;
+//        myMalfunctionsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
 
-        DatabaseReference r = FirebaseDatabase.getInstance().getReference("mals");
-        r.addValueEventListener(new ValueEventListener() {
+        DatabaseReference r = FirebaseDatabase.getInstance().getReference("Technician");
+        assert user != null;
+        r.child(user.getPhone() + "/my_mals").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    MalfunctionDetailsInt mal = ds.getValue(MalfunctionDetails.class);
-                    assert mal != null;
-                    if (mal.isIs_open()) {
-                        r.getDatabase().getReference("institution/" + mal.getInstitution()).addValueEventListener(new ValueEventListener() {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+                if (dataSnapshot1.getValue() == null) {
+                    final TextView textView = binding.textMyMalfunctions;
+                    myMalfunctionsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+                        @Override
+                        public void onChanged(@Nullable String s) {
+                            textView.setText(s);
+                        }
+                    });
+                } else {
+                    ArrayList<malfunctionView> arrMals = new ArrayList<>();
+                    for (DataSnapshot dataSnapshot : dataSnapshot1.getChildren()) {
+                        String mal_id = dataSnapshot.getKey();
+                        r.getDatabase().getReference("mals").addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot das) {
-                                InstitutionDetailsInt ins = das.getValue(InstitutionDetails.class);
-                                ProductDetails p;
-                                if (mal.getProduct_id() == null) {
-                                    p = ds.child("productDetails").getValue(ProductDetails.class);
-                                } else {
-                                    p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
-                                }
-                                arrMals.add(new malfunctionView(mal, p, ins, user));
-                                OpenMalfunctionsAdapter oma = new OpenMalfunctionsAdapter(root.getContext(), R.layout.fragment_open_malfunctions_row, arrMals);
-                                list.setAdapter(oma);
+                            public void onDataChange(@NonNull DataSnapshot ds) {
+                                assert mal_id != null;
+                                MalfunctionDetailsInt mal = ds.child(mal_id).getValue(MalfunctionDetails.class);
+                                assert mal != null;
+                                r.getDatabase().getReference("institution/" + mal.getInstitution()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot das) {
+                                        InstitutionDetailsInt ins = das.getValue(InstitutionDetails.class);
+                                        ProductDetails p;
+                                        if (mal.getProduct_id() == null) {
+                                            p = ds.child("productDetails").getValue(ProductDetails.class);
+                                        } else {
+                                            p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
+                                        }
+                                        assert ins != null;
+                                        assert p != null;
+                                        arrMals.add(new malfunctionView(mal, p, ins, user));
+                                        MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root.getContext(), R.layout.fragment_my_malfunctions_row, arrMals);
+                                        list.setAdapter(oma);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
+
+
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.d("TAG", databaseError.getMessage());
                             }
                         });
                     }
@@ -88,7 +120,7 @@ public class MyMalfunctionsFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("TAG", databaseError.getMessage());
+
             }
         });
 

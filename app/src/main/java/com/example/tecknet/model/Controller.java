@@ -654,10 +654,15 @@ public abstract class Controller {
 
     public static void take_malfunction(String tech, String mal){
         DatabaseReference r = connect_db("Technician/" + tech +"/my_mals");
-        r.push().setValue(mal);
+        r.child(mal).setValue("נדרש טיפול");
         r = connect_db("mals/" + mal);
         r.child("tech").setValue(tech);
         r.child("is_open").setValue(false);
+    }
+
+    public static void set_status_nalfunction_tech(String tech, String mal, String status){
+        DatabaseReference r = connect_db("Technician/" + tech +"/my_mals");
+        r.child(mal).setValue(status);
     }
 
 }

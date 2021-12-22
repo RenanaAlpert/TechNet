@@ -96,22 +96,6 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
                             }
                         });
                 builder.create().show();
-
-//                listener.passfragment(mal, product, ins);
-
-//                Bundle bundle = new Bundle();
-//                bundle.putString("name", ins.getName());
-//                bundle.putString("area", ins.getArea());
-//                bundle.putString("address", ins.getAddress() + " " + ins.getCity());
-//                bundle.putString("device", product.getDevice());
-//                bundle.putString("company", product.getCompany());
-//                bundle.putString("type", product.getType());
-//                bundle.putString("explain", mal.getExplanation());
-//
-//                Fragment details = MalfunctionDetailsFragment.newInstance();
-//                details.setArguments(bundle);
-//
-//                ((FragmentActivity)v.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.malfunction_detailes_container, details).commit();
             }
         });
 
