@@ -11,20 +11,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="שם בית ספר: "
-        android:textAlignment="viewStart"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtDevice"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginBottom="5dp"
-        android:text="שם בית ספר"
+        android:text="שם בית ספר "
         android:textAlignment="viewStart"
         android:textSize="18sp" />
 
@@ -36,20 +23,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="כתובת בית ספר: "
-        android:textAlignment="viewStart"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtAddress"
-        android:layout_width="114dp"
-        android:layout_height="726dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="5dp"
-        android:text="כתובת בית ספר"
+        android:text="כתובת בית ספר "
         android:textAlignment="viewStart"
         android:textSize="18sp" />
 
@@ -61,20 +35,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="מכשיר תקול: "
-        android:textAlignment="viewStart"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtBreakDevice"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="122dp"
-        android:layout_marginBottom="5dp"
-        android:text="מכשיר תקול"
+        android:text="מכשיר תקול "
         android:textAlignment="viewStart"
         android:textSize="18sp" />
 
@@ -86,20 +47,7 @@
         android:layout_marginTop="70dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="דגם: "
-        android:textAlignment="viewStart"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txttype"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="5dp"
-        android:text="דגם"
+        android:text="דגם "
         android:textAlignment="viewStart"
         android:textSize="18sp" />
 
@@ -111,20 +59,7 @@
         android:layout_marginTop="90dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="תיאור תקלה: "
-        android:textAlignment="viewStart"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtFaultDescription"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="5dp"
-        android:text="תיאור תקלה"
+        android:text="תיאור תקלה "
         android:textAlignment="viewStart"
         android:textSize="18sp" />
 
@@ -136,20 +71,7 @@
         android:layout_marginTop="110dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="איש קשר: "
-        android:textAlignment="viewStart"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtContact"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="5dp"
-        android:text="איש קשר"
+        android:text="איש קשר "
         android:textAlignment="viewStart"
         android:textSize="18sp" />
 
