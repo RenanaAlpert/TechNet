@@ -1,5 +1,8 @@
 package com.example.tecknet.view.report_malfunction_maintenance_man;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +29,7 @@ import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.MaintenanceMan;
 import com.example.tecknet.model.MaintenanceManInt;
 import com.example.tecknet.model.ProductDetails;
+import com.example.tecknet.model.Technician;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.LoginActivity;
@@ -102,6 +106,22 @@ public class ReportMalfunctionFragment extends Fragment {
                             clear_edit_text();
                             Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
                         }
+                        DatabaseReference r = FirebaseDatabase.getInstance().getReference("Technician");
+                        r.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot d: dataSnapshot.getChildren()){
+                                    final Notification ngr =
+                                            (NotificationManager) ReportMalfunctionFragment.this.getSystemService(Context.NOTIFICATION_SERVICE);
+                                    Notification note = new Notification(R.drawable.ic_launcher,)
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 });
 
