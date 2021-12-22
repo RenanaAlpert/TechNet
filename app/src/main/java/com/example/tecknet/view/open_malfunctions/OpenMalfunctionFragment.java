@@ -47,7 +47,6 @@ public class OpenMalfunctionFragment extends Fragment {
     private FragmentOpenMalfunctionsBinding binding;
     private View root;
     private ListView list;
-    private UserViewModel userView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class OpenMalfunctionFragment extends Fragment {
         binding = FragmentOpenMalfunctionsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
-        userView = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        UserViewModel userView = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user = userView.getItem().getValue();
 
         ArrayList<malfunctionView> arrMals = new ArrayList<>();
