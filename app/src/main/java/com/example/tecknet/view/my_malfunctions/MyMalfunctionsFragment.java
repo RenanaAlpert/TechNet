@@ -90,7 +90,7 @@ public class MyMalfunctionsFragment extends Fragment {
                                         InstitutionDetailsInt ins = das.getValue(InstitutionDetails.class);
                                         ProductDetails p;
                                         if (mal.getProduct_id() == null) {
-                                            p = ds.child("productDetails").getValue(ProductDetails.class);
+                                            p = ds.child(mal_id + "/productDetails").getValue(ProductDetails.class);
                                         } else {
                                             p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
                                         }
