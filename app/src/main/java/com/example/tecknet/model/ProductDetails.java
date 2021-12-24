@@ -67,21 +67,22 @@ public class ProductDetails implements ProductDetailsInt ,Comparable {
     public String toString(){
 
         String productStr = "";
-        if(type!=null && !type.isEmpty()){
-            productStr = type +"\n";
-        }
         if(device!=null && !device.isEmpty()){
-            productStr += " דגם : "+device+"\n";
+            productStr = device + "," ;
+        }
+        if(type!=null && !type.isEmpty()){
+            productStr += "\nסוג : "+type + ",";
         }
         if (company!=null && !company.isEmpty()){
-            productStr += " חברה : "+ company+"\n";
+            productStr += "\nחברה : "+ company + ",";
         }
         if (year_of_production!=null && !year_of_production.isEmpty()){
-            productStr += " שנת יצור : " + year_of_production+"\n";
+            productStr += "\nשנת יצור : " + year_of_production+ ",";
         }
         if (date_of_responsibility!=null && !date_of_responsibility.equals("DD/MM/YYYY") && !date_of_responsibility.equals("")){
-            productStr += " תאריך אחריות : "+date_of_responsibility+"\n";
+            productStr += "\nתאריך אחריות : "+date_of_responsibility + ",";
         }
+        productStr = productStr.substring(0 , productStr.length()-1) + ".";
         return productStr;
     }
 

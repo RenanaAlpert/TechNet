@@ -83,6 +83,7 @@ public class OpenMalfunctionFragment extends Fragment {
                                 arrMals.add(new malfunctionView(mal, p, ins, user));
                                 OpenMalfunctionsAdapter oma = new OpenMalfunctionsAdapter(root.getContext(), R.layout.fragment_open_malfunctions_row, arrMals);
                                 list.setAdapter(oma);
+
                             }
 
                             @Override

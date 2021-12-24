@@ -3,11 +3,14 @@ package com.example.tecknet.model;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.tecknet.view.LoginActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -286,7 +289,7 @@ public abstract class Controller {
 
 
         //add product detail to the mal
-        ProductDetailsInt pd = new ProductDetails(type, company, device, "", "");
+        ProductDetailsInt pd = new ProductDetails(device, company, type, "", "");
         r.child(malId).child("productDetails").setValue(pd);
     }
 
@@ -663,6 +666,52 @@ public abstract class Controller {
     public static void set_status_nalfunction_tech(String tech, String mal, String status){
         DatabaseReference r = connect_db("Technician/" + tech +"/my_mals");
         r.child(mal).setValue(status);
+    }
+
+    public static void update_user_details(String phone , String first, String last){
+        DatabaseReference r = connect_db("users/"+phone);
+        if(!first.equals("")&&!first.equals(" ") && !first.equals("\n")){
+            r.child("firstName").setValue(first);
+        }
+        if(!last.equals("")&&!last.equals(" ") && !last.equals("\n")){
+            r.child("lastName").setValue(last);
+        }
+    }
+
+    public static void update_user_pass(String phone , EditText new1 ){
+        DatabaseReference r = connect_db("users/"+phone);
+        String new1str  = new1.getText().toString();
+        r.child("pass").setValue(new1str);
+
+    }
+    public static void update_institution_adrr(String phone , EditText city , EditText addr , Spinner area){
+        String cityS = city.getText().toString();
+        String addrS = addr.getText().toString();
+        String areaS = area.getSelectedItem().toString();
+
+        DatabaseReference r = connect_db("maintenance");
+        r.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String insNum = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
+                DatabaseReference update = connect_db("institution/"+insNum);
+                if(!cityS.equals("") && !cityS.equals(" ")&& !cityS.equals("\n")){
+                    update.child("city").setValue(cityS);
+                }
+                if(!addrS.equals("") && !addrS.equals(" ")&& !addrS.equals("\n")){
+                    update.child("address").setValue(addrS);
+                }
+                if(!areaS.equals("בחר")){
+                    update.child("area").setValue(areaS);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

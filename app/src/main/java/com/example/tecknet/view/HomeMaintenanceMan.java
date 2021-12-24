@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import com.example.tecknet.R;
 import com.example.tecknet.model.UserInt;
+import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
 
         //get user from login\signup
         UserInt user = getIntent().getParcelableExtra("User");
-        //add utser to shared view model so fregment can see it
+        //add user to shared view model so fragment can see it
         passOnUViewModel = new ViewModelProvider(HomeMaintenanceMan.this).get(UserViewModel.class);
         passOnUViewModel.setItem(user);
 
@@ -94,14 +95,14 @@ public class HomeMaintenanceMan extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            //todo add transition to add profile
-//            case R.id.action_move_to_update_profile_main_man: //move to update profile fragment
-//                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.content, new UpdateProfileMainManFragment());
-//                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
+//            todo add transition to add profile
+            case R.id.action_move_to_update_profile_main_man: //move to update profile fragment
+                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.home_fragment, new UpdateProfileMainManFragment());
+                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
 //                // Commit the transaction
-//                fragmentTransaction.commit();//to do
-//                return true;
+                fragmentTransaction.commit();//to do
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

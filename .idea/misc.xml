@@ -3,32 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.15729166666666666" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.15729166666666666" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_main_technician.xml" value="0.1" />
         <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_maintenance_man_details.xml" value="0.18115942028985507" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_malfunction_details.xml" value="0.12552083333333333" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_tech_men_details.xml" value="0.12552083333333333" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/app_bar_main_maintenance_man.xml" value="0.1234375" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/app_bar_main_technician.xml" value="0.1234375" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/content_main_maintenance_man.xml" value="0.1234375" />
         <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_add_product_maintenance_man.xml" value="0.13949275362318841" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.12552083333333333" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_malfunction_details.xml" value="0.1" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_manaintance_man_malfunctions.xml" value="0.13043478260869565" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_my_malfunctions.xml" value="0.1" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_my_malfunctions_row.xml" value="0.22" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_open_malfuction_details.xml" value="0.13043478260869565" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_open_malfunction_details_row.xml" value="0.13043478260869565" />
         <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_open_malfunctions.xml" value="0.1234375" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_open_malfunctions_row.xml" value="0.2" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/technet/software_engineering/app/src/main/res/layout/activity_main_technician.xml" value="0.18" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/technet/software_engineering/app/src/main/res/layout/activity_malfunction_details.xml" value="0.1" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/technet/software_engineering/app/src/main/res/layout/activity_tech_men_details.xml" value="0.1" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/technet/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.13949275362318841" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/technet/software_engineering/app/src/main/res/layout/fragment_malfunction_details.xml" value="0.25" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/technet/software_engineering/app/src/main/res/layout/fragment_open_malfunctions.xml" value="0.1" />
-        <entry key="..\:/Users/BASE/AndroidStudioProjects/technet/software_engineering/app/src/main/res/layout/fragment_open_malfunctions_row.xml" value="0.18" />
         <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/activity_loading_screen.xml" value="0.18489583333333334" />
         <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.17760416666666667" />
         <entry key="..\:/Users/User1/Documents/another attempt/software_engineering/app/src/main/res/layout/activity_main_technician.xml" value="0.18854166666666666" />
@@ -53,27 +30,6 @@
         <entry key="..\:/Users/User1/Documents/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User1/Documents/software_engineering/app/src/main/res/layout/activity_malfunction_report.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User1/Documents/software_engineering/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.14402173913043478" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/app_bar_main_maintenance_man.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/app_bar_main_technician.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/content_main_maintenance_man.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/content_main_technician.xml" value="0.13405797101449277" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_add_product_maintenance_man.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_home_maintenance_man.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_inventory_maintenance_man.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_manaintance_man_malfunctions.xml" value="0.13405797101449277" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_my_malfunctions.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_open_malfunctions.xml" value="0.13405797101449277" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_report_malfunction_maintenance_man.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_update_profile_main_man.xml" value="0.17798913043478262" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/fragment_update_profile_technician.xml" value="0.13405797101449277" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/nav_header_main_maintenance_man.xml" value="0.19021739130434784" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/layout/nav_header_main_technician.xml" value="0.17798913043478262" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/menu/activity_main_drawer_maintenance_man.xml" value="0.536" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/menu/activity_main_drawer_technician.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/menu/main_maintenance_man.xml" value="0.2125" />
-        <entry key="..\:/Users/moriy/AndroidStudioProjects/software_engineering/app/src/main/res/menu/main_technician.xml" value="0.2125" />
         <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.1308876811594203" />
         <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.1308876811594203" />
         <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.14666666666666667" />
@@ -93,18 +49,28 @@
         <entry key="..\:/Users/yuval/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/yuval/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/yuval/AndroidStudioProjects/software_engineering/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_loading_screen.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_maintenance_man_details.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_tech_men_details.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/app_bar_main_maintenance_man.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/content_main_maintenance_man.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/content_main_technician.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_add_product_maintenance_man.xml" value="0.16666666666666666" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_home_maintenance_man.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_inventory_maintenance_man.xml" value="0.22" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_inventory_maintenancr_man_row.xml" value="0.16666666666666666" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_open_malfunctions.xml" value="0.24879614767255218" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_open_malfunctions_row.xml" value="0.1796875" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_report_malfunction_maintenance_man.xml" value="0.16666666666666666" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_report_not_in_stock.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_report_not_in_stock.xml" value="0.22" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_update_profile_main_man.xml" value="0.22" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/nav_header_main_maintenance_man.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/menu/activity_main_drawer_maintenance_man.xml" value="0.1" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/menu/main_maintenance_man.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/menu/main_maintenance_man.xml" value="0.16666666666666666" />
       </map>
     </option>
   </component>

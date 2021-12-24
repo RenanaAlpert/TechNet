@@ -31,7 +31,7 @@ public class AddProductFragment extends Fragment {
 
     private UserViewModel uViewModel;
     private FragmentAddProductMaintenanceManBinding binding;
-    private EditText type  ,company ,device  , yearOfProduction ,dateOfResponsibility;
+    private EditText device, type  ,company   , yearOfProduction ,dateOfResponsibility;
     private Button addProdBut;
 
 
@@ -45,8 +45,8 @@ public class AddProductFragment extends Fragment {
         uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user=uViewModel.getItem().getValue();
 
+        device = binding.device; // PHONE/ computer ....
         type = binding.type;
-        device = binding.device;
         company = binding.company;
         yearOfProduction = binding.yearOfProduction;
         dateOfResponsibility = binding.dateOfResponsibility;
@@ -119,8 +119,8 @@ public class AddProductFragment extends Fragment {
             public void onClick(View v) {
 
                 //extract the product details from the User
-                String typeS = type.getText().toString();
                 String deviceS = device.getText().toString();
+                String typeS = type.getText().toString();
                 String companyS = company.getText().toString();
                 String yearOfProductionS = yearOfProduction.getText().toString();
                 String dateOfResponsibilityS = dateOfResponsibility.getText().toString();

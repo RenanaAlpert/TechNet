@@ -36,6 +36,7 @@ import com.example.tecknet.view.LoginActivity;
 import com.example.tecknet.view.MainActivity;
 import com.example.tecknet.view.UserViewModel;
 
+import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -72,16 +73,18 @@ public class ReportMalfunctionFragment extends Fragment {
         UserInt user=uViewModel.getItem().getValue();
 
         //not working yet
-       /* notInInv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ReportNotInStockFragment fragment = new ReportNotInStockFragment();
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.report_malfunction_fragment, fragment).commit();
-
-            }
-        });*/
+//        notInInv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.report_malfunction_fragment, new ReportNotInStockFragment());
+//                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
+////                // Commit the transaction
+//                fragmentTransaction.commit();//to do
+//
+//            }
+//        });
         //show the inventory of this user in spinner
         Controller.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
 
