@@ -38,7 +38,7 @@ public class HomeFragmentMainMan extends Fragment {
         binding = FragmentHomeMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
+        final TextView textView = binding.textHomeMainMan;
         homeViewModelMainMan.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

@@ -19,37 +19,38 @@ import com.example.tecknet.databinding.FragmentHomeTechnicianBinding;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
+import com.example.tecknet.model.UserInt;
+import com.example.tecknet.view.UserViewModel;
+import com.example.tecknet.view.home_maintenance_man.HomeViewModelMainMan;
 
 import java.util.Collection;
 
-public class HomeFragment extends Fragment {
-
+public class HomeFragmentTechnician extends Fragment {
+    private UserViewModel uViewModel;
     private HomeViewModel homeViewModel;
+    private HomeViewModel homeViewModelMainMan;
+
     private FragmentHomeTechnicianBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+//        //get user of this app
+//        uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+//        UserInt user=uViewModel.getItem().getValue();
 
         binding = FragmentHomeTechnicianBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
+        final TextView textView = binding.textHomeTechnician;
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
         });
-//        Collection<MalfunctionDetailsInt> open_mals = Controller.open_malfunction();
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(root.getContext(), android.R.layout.simple_list_item_1);
-//        for (MalfunctionDetailsInt mal: open_mals){
-//            ProductDetailsInt product = Controller.get_product(mal.getProduct_id());
-//            adapter.add(product.getDevice());
-//            adapter.add(product.getCompany());
-//        }
-//        ListView list = (ListView) root.findViewById(R.id.listview);
+
         return root;
     }
 

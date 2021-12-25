@@ -10,7 +10,6 @@ import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -39,6 +38,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbarMainMan);
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
@@ -51,7 +51,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_main_man, R.id.nav_report_malfunction,R.id.nav_report_malfunction_new, R.id.nav_inventory, R.id.nav_add_product)
+                R.id.nav_home_main_man, R.id.nav_report_malfunction, R.id.nav_report_malfunction_new, R.id.nav_inventory, R.id.nav_add_product)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_main_man);
@@ -97,8 +97,8 @@ public class HomeMaintenanceMan extends AppCompatActivity {
 
 //            todo add transition to add profile
             case R.id.action_move_to_update_profile_main_man: //move to update profile fragment
-                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.home_fragment, new UpdateProfileMainManFragment());
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.home_fragment_main_man, new UpdateProfileMainManFragment());
                 fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
 //                // Commit the transaction
                 fragmentTransaction.commit();//to do

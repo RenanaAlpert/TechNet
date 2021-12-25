@@ -96,4 +96,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fName">שם פרטי</string>
+    <string name="change_pass_text">שינוי סיסמה</string>
+    <string name="update_txt">עדכן</string>
+    <string name="change_city_txt">שנה עיר</string>
+    <string name="change_address_txt">שנה כתובת</string>
+    <string name="change_ins_details_txt">שינוי פרטי מוסד</string>
+    <string name="current_pass_confarmation_txt">סיסמה נוכחית לאימות</string>
+    <string name="same_pass_txt">אותה סיסמה</string>
+    <string name="last_name_txt">שם משפחה</string>
+    <string name="first_name_txt">שם פרטי</string>
+    <string name="update_details_txt">עדכון פרטים</string>
 </resources>

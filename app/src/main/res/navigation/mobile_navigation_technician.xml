@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home_technician"
-        android:name="com.example.tecknet.view.home_technician.HomeFragment"
+        android:name="com.example.tecknet.view.home_technician.HomeFragmentTechnician"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home_technician" />
 

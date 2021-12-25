@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -25,12 +26,14 @@ import com.example.tecknet.model.malfunctionView;
 import com.example.tecknet.view.open_malfunctions.MalfunctionDetailsFragment;
 import com.example.tecknet.view.open_malfunctions.OpenMalfunctionFragment;
 import com.example.tecknet.view.open_malfunctions.OpenMalfunctionsAdapter;
+import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
+import com.example.tecknet.view.update_profile_technician.UpdateProfileTechnicianFragment;
 import com.google.android.material.navigation.NavigationView;
 
 /**
  * this is the activity that manage all technicians screens after login or sign up
  */
-public class HomeTechnician extends AppCompatActivity{
+public class HomeTechnician extends AppCompatActivity {
     private UserViewModel passOnUViewModel;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainTechnicianBinding binding;
@@ -49,7 +52,7 @@ public class HomeTechnician extends AppCompatActivity{
 
 
         //get user from login\signup
-        UserInt user= getIntent().getParcelableExtra("User");
+        UserInt user = getIntent().getParcelableExtra("User");
         //add user to shared view model so fregment can see it
         passOnUViewModel = new ViewModelProvider(HomeTechnician.this).get(UserViewModel.class);
         passOnUViewModel.setItem(user);
@@ -82,15 +85,15 @@ public class HomeTechnician extends AppCompatActivity{
                 || super.onSupportNavigateUp();
     }
 
-    private void nullify()
-    {
-        this.passOnUViewModel=null;
-        this.mAppBarConfiguration=null;
-        this.binding=null;
+    private void nullify() {
+        this.passOnUViewModel = null;
+        this.mAppBarConfiguration = null;
+        this.binding = null;
     }
 
     /**
      * add 3 doted menu with sign out and update profile
+     *
      * @param item
      * @return
      */
@@ -102,7 +105,13 @@ public class HomeTechnician extends AppCompatActivity{
                 Intent intent = new Intent(HomeTechnician.this, MainActivity.class);
                 startActivity(intent);
                 return true;
-//            case R.id.action_settings_technician:
+            case R.id.action_settings_technician:
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.home_fragment_technician, new UpdateProfileTechnicianFragment());
+                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
+//                // Commit the transaction
+                fragmentTransaction.commit();//to do
+                return true;
             default:
 
                 return super.onOptionsItemSelected(item);

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.home_maintenance_man.HomeFragmentMainMan"
-    android:id="@+id/home_fragment">
+    android:id="@+id/home_fragment_main_man">
 
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/text_home_main_man"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
