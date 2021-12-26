@@ -1,6 +1,8 @@
 package com.example.tecknet.model;
 
 public class ProductExplanationUser{
+
+    //todo change private
     ProductDetailsInt prod;
     String malfunctionExplanation;
     UserInt user;

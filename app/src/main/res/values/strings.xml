@@ -106,4 +106,9 @@
     <string name="last_name_txt">שם משפחה</string>
     <string name="first_name_txt">שם פרטי</string>
     <string name="update_details_txt">עדכון פרטים</string>
+    <string name="product_type_txt">סוג מוצר:</string>
+    <string name="device_txt">דגם:</string>
+    <string name="company_txt">חברה:</string>
+    <string name="malfunction_details_txt">פרטי תקלה:</string>
+    <string name="tech_details_txt">פרטי טכנאי:</string>
 </resources>

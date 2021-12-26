@@ -36,8 +36,13 @@
         <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/content_main_technician.xml" value="0.1" />
         <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/fragment_home_maintenance_man.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/fragment_manaintance_man_malfunctions.xml" value="0.1" />
+        <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/fragment_my_malfunctions_row.xml" value="0.12907608695652173" />
+        <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/fragment_open_malfunctions_row.xml" value="0.1" />
         <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/fragment_update_profile_main_man.xml" value="0.1793478260869565" />
         <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/fragment_update_profile_technician.xml" value="0.1793478260869565" />
+        <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/nav_header_main_technician.xml" value="0.1" />
+        <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/layout/single_malfunction_maintenace_display.xml" value="0.1" />
         <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/menu/main_maintenance_man.xml" value="0.18425925925925926" />
         <entry key="..\:/Users/moriy/Desktop/software_engineering/app/src/main/res/menu/main_technician.xml" value="0.1" />
         <entry key="..\:/Users/nadav/StudioProjects/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.1308876811594203" />

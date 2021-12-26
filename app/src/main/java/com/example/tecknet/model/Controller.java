@@ -39,9 +39,19 @@ public abstract class Controller {
      * @param db
      * @return
      */
-    private static DatabaseReference connect_db(String db) {
+    public static DatabaseReference connect_db(String db) {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance(); //connect to firebase
         return rootNode.getReference(db);
+    }
+    public static String techString(UserInt user) {
+        String techStr = "";
+        if (user == null) {
+            techStr +="לא הוקצה" + "\n";
+        } else {
+            techStr += "שם הטכנאי: " + user.getFirstName() + " " + user.getFirstName() + "\n";
+            techStr += "מס' טלפון: " + user.getPhone() + "\n" + "מייל: " + user.getEmail() + "\n";
+        }
+        return techStr;
     }
 
     /**
