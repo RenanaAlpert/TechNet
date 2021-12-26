@@ -37,19 +37,16 @@ public class HomeFragmentTechnician extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 //        //get user of this app
-//        uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-//        UserInt user=uViewModel.getItem().getValue();
+        uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        UserInt user=uViewModel.getItem().getValue();
+        UserInt user2 = getActivity().getIntent().getParcelableExtra("User");
+
 
         binding = FragmentHomeTechnicianBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHomeTechnician;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        TextView textView = binding.textHomeTechnician;
+        textView.setText( "שלום "+user2.getFirstName() +" " +user2.getLastName() +"!");
 
         return root;
     }

@@ -723,5 +723,11 @@ public abstract class Controller {
             }
         });
     }
+    public static void update_technician_area(String phone , Spinner area){
+        DatabaseReference r = connect_db("Technician/"+phone );
+        String areaStr = area.getSelectedItem().toString();
+        r.child("area").setValue(areaStr);
+
+    }
 
 }
