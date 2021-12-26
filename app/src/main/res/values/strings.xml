@@ -106,4 +106,6 @@
     <string name="last_name_txt">שם משפחה</string>
     <string name="first_name_txt">שם פרטי</string>
     <string name="update_details_txt">עדכון פרטים</string>
+    <string name="change_work_area">שינוי אזור עבודה</string>
+    <string name="mainManExplanation">כאן תוכל לדווח על בעיות והתקלות שלך ושטכנאי באזורך יגיע לתקן \nבנוסף תוכל לעקוב אחרי המלאי שלך ואחרי התקלות שפתחת</string>
 </resources>

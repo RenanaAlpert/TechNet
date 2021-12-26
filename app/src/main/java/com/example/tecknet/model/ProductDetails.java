@@ -82,7 +82,7 @@ public class ProductDetails implements ProductDetailsInt ,Comparable {
         if (date_of_responsibility!=null && !date_of_responsibility.equals("DD/MM/YYYY") && !date_of_responsibility.equals("")){
             productStr += "\nתאריך אחריות : "+date_of_responsibility + ",";
         }
-        productStr = productStr.substring(0 , productStr.length()-1) + ".";
+        if(productStr.length() > 0) productStr = productStr.substring(0 , productStr.length()-1) + ".";
         return productStr;
     }
 

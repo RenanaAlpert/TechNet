@@ -95,7 +95,6 @@ public class HomeMaintenanceMan extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-//            todo add transition to add profile
             case R.id.action_move_to_update_profile_main_man: //move to update profile fragment
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.home_fragment_main_man, new UpdateProfileMainManFragment());

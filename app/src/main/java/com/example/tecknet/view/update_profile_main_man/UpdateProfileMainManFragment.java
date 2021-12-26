@@ -97,6 +97,8 @@ public class UpdateProfileMainManFragment extends Fragment {
                 if (pass1.equals(pass2)) {
                     //call the controller
                     Controller.update_user_pass(user.getPhone(), changePass);
+                    user.setPass(pass1);
+
                     return  true;
                 }
                 else {

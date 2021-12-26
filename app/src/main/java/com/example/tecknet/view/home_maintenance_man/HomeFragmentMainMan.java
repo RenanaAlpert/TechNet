@@ -25,26 +25,18 @@ public class HomeFragmentMainMan extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModelMainMan =
                 new ViewModelProvider(this).get(HomeViewModelMainMan.class);
-        //get user of this app
-        uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
-        UserInt user=uViewModel.getItem().getValue();
-        //todo fix print user name
-//        System.out.println("my activity: "+requireActivity());
-//        System.out.println(user==null);
-
-//        String fullName= user.getFirstName()+" "+user.getLastName();
-//        System.out.println(fullName);
 
         binding = FragmentHomeMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        //get user of this app
+        uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+        UserInt user = uViewModel.getItem().getValue();
+        UserInt user2 = getActivity().getIntent().getParcelableExtra("User");
 
-        final TextView textView = binding.textHomeMainMan;
-        homeViewModelMainMan.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        TextView textView = binding.helloMainManText;
+        textView.setText( "שלום "+user2.getFirstName() +" "+ user2.getLastName() +"!");
+
         return root;
     }
 
