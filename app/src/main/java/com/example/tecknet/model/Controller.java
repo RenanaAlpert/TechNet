@@ -1,5 +1,8 @@
 package com.example.tecknet.model;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,7 +13,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.tecknet.view.HomeMaintenanceMan;
+import com.example.tecknet.view.HomeTechnician;
 import com.example.tecknet.view.LoginActivity;
+import com.example.tecknet.view.MaintenanceManDetailsActivity;
+import com.example.tecknet.view.SignUpActivity;
+import com.example.tecknet.view.TechMenDetailsActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,22 +66,124 @@ public abstract class Controller {
         return techStr;
     }
 
+    public static void new_user_auth_real_db(UserInt user ,View root ){
+        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+
+        fAuth.createUserWithEmailAndPassword(user.getEmail(),user.getPass()).addOnCompleteListener(
+                new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+
+                            Controller.add_new_user_to_Auth(fAuth.getUid() ,user.getPhone());
+                            Controller.new_user(user);
+                            Toast.makeText(root.getContext() ,"רישום הצליח", Toast.LENGTH_LONG).show();
+
+                            move_to_register_continue(user, root);
+                        }
+                        else {
+                            Toast.makeText(root.getContext() ,"בעיה ברישום!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+    }
+    /**
+     * this function move to the next screen
+     */
+    private static void move_to_register_continue(UserInt user, View root){
+        if(user.getRole().equals("טכנאי")){
+            Intent intent = new Intent();
+            intent.setClass(root.getContext(), TechMenDetailsActivity.class);
+            intent.putExtra("User" , user);
+            root.getContext().startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent();
+            intent.setClass(root.getContext(), MaintenanceManDetailsActivity.class);
+            intent.putExtra("User" , user);
+            root.getContext().startActivity(intent);
+        }
+
+    }
+
     /**
      * Add new User.
      *
-     * @param first_name
-     * @param last_name
-     * @param phone
-     * @param mail
-     * @param password
-     * @param role
      */
-    public static void new_user(String first_name, String last_name, String phone, String mail,
-                                String password, String role) {
+    public static void new_user(UserInt user) {
         DatabaseReference r = connect_db("users");
-        UserInt us = new User(first_name, last_name, password, mail, role, phone);
-        r.child(phone).setValue(us);
+        r.child(user.getPhone()).setValue(user);
     }
+
+    /**
+     * This controller function is enter to AuthToReal table the new user id - phone
+     * we want the access to user db be more essy
+     * @param userId
+     * @param phoneNum
+     */
+    public static void add_new_user_to_Auth(String userId , String phoneNum){
+        DatabaseReference r = connect_db("AuthToReal");
+        r.child(userId).setValue(phoneNum);
+
+    }
+
+    /////////*********/////////////**********//////////**********///////////
+    public static void login(View root ,String email ,String password){
+        FirebaseAuth fAuth =FirebaseAuth.getInstance();
+
+        fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    String userId = fAuth.getUid();
+                    Controller.login_get_user(root,userId);
+                    Toast.makeText(root.getContext(), "כניסה הוצלחה", Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(root.getContext(), "שם משתמש או סיסמה לא נכונים או שמשתמש לא קיים.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+    public static void login_get_user(View root , String userId){
+        DatabaseReference r = connect_db("AuthToReal");
+        r.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String phone = (String) dataSnapshot.child(userId).getValue();
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference("users/" + phone);
+                db.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+                        assert user != null;
+                        Controller.move_to_home_pages(user , root);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) { }});
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+    }
+    private static void move_to_home_pages(UserInt user, View root){
+        if(user.getRole().equals("טכנאי")){
+            Intent intent = new Intent();
+            intent.setClass(root.getContext(), HomeTechnician.class);
+            intent.putExtra("User" , user);
+            root.getContext().startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent();
+            intent.setClass(root.getContext(), HomeMaintenanceMan.class);
+            intent.putExtra("User" , user);
+            root.getContext().startActivity(intent);
+        }
+    }
+
+    /////////*********/////////////**********//////////**********///////////
 
     public static void get_maintenance_man(UserInt user) {
         if (user != null) {
@@ -468,12 +582,12 @@ public abstract class Controller {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // initialize the array
                 final List<ProductDetails> products = new ArrayList<ProductDetails>();
-
                 for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
                     ProductDetails p = areaSnapshot.getValue(ProductDetails.class);
                     products.add(p);
                 }
                 Collections.sort(products);
+                products.add(new ProductDetails("אחר" , "", "" ,"",""));
                 ArrayAdapter<ProductDetails> productsAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_spinner_item, products);
                 productsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 productSpinner.setAdapter(productsAdapter);
@@ -678,6 +792,9 @@ public abstract class Controller {
         r.child(mal).setValue(status);
     }
 
+    /**
+     * yuval for update details
+     */
     public static void update_user_details(String phone , String first, String last){
         DatabaseReference r = connect_db("users/"+phone);
         if(!first.equals("")&&!first.equals(" ") && !first.equals("\n")){
@@ -688,12 +805,18 @@ public abstract class Controller {
         }
     }
 
+    /**
+     * yuval for update details
+     */
     public static void update_user_pass(String phone , EditText new1 ){
         DatabaseReference r = connect_db("users/"+phone);
         String new1str  = new1.getText().toString();
         r.child("pass").setValue(new1str);
 
     }
+    /**
+     * yuval for update details
+     */
     public static void update_institution_adrr(String phone , EditText city , EditText addr , Spinner area){
         String cityS = city.getText().toString();
         String addrS = addr.getText().toString();
@@ -723,6 +846,9 @@ public abstract class Controller {
             }
         });
     }
+    /**
+     * yuval for update details
+     */
     public static void update_technician_area(String phone , Spinner area){
         DatabaseReference r = connect_db("Technician/"+phone );
         String areaStr = area.getSelectedItem().toString();

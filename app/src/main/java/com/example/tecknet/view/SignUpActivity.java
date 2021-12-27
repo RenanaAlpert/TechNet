@@ -9,11 +9,19 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -22,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText email ,fName ,lName ,pass ,phone;
     Spinner role;
     Button next;
+    FirebaseAuth fAuth;
 
     ProgressBar pBar;
 
@@ -37,6 +46,8 @@ public class SignUpActivity extends AppCompatActivity {
         role = (Spinner) findViewById(R.id.role);
         phone = (EditText) findViewById(R.id.phone);
         next = (Button) findViewById(R.id.button) ;
+
+        fAuth = FirebaseAuth.getInstance();//////////new
 
         pBar = findViewById(R.id.progressBar);
         next.setOnClickListener(new View.OnClickListener() {
@@ -56,21 +67,11 @@ public class SignUpActivity extends AppCompatActivity {
                     boolean valid = is_valid_detaild(emailS,phoneS);
                     if(valid) {
                         pBar.setVisibility(View.VISIBLE);//loading
+                        UserInt myUser = new User(fNames, lNames, passwordS, emailS, roleS, phoneS);
 
-                        User myUser = new User(fNames, lNames, passwordS, emailS, roleS, phoneS);
+                        Controller.new_user_auth_real_db(myUser , getCurrentFocus() );
 
-//                    //add user to shared view model//todo erase
-//                    uViewModel = new ViewModelProvider(SignUpActivity.this).get(UserViewModel.class);
-//                    uViewModel.setItem(myUser);
-
-//                  todo  check_if_user_exist(phoneS);
-
-                        // call to new_user from controller hoe enter the new details of the user
-                        com.example.tecknet.model.Controller.new_user(fNames, lNames, phoneS, emailS, passwordS, roleS);
-                        clear_from_editext(); // clear from the edit text
-
-                        if (roleS.equals("אב בית")) continue_to_institution_detail(myUser);
-                        else continue_to_tech_detail(myUser);
+                        clear_from_editext();
                     }
 
                 }
@@ -144,20 +145,6 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
-
-    /**
-     * this function move to the next screen
-     */
-    private void continue_to_institution_detail( User myUser) {
-        Intent intent = new Intent(SignUpActivity.this, MaintenanceManDetailsActivity.class);
-        intent.putExtra("User" ,  myUser);
-        startActivity(intent);
-    }
-    private void continue_to_tech_detail( User myUser) {
-        Intent intent = new Intent(SignUpActivity.this, TechMenDetailsActivity.class);
-        intent.putExtra("User" , myUser);
-        startActivity(intent);
-    }
 
     /**
      * Private function how clear the text from the edit text view

@@ -51,7 +51,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_main_man, R.id.nav_report_malfunction, R.id.nav_report_malfunction_new, R.id.nav_inventory, R.id.nav_add_product)
+                R.id.nav_home_main_man, R.id.nav_report_malfunction, R.id.nav_inventory, R.id.nav_add_product)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_main_man);

@@ -1,6 +1,7 @@
 package com.example.tecknet.view;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,6 +17,17 @@ import android.widget.Toast;
 //import com.google.android.gms.tasks.OnCompleteListener;
 //import com.google.android.gms.tasks.Task;
 import com.example.tecknet.R;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,82 +38,50 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.example.tecknet.model.*;
 
-public class LoginActivity extends AppCompatActivity {
-    EditText phone , pass;
+public class LoginActivity extends AppCompatActivity /**implements GoogleApiClient.OnConnectionFailedListener**/ {
+    EditText phone , pass ,email;
     TextView forgetPass;
     Button login;
     ProgressBar pBar;
-    DatabaseReference dbRef;
+    /**DatabaseReference dbRef;**/
+//    SignInButton loginGoogle;
+//    private GoogleApiClient googleAPIclient;
+//    private static final int SIGN_IN =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        phone = (EditText)findViewById(R.id.phone);
+        email = (EditText)findViewById(R.id.email);
         pass = (EditText) findViewById(R.id.pass);
         forgetPass = findViewById(R.id.forget_pass);
         login =(Button)findViewById(R.id.button);
         pBar = findViewById(R.id.progressBarLogin);
-        dbRef = FirebaseDatabase.getInstance().getReference("users");
-        //animation
-//        ObjectAnimator obgAn = ObjectAnimator.ofFloat(email , "translationY", 400f , 0f);
-//        obgAn.setDuration(3500);
-//
-//        ObjectAnimator move = ObjectAnimator.ofFloat(email , "alpha", 0f , 1f);
-//        move.setDuration(3500);
-//        AnimatorSet aniSet = new AnimatorSet();
-//        aniSet.play(move).with(obgAn);
-//        aniSet.start();
+
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail().build();
+//        googleAPIclient = new GoogleApiClient.Builder(this).enableAutoManage(this,this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API , gso).build();
+//        loginGoogle = findViewById(R.id.google_signin);
+//        loginGoogle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleAPIclient);
+//                startActivityForResult(intent, SIGN_IN);
+//            }
+//        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneS = phone.getText().toString(); //phone string
+                String emailS = email.getText().toString(); //phone string
                 String passwordS = pass.getText().toString(); // password string
-
-                if(if_enter_details(phoneS,passwordS) && is_valid_detaild(phoneS)) {
-                    pBar.setVisibility(View.VISIBLE); //on the login pic
-                    login(phoneS, passwordS);
-                    clear_login_editext(); //clear from the edit text
+                if (if_enter_details(emailS, passwordS) && is_valid_detaild(emailS)) {
+                    pBar.setVisibility(View.VISIBLE);
+                    Controller.login(v , emailS ,passwordS);
+                    clear_login_editext();
                 }
-
-
-            }
-        });
-    }
-    public void login(String phone , String pass){
-        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(phone).exists()){
-                    User user = snapshot.child(phone).getValue(User.class);
-                    MaintenanceMan man = snapshot.child(phone).getValue(MaintenanceMan.class);
-                    if(user.getPass().equals(pass)){
-                        Toast.makeText(LoginActivity.this , "Login success" , Toast.LENGTH_LONG).show();
-
-                        if(user.getRole().equals("אב בית")){
-                            Intent intent = new Intent(getApplicationContext() , HomeMaintenanceMan.class);
-                            intent.putExtra("User" , user);
-                            startActivity(intent);
-                        }
-                        else {
-                            Intent intent =new Intent(getApplicationContext() , HomeTechnician.class);
-                            intent.putExtra("User" , user);
-                            startActivity(intent);
-                        }
-                    }
-                    else {
-                        Toast.makeText(LoginActivity.this , "שם משתמש או סיסמה אינם נכונים" , Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                else {
-                    Toast.makeText(LoginActivity.this , "שם משתמש או סיסמה אינם נכונים" , Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("TAG",error.getMessage());
             }
         });
     }
@@ -110,20 +90,20 @@ public class LoginActivity extends AppCompatActivity {
      * Private function how clear the text from the edit text view
      */
     private void clear_login_editext(){
-        phone.getText().clear();
+        email.getText().clear();
         pass.getText().clear();
     }
 
     /**
      * this function check if the phone number is valide
-     * @param phoneS
+     * @param mail
      * @return true if phone number is valid
      *      else false
      */
-    private boolean is_valid_detaild(String phoneS ){
+    private boolean is_valid_detaild(String mail ){
 
-        if(!com.example.tecknet.model.ValidInputs.valid_phone(phoneS)){
-            phone.setError("מספר טלפון לא חוקי!");
+        if(!ValidInputs.valid_email(mail)){
+            email.setError("כתובת מייל לא חוקית!");
             return false;
         }
         return true;
@@ -131,14 +111,14 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * this function check if the user enter login details
-     * @param phoneS
+     * @param mailsS
      * @param passwordS
      * @return true if the user enter hus details
      *      else false
      */
-    private boolean if_enter_details(String phoneS, String passwordS){
-        if(phoneS.isEmpty()){
-            phone.setError("אנא הכנס מספר טלפון");
+    private boolean if_enter_details(String mailsS, String passwordS){
+        if(mailsS.isEmpty()){
+            email.setError("אנא הכנס כתובת מייל");
             return false ;
         }
         if(passwordS.isEmpty()){
@@ -148,4 +128,24 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+//    @Override
+//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode , int resultCode , @Nullable Intent data) {
+//        super.onActivityResult(requestCode,resultCode,data);
+//        if(requestCode == SIGN_IN){
+//            GoogleSignInResult res = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            if(res.isSuccess()){
+//
+//                startActivity(new Intent(getApplicationContext(), HomeMaintenanceMan.class));
+//                finish();
+//            }
+//            else{
+//                Toast.makeText(LoginActivity.this, "כניסה נכשלה", Toast.LENGTH_LONG).show();
+//
+//            }
+//        }
+//    }
 }

@@ -7,20 +7,6 @@ android:layout_height="match_parent"
 tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragment">
 
 
-<!--    <TextView-->
-<!--        android:id="@+id/text_report_malfunction"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <FrameLayout
         android:id="@+id/report_malfunction_fragment"
         android:layout_width="match_parent"
@@ -56,36 +42,32 @@ tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragmen
         android:textSize="30sp"
 
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/products"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
+
 
     <Spinner
         android:id="@+id/products"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
         android:background="@drawable/edit_text_bg"
         android:minHeight="48dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/malfunction_detailes"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintTop_toBottomOf="@+id/elsee"
+
+        app:layout_constraintVertical_bias="0.05"
         app:layout_constraintWidth_percent=".8"></Spinner>
-<!--
+
     <EditText
-        android:id="@+id/phone_type"
+        android:id="@+id/device"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
-        android:hint="@string/device_type"
+        android:hint="סוג"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -95,7 +77,8 @@ tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragmen
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/products"
         app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".8"
+        android:visibility="invisible"/>
 
 
 <EditText
@@ -113,9 +96,10 @@ tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragmen
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias=".5"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/phone_type"
+    app:layout_constraintTop_toBottomOf="@id/device"
     app:layout_constraintVertical_bias="0"
-    app:layout_constraintWidth_percent=".8" />
+    app:layout_constraintWidth_percent=".8"
+    android:visibility="invisible"/>
 
 
 <EditText
@@ -135,9 +119,10 @@ tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragmen
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/model"
     app:layout_constraintVertical_bias="0"
-    app:layout_constraintWidth_percent=".8" />
+    app:layout_constraintWidth_percent=".8"
+    android:visibility="invisible"/>
 
--->
+
 <EditText
     android:id="@+id/elsee"
     android:layout_width="0dp"
@@ -150,28 +135,17 @@ tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragmen
     android:paddingLeft="20dp"
     android:paddingTop="10dp"
     android:paddingRight="10dp"
+
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/products"
-    app:layout_constraintVertical_bias="0.0"
-    app:layout_constraintWidth_percent=".8" />
+    app:layout_constraintTop_toBottomOf="@id/malfunction_detailes"
+    app:layout_constraintVertical_bias="0.1"
+    app:layout_constraintWidth_percent=".8"/>
+<!--    android:visibility="invisible"-->
 
 
-    <Button
-        android:id="@+id/not_in_inventory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="המוצר לא במלאי"
 
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintHorizontal_bias=".85"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/elsee" />
 
 
 
@@ -190,8 +164,8 @@ tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragmen
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias=".5"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/elsee"
-    app:layout_constraintVertical_bias=".4"
+    app:layout_constraintTop_toBottomOf="@+id/company"
+    app:layout_constraintVertical_bias=".2"
     app:layout_constraintWidth_percent=".8" />
 
 

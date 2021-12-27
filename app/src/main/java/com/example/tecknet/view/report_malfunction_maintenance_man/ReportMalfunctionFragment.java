@@ -51,8 +51,8 @@ public class ReportMalfunctionFragment extends Fragment {
     private UserViewModel uViewModel;
     private FragmentReportMalfunctionMaintenanceManBinding binding;
     EditText detailFault;
+    EditText device, type  ,company ;
     Button reportBut;
-    Button notInInv;
 
     Spinner prodSpinner;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -63,28 +63,19 @@ public class ReportMalfunctionFragment extends Fragment {
         binding = FragmentReportMalfunctionMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        device = binding.device; //phone/computer /....
+        type = binding.model;
+        company = binding.company;
+
         detailFault = binding.elsee;
         reportBut = binding.button ;
         prodSpinner = binding.products;
 
-        notInInv =binding.notInInventory;
 
         uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user=uViewModel.getItem().getValue();
 
-        //not working yet
-//        notInInv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.report_malfunction_fragment, new ReportNotInStockFragment());
-//                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
-////                // Commit the transaction
-//                fragmentTransaction.commit();//to do
-//
-//            }
-//        });
+
         //show the inventory of this user in spinner
         Controller.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
 
@@ -92,46 +83,61 @@ public class ReportMalfunctionFragment extends Fragment {
         prodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //user click on report button
-                reportBut.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                //extract the report details from the User
 
-                        //extract the report details from the User
-                        String detailFaultS = detailFault.getText().toString();
-                        //check if the user entered details
-                        if(check_if_entered_details(detailFaultS)) {
-                            //extract the product the user chose
-                            ProductDetails prod = (ProductDetails) parent.getSelectedItem();
-                            //add this mal to database
-                            Controller.add_malfunction_with_exist_prod(prod, detailFaultS,user.getPhone());
+                ProductDetails prod = (ProductDetails) parent.getSelectedItem();
+                if (prod.getDevice().equals("אחר")) {
+                    device.setVisibility(View.VISIBLE);
+                    type.setVisibility(View.VISIBLE);
+                    company.setVisibility(View.VISIBLE);
 
-                            clear_edit_text();
-                            Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
+                    reportBut.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+
+                            String deviceS = device.getText().toString();
+                            String typeS = type.getText().toString(); //*//
+                            String companyS = company.getText().toString();
+                            String detailFaultS = detailFault.getText().toString();
+
+                            if (check_if_entered_details(deviceS, typeS, companyS, detailFaultS)) {
+                                //call to this function from the controller how found the
+                                //institution id and call new_malfunction how add this mal to DB
+                                Controller.add_mal_and_extract_istituId(user.getPhone(), deviceS, companyS, typeS, detailFaultS);
+
+                                clear_edit_text(); //clear from edit text
+                            }
                         }
-                        DatabaseReference r = FirebaseDatabase.getInstance().getReference("Technician");
-                        r.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot d: dataSnapshot.getChildren()){
-//                                    final Notification ngr =
-//                                            (NotificationManager) ReportMalfunctionFragment.this.getSystemService(Context.NOTIFICATION_SERVICE);
-//                                    Notification note = new Notification(R.drawable.ic_launcher,)
-                                }
+                    });
+                }
+                else {
+                    device.setVisibility(View.GONE);
+                    type.setVisibility(View.GONE);
+                    company.setVisibility(View.GONE);
+                    reportBut.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String detailFaultS = detailFault.getText().toString();
+
+                            //check if the user entered details
+                            if (check_if_entered_details(detailFaultS)) {
+                                //add this mal to database
+                                Controller.add_malfunction_with_exist_prod(prod, detailFaultS, user.getPhone());
+
+                                clear_edit_text();
+                                Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
                             }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
 
-                            }
-                        });
-                    }
-                });
-
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
+
 
     return root;
     }
@@ -146,7 +152,9 @@ public class ReportMalfunctionFragment extends Fragment {
      * Private function how clear the text from the edit text view
      */
     private void clear_edit_text(){
-
+        device.getText().clear();
+        type.getText().clear();
+        company.getText().clear();
         detailFault.getText().clear();
 
     }
@@ -160,5 +168,29 @@ public class ReportMalfunctionFragment extends Fragment {
         return true;
 
     }
+
+
+    private boolean check_if_entered_details(String modelS , String typeS , String companyS, String detailFaultS){
+
+        if(modelS.isEmpty()){
+            device.setError("Please enter th device!!");
+            return false;
+        }
+        if(typeS.isEmpty()){
+            type.setError("Please enter the type!!");
+            return false;
+        }
+        if(companyS.isEmpty()){
+            company.setError("Please enter the company!!");
+            return false;
+        }
+        if(detailFaultS.isEmpty()){
+            detailFault.setError("Please enter report reason!!");
+            return false;
+        }
+        return true;
+
+    }
+
 
 }
