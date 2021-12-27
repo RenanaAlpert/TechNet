@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -855,5 +856,71 @@ public abstract class Controller {
         r.child("area").setValue(areaStr);
 
     }
+    //////////////////////////////////////////////////////////////////////////////
+    public static void tech_homePage_see_sumJobs(TextView textJobs ,String userPhone){
+        DatabaseReference r = connect_db("Technician");
+
+        r.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final int[] countMal = {0};
+                Technician tech =dataSnapshot.child(userPhone).getValue(Technician.class);
+                assert tech != null;
+                String area = tech.getArea();
+
+                Controller.move_on_mals_insId(textJobs ,  area ,countMal);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public static void move_on_mals_insId(TextView textJobs ,String area , final int[] countMal){
+        DatabaseReference mals =connect_db("mals");
+        mals.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    MalfunctionDetails myMal = ds.getValue(MalfunctionDetails.class);
+                    if(myMal.isIs_open()) {
+
+                        String malIns = myMal.getInstitution();
+                        Controller.check_mal_area(textJobs, area,countMal , malIns);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public static void check_mal_area(TextView textJobs ,String area , final int[] countMal ,String malIns){
+        DatabaseReference areaMal = connect_db("institution/" + malIns);//FirebaseDatabase.getInstance().getReference("institution/" + malIns);
+
+        areaMal.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                InstitutionDetails ins = dataSnapshot.getValue(InstitutionDetails.class);
+                assert ins != null;
+                String malArea = ins.getArea();
+                if (malArea.equals(area)) {
+                    countMal[0]++;
+                    textJobs.setText("יש באזורך כעת " + countMal[0] + " עבודות פנויות! ");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    //////////////////////////////////////////////////////////////////////////////
 
 }

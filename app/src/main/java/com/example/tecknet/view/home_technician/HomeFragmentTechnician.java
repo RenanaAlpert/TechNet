@@ -17,11 +17,20 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.tecknet.R;
 import com.example.tecknet.databinding.FragmentHomeTechnicianBinding;
 import com.example.tecknet.model.Controller;
+import com.example.tecknet.model.InstitutionDetails;
+import com.example.tecknet.model.MalfunctionDetails;
 import com.example.tecknet.model.MalfunctionDetailsInt;
+import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.ProductDetailsInt;
+import com.example.tecknet.model.Technician;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
 import com.example.tecknet.view.home_maintenance_man.HomeViewModelMainMan;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Collection;
 
@@ -47,6 +56,9 @@ public class HomeFragmentTechnician extends Fragment {
 
         TextView textView = binding.textHomeTechnician;
         textView.setText( "שלום "+user2.getFirstName() +" " +user2.getLastName() +"!");
+
+        TextView textJobs = binding.countWorkInMyArea;
+        Controller.tech_homePage_see_sumJobs(textJobs, user2.getPhone());
 
         return root;
     }
