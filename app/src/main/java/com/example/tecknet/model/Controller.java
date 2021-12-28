@@ -175,6 +175,7 @@ public abstract class Controller {
             intent.setClass(root.getContext(), HomeTechnician.class);
             intent.putExtra("User" , user);
             root.getContext().startActivity(intent);
+
         }
         else{
             Intent intent = new Intent();

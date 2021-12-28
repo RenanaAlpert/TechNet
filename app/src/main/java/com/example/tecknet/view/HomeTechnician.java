@@ -1,6 +1,8 @@
 package com.example.tecknet.view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -46,6 +48,7 @@ public class HomeTechnician extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbarTechnician);
+
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -101,9 +104,16 @@ public class HomeTechnician extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_disconnect_technician:
-                nullify();//empty all.
-                Intent intent = new Intent(HomeTechnician.this, MainActivity.class);
-                startActivity(intent);
+                new AlertDialog.Builder(binding.getRoot().getContext()).setIcon(android.R.drawable.btn_dialog)
+                        .setTitle("האם אתה בטוח שאתה רוצה להתנתק?")
+                        .setPositiveButton("צא", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                nullify();
+                                Intent intent = new Intent(HomeTechnician.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("השאר" , null).show();
                 return true;
             case R.id.action_settings_technician:
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

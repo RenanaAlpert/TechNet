@@ -1,11 +1,16 @@
 package com.example.tecknet.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
 import com.example.tecknet.R;
+import com.example.tecknet.model.Controller;
+import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -87,12 +92,20 @@ public class HomeMaintenanceMan extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
+//        Intent intent;
         switch (item.getItemId()) {
             case R.id.action_disconnect_main_man: //move to enter page
-                nullify();//empty all.
-                intent = new Intent(HomeMaintenanceMan.this, MainActivity.class);
-                startActivity(intent);
+                new AlertDialog.Builder(binding.getRoot().getContext()).setIcon(android.R.drawable.btn_dialog)
+                        .setTitle("האם אתה בטוח שאתה רוצה להתנתק?")
+                        .setPositiveButton("צא", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                nullify();//empty all.
+                                Intent intent = new Intent(HomeMaintenanceMan.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("השאר" , null).show();
+
                 return true;
 
             case R.id.action_move_to_update_profile_main_man: //move to update profile fragment

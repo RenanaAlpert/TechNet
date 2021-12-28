@@ -1,16 +1,20 @@
 package com.example.tecknet.view.home_maintenance_man;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.tecknet.databinding.FragmentHomeMaintenanceManBinding;
 import com.example.tecknet.model.Controller;
@@ -29,6 +33,24 @@ public class HomeFragmentMainMan extends Fragment {
 
         binding = FragmentHomeMaintenanceManBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("יציאה");
+                builder.setMessage("האם אתה בטוח רוצה לצאת?");
+                builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        getActivity().finishAffinity();
+                    }
+                });
+                builder.setNegativeButton("השאר",null);
+                builder.show();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         //get user of this app
         uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user = uViewModel.getItem().getValue();
@@ -41,7 +63,6 @@ public class HomeFragmentMainMan extends Fragment {
         //Text view to see sentence how say how mach from my mal is open in home page
         TextView myMals = binding.countMyOpenMal;
         Controller.mainMan_homePage_see_sumMyJobs(myMals, user2.getPhone());
-
 
         return root;
     }

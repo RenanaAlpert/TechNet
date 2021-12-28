@@ -38,6 +38,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.example.tecknet.model.*;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginActivity extends AppCompatActivity /**implements GoogleApiClient.OnConnectionFailedListener**/ {
     EditText phone , pass ,email;
     TextView forgetPass;
@@ -80,7 +82,11 @@ public class LoginActivity extends AppCompatActivity /**implements GoogleApiClie
                 if (if_enter_details(emailS, passwordS) && is_valid_detaild(emailS)) {
                     pBar.setVisibility(View.VISIBLE);
                     Controller.login(v , emailS ,passwordS);
+
+
+
                     clear_login_editext();
+
                 }
             }
         });
@@ -92,6 +98,7 @@ public class LoginActivity extends AppCompatActivity /**implements GoogleApiClie
     private void clear_login_editext(){
         email.getText().clear();
         pass.getText().clear();
+
     }
 
     /**
