@@ -43,9 +43,9 @@ public class HomeFragmentTechnician extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-//        //get user of this app
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
+        //get user of this app
         uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user=uViewModel.getItem().getValue();
         UserInt user2 = getActivity().getIntent().getParcelableExtra("User");
@@ -54,11 +54,13 @@ public class HomeFragmentTechnician extends Fragment {
         binding = FragmentHomeTechnicianBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //Print to the screen hello userName
         TextView textView = binding.textHomeTechnician;
         textView.setText( "שלום "+user2.getFirstName() +" " +user2.getLastName() +"!");
 
+        //This text view is for print to the screen the sum of the open current jobs in my area
         TextView textJobs = binding.countWorkInMyArea;
-        Controller.tech_homePage_see_sumJobs(textJobs, user2.getPhone());
+        Controller.tech_homePage_see_sumJobs(textJobs, user2.getPhone()); // in controller is make the count
 
         return root;
     }

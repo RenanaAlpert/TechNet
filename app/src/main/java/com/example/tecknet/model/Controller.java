@@ -922,5 +922,41 @@ public abstract class Controller {
         });
     }
     //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////***************************/////////////////////////
+    public  static  void  mainMan_homePage_see_sumMyJobs(TextView myMals ,String userPhone){
+        DatabaseReference r = connect_db("maintenance/"+userPhone+"/malfunctions_list");
+
+        r.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final int[] countMal = {0};
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    String malId= ds.getValue(String.class);
+                    //call anoder function
+                    Controller.check_mal_isOpen(myMals ,malId,countMal);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+    }
+    private static void check_mal_isOpen(TextView textJobs ,String malId , final int[] countMal ){
+        DatabaseReference mal = connect_db("mals/" + malId +"/is_open");//FirebaseDatabase.getInstance().getReference("institution/" + malIns);
+
+        mal.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean ins = dataSnapshot.getValue(boolean.class);
+                if (ins) {
+                    countMal[0]++;
+                    textJobs.setText("יש לך " + countMal[0] + " תקלות פתוחות עדיין! ");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+    }
+    //////////////////////////////***************************/////////////////////////
+
 
 }

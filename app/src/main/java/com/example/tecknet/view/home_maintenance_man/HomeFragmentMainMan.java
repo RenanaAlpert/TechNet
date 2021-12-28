@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.databinding.FragmentHomeMaintenanceManBinding;
+import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
 
@@ -36,6 +37,11 @@ public class HomeFragmentMainMan extends Fragment {
 
         TextView textView = binding.helloMainManText;
         textView.setText( "שלום "+user2.getFirstName() +" "+ user2.getLastName() +"!");
+
+        //Text view to see sentence how say how mach from my mal is open in home page
+        TextView myMals = binding.countMyOpenMal;
+        Controller.mainMan_homePage_see_sumMyJobs(myMals, user2.getPhone());
+
 
         return root;
     }

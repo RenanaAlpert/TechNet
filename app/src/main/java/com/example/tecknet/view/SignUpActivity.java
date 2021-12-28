@@ -30,7 +30,6 @@ public class SignUpActivity extends AppCompatActivity {
     EditText email ,fName ,lName ,pass ,phone;
     Spinner role;
     Button next;
-    FirebaseAuth fAuth;
 
     ProgressBar pBar;
 
@@ -47,7 +46,6 @@ public class SignUpActivity extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.phone);
         next = (Button) findViewById(R.id.button) ;
 
-        fAuth = FirebaseAuth.getInstance();//////////new
 
         pBar = findViewById(R.id.progressBar);
         next.setOnClickListener(new View.OnClickListener() {
