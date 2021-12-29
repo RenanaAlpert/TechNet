@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/product_maintenance_header"
         android:layout_width="402dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
@@ -33,9 +33,9 @@
         android:id="@+id/product_maintenance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/product_maintenance_header"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
+        android:layout_alignParentEnd="true"
         android:padding="3dp"
         android:text="@string/product_type_txt"
         android:textAlignment="viewStart"
@@ -97,7 +97,7 @@
         android:layout_marginTop="5dp"
         android:layout_below="@+id/company_maintenance"
         android:padding="3dp"
-        android:text="@string/tech_details_txt"
+        android:text="@string/malfunction_details_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textStyle="bold" />
