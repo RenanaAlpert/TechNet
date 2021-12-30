@@ -50,6 +50,7 @@ public class TechMenDetailsActivity extends AppCompatActivity {
                 ///todo move to morias screen
                 Intent intent = new Intent(TechMenDetailsActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
 
 
             }

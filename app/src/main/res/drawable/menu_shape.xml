@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/stroke1">
+
+    <corners
+        android:bottomRightRadius="0dp"
+        android:bottomLeftRadius="40dp"
+        android:topLeftRadius="0dp"
+        android:topRightRadius="40dp" />
+    <stroke android:width="2dp"
+        android:color="#B3009688"/>
+    <gradient
+        android:angle="270"
+        android:startColor="#FFFFFF"
+        android:centerColor="#FFFFFF"
+        android:endColor="#A6D5D0"
+        android:type="linear"
+        />
+</shape>

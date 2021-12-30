@@ -7,7 +7,6 @@
     tools:context=".view.my_malfunctions.MyMalfunctionsFragment">
 
 
-
     <TextView
         android:id="@+id/text_my_malfunctions"
         android:layout_width="match_parent"

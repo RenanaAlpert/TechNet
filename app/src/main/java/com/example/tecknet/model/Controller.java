@@ -1,5 +1,8 @@
 package com.example.tecknet.model;
 
+import static android.content.ContentValues.TAG;
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,13 +19,18 @@ import androidx.annotation.NonNull;
 
 import com.example.tecknet.view.HomeMaintenanceMan;
 import com.example.tecknet.view.HomeTechnician;
+import com.example.tecknet.view.LoginActivity;
 import com.example.tecknet.view.MaintenanceManDetailsActivity;
+import com.example.tecknet.view.SignUpActivity;
 import com.example.tecknet.view.TechMenDetailsActivity;
 import com.example.tecknet.view.maintenance_man_malfunctions.PEUAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -1056,5 +1064,32 @@ public abstract class Controller {
     }
     //////////////////////////////***************************/////////////////////////
 
+    public static void change_user_pass(String email , String pass){
+        FirebaseAuth mAuth;
+
+        FirebaseUser thisUser = FirebaseAuth.getInstance().getCurrentUser();
+        AuthCredential credential = EmailAuthProvider.getCredential(email, pass);
+
+        thisUser.reauthenticate(credential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            thisUser.updatePassword(pass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "Password updated");
+                                    } else {
+                                        Log.d(TAG, "Error password not updated");
+                                    }
+                                }
+                            });
+                        } else {
+                            Log.d(TAG, "Error auth failed");
+                        }
+                    }
+                });
+    }
 
 }

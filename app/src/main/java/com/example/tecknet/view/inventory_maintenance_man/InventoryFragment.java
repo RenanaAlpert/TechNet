@@ -32,12 +32,15 @@ import com.example.tecknet.model.malfunctionView;
 import com.example.tecknet.view.LoginActivity;
 import com.example.tecknet.view.UserViewModel;
 import com.example.tecknet.view.open_malfunctions.OpenMalfunctionsAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -46,6 +49,8 @@ public class InventoryFragment extends Fragment {
     private UserViewModel uViewModel;
     private FragmentInventoryMaintenanceManBinding binding;
     private Button delBut;
+
+//    FloatingActionButton delBut;
     private ListView list;
     private  TextView textView;
 //    View root;
@@ -60,18 +65,19 @@ public class InventoryFragment extends Fragment {
         uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user=uViewModel.getItem().getValue();
 
+
         //define arraylist of products
         ArrayList<ProductDetails> arrProd = new ArrayList<>();
         String phone = user.getPhone(); //user phone number
 
         //initialize the buttons
         list = binding.listview;
-        textView = binding.empty;
+//        textView = binding.empty;
         delBut = binding.btnDelete;
         //call the function in controller to show the user inventory
         Controller.show_inventory(phone ,  arrProd , list , root);
         //If the list is empty ( don't enter products to his inventory)  show msg
-        list.setEmptyView(textView);
+//        list.setEmptyView(textView);
         //Click on delete button for delete product in inventory
         delBut.setOnClickListener(new View.OnClickListener() {
             @Override

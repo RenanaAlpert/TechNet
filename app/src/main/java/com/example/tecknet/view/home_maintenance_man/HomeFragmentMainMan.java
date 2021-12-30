@@ -28,6 +28,7 @@ public class HomeFragmentMainMan extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         homeViewModelMainMan =
                 new ViewModelProvider(this).get(HomeViewModelMainMan.class);
 

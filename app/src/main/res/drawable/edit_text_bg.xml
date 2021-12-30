@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/stroke1">
+
     <corners android:radius="40dp"/>
-    <stroke android:width="3dp"
-        android:color="@color/teal_700"/>
+    <stroke android:width="2dp"
+        android:color="#B3009688"/>
+    <gradient
+        android:angle="270"
+        android:startColor="#80FFFFFF"
+        android:endColor="#80B0FAF3"
+        android:type="linear"
+        />
 </shape>
