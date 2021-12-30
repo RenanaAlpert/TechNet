@@ -1,4 +1,4 @@
 package com.example.tecknet.controller;
 
-public class maintanance_controller {
+public abstract class maintanance_controller {
 }

@@ -1,4 +1,4 @@
 package com.example.tecknet.controller;
 
-public class shared_controller {
+public abstract class shared_controller {
 }
