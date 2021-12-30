@@ -1,7 +1,7 @@
 package com.example.tecknet.model;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -16,10 +16,9 @@ import androidx.annotation.NonNull;
 
 import com.example.tecknet.view.HomeMaintenanceMan;
 import com.example.tecknet.view.HomeTechnician;
-import com.example.tecknet.view.LoginActivity;
 import com.example.tecknet.view.MaintenanceManDetailsActivity;
-import com.example.tecknet.view.SignUpActivity;
 import com.example.tecknet.view.TechMenDetailsActivity;
+import com.example.tecknet.view.maintenance_man_malfunctions.PEUAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -30,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -955,6 +955,104 @@ public abstract class Controller {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+    }
+
+    public static void loadDataInListview(UserInt user, ArrayList<ProductExplanationUser> peuModalArrayList, ListView  malfunctionsList , int layout, Context context) {
+        // below line is use to get data from Firebase
+        // firestore using collection in android.
+        Controller.connect_db("maintenance").addValueEventListener(new ValueEventListener() {//listener for maintenance
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dsMainMan) {
+                DataSnapshot dsMalList = dsMainMan.child(user.getPhone());
+                if (dsMalList.hasChild("malfunctions_list")) {
+                    Controller.connect_db("mals").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dsMals) {
+                            for (DataSnapshot ds_mal_id : dsMalList.child("malfunctions_list").getChildren()) {
+                                String mal_id = ds_mal_id.getValue(String.class);
+                                assert dsMals.hasChild(mal_id);
+                                MalfunctionDetailsInt mal = dsMals.child(mal_id).getValue(MalfunctionDetails.class);
+
+                                assert mal != null;
+                                Controller.connect_db("institution").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dsIns) {
+                                        Controller.connect_db("users").addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dsUsers) {
+                                                String explanation = mal.getExplanation();
+                                                ProductDetailsInt prod;
+                                                UserInt tech;
+
+                                                if (mal.getProduct_id() == null) {
+                                                    prod = dsMals.child(mal_id).child("productDetails").getValue(ProductDetails.class);
+
+                                                } else {
+                                                    String insId = dsMalList.child("institution").getValue(String.class);
+
+                                                    DataSnapshot dsProd = dsIns.child(insId).child("inventory").child(mal.getProduct_id());
+                                                    prod = dsProd.getValue(ProductDetails.class);
+
+                                                }
+                                                if (mal.getTech() == null) {
+                                                    tech = null;
+
+                                                } else {
+
+                                                    tech = dsUsers.child(mal.getTech()).getValue(User.class);
+
+
+                                                }
+                                                peuModalArrayList.add(new ProductExplanationUser(prod, explanation, tech));
+                                                PEUAdapter peuAdapter = new PEUAdapter(context, layout, peuModalArrayList);
+                                                malfunctionsList.setAdapter(peuAdapter);
+
+                                            }
+
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError
+                                                                            databaseError) {
+
+                                            }
+                                        });
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError
+                                                                    databaseError) {
+
+                                    }
+
+
+                                });
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }//listener for mals
+
+
+                    });
+
+//                Toast.makeText(MainManMalfunctionsFragment.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
         });
     }
     //////////////////////////////***************************/////////////////////////
