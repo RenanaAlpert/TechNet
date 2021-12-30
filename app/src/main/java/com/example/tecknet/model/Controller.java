@@ -782,9 +782,8 @@ public abstract class Controller {
     }
 
     public static void take_malfunction(String tech, String mal){
-        DatabaseReference r = connect_db("Technician/" + tech +"/my_mals");
-        r.child(mal).setValue("נדרש טיפול");
-        r = connect_db("mals/" + mal);
+        set_status_nalfunction_tech(tech, mal, "נדרש טיפול");
+        DatabaseReference r = connect_db("mals/" + mal);
         r.child("tech").setValue(tech);
         r.child("is_open").setValue(false);
     }

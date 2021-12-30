@@ -12,6 +12,8 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
     boolean is_open;
     String product_id;
     String tech;
+    String status;
+    double payment;
 //    String mal_creator;
 
     public MalfunctionDetails() {
@@ -24,6 +26,8 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
         this.is_open = true;
         this.product_id = product;
         this.tech = null;
+        this.status = "מחכה לטיפול";
+        this.payment = 0.0;
     }
 
     public String getMal_id() {

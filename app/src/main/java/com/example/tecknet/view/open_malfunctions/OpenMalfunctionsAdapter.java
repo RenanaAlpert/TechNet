@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -68,6 +70,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         tvDevice.setText(product.getDevice());
 
         Button button = convertView.findViewById(R.id.button);
+        View finalConvertView = convertView;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +89,9 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Controller.take_malfunction(user.getPhone(), mal.getMal_id());
-                                dialog.cancel();
+                                ListView list = (ListView) ((AppCompatActivity)mContext).findViewById(R.id.listview);
+                                list.removeFooterView(finalConvertView);
+                                //dialog.cancel();
                             }
                         })
                         .setNegativeButton("חזור", new DialogInterface.OnClickListener() {
