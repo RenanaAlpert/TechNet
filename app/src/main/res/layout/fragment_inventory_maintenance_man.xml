@@ -97,7 +97,17 @@
         android:dividerHeight="3dip"
 
         android:textSize="50sp" />
-    <!--        New Project Button-->
+
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:gravity="center"
+            android:text="לא קיימים מוצרים להצגה"
+            android:textColor="#86C5C5"
+            android:textSize="15dp" />
+<!--            New Project Button-->
     <RelativeLayout
         android:id="@+id/fragment_profile_project_relLayoutButton"
         android:layout_width="match_parent"

@@ -22,6 +22,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
+import com.example.tecknet.controller.maintanance_controller;
+import com.example.tecknet.controller.shared_controller;
 import com.example.tecknet.databinding.FragmentUpdateProfileMainManBinding;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.UserInt;
@@ -73,10 +75,10 @@ public class UpdateProfileMainManFragment extends Fragment {
                 if(check_valid_chang_pass(user , changePass.getText().toString(),changePass2.getText().toString()
                                             , currPass.getText().toString())) {
                     //controller.update_user_details
-                    Controller.update_user_details(user.getPhone(), fName.getText().toString(), lName.getText().toString());
+                    shared_controller.update_user_details(user.getPhone(), fName.getText().toString(), lName.getText().toString());
 
                     //controller.update_ins_adrr
-                    Controller.update_institution_adrr(user.getPhone(), city, adrr, area);
+                    maintanance_controller.update_institution_adrr(user.getPhone(), city, adrr, area);
                     clear_edit_text();
                     Toast.makeText(getActivity() , "עדכון פרופיל הצליח" , Toast.LENGTH_LONG).show();
                 }
@@ -110,9 +112,9 @@ public class UpdateProfileMainManFragment extends Fragment {
             if (user.getPass().equals(curr)) {
                 if (pass1.equals(pass2)) {
                     //call the controller
-                    Controller.update_user_pass(user.getPhone(), changePass);
+                    shared_controller.update_user_pass(user.getPhone(), changePass);
                     /////////////////
-                    Controller.change_user_pass(user.getEmail(), pass1);
+                    shared_controller.change_user_pass(user.getEmail(), pass1);
                     ////////////////
                     user.setPass(pass1);
 

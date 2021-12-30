@@ -3,12 +3,15 @@ package com.example.tecknet.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.tecknet.R;
+import com.example.tecknet.controller.technician_controller;
 import com.example.tecknet.model.UserInt;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -45,17 +48,27 @@ public class TechMenDetailsActivity extends AppCompatActivity {
                 //User obj from the prev screen
                 UserInt user = getIntent().getParcelableExtra("User");
 
-                com.example.tecknet.model.Controller.new_tech(user.getPhone() ,sArea);
+                if(check_area_input(sArea)) {
+                    technician_controller.new_tech(user.getPhone(), sArea);
 
-                ///todo move to morias screen
-                Intent intent = new Intent(TechMenDetailsActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-
-
+                    Intent intent = new Intent(TechMenDetailsActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
 
+    }
+    private boolean check_area_input(String sArea){
+
+        if(sArea.equals("בחר")){
+            TextView errorText = (TextView)area.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("אנא בחר אזור");//changes the selected item text to this
+            return false;
+        }
+        return true;
     }
 }

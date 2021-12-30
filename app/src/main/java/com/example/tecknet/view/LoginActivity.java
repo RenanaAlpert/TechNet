@@ -17,6 +17,7 @@ import android.widget.Toast;
 //import com.google.android.gms.tasks.OnCompleteListener;
 //import com.google.android.gms.tasks.Task;
 import com.example.tecknet.R;
+import com.example.tecknet.controller.shared_controller;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -81,9 +82,7 @@ public class LoginActivity extends AppCompatActivity /**implements GoogleApiClie
                 String passwordS = pass.getText().toString(); // password string
                 if (if_enter_details(emailS, passwordS) && is_valid_detaild(emailS)) {
                     pBar.setVisibility(View.VISIBLE);
-                    Controller.login(v , emailS ,passwordS);
-
-
+                    shared_controller.login(v , emailS ,passwordS);
 
                     clear_login_editext();
 

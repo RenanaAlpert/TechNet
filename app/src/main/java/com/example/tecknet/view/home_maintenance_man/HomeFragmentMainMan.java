@@ -16,6 +16,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.tecknet.controller.maintanance_controller;
+import com.example.tecknet.controller.shared_controller;
 import com.example.tecknet.databinding.FragmentHomeMaintenanceManBinding;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.UserInt;
@@ -63,7 +65,7 @@ public class HomeFragmentMainMan extends Fragment {
 
         //Text view to see sentence how say how mach from my mal is open in home page
         TextView myMals = binding.countMyOpenMal;
-        Controller.mainMan_homePage_see_sumMyJobs(myMals, user2.getPhone());
+        maintanance_controller.mainMan_homePage_see_sumMyJobs(myMals, user2.getPhone());
 
         return root;
     }

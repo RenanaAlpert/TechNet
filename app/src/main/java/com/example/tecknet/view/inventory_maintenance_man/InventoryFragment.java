@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
+import com.example.tecknet.controller.maintanance_controller;
 import com.example.tecknet.databinding.FragmentInventoryMaintenanceManBinding;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.MaintenanceMan;
@@ -72,12 +73,13 @@ public class InventoryFragment extends Fragment {
 
         //initialize the buttons
         list = binding.listview;
-//        textView = binding.empty;
+        textView = binding.empty;
         delBut = binding.btnDelete;
         //call the function in controller to show the user inventory
-        Controller.show_inventory(phone ,  arrProd , list , root);
-        //If the list is empty ( don't enter products to his inventory)  show msg
-//        list.setEmptyView(textView);
+        maintanance_controller.show_inventory(phone ,  arrProd , list , root);
+//        If the list is empty ( don't enter products to his inventory)  show msg
+        list.setEmptyView(textView);
+
         //Click on delete button for delete product in inventory
         delBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +99,7 @@ public class InventoryFragment extends Fragment {
                                         //Convert to product obj
                                         ProductDetails prod = (ProductDetails) parent.getAdapter().getItem(position);
                                         //Delete this product from his database
-                                        Controller.delete_product_from_inventory(prod, phone);
+                                        maintanance_controller.delete_product_from_inventory(prod, phone);
                                         //extract the adapter of the list view
                                         ArrayAdapter<ProductDetails> adapter = (ArrayAdapter<ProductDetails>)parent.getAdapter();
                                         arrProd.remove(wichItem); //Remove the item
