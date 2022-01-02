@@ -25,6 +25,26 @@
             app:argType="string" />
 
     </fragment>
+    <fragment
+        android:id="@+id/nav_update_details"
+        android:name="com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment"
+        android:label="@string/update_details"
+        tools:layout="@layout/fragment_update_profile_main_man" >
+        <argument
+            android:name="user"
+            app:argType="com.example.tecknet.model.UserInt"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="institution"
+            app:argType="com.example.tecknet.model.InstitutionDetailsInt"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="institution_symble"
+            app:argType="string" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_report_malfunction"

@@ -13,7 +13,7 @@
         android:fontFamily="serif"
 
         android:scaleType="centerCrop"
-        android:src="@drawable/backgroundnew"
+        android:src="@drawable/tow_layer_color"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,35 +27,40 @@
 
     <TextView
         android:id="@+id/institution_detailes"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/institution_detailes"
         android:textStyle="bold"
-        android:fontFamily="serif"
         android:textColor="@color/black"
         android:textAlignment="center"
+
         android:textAllCaps="true"
-        android:textSize="34sp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.05" />
 
 
     <TextView
         android:id="@+id/malfunction_detailes"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:fontFamily="serif"
+        android:elevation="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
         android:text="@string/Fill_institution_detailes"
-        android:textColor="@color/black"
+        android:textColor="@color/teal_700"
         android:textSize="20sp"
-
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/institution_detailes"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintVertical_bias="0.028"
+        app:layout_constraintWidth_percent=".8"/>
 
     <EditText
         android:id="@+id/institution_num"
@@ -65,8 +70,8 @@
         android:hint="@string/institution_Symbol_num"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
         android:paddingRight="10dp"
+        android:elevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,14 +83,15 @@
         android:id="@+id/institution_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/edit_text_bg"
         android:hint="@string/institution_name"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:elevation="20dp"
+
         app:layout_constraintVertical_bias="0"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
@@ -100,10 +106,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/edit_text_bg"
-        android:hint="@string/town"
+        android:hint="עיר"
+        android:minHeight="48dp"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:elevation="20dp"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +184,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
         android:text="@string/signUp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
 
         android:textSize="16sp"
         android:textStyle="bold"

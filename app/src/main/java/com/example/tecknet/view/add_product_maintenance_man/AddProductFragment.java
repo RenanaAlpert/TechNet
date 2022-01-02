@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.tecknet.controller.maintanance_controller;
 import com.example.tecknet.databinding.FragmentAddProductMaintenanceManBinding;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.ProductDetails;
@@ -127,9 +128,10 @@ public class AddProductFragment extends Fragment {
                 //create product obj
                 ProductDetailsInt pd =new ProductDetails(deviceS, companyS, typeS, yearOfProductionS,dateOfResponsibilityS);
                 //add the product details to DB
-                Controller.add_product_inventory(user.getPhone() , pd);
+                maintanance_controller.add_product_inventory(user.getPhone() , pd);
                 //clear the edit text
                 clear_product_editext();
+                Toast.makeText(root.getContext(), "הוספת מוצר עבר בהצלחה" , Toast.LENGTH_LONG).show();
 
             }
         });

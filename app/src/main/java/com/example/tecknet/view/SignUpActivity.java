@@ -1,4 +1,5 @@
 package com.example.tecknet.view;
+import com.example.tecknet.controller.shared_controller;
 import com.example.tecknet.model.*;
 import android.content.Intent;
 import android.graphics.Color;
@@ -67,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
                         pBar.setVisibility(View.VISIBLE);//loading
                         UserInt myUser = new User(fNames, lNames, passwordS, emailS, roleS, phoneS);
 
-                        Controller.new_user_auth_real_db(myUser , getCurrentFocus() );
+                        shared_controller.new_user_auth_real_db(myUser , getCurrentFocus());
 
                         clear_from_editext();
                     }

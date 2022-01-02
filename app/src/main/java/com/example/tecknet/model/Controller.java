@@ -1,5 +1,8 @@
 package com.example.tecknet.model;
 
+import static android.content.ContentValues.TAG;
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,13 +19,18 @@ import androidx.annotation.NonNull;
 
 import com.example.tecknet.view.HomeMaintenanceMan;
 import com.example.tecknet.view.HomeTechnician;
+import com.example.tecknet.view.LoginActivity;
 import com.example.tecknet.view.MaintenanceManDetailsActivity;
+import com.example.tecknet.view.SignUpActivity;
 import com.example.tecknet.view.TechMenDetailsActivity;
 import com.example.tecknet.view.maintenance_man_malfunctions.PEUAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,125 +75,15 @@ public abstract class Controller {
         return techStr;
     }
 
-    public static void new_user_auth_real_db(UserInt user ,View root ){
-        FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    /////
+    //sign up moved to shared controller
+    /////
 
-        fAuth.createUserWithEmailAndPassword(user.getEmail(),user.getPass()).addOnCompleteListener(
-                new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-
-                            Controller.add_new_user_to_Auth(fAuth.getUid() ,user.getPhone());
-                            Controller.new_user(user);
-                            Toast.makeText(root.getContext() ,"רישום הצליח", Toast.LENGTH_LONG).show();
-
-                            move_to_register_continue(user, root);
-                        }
-                        else {
-                            Toast.makeText(root.getContext() ,"בעיה ברישום!", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-    }
-    /**
-     * this function move to the next screen
-     */
-    private static void move_to_register_continue(UserInt user, View root){
-        if(user.getRole().equals("טכנאי")){
-            Intent intent = new Intent();
-            intent.setClass(root.getContext(), TechMenDetailsActivity.class);
-            intent.putExtra("User" , user);
-            root.getContext().startActivity(intent);
-        }
-        else{
-            Intent intent = new Intent();
-            intent.setClass(root.getContext(), MaintenanceManDetailsActivity.class);
-            intent.putExtra("User" , user);
-            root.getContext().startActivity(intent);
-        }
-
-    }
-
-    /**
-     * Add new User.
-     *
-     */
-    public static void new_user(UserInt user) {
-        DatabaseReference r = connect_db("users");
-        r.child(user.getPhone()).setValue(user);
-    }
-
-    /**
-     * This controller function is enter to AuthToReal table the new user id - phone
-     * we want the access to user db be more essy
-     * @param userId
-     * @param phoneNum
-     */
-    public static void add_new_user_to_Auth(String userId , String phoneNum){
-        DatabaseReference r = connect_db("AuthToReal");
-        r.child(userId).setValue(phoneNum);
-
-    }
-
-    /////////*********/////////////**********//////////**********///////////
-    public static void login(View root ,String email ,String password){
-        FirebaseAuth fAuth =FirebaseAuth.getInstance();
-
-        fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    String userId = fAuth.getUid();
-                    Controller.login_get_user(root,userId);
-                    Toast.makeText(root.getContext(), "כניסה הוצלחה", Toast.LENGTH_LONG).show();
-
-                } else {
-                    Toast.makeText(root.getContext(), "שם משתמש או סיסמה לא נכונים או שמשתמש לא קיים.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-    }
-    public static void login_get_user(View root , String userId){
-        DatabaseReference r = connect_db("AuthToReal");
-        r.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String phone = (String) dataSnapshot.child(userId).getValue();
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference("users/" + phone);
-                db.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
-                        assert user != null;
-                        Controller.move_to_home_pages(user , root);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) { }});
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
-    }
-    private static void move_to_home_pages(UserInt user, View root){
-        if(user.getRole().equals("טכנאי")){
-            Intent intent = new Intent();
-            intent.setClass(root.getContext(), HomeTechnician.class);
-            intent.putExtra("User" , user);
-            root.getContext().startActivity(intent);
-
-        }
-        else{
-            Intent intent = new Intent();
-            intent.setClass(root.getContext(), HomeMaintenanceMan.class);
-            intent.putExtra("User" , user);
-            root.getContext().startActivity(intent);
-        }
-    }
-
-    /////////*********/////////////**********//////////**********///////////
+    ///
+    // login move to shared controller
+    ///
+    ///
+    ///
 
     public static void get_maintenance_man(UserInt user) {
         if (user != null) {
@@ -198,38 +96,14 @@ public abstract class Controller {
         }
     }
 
-    //yuval change and superset from the new User
-    public static void new_tech(String phone, String area) {
-        DatabaseReference r = connect_db("Technician");
-        TechnicianInt t = new Technician(phone, area);
-        r.child(phone).setValue(t);
-    }
+    /////
+    // create new tech moved to controller
+    /////
 
 
-    /**
-     * Add institution
-     *
-     * @param symbol
-     * @param name
-     * @param address
-     * @param city
-     * @param area
-     * @param operation_hours
-     * @param phone_number
-     * @param phone_maintenance
-     */
-    public static void set_institution(String symbol, String name, String address, String city,
-                                       String area, String operation_hours, String phone_number,
-                                       String phone_maintenance) {
-
-        DatabaseReference r = connect_db("institution");
-        InstitutionDetailsInt ins = new InstitutionDetails(symbol, name, address, city, area, operation_hours, phone_number, phone_maintenance);
-        //todo check symble dosen't already exist
-        r.child(symbol).setValue(ins);
-        MaintenanceManInt mm = new MaintenanceMan(phone_maintenance, symbol);
-        r = connect_db("maintenance");
-        r.child(phone_maintenance).setValue(mm);
-    }
+    //////
+    /// set institution moved to maintenance man controller
+    //////
 
     /**
      * get user from data base by it's key
@@ -379,6 +253,7 @@ public abstract class Controller {
         });
     }
 
+    //yuval add this function to main man controller but yuval didn't Write this so how write this delete.
     public static void add_to_malfunction_list(String mainManKey,String malId)
     {
         DatabaseReference dataRefMainMan = connect_db("maintenance");
@@ -389,92 +264,14 @@ public abstract class Controller {
         malfunctionListRef.updateChildren(map);
     }
 
-    /**
-     * open malfunction report
-     *
-     * @param symbol
-     * @param device
-     * @param company
-     * @param type
-     * @param explain
-     */
-    // TODO moriya fix
-    public static void new_malfunction(String phoneMainMan, String symbol, String device, String company, String type, String explain) {
-        MalfunctionDetailsInt mal = new MalfunctionDetails(null, symbol, explain);
-        DatabaseReference r = connect_db("mals");
+    /// ann new malfunction to main man controller
 
-        // Generate a reference to a new location and add some data using push()
-        DatabaseReference newMalRef = r.push();
-        String malId = newMalRef.getKey(); //get string of the uniq key
-        mal.setMal_id(malId);
-        newMalRef.setValue(mal); //add this to mal database
-
-
-        //add to maintenance man malfunction list
-       add_to_malfunction_list(phoneMainMan,malId);
-
-
-        //add product detail to the mal
-        ProductDetailsInt pd = new ProductDetails(device, company, type, "", "");
-        r.child(malId).child("productDetails").setValue(pd);
-    }
-
-    /**
-     * extract institution id from data base and call to function to add new malfunction to data base
-     *
-     * @param userPhone
-     * @param model
-     * @param company
-     * @param type
-     * @param detailFault
-     */
-    public static void add_mal_and_extract_istituId(String userPhone, String model, String company,
-                                                    String type, String detailFault) {
-        DatabaseReference dataRef = connect_db("maintenance");
-        final String[] insSymbol = new String[1];
-
-        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(userPhone).exists()) {
-                    if (!(userPhone.isEmpty())) {
-                        insSymbol[0] = dataSnapshot.child(userPhone).getValue(MaintenanceMan.class).getInstitution();
-
-                        new_malfunction(userPhone, insSymbol[0], model, company, type, detailFault);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });
-    }
-
-    public static void add_product_inventory(String phone, ProductDetailsInt pd) {
-        DatabaseReference dataRef = connect_db("maintenance");
-        final String[] insSymbol = new String[1];
-        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(phone).exists()) {
-                    //extract institution number
-                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
-                    DatabaseReference r = connect_db("institution");
-                    DatabaseReference newProdRef = r.child(insSymbol[0]).child("inventory").push(); // Generate a reference to a new location and add some data using push()
-                    String prodId = newProdRef.getKey(); //get string of the uniq key
-                    pd.setProduct_id(prodId);
-                    newProdRef.setValue(pd); //add this to institution.inventory database
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
+    ////////////////////////
+    //////add_mal_and_extract_istituId IN MAIN MAIN CONTROLLER
+    ////////////////
+    //////
+    //add_product_inventory moved to main man controller
+    ////
 
     public static List<MalfunctionDetailsInt> open_malfunction() {
         List<MalfunctionDetailsInt> malsCol = new LinkedList<>();
@@ -542,150 +339,17 @@ public abstract class Controller {
         return p[0];
     }
 
-    /**
-     * this function find the user institution number and call
-     * show_spinner_products function to show the product in spinner on
-     * report malfunction fragment
-     *
-     * @param phone
-     * @param root
-     */
-    public static void what_insNum_show_spinner_products(Spinner productSpinner, String phone, View root) {
-        DatabaseReference dataRef = connect_db("maintenance");
-        final String[] insSymbol = new String[1];
-        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(phone).exists()) {
-                    //extract institution number
-                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
-                    show_spinner_products(productSpinner, insSymbol[0], root);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-
-    }
-
-    /**
-     * this function get the institution number and show in spinner the institution products
-     *
-     * @param insNumber
-     * @param root
-     */
-    private static void show_spinner_products(final Spinner productSpinner, String insNumber, View root) {
-        DatabaseReference fDatabaseRoot = FirebaseDatabase.getInstance().getReference();
-
-        fDatabaseRoot.child("institution").child(insNumber).child("inventory").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // initialize the array
-                final List<ProductDetails> products = new ArrayList<ProductDetails>();
-                for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
-                    ProductDetails p = areaSnapshot.getValue(ProductDetails.class);
-                    products.add(p);
-                }
-                Collections.sort(products);
-                products.add(new ProductDetails("אחר" , "", "" ,"",""));
-                ArrayAdapter<ProductDetails> productsAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_spinner_item, products);
-                productsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                productSpinner.setAdapter(productsAdapter);
-
-            }
+    ////////
+    ///    what_insNum_show_spinner_products moved to main man controller
+    ///////////
 
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+    ////add_malfunction_with_exist_prod in main man controller
 
-            }
-        });
-    }
+   /////show inventory moved to main man controller
 
-    /**
-     * this function get the product details and explanation of the problem and user.phone
-     * find the institution number.
-     * call new_malfunction_with_existProd that enter to database
-     *
-     * @param prod
-     * @param explain
-     * @param mainManKey
-     */
-    public static void add_malfunction_with_exist_prod(ProductDetailsInt prod, String explain, String mainManKey) {
-        DatabaseReference dataRef = connect_db("maintenance");
-        final String[] insSymbol = new String[1];
-        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(mainManKey).exists()) {
-                    //extract institution number
-                    insSymbol[0] = dataSnapshot.child(mainManKey).getValue(MaintenanceMan.class).getInstitution();
-                    new_malfunction_with_existProd(mainManKey,prod , explain ,insSymbol[0] );
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
 
-    }
-
-    /**
-     * this function get product , explanation and institution number
-     * and enter the malfunction to database.
-     * connect to mals table
-     * get unique ID to this report
-     * set the MalfunctionDetails id to the given id
-     * add id to DB
-     *
-     * @param prod
-     * @param explain
-     * @param insNumber
-     */
-    private static void new_malfunction_with_existProd(String mainManKey,ProductDetailsInt prod, String explain, String insNumber) {
-        MalfunctionDetailsInt mal = new MalfunctionDetails(prod.getProduct_id(), insNumber, explain);
-        DatabaseReference r = connect_db("mals");
-        // Generate a reference to a new location and add some data using push()
-        DatabaseReference newMalRef = r.push();
-        String malId = newMalRef.getKey(); //get string of the uniq key
-        mal.setMal_id(malId);
-        newMalRef.setValue(mal); //add this to mal database
-        //add to maintenance man malfunction list
-        add_to_malfunction_list(mainManKey,malId);
-    }
-
-    /**
-     * This function is call from 'inventory fragment' class to show to the maintenance man
-     * his inventory , here he extract his institution id -
-     * and call to show_products function to move on the product and show in screen.
-     *
-     * @param phone
-     * @param arrProd
-     * @param list
-     * @param root
-     */
-    public static void show_inventory(String phone, ArrayList<ProductDetails> arrProd, ListView list, View root) {
-        DatabaseReference dataRef = connect_db("maintenance");
-        final String[] insSymbol = new String[1];
-        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(phone).exists()) {
-                    //extract institution number
-                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
-                    show_products(insSymbol[0], arrProd, list, root);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-
-    }
 //
 //    /**
 //     * This function go to maintenance man inventory and get a specific product list .
@@ -716,70 +380,10 @@ public abstract class Controller {
 //        return 1;
 //    }
 
-    /**
-     * This function go to maintenance man inventory and set ListView to the product
-     * list .
-     *
-     * @param insNum
-     * @param arrProd
-     * @param list
-     * @param root
-     */
-    private static void show_products(String insNum, ArrayList<ProductDetails> arrProd, ListView list, View root) {
-        DatabaseReference r = connect_db("institution").child(insNum).child("inventory");
-        r.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    ProductDetails prod = ds.getValue(ProductDetails.class);
-                    assert prod != null;
-//                    String productStr = create_string_from_product(prod);
-                    arrProd.add(prod);
-
-                }
-                if (!arrProd.isEmpty()) {
-                    Collections.sort(arrProd);
-                    ArrayAdapter<ProductDetails> areasAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_list_item_1, arrProd);
-                    list.setAdapter(areasAdapter);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("TAG", databaseError.getMessage());
-            }
-        });
-    }
-
-    /**
-     * This function delete this product from the user inventory DB
-     *
-     * @param prod
-     * @param phone
-     */
-    public static void delete_product_from_inventory(ProductDetailsInt prod, String phone) {
-        DatabaseReference dataRef = connect_db("maintenance");
-        final String[] insSymbol = new String[1];
-        dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(phone).exists()) {
-                    //extract institution number
-                    insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
-                    DatabaseReference r = connect_db("institution");
-                    r.child(insSymbol[0]).child("inventory")
-                            .child(prod.getProduct_id()).removeValue();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-
-    }
+    ///
+    ///delet product inventory moved to main man controller
+    ///
 
     public static void take_malfunction(String tech, String mal){
         DatabaseReference r = connect_db("Technician");
@@ -795,9 +399,8 @@ public abstract class Controller {
         r.child("status").setValue(s);
     }
 
-    /**
-     * yuval for update details
-     */
+    // TODO: 30/12/2021  delete after change tech update details
+
     public static void update_user_details(String phone , String first, String last){
         DatabaseReference r = connect_db("users/"+phone);
         if(!first.equals("")&&!first.equals(" ") && !first.equals("\n")){
@@ -808,47 +411,14 @@ public abstract class Controller {
         }
     }
 
-    /**
-     * yuval for update details
-     */
+    // TODO: 30/12/2021  delete after change tech update details
     public static void update_user_pass(String phone , EditText new1 ){
         DatabaseReference r = connect_db("users/"+phone);
         String new1str  = new1.getText().toString();
         r.child("pass").setValue(new1str);
 
     }
-    /**
-     * yuval for update details
-     */
-    public static void update_institution_adrr(String phone , EditText city , EditText addr , Spinner area){
-        String cityS = city.getText().toString();
-        String addrS = addr.getText().toString();
-        String areaS = area.getSelectedItem().toString();
-
-        DatabaseReference r = connect_db("maintenance");
-        r.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String insNum = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
-                DatabaseReference update = connect_db("institution/"+insNum);
-                if(!cityS.equals("") && !cityS.equals(" ")&& !cityS.equals("\n")){
-                    update.child("city").setValue(cityS);
-                }
-                if(!addrS.equals("") && !addrS.equals(" ")&& !addrS.equals("\n")){
-                    update.child("address").setValue(addrS);
-                }
-                if(!areaS.equals("בחר")){
-                    update.child("area").setValue(areaS);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
+    ///////////update ins address in main man controller
     /**
      * yuval for update details
      */
@@ -858,106 +428,14 @@ public abstract class Controller {
         r.child("area").setValue(areaStr);
 
     }
-    //////////////////////////////////////////////////////////////////////////////
-    public static void tech_homePage_see_sumJobs(TextView textJobs ,String userPhone){
-        DatabaseReference r = connect_db("Technician");
-
-        r.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final int[] countMal = {0};
-                Technician tech =dataSnapshot.child(userPhone).getValue(Technician.class);
-                assert tech != null;
-                String area = tech.getArea();
-
-                Controller.move_on_mals_insId(textJobs ,  area ,countMal);
 
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-    public static void move_on_mals_insId(TextView textJobs ,String area , final int[] countMal){
-        DatabaseReference mals =connect_db("mals");
-        mals.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    MalfunctionDetails myMal = ds.getValue(MalfunctionDetails.class);
-                    if(myMal.isIs_open()) {
-
-                        String malIns = myMal.getInstitution();
-                        Controller.check_mal_area(textJobs, area,countMal , malIns);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-    public static void check_mal_area(TextView textJobs ,String area , final int[] countMal ,String malIns){
-        DatabaseReference areaMal = connect_db("institution/" + malIns);//FirebaseDatabase.getInstance().getReference("institution/" + malIns);
-
-        areaMal.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                InstitutionDetails ins = dataSnapshot.getValue(InstitutionDetails.class);
-                assert ins != null;
-                String malArea = ins.getArea();
-                if (malArea.equals(area)) {
-                    countMal[0]++;
-                    textJobs.setText("יש באזורך כעת " + countMal[0] + " עבודות פנויות! ");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-    //////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////***************************/////////////////////////
-    public  static  void  mainMan_homePage_see_sumMyJobs(TextView myMals ,String userPhone){
-        DatabaseReference r = connect_db("maintenance/"+userPhone+"/malfunctions_list");
-
-        r.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final int[] countMal = {0};
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    String malId= ds.getValue(String.class);
-                    //call anoder function
-                    Controller.check_mal_isOpen(myMals ,malId,countMal);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
-    }
-    private static void check_mal_isOpen(TextView textJobs ,String malId , final int[] countMal ){
-        DatabaseReference mal = connect_db("mals/" + malId +"/is_open");//FirebaseDatabase.getInstance().getReference("institution/" + malIns);
-
-        mal.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean ins = dataSnapshot.getValue(boolean.class);
-                if (ins) {
-                    countMal[0]++;
-                    textJobs.setText("יש לך " + countMal[0] + " תקלות פתוחות עדיין! ");
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
-    }
+    /////////////
+    //tech_homePage_see_sumJobs MOVED TO TECH CONTROLLER
+    //////////
+    //////
+    /// mainMan_homePage_see_sumMyJobs moved to main man controller
+    ///////
 
     public static void loadDataInListview(UserInt user, ArrayList<ProductExplanationUser> peuModalArrayList, ListView  malfunctionsList , int layout, Context context) {
         // below line is use to get data from Firebase
@@ -1058,5 +536,6 @@ public abstract class Controller {
     }
     //////////////////////////////***************************/////////////////////////
 
+    ////change_user_pass in shared controller
 
 }

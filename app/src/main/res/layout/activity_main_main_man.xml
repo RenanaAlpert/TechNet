@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-
     <include
         android:id="@+id/app_bar_main"
         layout="@layout/app_bar_main_maintenance_man"
@@ -20,6 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:background="@drawable/menu_shape"
         app:headerLayout="@layout/nav_header_main_maintenance_man"
         app:menu="@menu/activity_main_drawer_maintenance_man" />
 </androidx.drawerlayout.widget.DrawerLayout>

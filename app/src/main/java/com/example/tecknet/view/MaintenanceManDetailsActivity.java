@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tecknet.R;
+import com.example.tecknet.controller.maintanance_controller;
+import com.example.tecknet.controller.shared_controller;
+import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.User;
 
@@ -64,7 +67,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
 
                     //todo check sNumIns doesn't already exist
                     //call to controller
-                    com.example.tecknet.model.Controller.set_institution(sNumIns, sNameIns, sAddressIns,
+                    maintanance_controller.set_institution(sNumIns, sNameIns, sAddressIns,
                             sCityIns, sArea, "", sPhoneInc, myUser.getPhone());
 
                     Intent intent = new Intent(MaintenanceManDetailsActivity.this, MainActivity.class);
@@ -73,6 +76,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
                     Toast.makeText(MaintenanceManDetailsActivity.this, "SignUp institution success", Toast.LENGTH_LONG).show();
 
                     startActivity(intent);
+                    finish();
                 }
             }
         });

@@ -6,31 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity">
 
-    <!--    <EditText-->
-<!--        android:id="@+id/phone"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/edit_text_bg"-->
-<!--        android:hint="@string/phone"-->
-<!--        android:inputType="phone"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:paddingLeft="20dp"-->
-<!--        android:paddingTop="10dp"-->
-<!--        android:paddingRight="10dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias=".5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias=".3"-->
-<!--        app:layout_constraintWidth_percent=".8" />-->
 
+    <!--        android:src="@drawable/backgroundnew"-->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/tow_layer_color"
         android:scaleType="centerCrop"
-        android:src="@drawable/backgroundnew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".27"
@@ -39,17 +22,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="כניסה"
+        android:textColor="@color/teal_700"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.1" />
+
+
     <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+
         android:background="@drawable/edit_text_bg"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
         android:paddingRight="10dp"
+        android:elevation="20dp"
+        android:drawableRight="@drawable/ic_email"
+        android:drawablePadding="5dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
@@ -64,19 +68,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_bg"
-        android:ems="10"
         android:hint="@string/pass"
-        android:inputType="textPassword"
+        android:inputType="textWebPassword"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
+        android:elevation="20dp"
         android:paddingRight="10dp"
+        android:drawableRight="@drawable/ic_pass"
+        android:drawablePadding="5dp"
+
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email"
-        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent=".8" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -87,7 +94,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
 
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:background="@drawable/button_bg"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,6 +114,7 @@
         app:layout_constraintHorizontal_bias="1"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
+        android:gravity="right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/pass"
         app:layout_constraintStart_toStartOf="parent"

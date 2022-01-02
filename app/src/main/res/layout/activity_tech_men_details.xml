@@ -10,20 +10,15 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="serif"
 
-        android:scaleType="centerCrop"
-        android:src="@drawable/backgroundnew"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:src="@drawable/tow_layer_color"
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".27"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        />
 
     <TextView
         android:id="@+id/tech_details_cont"
@@ -31,14 +26,17 @@
         android:layout_height="wrap_content"
         android:text="המשך פרטי טכנאי"
         android:textStyle="bold"
-        android:fontFamily="serif"
         android:textColor="@color/black"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textSize="34sp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.05"/>
+
     <Spinner
         android:id="@+id/area"
         android:layout_width="0dp"
@@ -49,6 +47,7 @@
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
+        android:elevation="20dp"
         android:spinnerMode="dialog"
         app:layout_constraintVertical_bias="0.1"
         android:layout_marginTop="10dp"
@@ -57,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tech_details_cont"
-        app:layout_constraintWidth_percent=".8"></Spinner>
+        app:layout_constraintWidth_percent=".8" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
@@ -65,10 +64,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
         android:text="@string/signUp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
 
         android:textSize="16sp"
         android:textStyle="bold"
+        android:elevation="20dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

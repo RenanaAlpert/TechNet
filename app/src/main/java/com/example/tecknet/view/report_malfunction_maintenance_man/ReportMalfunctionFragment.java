@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
+import com.example.tecknet.controller.maintanance_controller;
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetails;
@@ -77,7 +78,7 @@ public class ReportMalfunctionFragment extends Fragment {
 
 
         //show the inventory of this user in spinner
-        Controller.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
+        maintanance_controller.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
 
         //if user select item
         prodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -104,9 +105,11 @@ public class ReportMalfunctionFragment extends Fragment {
                             if (check_if_entered_details(deviceS, typeS, companyS, detailFaultS)) {
                                 //call to this function from the controller how found the
                                 //institution id and call new_malfunction how add this mal to DB
-                                Controller.add_mal_and_extract_istituId(user.getPhone(), deviceS, companyS, typeS, detailFaultS);
+                                maintanance_controller.add_mal_and_extract_istituId(user.getPhone(), deviceS, companyS, typeS, detailFaultS);
 
                                 clear_edit_text(); //clear from edit text
+                                Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
+
                             }
                         }
                     });
@@ -123,15 +126,13 @@ public class ReportMalfunctionFragment extends Fragment {
                             //check if the user entered details
                             if (check_if_entered_details(detailFaultS)) {
                                 //add this mal to database
-                                Controller.add_malfunction_with_exist_prod(prod, detailFaultS, user.getPhone());
+                                maintanance_controller.add_malfunction_with_exist_prod(prod, detailFaultS, user.getPhone());
 
                                 clear_edit_text();
                                 Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
                             }
-
                         }
                     });
-
                 }
             }
             @Override
