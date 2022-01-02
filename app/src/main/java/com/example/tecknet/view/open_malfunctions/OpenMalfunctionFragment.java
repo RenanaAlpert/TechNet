@@ -58,7 +58,7 @@ public class OpenMalfunctionFragment extends Fragment {
         UserViewModel userView = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
         UserInt user = userView.getItem().getValue();
 
-        ArrayList<malfunctionView> arrMals = new ArrayList<>();
+//        ArrayList<malfunctionView> arrMals = new ArrayList<>();
         list = (ListView) root.findViewById(R.id.listview);
 
 
@@ -66,6 +66,8 @@ public class OpenMalfunctionFragment extends Fragment {
         r.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<malfunctionView> arrMals = new ArrayList<>();/// yuval moved this line to refresh the list view
+
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     MalfunctionDetailsInt mal = ds.getValue(MalfunctionDetails.class);
                     assert mal != null;

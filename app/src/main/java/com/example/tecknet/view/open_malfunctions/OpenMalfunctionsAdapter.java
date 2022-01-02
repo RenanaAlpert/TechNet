@@ -105,7 +105,11 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
                         });
                 builder.create().show();
 
+
+
+
             }
+
         });
 
         return convertView;
