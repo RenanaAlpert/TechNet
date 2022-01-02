@@ -85,4 +85,20 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
     public void setTech(String tech) {
         this.tech = tech;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getPayment() {
+        return payment;
+    }
+
+    public void setPayment(double payment) {
+        this.payment = payment;
+    }
 }

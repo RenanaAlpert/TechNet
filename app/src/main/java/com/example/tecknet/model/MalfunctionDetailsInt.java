@@ -28,6 +28,14 @@ public interface MalfunctionDetailsInt  {
     public String getTech();
 
     public void setTech(String tech);
+
+    public String getStatus();
+
+    public void setStatus(String status);
+
+    public double getPayment();
+
+    public void setPayment(double payment);
 //
 //    public String getMal_creator();
 //

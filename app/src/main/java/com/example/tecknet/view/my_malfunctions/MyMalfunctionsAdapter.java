@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.tecknet.R;
 import com.example.tecknet.model.Controller;
@@ -50,6 +51,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         TextView tvType= convertView.findViewById(R.id.type);
         TextView tvExplain = convertView.findViewById(R.id.FaultDescription);
         TextView tvContact = convertView.findViewById(R.id.Contact);
+        TextView tvStatus = convertView.findViewById(R.id.Status);
 
         MalfunctionDetailsInt mal = getItem(position).getMal();
         ProductDetailsInt product = getItem(position).getProduct();
@@ -62,13 +64,26 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         tvType.setText(product.getType());
         tvExplain.setText(mal.getExplanation());
         tvContact.setText(ins.getContact());
+        tvStatus.setText(mal.getStatus());
 
         Button button = convertView.findViewById(R.id.button);
+        if(mal.getStatus().equals("נלקח לטיפול")){
+            button.setText("התחל טיפול");
+        }
+        else if(mal.getStatus().equals("בטיפול")){
+            button.setText("לסיום");
+        }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controller.set_status_nalfunction_tech(userTech.getPhone(), mal.getMal_id(), "תקלה בטיפול");
-                button.setText("סגירת תקלה");
+                if(button.getText().equals("התחל טיפול")){
+                    Controller.set_status_nalfunction(mal.getMal_id(), "בטיפול");
+                    button.setText("לסיום");
+                }
+                else if(button.getText().equals("לסיום")){
+                    Controller.set_status_nalfunction(mal.getMal_id(), "מחכה לתשלום");
+                }
+               // Controller.set_status_nalfunction(mal.getMal_id(), "בטיפול");
             }
         });
 

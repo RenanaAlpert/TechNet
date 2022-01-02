@@ -77,7 +77,7 @@ public class MyMalfunctionsFragment extends Fragment {
                 } else {
                     ArrayList<malfunctionView> arrMals = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : dataSnapshot1.getChildren()) {
-                        String mal_id = dataSnapshot.getKey();
+                        String mal_id = dataSnapshot.getValue(String.class);
                         r.getDatabase().getReference("mals").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot ds) {
