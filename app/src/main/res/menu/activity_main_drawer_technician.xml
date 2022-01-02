@@ -16,5 +16,9 @@
             android:id="@+id/nav_my_malfunctions"
             android:icon="@drawable/ic_menu_schedule_my_malfunctions"
             android:title="@string/menu_my_malfunctions" />
+        <item
+            android:id="@+id/nav_update_details"
+            android:icon="@drawable/ic_change_details"
+            android:title="@string/update_details" />
     </group>
 </menu>

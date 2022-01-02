@@ -66,7 +66,7 @@ public class HomeTechnician extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_technician, R.id.nav_open_malfunction, R.id.nav_my_malfunctions)
+                R.id.nav_home_technician, R.id.nav_open_malfunction, R.id.nav_my_malfunctions ,R.id.update_technician_fragment)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_technician);
@@ -119,11 +119,11 @@ public class HomeTechnician extends AppCompatActivity {
                         }).setNegativeButton("השאר" , null).show();
                 return true;
             case R.id.action_settings_technician:
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.home_fragment_technician, new UpdateProfileTechnicianFragment());
-                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
-//                // Commit the transaction
-                fragmentTransaction.commit();//to do
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.home_fragment_technician, new UpdateProfileTechnicianFragment());
+//                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
+////                // Commit the transaction
+//                fragmentTransaction.commit();//to do
                 return true;
             default:
 

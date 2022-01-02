@@ -1,5 +1,6 @@
 package com.example.tecknet.view.my_malfunctions;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,7 @@ public class MyMalfunctionsFragment extends Fragment {
     private MyMalfunctionsViewModel myMalfunctionsViewModel;
     private FragmentMyMalfunctionsBinding binding;
     private View root;
-    private ListView list;
+    public ListView list;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

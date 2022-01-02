@@ -30,19 +30,27 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
 
     private Context mContext;
     private  int mResource;
+    private ArrayList<malfunctionView> arrMals;
+
 
 
     public MyMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<malfunctionView> obj) {
         super(context, resource, obj);
         mContext = context;
         mResource = resource;
+        arrMals = obj;
 
+    }
+    static class ViewHolder {
+        TextView text;
+        Button btn;
     }
 
     @SuppressLint({"ViewHolder", "SetTextI18n"})
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         LayoutInflater linf = LayoutInflater.from(mContext);
         convertView = linf.inflate(R.layout.fragment_my_malfunctions_row, parent, false);
         TextView tvName = convertView.findViewById(R.id.School);
@@ -73,15 +81,19 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         else if(mal.getStatus().equals("בטיפול")){
             button.setText("לסיום");
         }
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(button.getText().equals("התחל טיפול")){
                     Controller.set_status_nalfunction(mal.getMal_id(), "בטיפול");
                     button.setText("לסיום");
+                    arrMals.clear(); /// yuval added this line to refresh the list view
                 }
                 else if(button.getText().equals("לסיום")){
                     Controller.set_status_nalfunction(mal.getMal_id(), "מחכה לתשלום");
+
+                    arrMals.clear(); /// yuval added this line to refresh the list view
                 }
                // Controller.set_status_nalfunction(mal.getMal_id(), "בטיפול");
             }

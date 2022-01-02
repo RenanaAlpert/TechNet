@@ -41,12 +41,15 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
 
     private Context mContext;
     private  int mResource;
+    private ArrayList<malfunctionView> arrMals;
+
 
 
     public OpenMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<malfunctionView> obj) {
         super(context, resource, obj);
         mContext = context;
         mResource = resource;
+        arrMals = obj;
 
     }
 
@@ -101,6 +104,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
                             }
                         });
                 builder.create().show();
+
             }
         });
 
