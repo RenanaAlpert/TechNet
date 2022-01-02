@@ -3,6 +3,8 @@ package com.example.tecknet.view.inventory_maintenance_man;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,10 +54,11 @@ public class InventoryFragment extends Fragment {
     private UserViewModel uViewModel;
     private FragmentInventoryMaintenanceManBinding binding;
     private Button delBut;
-
+    private EditText search;
 //    FloatingActionButton delBut;
     private ListView list;
     private  TextView textView;
+
 //    View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -75,10 +80,12 @@ public class InventoryFragment extends Fragment {
         list = binding.listview;
         textView = binding.empty;
         delBut = binding.btnDelete;
+        search = binding.searchButton;
         //call the function in controller to show the user inventory
-        maintanance_controller.show_inventory(phone ,  arrProd , list , root);
+        maintanance_controller.show_inventory(phone ,  arrProd , list , root , search);
 //        If the list is empty ( don't enter products to his inventory)  show msg
         list.setEmptyView(textView);
+
 
         //Click on delete button for delete product in inventory
         delBut.setOnClickListener(new View.OnClickListener() {

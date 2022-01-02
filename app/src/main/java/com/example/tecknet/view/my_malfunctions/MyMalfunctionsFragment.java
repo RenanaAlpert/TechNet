@@ -96,10 +96,12 @@ public class MyMalfunctionsFragment extends Fragment {
                                             p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
                                         }
                                         assert ins != null;
-                                        assert p != null;
-                                        arrMals.add(new malfunctionView(mal, p, ins, user));
-                                        MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root.getContext(), R.layout.fragment_my_malfunctions_row, arrMals);
-                                        list.setAdapter(oma);
+//                                        assert p != null;
+                                        if(p!=null) {
+                                            arrMals.add(new malfunctionView(mal, p, ins, user));
+                                            MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root.getContext(), R.layout.fragment_my_malfunctions_row, arrMals);
+                                            list.setAdapter(oma);
+                                        }
                                     }
 
                                     @Override

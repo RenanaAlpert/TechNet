@@ -1,5 +1,7 @@
 package com.example.tecknet.controller;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.tecknet.R;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
@@ -19,6 +22,7 @@ import com.example.tecknet.model.MalfunctionDetails;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.ProductDetailsInt;
+import com.example.tecknet.view.inventory_maintenance_man.InventoryFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -139,7 +143,8 @@ public abstract class maintanance_controller {
      * @param list
      * @param root
      */
-    public static void show_inventory(String phone, ArrayList<ProductDetails> arrProd, ListView list, View root) {
+    public static void show_inventory(String phone, ArrayList<ProductDetails> arrProd, ListView list, View root,
+                                      EditText search) {
         DatabaseReference dataRef = shared_controller.connect_db("maintenance");
         final String[] insSymbol = new String[1];
         dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -148,7 +153,7 @@ public abstract class maintanance_controller {
                 if (dataSnapshot.child(phone).exists()) {
                     //extract institution number
                     insSymbol[0] = dataSnapshot.child(phone).getValue(MaintenanceMan.class).getInstitution();
-                    show_products(insSymbol[0], arrProd, list, root);
+                    show_products(insSymbol[0], arrProd, list, root , search);
                 }
             }
 
@@ -170,7 +175,8 @@ public abstract class maintanance_controller {
      * @param list
      * @param root
      */
-    private static void show_products(String insNum, ArrayList<ProductDetails> arrProd, ListView list, View root) {
+    private static void show_products(String insNum, ArrayList<ProductDetails> arrProd, ListView list, View root ,
+                                      EditText search) {
         DatabaseReference r = shared_controller.connect_db("institution").child(insNum).child("inventory");
         r.addValueEventListener(new ValueEventListener() {
             @Override
@@ -186,7 +192,25 @@ public abstract class maintanance_controller {
                 if (!arrProd.isEmpty()) {
                     Collections.sort(arrProd);
                     ArrayAdapter<ProductDetails> areasAdapter = new ArrayAdapter<ProductDetails>(root.getContext(), android.R.layout.simple_list_item_1, arrProd);
+                    list.setTextFilterEnabled(true);
                     list.setAdapter(areasAdapter);
+                    search.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            areasAdapter.getFilter().filter(s);
+                            areasAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+
+                        }
+                    });
                 }
             }
 
