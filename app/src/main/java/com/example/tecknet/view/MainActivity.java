@@ -3,6 +3,10 @@ package com.example.tecknet.view;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -18,7 +22,6 @@ import com.example.tecknet.R;
 public class MainActivity extends AppCompatActivity {
 
     public Button button;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
