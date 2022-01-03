@@ -10,16 +10,11 @@ import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.tecknet.controller.maintanance_controller;
-import com.example.tecknet.controller.shared_controller;
+import com.example.tecknet.controller.maintenance_controller;
 import com.example.tecknet.databinding.FragmentHomeMaintenanceManBinding;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
 
@@ -65,7 +60,7 @@ public class HomeFragmentMainMan extends Fragment {
 
         //Text view to see sentence how say how mach from my mal is open in home page
         TextView myMals = binding.countMyOpenMal;
-        maintanance_controller.mainMan_homePage_see_sumMyJobs(myMals, user2.getPhone());
+        maintenance_controller.mainMan_homePage_see_sumMyJobs(myMals, user2.getPhone());
 
         return root;
     }

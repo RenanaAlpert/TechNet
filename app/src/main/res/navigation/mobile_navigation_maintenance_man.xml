@@ -9,17 +9,17 @@
         android:id="@+id/nav_home_main_man"
         android:name="com.example.tecknet.view.home_maintenance_man.HomeFragmentMainMan"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home_maintenance_man" >
+        tools:layout="@layout/fragment_home_maintenance_man">
         <argument
             android:name="user"
+            android:defaultValue="@null"
             app:argType="com.example.tecknet.model.UserInt"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="institution"
+            android:defaultValue="@null"
             app:argType="com.example.tecknet.model.InstitutionDetailsInt"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="institution_symble"
             app:argType="string" />
@@ -29,17 +29,17 @@
         android:id="@+id/nav_update_details"
         android:name="com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment"
         android:label="@string/update_details"
-        tools:layout="@layout/fragment_update_profile_main_man" >
+        tools:layout="@layout/fragment_update_profile_main_man">
         <argument
             android:name="user"
+            android:defaultValue="@null"
             app:argType="com.example.tecknet.model.UserInt"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="institution"
+            android:defaultValue="@null"
             app:argType="com.example.tecknet.model.InstitutionDetailsInt"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="institution_symble"
             app:argType="string" />
@@ -50,42 +50,21 @@
         android:id="@+id/nav_report_malfunction"
         android:name="com.example.tecknet.view.report_malfunction_maintenance_man.ReportMalfunctionFragment"
         android:label="@string/menu_report_malfunction"
-        tools:layout="@layout/fragment_report_malfunction_maintenance_man" >
+        tools:layout="@layout/fragment_report_malfunction_maintenance_man">
         <argument
             android:name="user"
+            android:defaultValue="@null"
             app:argType="com.example.tecknet.model.UserInt"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="institution"
+            android:defaultValue="@null"
             app:argType="com.example.tecknet.model.InstitutionDetailsInt"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="institution_symbol"
             app:argType="string" />
     </fragment>
-
-    <fragment
-        android:id="@+id/nav_report_malfunction_new"
-        android:name="com.example.tecknet.view.report_malfunction_maintenance_man.ReportNotInStockFragment"
-        android:label="דיווח תקלה לא במלאי"
-        tools:layout="@layout/fragment_report_not_in_stock" >
-        <argument
-            android:name="user"
-            app:argType="com.example.tecknet.model.UserInt"
-            app:nullable="true"
-            android:defaultValue="@null" />
-        <argument
-            android:name="institution"
-            app:argType="com.example.tecknet.model.InstitutionDetailsInt"
-            app:nullable="true"
-            android:defaultValue="@null" />
-        <argument
-            android:name="institution_symbol"
-            app:argType="string" />
-    </fragment>
-
     <fragment
         android:id="@+id/nav_inventory"
         android:name="com.example.tecknet.view.inventory_maintenance_man.InventoryFragment"
@@ -104,4 +83,12 @@
         android:name="com.example.tecknet.view.maintenance_man_malfunctions.MainManMalfunctionsFragment"
         android:label="@string/my_malfunctions_reports"
         tools:layout="@layout/fragment_manaintance_man_malfunctions" />
+
+    <fragment
+        android:id="@+id/nav_waiting_for_payment"
+        android:name="com.example.tecknet.view.waiting_for_payment.WaitingForPayment"
+        android:label="ממתינים לתשלום"
+        tools:layout="@layout/fragment_maintenance_waiting_for_payment">
+
+    </fragment>
 </navigation>

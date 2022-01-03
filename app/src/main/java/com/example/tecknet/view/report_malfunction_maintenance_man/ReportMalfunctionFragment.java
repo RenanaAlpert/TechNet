@@ -1,50 +1,25 @@
 package com.example.tecknet.view.report_malfunction_maintenance_man;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.R;
-import com.example.tecknet.controller.maintanance_controller;
+import com.example.tecknet.controller.maintenance_controller;
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
-import com.example.tecknet.model.Controller;
-import com.example.tecknet.model.InstitutionDetails;
 
-import com.example.tecknet.model.MaintenanceMan;
-import com.example.tecknet.model.MaintenanceManInt;
 import com.example.tecknet.model.ProductDetails;
-import com.example.tecknet.model.Technician;
-import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.view.LoginActivity;
-import com.example.tecknet.view.MainActivity;
 import com.example.tecknet.view.UserViewModel;
-
-import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 
 public class ReportMalfunctionFragment extends Fragment {
@@ -78,7 +53,7 @@ public class ReportMalfunctionFragment extends Fragment {
 
 
         //show the inventory of this user in spinner
-        maintanance_controller.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
+        maintenance_controller.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
 
         //if user select item
         prodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -105,7 +80,7 @@ public class ReportMalfunctionFragment extends Fragment {
                             if (check_if_entered_details(deviceS, typeS, companyS, detailFaultS)) {
                                 //call to this function from the controller how found the
                                 //institution id and call new_malfunction how add this mal to DB
-                                maintanance_controller.add_mal_and_extract_istituId(user.getPhone(), deviceS, companyS, typeS, detailFaultS);
+                                maintenance_controller.add_mal_and_extract_istituId(user.getPhone(), deviceS, companyS, typeS, detailFaultS);
 
                                 clear_edit_text(); //clear from edit text
                                 Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
@@ -126,7 +101,7 @@ public class ReportMalfunctionFragment extends Fragment {
                             //check if the user entered details
                             if (check_if_entered_details(detailFaultS)) {
                                 //add this mal to database
-                                maintanance_controller.add_malfunction_with_exist_prod(prod, detailFaultS, user.getPhone());
+                                maintenance_controller.add_malfunction_with_exist_prod(prod, detailFaultS, user.getPhone());
 
                                 clear_edit_text();
                                 Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();

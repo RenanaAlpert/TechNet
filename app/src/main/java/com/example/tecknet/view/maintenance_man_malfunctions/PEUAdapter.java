@@ -62,11 +62,11 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
         // after initializing our items we are
         // setting data to our view.
         // below line is use to set data to our text view.
-         productTypeTV.setText(peu.getProd().getType());
-         productTV.setText(peu.getProd().getDevice());
-         companyTV.setText(peu.getProd().getCompany());
-         malfunctionInfoTV.setText(peu.getMalfunctionExplanation());
-         techInfoTV.setText(Controller.techString(peu.getUser()));
+        productTypeTV.setText(peu.getProd().getType());
+        productTV.setText(peu.getProd().getDevice());
+        companyTV.setText(peu.getProd().getCompany());
+        malfunctionInfoTV.setText(peu.getMalfunctionExplanation());
+        techInfoTV.setText(Controller.techString(peu.getUser()));
 
 
         // in below line we are using Picasso to
@@ -75,14 +75,14 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
 
         // below line is use to add item click listener
         // for our item of list view.
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // on the item click on our list view.
-                // we are displaying a toast message.
-                Toast.makeText(getContext(), "Item clicked is : " + peu.getMalfunctionExplanation(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // on the item click on our list view.
+//                // we are displaying a toast message.
+//                Toast.makeText(getContext(), "Item clicked is : " + peu.getMalfunctionExplanation(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
         return convertView;
     }
 }

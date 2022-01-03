@@ -116,4 +116,7 @@
     <string name="update_details">עידכון פרופיל</string>
     <string name="adrr">כתובת</string>
     <string name="cityy">עיר</string>
+    <string name="waiting_for_payment">תשלומים ממתינים</string>
+    <string name="mot_existing_malfunction_to_display">לא קיימות תקלות להצגה</string>
+    <string name="cancel_malfunction_txt">למחיקת תקלה</string>
 </resources>
