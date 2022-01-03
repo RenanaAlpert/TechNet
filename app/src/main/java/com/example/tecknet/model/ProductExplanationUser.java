@@ -3,9 +3,10 @@ package com.example.tecknet.model;
 public class ProductExplanationUser {
 
     private ProductDetailsInt prod;
-    private String malfunctionExplanation;
     private UserInt user;
-    private String malId;
+    private MalfunctionDetailsInt mal;
+
+
 
     /**
      * default constructor
@@ -17,15 +18,13 @@ public class ProductExplanationUser {
      * parameter constructor
      *
      * @param prod
-     * @param malfunctionExplanation
      * @param user
-     * @param malId
+     * @param mal
      */
-    public ProductExplanationUser(ProductDetailsInt prod, String malfunctionExplanation, UserInt user, String malId) {
+    public ProductExplanationUser(ProductDetailsInt prod, UserInt user, MalfunctionDetailsInt mal) {
         this.prod = prod;
-        this.malfunctionExplanation = malfunctionExplanation;
         this.user = user;
-        this.malId = malId;
+        this.mal = mal;
     }
 
     public ProductDetailsInt getProd() {
@@ -36,14 +35,6 @@ public class ProductExplanationUser {
         this.prod = prod;
     }
 
-    public String getMalfunctionExplanation() {
-        return malfunctionExplanation;
-    }
-
-    public void setMalfunctionExplanation(String malfunctionExplanation) {
-        this.malfunctionExplanation = malfunctionExplanation;
-    }
-
     public UserInt getUser() {
         return user;
     }
@@ -52,11 +43,11 @@ public class ProductExplanationUser {
         this.user = user;
     }
 
-    public String getMalId() {
-        return malId;
+    public MalfunctionDetailsInt getMal() {
+        return mal;
     }
 
-    public void setMalId(String malId) {
-        this.malId = malId;
+    public void setMal(MalfunctionDetailsInt mal) {
+        this.mal = mal;
     }
 }
