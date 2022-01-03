@@ -101,7 +101,6 @@ public class OpenMalfunctionFragment extends Fragment {
                 Log.d("TAG", databaseError.getMessage());
             }
         });
-
         return root;
     }
 

@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+//import androidx.media.app.NotificationCompat;
 
 import com.example.tecknet.R;
 import com.example.tecknet.controller.technician_controller;
@@ -111,6 +114,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
                             String pay = edittext.getText().toString();
                             double payment = Double.parseDouble(pay);
                             technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
+                            sendSMS(payment);
                             set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
                         }
                     });
@@ -130,17 +134,12 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         return convertView;
     }
 
-    private void notification(double pay){
-//        String ticker = "הודעה חדשה";
-//        String title = "התקלה טופלה בהצלחה!";
-//        String text = "התקלה במכשיר" + product.getType() + " - " + mal.getExplanation()
-//                + "תוקנה בהצלחה. מחיר הטיפול הינו" + pay + "ש\"ח";
-//        Notification.Builder builder = new Notification.Builder(mContext)
-//                .setTicker(ticker)
-//                .setContentTitle(title)
-//                .setContentText(text)
-//                .setSmallIcon(R.drawable.technetlogo);
-//
-//        builder.build();
+    private void sendSMS(double pay){
+        String title = "התקלה טופלה בהצלחה!";
+        String text = "התקלה במכשיר" + product.getType() + " - " + mal.getExplanation()
+                + "תוקנה בהצלחה. מחיר הטיפול הינו" + pay + "ש\"ח";
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(ins.getPhone_number(), null, text, null, null);
+
     }
 }

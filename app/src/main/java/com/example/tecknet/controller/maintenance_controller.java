@@ -100,10 +100,12 @@ public abstract class maintenance_controller {
         mal.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean ins = dataSnapshot.getValue(boolean.class);
-                if (ins) {
-                    countMal[0]++;
-                    textJobs.setText("יש לך " + countMal[0] + " תקלות פתוחות עדיין! ");
+                if(dataSnapshot.exists()) {
+                    boolean ins = dataSnapshot.getValue(boolean.class);
+                    if (ins) {
+                        countMal[0]++;
+                        textJobs.setText("יש לך " + countMal[0] + " תקלות פתוחות עדיין! ");
+                    }
                 }
             }
 
@@ -690,36 +692,31 @@ public abstract class maintenance_controller {
 
     //
     public static void delete_malfunction(ProductExplanationUser peu, UserInt user) {
-        DatabaseReference dataRefMainMan = connect_db("maintenance");
-        DatabaseReference dataRefMalFunctions = connect_db("mals");
+        delete_mal_from_mals(peu , user);
+        delete_mal_from_mainMan(peu , user);
+
+    }
+    private static void delete_mal_from_mainMan(ProductExplanationUser peu, UserInt user){
+        DatabaseReference dataRefMainMan = connect_db("maintenance/"+user.getPhone());
         dataRefMainMan.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshotMain) {
-                dataRefMalFunctions.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshotMals) {
-                        if (dataSnapshotMals.child((peu.getMal().getMal_id())).exists()) {
-                            dataRefMalFunctions.child(peu.getMal().getMal_id()).removeValue();
-                            //find in malfunction list and delete from it
-                            if (dataSnapshotMain.hasChild("malfunctions_list")) {
-                                DataSnapshot dsMalsList = dataSnapshotMain.child("malfunctions_list");
-                                for (DataSnapshot ds : dsMalsList.getChildren()) {
-                                    String malId = ds.getValue(String.class);
-                                    String key = ds.getKey();
-                                    if (malId.equals(peu.getMal().getMal_id())) {
-                                        dataRefMainMan.child("malfunctions_list").child(key).removeValue();
-                                        break;
-                                    }
-                                }
-                            }
+
+                if (dataSnapshotMain.child("malfunctions_list").exists()) {
+                    DataSnapshot dsMalsList = dataSnapshotMain.child("malfunctions_list");
+                    for (DataSnapshot ds : dsMalsList.getChildren()) {
+                        String malId = ds.getValue(String.class);
+                        String key = ds.getKey();
+//                        System.out.println("peu.getMal().getMal_id() : " + peu.getMal().getMal_id());
+                        if (malId.equals(peu.getMal().getMal_id())) {
+//                            System.out.println("mal id : " +malId);
+//                            System.out.println("mal key : " +key);
+
+                            dataRefMainMan.child("malfunctions_list").child(key).removeValue();
+                            break;
                         }
-
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                });
+                }
 
             }
 
@@ -727,6 +724,27 @@ public abstract class maintenance_controller {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
+    }
+    private static void delete_mal_from_mals(ProductExplanationUser peu, UserInt user){
+        DatabaseReference dataRefMalFunctions = connect_db("mals");
+        dataRefMalFunctions.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshotMals) {
+                if (dataSnapshotMals.child((peu.getMal().getMal_id())).exists()) {
+                    dataRefMalFunctions.child(peu.getMal().getMal_id()).removeValue();
+
+                    }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+
+
+
 
     }
 }

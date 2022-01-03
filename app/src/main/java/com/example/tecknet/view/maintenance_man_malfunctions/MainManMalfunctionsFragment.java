@@ -66,7 +66,7 @@ public class MainManMalfunctionsFragment extends Fragment {
         //If the list is empty ( don't enter products to his inventory)  show msg
         malfunctionsList.setEmptyView(textView);
 
-        //Click on delete button for delete product in inventory
+        //Click on delete button for delete mal
         delBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
