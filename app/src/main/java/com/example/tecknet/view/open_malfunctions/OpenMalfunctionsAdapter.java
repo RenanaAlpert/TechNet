@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
+import com.example.tecknet.controller.technician_controller;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
@@ -91,7 +92,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
                         .setPositiveButton("לטיפול", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Controller.take_malfunction(user.getPhone(), mal.getMal_id());
+                                technician_controller.take_malfunction(user.getPhone(), mal.getMal_id());
                                 ListView list = (ListView) ((AppCompatActivity)mContext).findViewById(R.id.listview);
                                 list.removeFooterView(finalConvertView);
                                 //dialog.cancel();

@@ -385,19 +385,9 @@ public abstract class Controller {
     ///delet product inventory moved to main man controller
     ///
 
-    public static void take_malfunction(String tech, String mal){
-        DatabaseReference r = connect_db("Technician");
-        r.child(tech + "/my_mals").push().setValue(mal);
-        r = connect_db("mals/" + mal);
-        r.child("status").setValue("נלקח לטיפול");
-        r.child("tech").setValue(tech);
-        r.child("is_open").setValue(false);
-    }
 
-    public static void set_status_nalfunction(String mal, String s){
-        DatabaseReference r = connect_db("mals/" + mal);
-        r.child("status").setValue(s);
-    }
+
+
 
     // TODO: 30/12/2021  delete after change tech update details
 

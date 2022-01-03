@@ -81,6 +81,25 @@ public abstract class technician_controller {
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
+
+    public static void set_status_nalfunction(String mal, String s){
+        DatabaseReference r = shared_controller.connect_db("mals/" + mal);
+        r.child("status").setValue(s);
+    }
+
+    public static void set_payment_nalfunction(String mal, double pay){
+        DatabaseReference r = shared_controller.connect_db("mals/" + mal);
+        r.child("payment").setValue(pay);
+    }
+
+    public static void take_malfunction(String tech, String mal){
+        DatabaseReference r = shared_controller.connect_db("Technician");
+        r.child(tech + "/my_mals").push().setValue(mal);
+        r = shared_controller.connect_db("mals/" + mal);
+        r.child("status").setValue("נלקח לטיפול");
+        r.child("tech").setValue(tech);
+        r.child("is_open").setValue(false);
+    }
     //////////////************ END TECH HOME PAGE ************//////////////
 
 }
