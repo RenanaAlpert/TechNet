@@ -3,140 +3,90 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <!--        &lt;!&ndash;Image view for displaying our image&ndash;&gt;-->
-    <!--        <ImageView-->
-    <!--            android:id="@+id/malfunction_image"-->
-    <!--            android:layout_width="100dp"-->
-    <!--            android:layout_height="100dp"-->
-    <!--            android:layout_margin="8dp"-->
-    <!--            android:background="@color/white"-->
-    <!--            android:backgroundTint="@color/white"-->
-    <!--            android:padding="3dp" />-->
-
-    <!--Text view for displaying our text -->
-    <!--        android:layout_toEndOf="@id/idIVimage"-->
-    <TextView
-        android:id="@+id/product_maintenance_header"
-        android:layout_width="402dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
-        android:text="@string/product_type_txt"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/product_maintenance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentEnd="true"
-        android:padding="3dp"
-        android:text="@string/product_type_txt"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black" />
-
-    <TextView
+  <TextView
         android:layout_width="402dp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/product_maintenance"
-        android:padding="3dp"
-        android:text="@string/device_txt"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/device_maintenance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_maintenance"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
-        android:text="@string/device_txt"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black" />
-    <TextView
-        android:layout_width="402dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/device_maintenance"
-        android:padding="3dp"
-        android:text="@string/company_txt"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/company_maintenance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/device_maintenance"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
-        android:text="@string/company_txt"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black" />
-    <TextView
-        android:layout_width="402dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/company_maintenance"
         android:padding="3dp"
         android:text="@string/malfunction_details_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textStyle="bold" />
-    <TextView
-        android:id="@+id/malfunction_info_maintenance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/company_maintenance"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
-        android:text="@string/malfunction_details_txt"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black" />
+
+  <TextView
+      android:id="@+id/malfunction_info_maintenance_payment"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_marginEnd="15dp"
+      android:layout_marginTop="5dp"
+      android:padding="3dp"
+      android:text="@string/malfunction_details_txt"
+      android:textAlignment="viewStart"
+      android:textColor="@color/black" />
     <TextView
         android:layout_width="402dp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/malfunction_info_maintenance"
+        android:layout_below="@+id/malfunction_info_maintenance_payment"
         android:padding="3dp"
         android:text="@string/tech_details_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textStyle="bold" />
-    <TextView
-        android:id="@+id/tech_info_maintenance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/malfunction_info_maintenance"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
-        android:text="@string/tech_details_txt"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black" />
+
+  <TextView
+      android:id="@+id/tech_info_maintenance_payment"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/malfunction_info_maintenance_payment"
+      android:layout_alignParentEnd="true"
+      android:layout_marginEnd="15dp"
+      android:layout_marginTop="5dp"
+      android:padding="3dp"
+      android:text="@string/tech_details_txt"
+      android:textAlignment="viewStart"
+      android:textColor="@color/black" />
+
+  <TextView
+      android:layout_width="402dp"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/tech_info_maintenance_payment"
+      android:layout_alignParentEnd="true"
+      android:layout_marginStart="15dp"
+      android:layout_marginTop="3dp"
+      android:layout_marginEnd="15dp"
+      android:padding="3dp"
+      android:text="@string/wanted_payment"
+      android:textAlignment="viewStart"
+      android:textColor="@color/black"
+      android:textStyle="bold" />
+
+  <TextView
+      android:id="@+id/payment"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/tech_info_maintenance_payment"
+      android:layout_alignParentEnd="true"
+      android:layout_marginEnd="15dp"
+      android:layout_marginTop="5dp"
+      android:padding="3dp"
+      android:text="@string/wanted_payment"
+      android:textAlignment="viewStart"
+      android:textColor="@color/black" />
+
+  <Button
+      android:id="@+id/btn_payment"
+      android:layout_width="134dp"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/payment"
+      android:layout_centerInParent="true"
+      android:layout_marginTop="18dp"
+      android:text="@string/for_payment_txt" />
 
 </RelativeLayout>
 

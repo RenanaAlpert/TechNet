@@ -82,10 +82,7 @@ public abstract class technician_controller {
         });
     }
 
-    public static void set_status_nalfunction(String mal, String s){
-        DatabaseReference r = shared_controller.connect_db("mals/" + mal);
-        r.child("status").setValue(s);
-    }
+
 
     public static void set_payment_nalfunction(String mal, double pay){
         DatabaseReference r = shared_controller.connect_db("mals/" + mal);

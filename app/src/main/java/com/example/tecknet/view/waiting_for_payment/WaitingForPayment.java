@@ -1,8 +1,5 @@
 package com.example.tecknet.view.waiting_for_payment;
 
-//import static com.example.tecknet.model.Controller.add_adapter_malfunction_list;
-//import static com.example.tecknet.model.Controller.get_malfunction_list;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.tecknet.R;
 import com.example.tecknet.controller.maintenance_controller;
 import com.example.tecknet.databinding.FragmentMaintenanceWaitingForPaymentBinding;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.ProductExplanationUser;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
@@ -54,7 +50,7 @@ public class WaitingForPayment extends Fragment {
 
         // here we are calling a method
         // to load data in our list view.
-        maintenance_controller.loadDataInListview(user,peuModalArrayList,malfunctionsList, R.layout.singal_main_man_waiting_for_payment,this.getContext());
+        maintenance_controller.loadWaitingPaymentListview(user, peuModalArrayList, malfunctionsList, R.layout.singal_main_man_waiting_for_payment, this.getContext());
 
         return root;
     }

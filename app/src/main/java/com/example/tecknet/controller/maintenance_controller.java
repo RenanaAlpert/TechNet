@@ -30,6 +30,7 @@ import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.inventory_maintenance_man.InventoryFragment;
 import com.example.tecknet.view.maintenance_man_malfunctions.PEUAdapter;
+import com.example.tecknet.view.waiting_for_payment.WaitingPaymentAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +45,8 @@ import java.util.Map;
 
 public abstract class maintenance_controller {
 
+    static final String WATES_PAYMENT = "מחכה לתשלום";
+    static final String PAYED = "שולם";
 
     /**
      * Add institution
@@ -503,10 +506,10 @@ public abstract class maintenance_controller {
     public static String techString(UserInt user) {
         String techStr = "";
         if (user == null) {
-            techStr += "לא הוקצה" + "\n";
+            techStr += "לא הוקצה";
         } else {
             techStr += "שם הטכנאי: " + user.getFirstName() + " " + user.getFirstName() + "\n";
-            techStr += "מס' טלפון: " + user.getPhone() + "\n" + "מייל: " + user.getEmail() + "\n";
+            techStr += "מס' טלפון: " + user.getPhone() + "\n" + "מייל: " + user.getEmail();
         }
         return techStr;
     }
@@ -576,6 +579,95 @@ public abstract class maintenance_controller {
                                                                     databaseError) {
                                     }
                                 });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }//listener for mals
+                    });
+
+//                Toast.makeText(MainManMalfunctionsFragment.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+    }
+
+    /**
+     * this function load list of malfunction of current user(maintenance man),
+     * and put it inside adapter for display
+     *
+     * @param user              - the current app user
+     * @param peuModalArrayList - list of the data model to be displayed
+     * @param malfunctionsList  -listview of the malfunctions to display
+     * @param layout            - the layout file of the adapter
+     * @param context           -the context of the displayed list.
+     */
+    public static void loadWaitingPaymentListview(UserInt user, ArrayList<ProductExplanationUser> peuModalArrayList, ListView malfunctionsList, int layout, Context context) {
+        // below line is use to get data from Firebase
+        // firestore using collection in android.
+        Controller.connect_db("maintenance").addValueEventListener(new ValueEventListener() {//listener for maintenance
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dsMainMan) {
+                DataSnapshot dsMalList = dsMainMan.child(user.getPhone());
+                if (dsMalList.hasChild("malfunctions_list")) {
+                    Controller.connect_db("mals").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dsMals) {
+                            for (DataSnapshot ds_mal_id : dsMalList.child("malfunctions_list").getChildren()) {
+                                String mal_id = ds_mal_id.getValue(String.class);
+                                assert dsMals.hasChild(mal_id);
+                                MalfunctionDetailsInt mal = dsMals.child(mal_id).getValue(MalfunctionDetails.class);
+
+                                assert mal != null;
+                                if (mal.getStatus().equals(maintenance_controller.WATES_PAYMENT)) {
+                                    Controller.connect_db("institution").addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dsIns) {
+                                            Controller.connect_db("users").addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dsUsers) {
+                                                    String explanation = mal.getExplanation();
+                                                    ProductDetailsInt prod;
+                                                    UserInt tech;
+                                                    if (mal.getProduct_id() == null) {
+                                                        prod = dsMals.child(mal_id).child("productDetails").getValue(ProductDetails.class);
+                                                    } else {
+                                                        String insId = dsMalList.child("institution").getValue(String.class);
+                                                        DataSnapshot dsProd = dsIns.child(insId).child("inventory").child(mal.getProduct_id());
+                                                        prod = dsProd.getValue(ProductDetails.class);
+                                                    }
+                                                    if (mal.getTech() == null) {
+                                                        tech = null;
+                                                    } else {
+                                                        tech = dsUsers.child(mal.getTech()).getValue(User.class);
+                                                    }
+                                                    peuModalArrayList.add(new ProductExplanationUser(prod, tech, mal));
+                                                    //todo only different line!!!! what can be done?
+                                                    WaitingPaymentAdapter peuAdapter = new WaitingPaymentAdapter(context, layout, peuModalArrayList);
+                                                    malfunctionsList.setAdapter(peuAdapter);
+
+                                                }
+
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                }
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError
+                                                                        databaseError) {
+                                        }
+                                    });
+                                }
                             }
                         }
 

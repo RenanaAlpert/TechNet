@@ -99,6 +99,16 @@ public abstract class shared_controller {
     }
 
     /**
+     * change status of malfunction in data base
+     * @param mal
+     * @param s
+     */
+    public static void set_status_malfunction(String mal, String s){
+        DatabaseReference r = shared_controller.connect_db("mals/" + mal);
+        r.child("status").setValue(s);
+    }
+
+    /**
      * This private function according the user obj go to the fix home page screen.
      * @param user
      * @param root

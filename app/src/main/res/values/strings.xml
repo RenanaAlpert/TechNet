@@ -120,4 +120,6 @@
     <string name="mot_existing_malfunction_to_display">לא קיימות תקלות להצגה</string>
     <string name="cancel_malfunction_txt">למחיקת תקלה</string>
     <string name="status_header_txt">סטטוס:</string>
+    <string name="wanted_payment">תשלום מבוקש:</string>
+    <string name="for_payment_txt">לתשלום</string>
 </resources>

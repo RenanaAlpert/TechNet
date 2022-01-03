@@ -1,9 +1,9 @@
 package com.example.tecknet.view.my_malfunctions;
 
+import static com.example.tecknet.controller.shared_controller.set_status_malfunction;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -16,12 +16,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.media.app.NotificationCompat;
 
 import com.example.tecknet.R;
 import com.example.tecknet.controller.technician_controller;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
@@ -96,7 +93,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
             @Override
             public void onClick(View v) {
                 if (button.getText().equals("התחל טיפול")) {
-                    technician_controller.set_status_nalfunction(mal.getMal_id(), "בטיפול");
+                    set_status_malfunction(mal.getMal_id(), "בטיפול");
                     button.setText("לסיום");
                     arrMals.clear(); /// yuval added this line to refresh the list view
                 }
@@ -114,7 +111,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
                             String pay = edittext.getText().toString();
                             double payment = Double.parseDouble(pay);
                             technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
-                            technician_controller.set_status_nalfunction(mal.getMal_id(), "מחכה לתשלום");
+                            set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
                         }
                     });
 
