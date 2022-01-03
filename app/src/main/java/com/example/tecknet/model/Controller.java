@@ -108,7 +108,7 @@ public abstract class Controller {
     /**
      * get user from data base by it's key
      *
-     * @param userKey
+//     * @param userKey
      * @return
      */
 //    public static int getUser(String userKey,UserInt user) {
@@ -131,138 +131,7 @@ public abstract class Controller {
 ////        return user.get(0);
 //    }
 
-    /**
-     * @param adapter
-     */
-    public static void add_adapter_malfunction_list( ArrayAdapter<String> adapter) {
-        adapter.clear();
-        for (ProductExplanationUser tmpPeu :peuArrayList ) {
-            String full_string = "";
-            full_string=tmpPeu.getProd().toString();
-//            full_string += "סוג מוצר: " + tmpPeu.getProd().getType() + "\nדגם: " + tmpPeu.getProd().getDevice() + "\n";
-//            full_string += "חברה: " + tmpPeu.getProd().getCompany() + "\nפרטי התקלה: " + tmpPeu.getMalfunctionExplanation() + "\n";
-            if (tmpPeu.getUser() == null) {
-                full_string += "טכנאי: " + "לא הוקצה" + "\n";
-            }
-            else
-            {
-                full_string +="שם הטכנאי: " + tmpPeu.getUser().getFirstName() + " " + tmpPeu.getUser().getFirstName() + "\n";
-                full_string+="מס' טלפון: " + tmpPeu.getUser().getPhone() + "\n" + "מייל: " + tmpPeu.getUser().getEmail()+"\n";
-            }
-            adapter.add(full_string);
 
-
-        }
-    }
-
-    /**
-     * @param user
-     * @return
-     */
-    public static void get_malfunction_list(UserInt user) {
-        //get from data base
-        //connect to maintenance man' to get malfunction list
-        DatabaseReference r_main_man = FirebaseDatabase.getInstance().getReference("maintenance");
-        r_main_man.addValueEventListener(new ValueEventListener() {//listener for maintenance
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshotMainMan) {
-                DatabaseReference r = FirebaseDatabase.getInstance().getReference("mals");
-                r.addValueEventListener(new ValueEventListener() {//listener for mals
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshotMals) {
-                        peuArrayList.clear();//empty list
-                        peu = new ProductExplanationUser();
-                        DataSnapshot dsMainManMalsList = dataSnapshotMainMan.child(user.getPhone());
-                        if (dsMainManMalsList.hasChild("malfunctions_list")) {
-                            //for every malfunction of this mainMan, get full info from malfunctions.
-                            for (DataSnapshot da_mal_id : dsMainManMalsList.child("malfunctions_list").getChildren()) {
-                                String mal_id = da_mal_id.getValue(String.class);
-                                assert dataSnapshotMals.hasChild(mal_id);
-                                MalfunctionDetailsInt mal = dataSnapshotMals.child(mal_id).getValue(MalfunctionDetails.class);
-                                assert mal != null;
-                                if (mal.isIs_open()) {
-                                    String explanation = mal.getExplanation();
-                                    ProductDetailsInt prod;
-
-                                    if (mal.getProduct_id() == null) {
-                                        prod = dataSnapshotMals.child(mal_id).child("productDetails").getValue(ProductDetails.class);
-                                        peu.setProd(prod);
-
-                                    } else { //get product detailes from inventory
-                                        String insId = dsMainManMalsList.child("institution").getValue().toString();
-                                        DatabaseReference r = connect_db("institution").child(insId).child("inventory");
-                                        r.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                                DataSnapshot ds = dataSnapshot.child(mal.getProduct_id());
-                                                ProductDetailsInt prod=ds.getValue(ProductDetails.class);
-                                                assert prod != null;
-                                                peu.setProd(prod);
-
-                                            }
-
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                Log.d("TAG", databaseError.getMessage());
-                                            }
-                                        });
-                                    }
-
-                                    peu.setMalfunctionExplanation(explanation);
-                                    if (mal.getTech() == null) {
-                                        peu.setUser(null);
-                                    } else {
-                                        DatabaseReference r = connect_db("users");
-                                        r.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot ds) {
-                                                UserInt user=ds.child(mal.getTech()).getValue(User.class);
-                                                peu.setUser(user);
-
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                Log.d("TAG", databaseError.getMessage());
-                                            }
-                                        });
-                                    }
-
-                                    peuArrayList.add(peu);
-                                    peu = new ProductExplanationUser();
-                                }
-
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.d("TAG", databaseError.getMessage());
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("TAG", databaseError.getMessage());
-            }
-        });
-    }
-
-    //yuval add this function to main man controller but yuval didn't Write this so how write this delete.
-    public static void add_to_malfunction_list(String mainManKey,String malId)
-    {
-        DatabaseReference dataRefMainMan = connect_db("maintenance");
-        DatabaseReference malfunctionListRef = dataRefMainMan.child(mainManKey).child("malfunctions_list"); // Generate a reference to a new location and add some data using push()
-        String key = malfunctionListRef/*.child(malfunctionListRef.getKey())*/.push().getKey();
-        Map<String, Object> map = new HashMap<>();
-        map.put(key, malId);
-        malfunctionListRef.updateChildren(map);
-    }
 
     /// ann new malfunction to main man controller
 

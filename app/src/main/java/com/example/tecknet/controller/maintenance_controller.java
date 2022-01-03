@@ -559,7 +559,7 @@ public abstract class maintenance_controller {
                                                 } else {
                                                     tech = dsUsers.child(mal.getTech()).getValue(User.class);
                                                 }
-                                                peuModalArrayList.add(new ProductExplanationUser(prod, explanation, tech, mal.getMal_id()));
+                                                peuModalArrayList.add(new ProductExplanationUser(prod, tech, mal));
                                                 PEUAdapter peuAdapter = new PEUAdapter(context, layout, peuModalArrayList);
                                                 malfunctionsList.setAdapter(peuAdapter);
 
@@ -606,15 +606,15 @@ public abstract class maintenance_controller {
                 dataRefMalFunctions.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshotMals) {
-                        if (dataSnapshotMals.child(peu.getMalId()).exists()) {
-                            dataRefMalFunctions.child(peu.getMalId()).removeValue();
+                        if (dataSnapshotMals.child((peu.getMal().getMal_id())).exists()) {
+                            dataRefMalFunctions.child(peu.getMal().getMal_id()).removeValue();
                             //find in malfunction list and delete from it
                             if (dataSnapshotMain.hasChild("malfunctions_list")) {
                                 DataSnapshot dsMalsList = dataSnapshotMain.child("malfunctions_list");
                                 for (DataSnapshot ds : dsMalsList.getChildren()) {
                                     String malId = ds.getValue(String.class);
                                     String key = ds.getKey();
-                                    if (malId.equals(peu.getMalId())) {
+                                    if (malId.equals(peu.getMal().getMal_id())) {
                                         dataRefMainMan.child("malfunctions_list").child(key).removeValue();
                                         break;
                                     }

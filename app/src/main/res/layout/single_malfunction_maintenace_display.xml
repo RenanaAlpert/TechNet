@@ -137,6 +137,30 @@
         android:text="@string/tech_details_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black" />
+    <TextView
+        android:layout_width="402dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tech_info_maintenance"
+        android:padding="3dp"
+        android:text="@string/status_header_txt"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/status_maintenance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tech_info_maintenance"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:padding="3dp"
+        android:text="@string/status_header_txt"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black" />
 
 </RelativeLayout>
 

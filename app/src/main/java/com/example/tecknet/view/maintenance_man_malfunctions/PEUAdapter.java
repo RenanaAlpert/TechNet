@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.tecknet.R;
+import com.example.tecknet.controller.maintenance_controller;
 import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.ProductExplanationUser;
 
@@ -55,7 +56,7 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
         TextView companyTV = convertView.findViewById(R.id.company_maintenance);
         TextView malfunctionInfoTV = convertView.findViewById(R.id.malfunction_info_maintenance);
         TextView techInfoTV = convertView.findViewById(R.id.tech_info_maintenance);
-
+        TextView statusTV=convertView.findViewById(R.id.status_maintenance);
 
 //        ImageView courseIV = listitemView.findViewById(R.id.idIVimage);//TODO add picture
 
@@ -65,8 +66,9 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
         productTypeTV.setText(peu.getProd().getType());
         productTV.setText(peu.getProd().getDevice());
         companyTV.setText(peu.getProd().getCompany());
-        malfunctionInfoTV.setText(peu.getMalfunctionExplanation());
-        techInfoTV.setText(Controller.techString(peu.getUser()));
+        malfunctionInfoTV.setText(peu.getMal().getExplanation());
+        techInfoTV.setText(maintenance_controller.techString(peu.getUser()));
+        statusTV.setText(peu.getMal().getStatus());
 
 
         // in below line we are using Picasso to
