@@ -1,41 +1,24 @@
 package com.example.tecknet.view.update_profile_main_man;
 
-import static android.content.ContentValues.TAG;
-
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.R;
-import com.example.tecknet.controller.maintanance_controller;
+import com.example.tecknet.controller.maintenance_controller;
 import com.example.tecknet.controller.shared_controller;
 import com.example.tecknet.databinding.FragmentUpdateProfileMainManBinding;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Collections;
 
 public class UpdateProfileMainManFragment extends Fragment {
 
@@ -78,7 +61,7 @@ public class UpdateProfileMainManFragment extends Fragment {
                     shared_controller.update_user_details(user.getPhone(), fName.getText().toString(), lName.getText().toString());
 
                     //controller.update_ins_adrr
-                    maintanance_controller.update_institution_adrr(user.getPhone(), city, adrr, area);
+                    maintenance_controller.update_institution_adrr(user.getPhone(), city, adrr, area);
                     clear_edit_text();
                     Toast.makeText(getActivity() , "עדכון פרופיל הצליח" , Toast.LENGTH_LONG).show();
                 }

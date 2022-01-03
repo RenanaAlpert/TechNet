@@ -8,19 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.controller.maintanance_controller;
+import com.example.tecknet.controller.maintenance_controller;
 import com.example.tecknet.databinding.FragmentAddProductMaintenanceManBinding;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
@@ -128,7 +123,7 @@ public class AddProductFragment extends Fragment {
                 //create product obj
                 ProductDetailsInt pd =new ProductDetails(deviceS, companyS, typeS, yearOfProductionS,dateOfResponsibilityS);
                 //add the product details to DB
-                maintanance_controller.add_product_inventory(user.getPhone() , pd);
+                maintenance_controller.add_product_inventory(user.getPhone() , pd);
                 //clear the edit text
                 clear_product_editext();
                 Toast.makeText(root.getContext(), "הוספת מוצר עבר בהצלחה" , Toast.LENGTH_LONG).show();

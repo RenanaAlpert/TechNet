@@ -25,6 +25,10 @@
             android:icon="@drawable/ic_add_new_product"
             android:title="@string/menu_add_product" />
         <item
+            android:id="@+id/nav_waiting_for_payment"
+            android:icon="@drawable/ic_add_new_product"
+            android:title="@string/waiting_for_payment" />
+        <item
             android:id="@+id/nav_update_details"
             android:icon="@drawable/ic_change_details"
             android:title="@string/update_details" />
