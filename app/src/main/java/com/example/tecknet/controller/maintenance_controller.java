@@ -555,7 +555,6 @@ public abstract class maintenance_controller {
                                         Controller.connect_db("users").addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dsUsers) {
-                                                System.out.println("hereeeee2 + size "+peuModalArrayList.size());
 
                                                 String explanation = mal.getExplanation();
                                                 ProductDetailsInt prod;
@@ -639,6 +638,7 @@ public abstract class maintenance_controller {
                                     Controller.connect_db("institution").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dsIns) {
+                                            peuModalArrayList.clear();
                                             Controller.connect_db("users").addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dsUsers) {
@@ -733,7 +733,6 @@ public abstract class maintenance_controller {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
     }
     private static void delete_mal_from_mals(ProductExplanationUser peu, UserInt user){
         DatabaseReference dataRefMalFunctions = connect_db("mals");
@@ -750,10 +749,6 @@ public abstract class maintenance_controller {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
-
-
-
 
     }
 }
