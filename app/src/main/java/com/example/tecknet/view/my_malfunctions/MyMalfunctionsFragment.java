@@ -97,6 +97,7 @@ public class MyMalfunctionsFragment extends Fragment {
                                         }
                                         assert ins != null;
 //                                        assert p != null;
+                                        System.out.println("is nukk? "+ p);
                                         if(p!=null) {
                                             arrMals.add(new malfunctionView(mal, p, ins, user));
                                             MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root.getContext(), R.layout.fragment_my_malfunctions_row, arrMals);

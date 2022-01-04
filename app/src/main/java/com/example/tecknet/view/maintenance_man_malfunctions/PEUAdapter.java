@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tecknet.R;
 import com.example.tecknet.controller.maintenance_controller;
@@ -20,12 +22,15 @@ import java.util.ArrayList;
 
 public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
     private Context mContext;
-
+    private  int mResource;
+    ArrayList<ProductExplanationUser> datalist;
 
     // constructor for our list view adapter.
     public PEUAdapter(@NonNull Context context,  int resource,ArrayList<ProductExplanationUser> dataModalArrayList) {
         super(context, resource, dataModalArrayList);
         mContext = context;
+        mResource = resource;
+        datalist = dataModalArrayList;
 
     }
 
@@ -36,7 +41,7 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
         // layout for our item of list view.
         LayoutInflater linf = LayoutInflater.from(mContext);
         convertView = linf.inflate(R.layout.single_malfunction_maintenace_display, parent, false);
-
+        System.out.println("PEUAdapter getView");
 //        if (listitemView == null) {
 //            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.single_malfunction_maintenace_display, parent, false);
 //        }
@@ -70,7 +75,7 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
         techInfoTV.setText(maintenance_controller.techString(peu.getUser()));
         statusTV.setText(peu.getMal().getStatus());
 
-
+        this.notifyDataSetChanged();
         // in below line we are using Picasso to
         // load image from URL in our Image VIew.
 //        Picasso.get().load(dataModal.getImgUrl()).into(courseIV);
