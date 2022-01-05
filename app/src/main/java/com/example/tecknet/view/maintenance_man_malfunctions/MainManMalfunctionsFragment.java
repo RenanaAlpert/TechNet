@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -89,18 +90,17 @@ public class MainManMalfunctionsFragment extends Fragment {
                                         //extract the adapter of the list view
                                         ArrayAdapter<ProductExplanationUser> adapter = (ArrayAdapter<ProductExplanationUser>) parent.getAdapter();
                                         peuModalArrayList.remove(itemPos); //Remove the item
-                                        //Stackoverflow code to update the list view
-//                                        peuModalArrayList.clear();
-                                        peuModalArrayList.addAll(peuModalArrayList);
-                                        malfunctionsList.setAdapter(adapter);
+
                                         adapter.notifyDataSetChanged();
-                                        //
+
 
                                     }
                                 }).setNegativeButton("ביטול", null).show();
+
                         return true;
                     }
                 });
+
             }
         });
         return root;

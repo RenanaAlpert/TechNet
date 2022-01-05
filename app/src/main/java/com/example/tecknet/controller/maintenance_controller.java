@@ -533,22 +533,29 @@ public abstract class maintenance_controller {
             @Override
             public void onDataChange(@NonNull DataSnapshot dsMainMan) {
                 DataSnapshot dsMalList = dsMainMan.child(user.getPhone());
+                peuModalArrayList.clear();
+
                 if (dsMalList.hasChild("malfunctions_list")) {
                     Controller.connect_db("mals").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dsMals) {
+
                             for (DataSnapshot ds_mal_id : dsMalList.child("malfunctions_list").getChildren()) {
+
                                 String mal_id = ds_mal_id.getValue(String.class);
-                                assert dsMals.hasChild(mal_id);
+//                                assert dsMals.hasChild(mal_id);
+                                if(!dsMals.hasChild(mal_id) ) continue;
                                 MalfunctionDetailsInt mal = dsMals.child(mal_id).getValue(MalfunctionDetails.class);
 
                                 assert mal != null;
                                 Controller.connect_db("institution").addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dsIns) {
+                                        peuModalArrayList.clear();
                                         Controller.connect_db("users").addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dsUsers) {
+
                                                 String explanation = mal.getExplanation();
                                                 ProductDetailsInt prod;
                                                 UserInt tech;
@@ -567,7 +574,6 @@ public abstract class maintenance_controller {
                                                 peuModalArrayList.add(new ProductExplanationUser(prod, tech, mal));
                                                 PEUAdapter peuAdapter = new PEUAdapter(context, layout, peuModalArrayList);
                                                 malfunctionsList.setAdapter(peuAdapter);
-
                                             }
 
                                             @Override
@@ -632,6 +638,7 @@ public abstract class maintenance_controller {
                                     Controller.connect_db("institution").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dsIns) {
+                                            peuModalArrayList.clear();
                                             Controller.connect_db("users").addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dsUsers) {
@@ -692,6 +699,8 @@ public abstract class maintenance_controller {
 
     //
     public static void delete_malfunction(ProductExplanationUser peu, UserInt user) {
+        System.out.println("main man controller delete_malfunction");
+
         delete_mal_from_mals(peu , user);
         delete_mal_from_mainMan(peu , user);
 
@@ -724,7 +733,6 @@ public abstract class maintenance_controller {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
     }
     private static void delete_mal_from_mals(ProductExplanationUser peu, UserInt user){
         DatabaseReference dataRefMalFunctions = connect_db("mals");
@@ -741,10 +749,6 @@ public abstract class maintenance_controller {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-
-
-
-
 
     }
 }

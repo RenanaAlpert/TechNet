@@ -270,23 +270,14 @@ public abstract class Controller {
         }
     }
 
-    // TODO: 30/12/2021  delete after change tech update details
-    public static void update_user_pass(String phone , EditText new1 ){
-        DatabaseReference r = connect_db("users/"+phone);
-        String new1str  = new1.getText().toString();
-        r.child("pass").setValue(new1str);
+    // change pass moved to share controller
 
-    }
     ///////////update ins address in main man controller
     /**
      * yuval for update details
      */
-    public static void update_technician_area(String phone , Spinner area){
-        DatabaseReference r = connect_db("Technician/"+phone );
-        String areaStr = area.getSelectedItem().toString();
-        r.child("area").setValue(areaStr);
 
-    }
+    //update tech area moved to tech controller
 
 
     /////////////

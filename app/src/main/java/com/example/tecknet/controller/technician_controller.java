@@ -1,5 +1,6 @@
 package com.example.tecknet.controller;
 
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -98,5 +99,12 @@ public abstract class technician_controller {
         r.child("is_open").setValue(false);
     }
     //////////////************ END TECH HOME PAGE ************//////////////
+
+    public static void update_technician_area(String phone , Spinner area){
+        DatabaseReference r = shared_controller.connect_db("Technician/"+phone );
+        String areaStr = area.getSelectedItem().toString();
+        r.child("area").setValue(areaStr);
+
+    }
 
 }
