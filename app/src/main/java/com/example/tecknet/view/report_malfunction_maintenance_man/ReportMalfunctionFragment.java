@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -28,7 +30,12 @@ public class ReportMalfunctionFragment extends Fragment {
     private FragmentReportMalfunctionMaintenanceManBinding binding;
     EditText detailFault;
     EditText device, type  ,company ;
+    ImageView malImage;
     Button reportBut;
+    AppCompatImageButton cameraBut;
+    AppCompatImageButton galleryBut;
+    private static final int CAMERA_REQUEST = 1888;
+    private static final int MY_CAMERA_PERMISSION_CODE = 100;
 
     Spinner prodSpinner;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,6 +53,9 @@ public class ReportMalfunctionFragment extends Fragment {
         detailFault = binding.elsee;
         reportBut = binding.button ;
         prodSpinner = binding.products;
+        malImage= binding.malImage;
+        cameraBut=binding.buttonCamera;
+        galleryBut=binding.buttonGallery;
 
 
         uViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
@@ -94,6 +104,21 @@ public class ReportMalfunctionFragment extends Fragment {
                     type.setVisibility(View.GONE);
                     company.setVisibility(View.GONE);
                     reportBut.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String detailFaultS = detailFault.getText().toString();
+
+                            //check if the user entered details
+                            if (check_if_entered_details(detailFaultS)) {
+                                //add this mal to database
+                                maintenance_controller.add_malfunction_with_exist_prod(prod, detailFaultS, user.getPhone());
+
+                                clear_edit_text();
+                                Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                    cameraBut.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             String detailFaultS = detailFault.getText().toString();
