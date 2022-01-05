@@ -2,6 +2,7 @@ package com.example.tecknet.view.waiting_for_payment;
 
 import static com.example.tecknet.controller.shared_controller.set_status_malfunction;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,6 +39,7 @@ public class WaitingPaymentAdapter extends ArrayAdapter<ProductExplanationUser> 
 
     }
 
+    @SuppressLint("ViewHolder")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

@@ -1,12 +1,21 @@
 package com.example.tecknet.view.my_malfunctions;
 
-import static com.example.tecknet.controller.shared_controller.set_status_malfunction;
+import static com.google.android.material.internal.ContextUtils.getActivity;
+import static android.content.ContentValues.TAG;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +23,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 //import androidx.media.app.NotificationCompat;
 
 import com.example.tecknet.R;
 import com.example.tecknet.controller.technician_controller;
+import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.malfunctionView;
+import com.google.firebase.database.core.Tag;
 
 import java.util.ArrayList;
 
@@ -88,7 +102,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         else if (mal.getStatus().equals("בטיפול")) {
             button.setText("לסיום");
         }
-        else if (mal.getStatus().equals("מחכה לתשלום")){
+        else if (mal.getStatus().equals("מחכה לתשלום") || mal.getStatus().equals("שולם")){
             button.setEnabled(false);
         }
 
@@ -96,7 +110,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
             @Override
             public void onClick(View v) {
                 if (button.getText().equals("התחל טיפול")) {
-                    set_status_malfunction(mal.getMal_id(), "בטיפול");
+                    technician_controller.set_status_malfunction(mal.getMal_id(), "בטיפול");
                     button.setText("לסיום");
                     arrMals.clear(); /// yuval added this line to refresh the list view
                 }
@@ -111,11 +125,21 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
 
                     alert.setPositiveButton("שלח", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            String pay = edittext.getText().toString();
-                            double payment = Double.parseDouble(pay);
-                            technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
-                            sendSMS(payment);
-                            set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
+                            if (false){
+                                Toast.makeText(mContext, "לא הוכנס מחיר", Toast.LENGTH_LONG).show();
+                            }
+                            else {
+                                String pay = edittext.getText().toString();
+                                double payment = Double.parseDouble(pay);
+                                technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
+//                            if(!checkPermission(Manifest.permission.SEND_SMS)){
+//                                ActivityCompat.requestPermissions((Activity) mContext,new String[]{Manifest.permission.SEND_SMS},1);
+////                                ActivityCompat.requestPermissions();
+//                            }
+                                sendSMS(payment);
+
+                                technician_controller.set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
+                            }
                         }
                     });
 
@@ -134,12 +158,39 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         return convertView;
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private void sendSMS(double pay){
         String title = "התקלה טופלה בהצלחה!";
-        String text = "התקלה במכשיר" + product.getType() + " - " + mal.getExplanation()
-                + "תוקנה בהצלחה. מחיר הטיפול הינו" + pay + "ש\"ח";
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(ins.getPhone_number(), null, text, null, null);
+        String text = "התקלה במכשיר " + product.getType() + " - " + mal.getExplanation()
+                + " תוקנה בהצלחה. מחיר הטיפול הינו " + pay + " ש\"ח";
 
+        // Create the intent.
+//        Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+//        // Set the data for the intent as the phone number.
+//        smsIntent.setData(Uri.parse(ins.getContact()));
+//        // Add the message (sms) with the key ("sms_body").
+//        smsIntent.putExtra("sms_body", text);
+//        // If package resolves (target app installed), send intent.
+//        if (smsIntent.resolveActivity(mContext.getPackageManager()) != null) {
+//            mContext.startActivity(smsIntent);
+//            Toast.makeText(mContext, "ההודעה נשלחה בהצלחה", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Log.d(TAG, "Can't resolve app for ACTION_SENDTO Intent");
+//            Toast.makeText(mContext, "משהו נכשל. אנא נסה שוב", Toast.LENGTH_SHORT).show();
+//        }
+        try{
+            SmsManager smsManager = SmsManager.getDefault();
+            ActivityCompat.requestPermissions((Activity) mContext,new String[]{Manifest.permission.SEND_SMS},1);
+            smsManager.sendTextMessage(ins.getContact(), null, text, null, null);
+            Toast.makeText(mContext, "ההודעה נשלחה בהצלחה", Toast.LENGTH_SHORT).show();
+        } catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(mContext, "משהו נכשל. אנא נסה שוב", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean checkPermission(String permission){
+        int check = ContextCompat.checkSelfPermission(mContext, permission);
+        return (check == PackageManager.PERMISSION_GRANTED);
     }
 }

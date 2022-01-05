@@ -90,6 +90,11 @@ public abstract class technician_controller {
         r.child("payment").setValue(pay);
     }
 
+    public static void set_status_malfunction(String mal, String status) {
+        DatabaseReference r = shared_controller.connect_db("mals/" + mal);
+        r.child("status").setValue(status);
+    }
+
     public static void take_malfunction(String tech, String mal){
         DatabaseReference r = shared_controller.connect_db("Technician");
         r.child(tech + "/my_mals").push().setValue(mal);
@@ -106,5 +111,4 @@ public abstract class technician_controller {
         r.child("area").setValue(areaStr);
 
     }
-
 }

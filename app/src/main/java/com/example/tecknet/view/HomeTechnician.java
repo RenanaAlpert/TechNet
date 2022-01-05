@@ -131,20 +131,4 @@ public class HomeTechnician extends AppCompatActivity {
         }
     }
 
-//    public void passFregment(String[] args){
-//        Bundle bundle = new Bundle();
-//        bundle.putString("name", args[0]);
-//        bundle.putString("area", args[1]);
-//        bundle.putString("address", args[2]);
-//        bundle.putString("device", args[3]);
-//        bundle.putString("company", args[4]);
-//        bundle.putString("type", args[5]);
-//        bundle.putString("explain", args[6]);
-//
-//        MalfunctionDetailsFragment details = new MalfunctionDetailsFragment();
-//        details.setArguments(bundle);
-//
-//        this.getFragmentManager().beginTransaction().replace(R.id.button, details).commit();
-//    }
-
 }
