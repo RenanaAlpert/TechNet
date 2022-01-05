@@ -1,7 +1,8 @@
 package com.example.tecknet.view;
+import com.example.tecknet.controller.ValidInputs;
 import com.example.tecknet.controller.shared_controller;
 import com.example.tecknet.model.*;
-import android.content.Intent;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -10,19 +11,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -131,12 +123,12 @@ public class SignUpActivity extends AppCompatActivity {
      */
     private boolean is_valid_detaild(String emailS ,String phoneS ){
 
-        if(!com.example.tecknet.model.ValidInputs.valid_email(emailS)){
+        if(!ValidInputs.valid_email(emailS)){
             email.setError("כתובת מייל לא חוקי!");
             return false;
 
         }
-        if(!com.example.tecknet.model.ValidInputs.valid_phone(phoneS)){
+        if(!ValidInputs.valid_phone(phoneS)){
             phone.setError("מספר טלפון לא חוקי!");
             return false;
 

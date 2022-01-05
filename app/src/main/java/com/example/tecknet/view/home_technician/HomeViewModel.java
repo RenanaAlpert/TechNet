@@ -1,19 +1,8 @@
 package com.example.tecknet.view.home_technician;
 
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.example.tecknet.R;
-import com.example.tecknet.model.Controller;
-import com.example.tecknet.model.MalfunctionDetailsInt;
-import com.example.tecknet.model.ProductDetailsInt;
-
-import java.util.Collection;
 
 
 public class HomeViewModel extends ViewModel {

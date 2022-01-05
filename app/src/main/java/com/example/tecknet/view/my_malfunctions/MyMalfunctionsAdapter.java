@@ -1,21 +1,13 @@
 package com.example.tecknet.view.my_malfunctions;
 
-import static com.google.android.material.internal.ContextUtils.getActivity;
-import static android.content.ContentValues.TAG;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,20 +19,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 //import androidx.media.app.NotificationCompat;
 
 import com.example.tecknet.R;
 import com.example.tecknet.controller.technician_controller;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.malfunctionView;
-import com.google.firebase.database.core.Tag;
 
 import java.util.ArrayList;
 

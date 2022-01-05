@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.HomeMaintenanceMan;

@@ -6,18 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 
 import com.example.tecknet.R;
-import com.example.tecknet.model.Controller;
-import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.view.home_maintenance_man.HomeFragmentMainMan;
-import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;

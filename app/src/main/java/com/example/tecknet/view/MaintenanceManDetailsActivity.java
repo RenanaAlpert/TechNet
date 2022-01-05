@@ -1,9 +1,11 @@
 package com.example.tecknet.view;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tecknet.R;
+import com.example.tecknet.controller.ValidInputs;
 import com.example.tecknet.controller.maintenance_controller;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.User;
@@ -91,8 +94,8 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
      * @return true if the user fill all the edit text
      *      else false
      */
-    private boolean check_if_entered_details(String sNumIns  ,String sNameIns ,String sCityIns,
-                                             String sAddressIns,String sArea ,String sPhoneInc ){
+    private boolean check_if_entered_details(String sNumIns  , String sNameIns , String sCityIns,
+                                             String sAddressIns, String sArea , String sPhoneInc ){
         if(sNumIns.isEmpty()){
             numIns.setError("אנא הכנס סמל מוסד (או מספר מוסד)");
             return false;
@@ -132,13 +135,13 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
      */
     private boolean check_if_valid_details(String insNum , String insPhone){
 
-        if(!com.example.tecknet.model.ValidInputs.valid_institution_num(insNum)){
+        if(!ValidInputs.valid_institution_num(insNum)){
             numIns.setError("מספר מוסד לא חוקי!");
             return false;
 
         }
-        if(!com.example.tecknet.model.ValidInputs.valid_phone(insPhone)
-            && !com.example.tecknet.model.ValidInputs.valid_ins_phone_number(insPhone)){
+        if(!ValidInputs.valid_phone(insPhone)
+            && !ValidInputs.valid_ins_phone_number(insPhone)){
             phoneInc.setError("מספר טלפון מוסד לא חוקי!");
             return false;
 

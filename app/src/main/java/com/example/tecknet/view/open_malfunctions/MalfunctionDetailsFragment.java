@@ -24,25 +24,6 @@ public class MalfunctionDetailsFragment extends Fragment {
     private String type;
     private String explain;
 
-    public MalfunctionDetailsFragment() {
-        // Required empty public constructor
-    }
-
-    public static MalfunctionDetailsFragment newInstance(){
-//            String institution_name, String area, String address,
-//            String device, String company, String type,
-//            String explain) {
-        //        Bundle args = new Bundle();
-//        args.putString(institution_name, institution_name);
-//        args.putString(area, area);
-//        args.putString(address, address);
-//        args.putString(device, device);
-//        args.putString(company, company);
-//        args.putString(type, type);
-//        args.putString(explain, explain);
-//        fragment.setArguments(args);
-        return new MalfunctionDetailsFragment();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +48,7 @@ public class MalfunctionDetailsFragment extends Fragment {
 
         TextView school_name = root.findViewById(R.id.txtSchool);
         TextView school_address = root.findViewById(R.id.txtAddress);
-        TextView product_device = root.findViewById(R.id.txtDevice);
+//        TextView product_device = root.findViewById(R.id.txtDevice);
         TextView product_company = root.findViewById(R.id.txtCompany);
         TextView product_type = root.findViewById(R.id.txtType);
         TextView mal_explain = root.findViewById(R.id.txtExplain);

@@ -27,9 +27,6 @@
             android:name=".view.report_malfunction_maintenance_man.ReportNotInStockFragment"
             android:exported="false" />-->
         <activity
-            android:name=".view.malfunctionDetails"
-            android:exported="false" />
-        <activity
             android:name=".view.TechMenDetailsActivity"
             android:exported="false" />
         <activity

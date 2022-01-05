@@ -17,14 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
 import com.example.tecknet.controller.maintenance_controller;
 import com.example.tecknet.databinding.FragmentManaintanceManMalfunctionsBinding;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.ProductExplanationUser;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
