@@ -125,7 +125,6 @@
     <string name="sms_permission_available">בקשת התשלום תשלח בSMS</string>
     <string name="sms_access_required">"נדרשת הרשאת SMS כדי לשלוח בקשת תשלום "</string>
     <string name="approve_pay_at_price">מאשר תשלום בסך</string>
-    <string name="sms_unavailable">אין הרשאת SMS, לא תוכל להשלח בקשת תשלום</string>
     <string name="sms_permission_granted">קיימת הרשאת SMS, בקשת התשלום תשלח בהודעה</string>
     <string name="sms_permission_denied">לא אושרה הרשאת SMS. לא תשלח הודעה לבקשת תשלום .</string>
 </resources>

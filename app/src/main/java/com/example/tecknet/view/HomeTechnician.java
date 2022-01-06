@@ -174,7 +174,7 @@ public class HomeTechnician extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), R.string.sms_access_required,
                     Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(), R.string.sms_unavailable, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), R.string.sms_unavailable, Toast.LENGTH_SHORT).show();
             // Request the permission. The result will be received in onRequestPermissionResult().
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);

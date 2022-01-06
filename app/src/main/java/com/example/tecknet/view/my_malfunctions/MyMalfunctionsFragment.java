@@ -33,7 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MyMalfunctionsFragment extends Fragment {
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     private FragmentMyMalfunctionsBinding binding;
     private View root;
     public ListView list;

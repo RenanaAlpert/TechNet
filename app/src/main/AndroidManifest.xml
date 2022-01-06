@@ -12,7 +12,7 @@
     <uses-feature android:name="android.hardware.telephony"
         android:required="false"/>
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="16"
         android:targetSdkVersion="19"/>
 
     <application

@@ -2,14 +2,19 @@ package com.example.tecknet.controller;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.tecknet.R;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.HomeMaintenanceMan;
@@ -28,6 +33,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public abstract class shared_controller {
 
@@ -249,4 +256,19 @@ public abstract class shared_controller {
     }
     /////////////************ END UPDATE USER SHARED DETAILS ************//////////////
 
+    public static void loadMalImage(String malPicId, Context context, ImageView imageView)
+    {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference().child("mals_images/" + malPicId);
+        System.out.println("mals_images/" + malPicId);
+        System.out.println(storageReference);
+
+        Glide.with(context)
+                .load(storageReference)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .error(R.drawable.homepage_back)
+                        .fitCenter())
+                .into(imageView);
+    }
 }

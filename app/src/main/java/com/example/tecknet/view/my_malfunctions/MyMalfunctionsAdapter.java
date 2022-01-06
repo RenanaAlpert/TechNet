@@ -142,6 +142,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
 
                     alert.show();
                 }
+                arrMals.clear();
             }
         });
 
