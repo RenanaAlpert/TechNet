@@ -19,6 +19,7 @@ import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.Technician;
 import com.example.tecknet.model.TechnicianInt;
+import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.malfunctionView;
 import com.example.tecknet.view.my_malfunctions.MyMalfunctionsAdapter;
@@ -206,9 +207,20 @@ public abstract class technician_controller {
 //                                        assert p != null;
                                     System.out.println("is nukk? " + p);
                                     if (p != null) {
-                                        arrMals.add(new malfunctionView(mal, p, ins, user));
-                                        MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root, R.layout.fragment_my_malfunctions_row, arrMals);
-                                        list.setAdapter(oma);
+                                        r.getDatabase().getReference("users").addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                UserInt maintenance = dataSnapshot.child(ins.getContact()).getValue(User.class);
+                                                arrMals.add(new malfunctionView(mal, p, ins, maintenance));
+                                                MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root, R.layout.fragment_my_malfunctions_row, arrMals);
+                                                list.setAdapter(oma);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
                                     }
                                 }
 

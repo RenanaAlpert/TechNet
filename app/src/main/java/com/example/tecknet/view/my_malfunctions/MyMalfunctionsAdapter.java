@@ -74,14 +74,14 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         mal = getItem(position).getMal();
         product = getItem(position).getProduct();
         ins = getItem(position).getIns();
-        UserInt userTech = getItem(position).getUser();
+        UserInt maintenance = getItem(position).getUser();
 
         tvName.setText(ins.getName());
         tvAddress.setText(ins.getAddress() + " " + ins.getCity());
         tvDevice.setText(product.getDevice());
         tvType.setText(product.getType());
         tvExplain.setText(mal.getExplanation());
-        tvContact.setText(ins.getContact());
+        tvContact.setText(maintenance.getFirstName() + " " + maintenance.getLastName() + " - " + ins.getContact());
         tvStatus.setText(mal.getStatus());
 
         Button button = convertView.findViewById(R.id.button);
