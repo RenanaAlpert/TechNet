@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.open_malfunctions.OpenMalfunctionFragment">
+    tools:context=".view.open_malfunctions.OpenMalfunctionFragment"
+    android:background="@drawable/tow_layer_color">
 
 
     <ListView
@@ -16,8 +17,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:divider="#59FF00"
-        android:dividerHeight="2dip"
+        android:dividerHeight="5dip"
+
         android:textSize="50sp">
 
     </ListView>

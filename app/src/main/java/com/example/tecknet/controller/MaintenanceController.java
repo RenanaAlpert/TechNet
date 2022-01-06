@@ -112,7 +112,7 @@ public abstract class MaintenanceController {
                     boolean ins = dataSnapshot.getValue(boolean.class);
                     if (ins) {
                         countMal[0]++;
-                        textJobs.setText("יש לך " + countMal[0] + " תקלות פתוחות עדיין! ");
+                        textJobs.setText("יש לך " + countMal[0] + " תקלות פתוחות ");
                     }
                 }
             }

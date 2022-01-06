@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/elsee"
 
         app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintWidth_percent=".8"></Spinner>
+        app:layout_constraintWidth_percent="0.85"></Spinner>
 
     <EditText
         android:id="@+id/device"
@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/products"
         app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintWidth_percent=".4" />
 
 
@@ -123,8 +123,8 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".15"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias=".12"
+        app:layout_constraintStart_toStartOf="@+id/report_malfunction_fragment"
         app:layout_constraintTop_toBottomOf="@id/model"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintWidth_percent=".4" />
@@ -152,7 +152,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/malfunction_detailes"
         app:layout_constraintVertical_bias="0.02"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".85" />
 
     <ImageView
         android:id="@+id/mal_image"

@@ -112,7 +112,7 @@
     <string name="malfunction_details_txt">פרטי תקלה:</string>
     <string name="tech_details_txt">פרטי טכנאי:</string>
     <string name="change_work_area">שינוי אזור עבודה</string>
-    <string name="mainManExplanation">כאן תוכל לדווח על בעיות והתקלות שלך ושטכנאי באזורך יגיע לתקן \nבנוסף תוכל לעקוב אחרי המלאי שלך ואחרי התקלות שפתחת</string>
+    <string name="mainManExplanation">כאן תוכל לפרסם את התקלות שלך לטכנאים ואנשי מקצוע מאזורך. \nבנוסף תוכל לנהל את המלאי שלך ולעקוב אחרי התקלות שפתחת</string>
     <string name="update_details">עידכון פרופיל</string>
     <string name="adrr">כתובת</string>
     <string name="cityy">עיר</string>

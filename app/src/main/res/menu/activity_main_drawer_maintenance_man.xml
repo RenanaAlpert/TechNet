@@ -22,11 +22,11 @@
             android:title="@string/menu_inventory" />
         <item
             android:id="@+id/nav_add_product"
-            android:icon="@drawable/ic_add_new_product"
+            android:icon="@drawable/ic_add_product"
             android:title="@string/menu_add_product" />
         <item
             android:id="@+id/nav_waiting_for_payment"
-            android:icon="@drawable/ic_add_new_product"
+            android:icon="@drawable/ic_paymaent"
             android:title="@string/waiting_for_payment" />
         <item
             android:id="@+id/nav_update_details"

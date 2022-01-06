@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.waiting_for_payment.WaitingForPayment">
+    tools:context=".view.waiting_for_payment.WaitingForPayment"
+    android:background="@drawable/tow_layer_color">
 
     <ListView
         android:id="@+id/listview_waiting_for_payment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:divider="#009688"
-        android:dividerHeight="2dip"
+        android:dividerHeight="5dip"
+
         android:textSize="50sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
