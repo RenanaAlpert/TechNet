@@ -36,6 +36,7 @@ public class MyMalfunctionsFragment extends Fragment {
 
         list = (ListView) root.findViewById(R.id.mylistview);
 
+        assert user != null;
         technician_controller.load_my_malfunctions_list(user, root.getContext(), list);
 
         return root;
