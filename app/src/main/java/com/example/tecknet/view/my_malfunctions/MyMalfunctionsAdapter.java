@@ -1,12 +1,11 @@
 package com.example.tecknet.view.my_malfunctions;
 
-import android.Manifest;
+import static com.example.tecknet.controller.shared_controller.set_status_malfunction;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatButton;
 //import androidx.media.app.NotificationCompat;
 
 import com.example.tecknet.R;
@@ -91,7 +88,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         else if (mal.getStatus().equals("בטיפול")) {
             button.setText("לסיום");
         }
-        else if (mal.getStatus().equals("מחכה לתשלום") || mal.getStatus().equals("שולם")){
+        else if (mal.getStatus().equals("מחכה לתשלום")){
             button.setEnabled(false);
         }
 
@@ -99,7 +96,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
             @Override
             public void onClick(View v) {
                 if (button.getText().equals("התחל טיפול")) {
-                    technician_controller.set_status_malfunction(mal.getMal_id(), "בטיפול");
+                    set_status_malfunction(mal.getMal_id(), "בטיפול");
                     button.setText("לסיום");
                     arrMals.clear(); /// yuval added this line to refresh the list view
                 }
@@ -114,21 +111,11 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
 
                     alert.setPositiveButton("שלח", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            if (false){
-                                Toast.makeText(mContext, "לא הוכנס מחיר", Toast.LENGTH_LONG).show();
-                            }
-                            else {
-                                String pay = edittext.getText().toString();
-                                double payment = Double.parseDouble(pay);
-                                technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
-//                            if(!checkPermission(Manifest.permission.SEND_SMS)){
-//                                ActivityCompat.requestPermissions((Activity) mContext,new String[]{Manifest.permission.SEND_SMS},1);
-////                                ActivityCompat.requestPermissions();
-//                            }
-                                sendSMS(payment);
-
-                                technician_controller.set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
-                            }
+                            String pay = edittext.getText().toString();
+                            double payment = Double.parseDouble(pay);
+                            technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
+                            sendSMS(payment);
+                            set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
                         }
                     });
 
@@ -147,39 +134,12 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         return convertView;
     }
 
-    @SuppressLint("QueryPermissionsNeeded")
     private void sendSMS(double pay){
         String title = "התקלה טופלה בהצלחה!";
-        String text = "התקלה במכשיר " + product.getType() + " - " + mal.getExplanation()
-                + " תוקנה בהצלחה. מחיר הטיפול הינו " + pay + " ש\"ח";
+        String text = "התקלה במכשיר" + product.getType() + " - " + mal.getExplanation()
+                + "תוקנה בהצלחה. מחיר הטיפול הינו" + pay + "ש\"ח";
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(ins.getPhone_number(), null, text, null, null);
 
-        // Create the intent.
-//        Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
-//        // Set the data for the intent as the phone number.
-//        smsIntent.setData(Uri.parse(ins.getContact()));
-//        // Add the message (sms) with the key ("sms_body").
-//        smsIntent.putExtra("sms_body", text);
-//        // If package resolves (target app installed), send intent.
-//        if (smsIntent.resolveActivity(mContext.getPackageManager()) != null) {
-//            mContext.startActivity(smsIntent);
-//            Toast.makeText(mContext, "ההודעה נשלחה בהצלחה", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Log.d(TAG, "Can't resolve app for ACTION_SENDTO Intent");
-//            Toast.makeText(mContext, "משהו נכשל. אנא נסה שוב", Toast.LENGTH_SHORT).show();
-//        }
-        try{
-            SmsManager smsManager = SmsManager.getDefault();
-            ActivityCompat.requestPermissions((Activity) mContext,new String[]{Manifest.permission.SEND_SMS},1);
-            smsManager.sendTextMessage(ins.getContact(), null, text, null, null);
-            Toast.makeText(mContext, "ההודעה נשלחה בהצלחה", Toast.LENGTH_SHORT).show();
-        } catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(mContext, "משהו נכשל. אנא נסה שוב", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private boolean checkPermission(String permission){
-        int check = ContextCompat.checkSelfPermission(mContext, permission);
-        return (check == PackageManager.PERMISSION_GRANTED);
     }
 }
