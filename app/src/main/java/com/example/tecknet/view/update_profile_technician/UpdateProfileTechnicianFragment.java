@@ -7,19 +7,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.controller.shared_controller;
 import com.example.tecknet.controller.technician_controller;
 import com.example.tecknet.databinding.FragmentUpdateProfileTechnicianBinding;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
 

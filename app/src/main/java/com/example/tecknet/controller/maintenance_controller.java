@@ -3,6 +3,7 @@ package com.example.tecknet.controller;
 import static com.example.tecknet.controller.shared_controller.connect_db;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,9 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
-import com.example.tecknet.R;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MaintenanceMan;
@@ -28,7 +28,6 @@ import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.ProductExplanationUser;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.view.inventory_maintenance_man.InventoryFragment;
 import com.example.tecknet.view.maintenance_man_malfunctions.PEUAdapter;
 import com.example.tecknet.view.waiting_for_payment.WaitingPaymentAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -349,6 +348,7 @@ public abstract class maintenance_controller {
         final String[] insSymbol = new String[1];
 
         dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(userPhone).exists()) {
@@ -529,14 +529,14 @@ public abstract class maintenance_controller {
     public static void loadDataInListview(UserInt user, ArrayList<ProductExplanationUser> peuModalArrayList, ListView malfunctionsList, int layout, Context context) {
         // below line is use to get data from Firebase
         // firestore using collection in android.
-        Controller.connect_db("maintenance").addValueEventListener(new ValueEventListener() {//listener for maintenance
+        connect_db("maintenance").addValueEventListener(new ValueEventListener() {//listener for maintenance
             @Override
             public void onDataChange(@NonNull DataSnapshot dsMainMan) {
                 DataSnapshot dsMalList = dsMainMan.child(user.getPhone());
                 peuModalArrayList.clear();
 
                 if (dsMalList.hasChild("malfunctions_list")) {
-                    Controller.connect_db("mals").addValueEventListener(new ValueEventListener() {
+                    connect_db("mals").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dsMals) {
 
@@ -548,11 +548,11 @@ public abstract class maintenance_controller {
                                 MalfunctionDetailsInt mal = dsMals.child(mal_id).getValue(MalfunctionDetails.class);
 
                                 assert mal != null;
-                                Controller.connect_db("institution").addValueEventListener(new ValueEventListener() {
+                                connect_db("institution").addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dsIns) {
                                         peuModalArrayList.clear();
-                                        Controller.connect_db("users").addValueEventListener(new ValueEventListener() {
+                                        connect_db("users").addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dsUsers) {
 
@@ -620,12 +620,12 @@ public abstract class maintenance_controller {
     public static void loadWaitingPaymentListview(UserInt user, ArrayList<ProductExplanationUser> peuModalArrayList, ListView malfunctionsList, int layout, Context context) {
         // below line is use to get data from Firebase
         // firestore using collection in android.
-        Controller.connect_db("maintenance").addValueEventListener(new ValueEventListener() {//listener for maintenance
+        connect_db("maintenance").addValueEventListener(new ValueEventListener() {//listener for maintenance
             @Override
             public void onDataChange(@NonNull DataSnapshot dsMainMan) {
                 DataSnapshot dsMalList = dsMainMan.child(user.getPhone());
                 if (dsMalList.hasChild("malfunctions_list")) {
-                    Controller.connect_db("mals").addValueEventListener(new ValueEventListener() {
+                    connect_db("mals").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dsMals) {
                             for (DataSnapshot ds_mal_id : dsMalList.child("malfunctions_list").getChildren()) {
@@ -635,11 +635,11 @@ public abstract class maintenance_controller {
 
                                 assert mal != null;
                                 if (mal.getStatus().equals(maintenance_controller.WATES_PAYMENT)) {
-                                    Controller.connect_db("institution").addValueEventListener(new ValueEventListener() {
+                                    connect_db("institution").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dsIns) {
                                             peuModalArrayList.clear();
-                                            Controller.connect_db("users").addValueEventListener(new ValueEventListener() {
+                                            connect_db("users").addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dsUsers) {
                                                     String explanation = mal.getExplanation();

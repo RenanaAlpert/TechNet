@@ -5,13 +5,13 @@ public class malfunctionView {
     private MalfunctionDetailsInt mal;
     private InstitutionDetailsInt ins;
     private ProductDetailsInt product;
-    private UserInt user;
+    private UserInt maintenance;
 
     public malfunctionView(MalfunctionDetailsInt mal, ProductDetailsInt product, InstitutionDetailsInt ins, UserInt user) {
         this.mal = mal;
         this.product = product;
         this.ins = ins;
-        this.user = user;
+        this.maintenance = user;
     }
 
     public MalfunctionDetailsInt getMal() {
@@ -39,10 +39,10 @@ public class malfunctionView {
     }
 
     public UserInt getUser() {
-        return user;
+        return maintenance;
     }
 
     public void setUser(UserInt user) {
-        this.user = user;
+        this.maintenance = user;
     }
 }

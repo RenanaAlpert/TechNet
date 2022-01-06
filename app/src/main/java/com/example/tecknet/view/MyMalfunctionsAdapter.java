@@ -1,22 +1,16 @@
-package com.example.tecknet.view;
+package com.example.tecknet.view.my_malfunctions;
 
+import static com.example.tecknet.controller.shared_controller.set_status_malfunction;
 import static android.content.ContentValues.TAG;
 
 import static com.google.android.material.internal.ContextUtils.*;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -37,7 +30,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.tecknet.R;
 import com.example.tecknet.controller.technician_controller;
-import com.example.tecknet.model.Controller;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
@@ -69,7 +61,12 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
 
     }
 
+//    static class ViewHolder {
+//        TextView text;
+//        Button btn;
+//    }
 
+    @SuppressLint({"ViewHolder", "SetTextI18n"})
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -87,22 +84,24 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         mal = getItem(position).getMal();
         product = getItem(position).getProduct();
         ins = getItem(position).getIns();
-        UserInt userTech = getItem(position).getUser();
+        UserInt maintenance = getItem(position).getUser();
 
         tvName.setText(ins.getName());
         tvAddress.setText(ins.getAddress() + " " + ins.getCity());
         tvDevice.setText(product.getDevice());
         tvType.setText(product.getType());
         tvExplain.setText(mal.getExplanation());
-        tvContact.setText(ins.getContact());
+        tvContact.setText(maintenance.getFirstName() + " " + maintenance.getLastName() + " - " + ins.getContact());
         tvStatus.setText(mal.getStatus());
 
         Button button = convertView.findViewById(R.id.button);
         if (mal.getStatus().equals("נלקח לטיפול")) {
             button.setText("התחל טיפול");
-        } else if (mal.getStatus().equals("בטיפול")) {
+        }
+        else if (mal.getStatus().equals("בטיפול")) {
             button.setText("לסיום");
-        } else if (mal.getStatus().equals("מחכה לתשלום") || mal.getStatus().equals("שולם")) {
+        }
+        else if (mal.getStatus().equals("מחכה לתשלום")){
             button.setEnabled(false);
         }
 
@@ -110,15 +109,18 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
             @Override
             public void onClick(View v) {
                 if (button.getText().equals("התחל טיפול")) {
-                    technician_controller.set_status_malfunction(mal.getMal_id(), "בטיפול");
+                    set_status_malfunction(mal.getMal_id(), "בטיפול");
                     button.setText("לסיום");
-                    //arrMals.clear(); ///to refresh the list view
-                } else if (button.getText().equals("לסיום")) {
+                    arrMals.clear(); /// yuval added this line to refresh the list view
+                }
+
+                else if (button.getText().equals("לסיום")) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
                     final EditText edittext = new EditText(v.getContext());
                     alert.setMessage("\nעלות הטיפול:").setCancelable(false);
                     alert.setTitle("בקשת תשלום");
                     alert.setView(edittext);
+
                     alert.setPositiveButton("שלח", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             if (false) {

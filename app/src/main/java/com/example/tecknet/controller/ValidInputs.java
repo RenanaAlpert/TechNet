@@ -1,4 +1,4 @@
-package com.example.tecknet.model;
+package com.example.tecknet.controller;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

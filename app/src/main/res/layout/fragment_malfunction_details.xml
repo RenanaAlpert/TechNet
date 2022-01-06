@@ -26,7 +26,8 @@
         android:layout_marginEnd="93dp"
         android:text="בית ספר"
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/Address"
@@ -39,7 +40,8 @@
         android:text="כתובת : "
         android:textAlignment="viewStart"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/txtAddress"
@@ -51,7 +53,8 @@
         android:layout_marginBottom="5dp"
         android:text="כתובת"
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/Company"
@@ -63,7 +66,8 @@
         android:text="חברה: "
         android:textAlignment="viewStart"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/txtCompany"
@@ -74,7 +78,8 @@
         android:layout_marginEnd="69dp"
         android:text="חברה"
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/Type"
@@ -87,7 +92,8 @@
         android:text="דגם: "
         android:textAlignment="viewStart"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/txtType"
@@ -99,7 +105,8 @@
         android:layout_marginBottom="5dp"
         android:text="דגם"
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/Explain"
@@ -111,7 +118,8 @@
         android:text="תיאור תקלה: "
         android:textAlignment="viewStart"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/txtExplain"
@@ -122,7 +130,8 @@
         android:layout_marginEnd="122dp"
         android:text="תיאור תקלה"
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/Image"
@@ -135,7 +144,8 @@
         android:text="תמונה: "
         android:textAlignment="viewStart"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:gravity="start" />
 
     <TextView
         android:id="@+id/txtImage"
@@ -147,7 +157,8 @@
         android:layout_marginBottom="5dp"
         android:text="תמונה"
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
 
     <Button
         android:id="@+id/button"
@@ -158,6 +169,7 @@
         android:layout_marginTop="200dp"
         android:layout_marginEnd="120dp"
         android:layout_marginBottom="10dp"
-        android:text="לטיפול" />
+        android:text="לטיפול"
+        android:layout_alignParentRight="true" />
 
 </FrameLayout>
