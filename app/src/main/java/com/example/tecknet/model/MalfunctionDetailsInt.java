@@ -36,8 +36,8 @@ public interface MalfunctionDetailsInt  {
     public double getPayment();
 
     public void setPayment(double payment);
-//
-//    public String getMal_creator();
-//
-//    public void setMal_creator(String mal_creator);
+
+    public String get_malPicId();
+
+    public void set_malPicId(String id);
 }

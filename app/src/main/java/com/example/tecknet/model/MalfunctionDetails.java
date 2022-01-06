@@ -14,6 +14,7 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
     String tech;
     String status;
     double payment;
+    String malPicId;
 //    String mal_creator;
 
     public MalfunctionDetails() {
@@ -28,6 +29,7 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
         this.tech = null;
         this.status = "מחכה לטיפול";
         this.payment = 0.0;
+        malPicId = null;
     }
 
     public String getMal_id() {
@@ -65,14 +67,6 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
     public String getProduct_id() {
         return product_id;
     }
-//
-//    public String getMal_creator() {
-//        return mal_creator;
-//    }
-//
-//    public void setMal_creator(String mal_creator) {
-//        this.mal_creator = mal_creator;
-//    }
 
     public void setProduct_id(String product_id) {
         this.product_id = product_id;
@@ -101,4 +95,9 @@ public class MalfunctionDetails implements MalfunctionDetailsInt {
     public void setPayment(double payment) {
         this.payment = payment;
     }
+
+    public String get_malPicId(){
+        return malPicId;
+    }
+    public void set_malPicId(String id){ malPicId = id;}
 }

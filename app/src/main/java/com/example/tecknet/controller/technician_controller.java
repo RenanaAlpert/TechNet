@@ -159,9 +159,43 @@ public abstract class technician_controller {
                                 arrMals.add(new MalfunctionView(mal, p, ins, user));
                                 OpenMalfunctionsAdapter oma = new OpenMalfunctionsAdapter(root, R.layout.fragment_open_malfunctions_row, arrMals);
                                 list.setAdapter(oma);
+                                r.getDatabase().getReference("Technician/" + user.getPhone()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshotT) {
+                                        TechnicianInt tech = dataSnapshotT.getValue(Technician.class);
 
+                                        r.getDatabase().getReference("institution/" + mal.getInstitution()).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot das) {
+                                                InstitutionDetailsInt ins = das.getValue(InstitutionDetails.class);
+
+                                                assert tech != null;
+                                                assert ins != null;
+                                                if (tech.getArea().equals(ins.getArea())) {
+                                                    ProductDetails p;
+                                                    if (mal.getProduct_id() == null) {
+                                                        p = ds.child("productDetails").getValue(ProductDetails.class);
+                                                    } else {
+                                                        p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
+                                                    }
+                                                    arrMals.add(new MalfunctionView(mal, p, ins, user));
+                                                    OpenMalfunctionsAdapter oma = new OpenMalfunctionsAdapter(root, R.layout.fragment_open_malfunctions_row, arrMals);
+                                                    list.setAdapter(oma);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
                             }
@@ -169,14 +203,11 @@ public abstract class technician_controller {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("TAG", databaseError.getMessage());
             }
         });
     }
-
 
     public static void load_my_malfunctions_list(UserInt user, Context root, ListView list) {
         DatabaseReference r = shared_controller.connect_db("Technician");

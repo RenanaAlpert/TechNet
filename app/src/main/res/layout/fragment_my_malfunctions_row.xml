@@ -4,18 +4,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/School"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
-        android:text="שם בית ספר "
-        android:textAlignment="viewStart"
-        android:textSize="18sp" />
-
-    <TextView
         android:id="@+id/Status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,67 +13,170 @@
         android:layout_marginBottom="5dp"
         android:text="סטטוס"
         android:textAlignment="viewEnd"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="end" />
+
+    <TextView
+        android:id="@+id/School1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="start"
+        android:text="שם מוסד:"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/School"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="שם בית ספר "
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        android:gravity="start" />
+
+    <TextView
+        android:id="@+id/Address1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="כתובת:"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/Address"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="85dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:text="כתובת בית ספר "
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
+
+    <TextView
+        android:id="@+id/BreakDevice1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="מכשיר תקול:"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/BreakDevice"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
+        android:gravity="start"
         android:text="מכשיר תקול "
         android:textAlignment="viewStart"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/type1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="175dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="דגם:"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/type"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="195dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:text="דגם "
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
+
+    <TextView
+        android:id="@+id/FaultDescription1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="תיאור תקלה:"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/FaultDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:text="תיאור תקלה "
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
+
+    <TextView
+        android:id="@+id/Contact1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="איש קשר:"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/Contact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="305dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:text="איש קשר "
         android:textAlignment="viewStart"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:gravity="start" />
 
     <Button
         android:id="@+id/button"
@@ -93,10 +184,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="10dp"/>
-<!--        android:text="התחל טיפול" />-->
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="360dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="118dp"
+        android:layout_marginRight="120dp" />
 
 </RelativeLayout>
