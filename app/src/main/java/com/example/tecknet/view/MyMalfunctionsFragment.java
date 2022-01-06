@@ -1,6 +1,6 @@
-package com.example.tecknet.view.my_malfunctions;
+package com.example.tecknet.view;
 
-import android.app.AlertDialog;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +24,7 @@ import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.malfunctionView;
-import com.example.tecknet.view.UserViewModel;
-import com.example.tecknet.view.open_malfunctions.OpenMalfunctionsAdapter;
+import com.example.tecknet.view.my_malfunctions.MyMalfunctionsViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,11 +34,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MyMalfunctionsFragment extends Fragment {
-
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     private MyMalfunctionsViewModel myMalfunctionsViewModel;
     private FragmentMyMalfunctionsBinding binding;
     private View root;
     public ListView list;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -97,8 +97,8 @@ public class MyMalfunctionsFragment extends Fragment {
                                         }
                                         assert ins != null;
 //                                        assert p != null;
-                                        System.out.println("is nukk? "+ p);
-                                        if(p!=null) {
+                                        System.out.println("is nukk? " + p);
+                                        if (p != null) {
                                             arrMals.add(new malfunctionView(mal, p, ins, user));
                                             MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root.getContext(), R.layout.fragment_my_malfunctions_row, arrMals);
                                             list.setAdapter(oma);
@@ -130,6 +130,8 @@ public class MyMalfunctionsFragment extends Fragment {
 
         return root;
     }
+
+
 
     @Override
     public void onDestroyView() {

@@ -1,20 +1,23 @@
 package com.example.tecknet.view;
 
-import android.app.Activity;
+import static com.example.tecknet.view.MyMalfunctionsAdapter.MY_PERMISSIONS_REQUEST_SEND_SMS;
+import static com.example.tecknet.view.MyMalfunctionsAdapter.sendSMS;
+
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
-import androidx.appcompat.app.ActionBar;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -23,16 +26,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.tecknet.R;
 import com.example.tecknet.databinding.ActivityMainTechnicianBinding;
-import com.example.tecknet.model.InstitutionDetailsInt;
-import com.example.tecknet.model.MalfunctionDetailsInt;
-import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.model.malfunctionView;
-import com.example.tecknet.view.open_malfunctions.MalfunctionDetailsFragment;
-import com.example.tecknet.view.open_malfunctions.OpenMalfunctionFragment;
-import com.example.tecknet.view.open_malfunctions.OpenMalfunctionsAdapter;
-import com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment;
-import com.example.tecknet.view.update_profile_technician.UpdateProfileTechnicianFragment;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -66,7 +60,7 @@ public class HomeTechnician extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_technician, R.id.nav_open_malfunction, R.id.nav_my_malfunctions ,R.id.update_technician_fragment)
+                R.id.nav_home_technician, R.id.nav_open_malfunction, R.id.nav_my_malfunctions, R.id.update_technician_fragment)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_technician);
@@ -98,7 +92,7 @@ public class HomeTechnician extends AppCompatActivity {
     }
 
     /**
-     * add 3 doted menu with sign out and update profile
+     * add 3 doted menu with sign out
      *
      * @param item
      * @return
@@ -116,19 +110,76 @@ public class HomeTechnician extends AppCompatActivity {
                                 Intent intent = new Intent(HomeTechnician.this, MainActivity.class);
                                 startActivity(intent);
                             }
-                        }).setNegativeButton("השאר" , null).show();
+                        }).setNegativeButton("השאר", null).show();
                 return true;
-            case R.id.action_settings_technician:
-//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.home_fragment_technician, new UpdateProfileTechnicianFragment());
-//                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
-////                // Commit the transaction
-//                fragmentTransaction.commit();//to do
-                return true;
+
             default:
 
                 return super.onOptionsItemSelected(item);
         }
     }
 
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        // BEGIN_INCLUDE(onRequestPermissionsResult)
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_PERMISSIONS_REQUEST_SEND_SMS) {
+            // Request for camera permission.
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission has been granted. Start camera preview Activity.
+                Toast.makeText(getApplicationContext(), R.string.sms_permission_granted,
+                        Toast.LENGTH_SHORT)
+                        .show();
+                sendSMS();
+            } else {
+                // Permission request was denied.
+                Toast.makeText(getApplicationContext(), R.string.sms_permission_denied,
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+        // END_INCLUDE(onRequestPermissionsResult)
+    }
+
+    public void permissionsSMS() {
+        // Check if the SMS permission has been granted
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Permission is already available, start camera preview
+            Toast.makeText(getApplicationContext(), R.string.sms_permission_available,
+                    Toast.LENGTH_LONG).show();
+
+            sendSMS();
+        } else {
+            // Permission is missing and must be requested.
+            requestSMSPermission();
+        }
+    }
+
+    /**
+     * Requests the {@link Manifest.permission} permission.
+     * If an additional rationale should be displayed, the user has to launch the request from
+     * a SnackBar that includes additional information.
+     */
+    private void requestSMSPermission() {
+        // Permission has not been granted and must be requested.
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.SEND_SMS)) {
+            // Provide an additional rationale to the user if the permission was not granted
+            // and the user would benefit from additional context for the use of the permission.
+            Toast.makeText(getApplicationContext(), R.string.sms_access_required,
+                    Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.sms_unavailable, Toast.LENGTH_SHORT).show();
+            // Request the permission. The result will be received in onRequestPermissionResult().
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
+        }
+    }
+
+//
 }

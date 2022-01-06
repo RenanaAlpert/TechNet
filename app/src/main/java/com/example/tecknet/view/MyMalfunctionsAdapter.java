@@ -1,7 +1,8 @@
-package com.example.tecknet.view.my_malfunctions;
+package com.example.tecknet.view;
 
-import static com.google.android.material.internal.ContextUtils.getActivity;
 import static android.content.ContentValues.TAG;
+
+import static com.google.android.material.internal.ContextUtils.*;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -25,11 +26,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 //import androidx.media.app.NotificationCompat;
 
 import com.example.tecknet.R;
@@ -40,18 +43,22 @@ import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.malfunctionView;
+import com.example.tecknet.view.HomeTechnician;
+import com.google.android.material.internal.ContextUtils;
 import com.google.firebase.database.core.Tag;
 
 import java.util.ArrayList;
 
 public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
-
+    public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     private final Context mContext;
     private int mResource;
     private ArrayList<malfunctionView> arrMals;
     private MalfunctionDetailsInt mal;
     private ProductDetailsInt product;
     private InstitutionDetailsInt ins;
+    protected static String phoneNo;
+    protected static String message;
 
 
     public MyMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<malfunctionView> obj) {
@@ -62,12 +69,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
 
     }
 
-//    static class ViewHolder {
-//        TextView text;
-//        Button btn;
-//    }
 
-    @SuppressLint({"ViewHolder", "SetTextI18n"})
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -98,52 +100,45 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         Button button = convertView.findViewById(R.id.button);
         if (mal.getStatus().equals("נלקח לטיפול")) {
             button.setText("התחל טיפול");
-        }
-        else if (mal.getStatus().equals("בטיפול")) {
+        } else if (mal.getStatus().equals("בטיפול")) {
             button.setText("לסיום");
-        }
-        else if (mal.getStatus().equals("מחכה לתשלום") || mal.getStatus().equals("שולם")){
+        } else if (mal.getStatus().equals("מחכה לתשלום") || mal.getStatus().equals("שולם")) {
             button.setEnabled(false);
         }
 
-            button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (button.getText().equals("התחל טיפול")) {
                     technician_controller.set_status_malfunction(mal.getMal_id(), "בטיפול");
                     button.setText("לסיום");
-                    arrMals.clear(); /// yuval added this line to refresh the list view
-                }
-
-                else if (button.getText().equals("לסיום")) {
+                    //arrMals.clear(); ///to refresh the list view
+                } else if (button.getText().equals("לסיום")) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
                     final EditText edittext = new EditText(v.getContext());
-                    alert.setMessage("\nעלות הטיפול:");
-                    alert.setTitle("מחיר");
-
+                    alert.setMessage("\nעלות הטיפול:").setCancelable(false);
+                    alert.setTitle("בקשת תשלום");
                     alert.setView(edittext);
-
                     alert.setPositiveButton("שלח", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            if (false){
+                            if (false) {
                                 Toast.makeText(mContext, "לא הוכנס מחיר", Toast.LENGTH_LONG).show();
-                            }
-                            else {
+                            } else {
                                 String pay = edittext.getText().toString();
                                 double payment = Double.parseDouble(pay);
-                                technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
-//                            if(!checkPermission(Manifest.permission.SEND_SMS)){
-//                                ActivityCompat.requestPermissions((Activity) mContext,new String[]{Manifest.permission.SEND_SMS},1);
-////                                ActivityCompat.requestPermissions();
-//                            }
-                                sendSMS(payment);
+                                phoneNo = ins.getContact();
+                                try {
+                                    createSMS(payment);
+                                } finally {
+                                    System.out.println("hello there "+mal.getMal_id()+" "+ payment);
+                                    technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
+                                    technician_controller.set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
+                                }
 
-                                technician_controller.set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
+
                             }
                         }
-                    });
-
-                    alert.setNegativeButton("חזור", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton("חזור", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             dialog.cancel();
                             //arrMals.clear(); /// yuval added this line to refresh the list view
@@ -158,39 +153,20 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
         return convertView;
     }
 
-    @SuppressLint("QueryPermissionsNeeded")
-    private void sendSMS(double pay){
-        String title = "התקלה טופלה בהצלחה!";
-        String text = "התקלה במכשיר " + product.getType() + " - " + mal.getExplanation()
-                + " תוקנה בהצלחה. מחיר הטיפול הינו " + pay + " ש\"ח";
-
-        // Create the intent.
-//        Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
-//        // Set the data for the intent as the phone number.
-//        smsIntent.setData(Uri.parse(ins.getContact()));
-//        // Add the message (sms) with the key ("sms_body").
-//        smsIntent.putExtra("sms_body", text);
-//        // If package resolves (target app installed), send intent.
-//        if (smsIntent.resolveActivity(mContext.getPackageManager()) != null) {
-//            mContext.startActivity(smsIntent);
-//            Toast.makeText(mContext, "ההודעה נשלחה בהצלחה", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Log.d(TAG, "Can't resolve app for ACTION_SENDTO Intent");
-//            Toast.makeText(mContext, "משהו נכשל. אנא נסה שוב", Toast.LENGTH_SHORT).show();
-//        }
-        try{
-            SmsManager smsManager = SmsManager.getDefault();
-            ActivityCompat.requestPermissions((Activity) mContext,new String[]{Manifest.permission.SEND_SMS},1);
-            smsManager.sendTextMessage(ins.getContact(), null, text, null, null);
-            Toast.makeText(mContext, "ההודעה נשלחה בהצלחה", Toast.LENGTH_SHORT).show();
-        } catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(mContext, "משהו נכשל. אנא נסה שוב", Toast.LENGTH_SHORT).show();
-        }
+    public static void sendSMS() {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(phoneNo, null, message, null, null);
     }
 
-    private boolean checkPermission(String permission){
-        int check = ContextCompat.checkSelfPermission(mContext, permission);
-        return (check == PackageManager.PERMISSION_GRANTED);
+
+    private void createSMS(double pay) {
+        message = " התקלה במכשיר " + product.getType() + " - " + mal.getExplanation()
+                + " תוקנה בהצלחה. מחיר הטיפול הינו " + pay + " ש\"ח\n";
+        ((HomeTechnician)mContext).permissionsSMS();
+
     }
+
+
 }
+
+
