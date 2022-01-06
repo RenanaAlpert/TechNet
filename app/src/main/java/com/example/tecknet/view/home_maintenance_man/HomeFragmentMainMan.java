@@ -56,7 +56,7 @@ public class HomeFragmentMainMan extends Fragment {
 
 
         TextView textView = binding.helloMainManText;
-        textView.setText( "שלום "+user2.getFirstName() +" "+ user2.getLastName() +"!");
+        textView.setText( "שלום "+user2.getFirstName() +" "+ user2.getLastName());
 
         //Text view to see sentence how say how mach from my mal is open in home page
         TextView myMals = binding.countMyOpenMal;

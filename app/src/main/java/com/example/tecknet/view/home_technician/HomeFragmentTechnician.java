@@ -59,7 +59,7 @@ public class HomeFragmentTechnician extends Fragment {
 
         //Print to the screen hello userName
         TextView textView = binding.textHomeTechnician;
-        textView.setText( "שלום "+user2.getFirstName() +" " +user2.getLastName() +"!");
+        textView.setText( "שלום "+user2.getFirstName() +" " +user2.getLastName());
 
         //This text view is for print to the screen the sum of the open current jobs in my area
         TextView textJobs = binding.countWorkInMyArea;

@@ -27,7 +27,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.15"
+        android:layout_marginRight="8dp" />
 
     <TextView
         android:id="@+id/welcome"
@@ -63,7 +64,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="כאן תוכל למצוא בקלות ובמהירות עבודות באזורך המתאימים לך בשעות שהכי נוחות בשבילך."
+        android:text="כאן תוכל למצוא בקלות ובמהירות עבודות באזורך המתאימות לך בשעות שהכי נוחות בשבילך."
         android:background="@drawable/homepage_back2"
         android:elevation="20dp"
         android:padding="20dp"
