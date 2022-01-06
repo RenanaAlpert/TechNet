@@ -56,7 +56,7 @@ public abstract class shared_controller {
                 if (task.isSuccessful()) {
                     String userId = fAuth.getUid();
                     login_get_user(root,userId);
-                    Toast.makeText(root.getContext(), "כניסה הוצלחה", Toast.LENGTH_LONG).show();
+                    Toast.makeText(root.getContext(), "הכניסה בוצעה בהצלחה", Toast.LENGTH_LONG).show();
 
                 } else {
                     Toast.makeText(root.getContext(), "שם משתמש או סיסמה לא נכונים או שמשתמש לא קיים.", Toast.LENGTH_LONG).show();
