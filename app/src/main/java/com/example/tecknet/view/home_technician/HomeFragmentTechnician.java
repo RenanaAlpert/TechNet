@@ -48,6 +48,7 @@ public class HomeFragmentTechnician extends Fragment {
                 builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         getActivity().finishAffinity();
+
                     }
                 });
                 builder.setNegativeButton("השאר",null);
