@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MaintenanceMan;
@@ -53,8 +54,7 @@ import java.util.Map;
 
 public abstract class MaintenanceController {
 
-    static final String WATES_PAYMENT = "מחכה לתשלום";
-    static final String PAYED = "שולם";
+
 
     /**
      * Add institution
@@ -561,7 +561,7 @@ public abstract class MaintenanceController {
 
                                 assert mal != null;
                                 //display only malfunctions before done
-                                if(!mal.getStatus().equals(WATES_PAYMENT)&&!mal.getStatus().equals(PAYED))
+                                if(!mal.getStatus().equals(context.getString(R.string.awates_payment))&&!mal.getStatus().equals(context.getString(R.string.payed)))
                                 connect_db("institution").addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dsIns) {
@@ -648,7 +648,7 @@ public abstract class MaintenanceController {
                                 MalfunctionDetailsInt mal = dsMals.child(mal_id).getValue(MalfunctionDetails.class);
 
                                 assert mal != null;
-                                if (mal.getStatus().equals(MaintenanceController.WATES_PAYMENT)) {
+                                if (mal.getStatus().equals(context.getString(R.string.awates_payment))) {
                                     connect_db("institution").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dsIns) {

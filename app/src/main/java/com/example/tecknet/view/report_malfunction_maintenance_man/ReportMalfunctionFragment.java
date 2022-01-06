@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -52,8 +53,8 @@ public class ReportMalfunctionFragment extends Fragment {
     EditText device, type  ,company ;
     Button reportBut;
     ImageView malImage;
-    Button cameraBut;
-    Button galleryBut;
+    ImageButton cameraBut;
+    ImageButton galleryBut;
 
     private static final int MY_CAMERA_PERMISSION_CODE = 101;
     private static final int CAMERA_REQUEST_CODE = 102;

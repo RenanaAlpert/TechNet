@@ -51,7 +51,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_main_man, R.id.nav_report_malfunction, R.id.nav_inventory, R.id.nav_add_product ,R.id.nav_waiting_for_payment ,R.id.nav_update_details)
+                R.id.nav_home_main_man, R.id.nav_report_malfunction, R.id.nav_inventory, R.id.nav_add_product, R.id.nav_waiting_for_payment, R.id.nav_update_details)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_main_man);
@@ -99,17 +99,7 @@ public class HomeMaintenanceMan extends AppCompatActivity {
                                 Intent intent = new Intent(HomeMaintenanceMan.this, MainActivity.class);
                                 startActivity(intent);
                             }
-                        }).setNegativeButton("השאר" , null).show();
-
-                return true;
-
-            case R.id.action_move_to_update_profile_main_man: //move to update profile fragment
-//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.home_fragment_main_man, new UpdateProfileMainManFragment());
-//                fragmentTransaction.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
-////                // Commit the transaction
-//                fragmentTransaction.commit();//to do
-
+                        }).setNegativeButton("השאר", null).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

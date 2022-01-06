@@ -18,7 +18,6 @@ import com.example.tecknet.view.UserViewModel;
 
 
 public class OpenMalfunctionFragment extends Fragment {
-    //    private OpenMalfunctionViewModel openMalfunctionViewModel;
     private FragmentOpenMalfunctionsBinding binding;
     private View root;
     private ListView list;

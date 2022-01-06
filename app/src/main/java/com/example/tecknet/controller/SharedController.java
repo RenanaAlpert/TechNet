@@ -266,8 +266,7 @@ public abstract class SharedController {
         Glide.with(context)
                 .load(storageReference)
                 .apply(new RequestOptions()
-                        .placeholder(R.drawable.ic_launcher_background)
-                        .error(R.drawable.homepage_back)
+                        .placeholder(R.drawable.placeholder)
                         .fitCenter())
                 .into(imageView);
     }

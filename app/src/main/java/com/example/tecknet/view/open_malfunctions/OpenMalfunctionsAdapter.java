@@ -67,14 +67,10 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
 
         Button button = convertView.findViewById(R.id.button);
         View finalConvertView = convertView;
-        if(mal.get_malPicId()!=null)
-        {
-            loadMalImage(mal.get_malPicId(),mContext,imageView);
+        if (mal.get_malPicId() != null) {
+            loadMalImage(mal.get_malPicId(), mContext, imageView);
         }
-        else
-        {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_compeny));
-        }
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,15 +78,15 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 String message =
-                        "בית ספר: " + ins.getName() + "\n" +
-                                "כתובת: " + ins.getAddress() + " " + ins.getCity() + "\n" +
-                                "מכשיר: " + product.getDevice() + "\n" +
-                                "חברה: " + product.getCompany() + "\n" +
-                                "דגם: " + product.getType() + "\n" +
-                                "תיאור התקלה: " + mal.getExplanation();
+                        mContext.getString(R.string.school_name) + ins.getName() + "\n" +
+                                mContext.getString(R.string.address_header) + ins.getAddress() + " " + ins.getCity() + "\n" +
+                                mContext.getString(R.string.product_type_txt) + product.getDevice() + "\n" +
+                                mContext.getString(R.string.company_txt) + product.getCompany() + "\n" +
+                                mContext.getString(R.string.device_txt) + product.getType() + "\n" +
+                                mContext.getString(R.string.malfunction_details_txt) + mal.getExplanation();
 
                 builder.setMessage(message).setCancelable(false)
-                        .setPositiveButton("לטיפול", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.to_handle, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 TechnicianController.take_malfunction(user.getPhone(), mal.getMal_id());
@@ -99,7 +95,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
                                 //dialog.cancel();
                             }
                         })
-                        .setNegativeButton("חזור", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.go_back, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();

@@ -9,10 +9,5 @@
         app:showAsAction="ifRoom" />
 
     />
-    <item
-        android:id="@+id/action_settings_technician"
-        android:icon="@drawable/ic_baseline_person_outline_24"
-        android:orderInCategory="101"
-        android:title="@string/action_move_to_update_profile"
-        app:showAsAction="never" />
+
 </menu>

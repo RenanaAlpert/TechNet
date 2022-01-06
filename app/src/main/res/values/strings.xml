@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TeckNet</string>
+    <string name="app_name">TechNet</string>
     <string name="email">מייל</string>
     <string name="FirstName">שם פרטי</string>
     <string name="LastName">שם משפחה</string>
@@ -127,4 +127,10 @@
     <string name="approve_pay_at_price">מאשר תשלום בסך</string>
     <string name="sms_permission_granted">קיימת הרשאת SMS, בקשת התשלום תשלח בהודעה</string>
     <string name="sms_permission_denied">לא אושרה הרשאת SMS. לא תשלח הודעה לבקשת תשלום .</string>
+    <string name="school_name">בית ספר:</string>
+    <string name="address_header">כתובת:</string>
+    <string name="to_handle">לטיפול</string>
+    <string name="go_back">חזור</string>
+    <string name="awates_payment">מחכה לתשלום</string>
+    <string name="payed">שולם</string>
 </resources>
