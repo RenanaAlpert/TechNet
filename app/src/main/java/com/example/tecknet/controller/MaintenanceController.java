@@ -1,6 +1,6 @@
 package com.example.tecknet.controller;
 
-import static com.example.tecknet.controller.shared_controller.connect_db;
+import static com.example.tecknet.controller.SharedController.connect_db;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,7 +20,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
-import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MaintenanceMan;
@@ -29,10 +28,9 @@ import com.example.tecknet.model.MalfunctionDetails;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.ProductDetailsInt;
-import com.example.tecknet.model.ProductExplanationUser;
+import com.example.tecknet.model.ProductMalfunctionUser;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.view.inventory_maintenance_man.InventoryFragment;
 import com.example.tecknet.view.maintenance_man_malfunctions.PEUAdapter;
 import com.example.tecknet.view.waiting_for_payment.WaitingPaymentAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,7 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class maintenance_controller {
+public abstract class MaintenanceController {
 
     static final String WATES_PAYMENT = "מחכה לתשלום";
     static final String PAYED = "שולם";
@@ -541,7 +539,7 @@ public abstract class maintenance_controller {
      * @param layout            - the layout file of the adapter
      * @param context           -the context of the displayed list.
      */
-    public static void loadDataInListview(UserInt user, ArrayList<ProductExplanationUser> peuModalArrayList, ListView malfunctionsList, int layout, Context context) {
+    public static void loadDataInListview(UserInt user, ArrayList<ProductMalfunctionUser> peuModalArrayList, ListView malfunctionsList, int layout, Context context) {
         // below line is use to get data from Firebase
         // firestore using collection in android.
         connect_db("maintenance").addValueEventListener(new ValueEventListener() {//listener for maintenance
@@ -586,7 +584,7 @@ public abstract class maintenance_controller {
                                                 } else {
                                                     tech = dsUsers.child(mal.getTech()).getValue(User.class);
                                                 }
-                                                peuModalArrayList.add(new ProductExplanationUser(prod, tech, mal));
+                                                peuModalArrayList.add(new ProductMalfunctionUser(prod, tech, mal));
                                                 PEUAdapter peuAdapter = new PEUAdapter(context, layout, peuModalArrayList);
                                                 malfunctionsList.setAdapter(peuAdapter);
 
@@ -633,7 +631,7 @@ public abstract class maintenance_controller {
      * @param layout            - the layout file of the adapter
      * @param context           -the context of the displayed list.
      */
-    public static void loadWaitingPaymentListview(UserInt user, ArrayList<ProductExplanationUser> peuModalArrayList, ListView malfunctionsList, int layout, Context context) {
+    public static void loadWaitingPaymentListview(UserInt user, ArrayList<ProductMalfunctionUser> peuModalArrayList, ListView malfunctionsList, int layout, Context context) {
         // below line is use to get data from Firebase
         // firestore using collection in android.
         connect_db("maintenance").addValueEventListener(new ValueEventListener() {//listener for maintenance
@@ -650,7 +648,7 @@ public abstract class maintenance_controller {
                                 MalfunctionDetailsInt mal = dsMals.child(mal_id).getValue(MalfunctionDetails.class);
 
                                 assert mal != null;
-                                if (mal.getStatus().equals(maintenance_controller.WATES_PAYMENT)) {
+                                if (mal.getStatus().equals(MaintenanceController.WATES_PAYMENT)) {
                                     connect_db("institution").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dsIns) {
@@ -673,7 +671,7 @@ public abstract class maintenance_controller {
                                                     } else {
                                                         tech = dsUsers.child(mal.getTech()).getValue(User.class);
                                                     }
-                                                    peuModalArrayList.add(new ProductExplanationUser(prod, tech, mal));
+                                                    peuModalArrayList.add(new ProductMalfunctionUser(prod, tech, mal));
                                                     //todo only different line!!!! what can be done?
                                                     WaitingPaymentAdapter peuAdapter = new WaitingPaymentAdapter(context, layout, peuModalArrayList);
                                                     malfunctionsList.setAdapter(peuAdapter);
@@ -712,13 +710,13 @@ public abstract class maintenance_controller {
     }
 
     //
-    public static void delete_malfunction(ProductExplanationUser peu, UserInt user) {
+    public static void delete_malfunction(ProductMalfunctionUser peu, UserInt user) {
         System.out.println("main man controller delete_malfunction");
         delete_mal_from_mals(peu , user);
         delete_mal_from_mainMan(peu , user);
 
     }
-    private static void delete_mal_from_mainMan(ProductExplanationUser peu, UserInt user){
+    private static void delete_mal_from_mainMan(ProductMalfunctionUser peu, UserInt user){
         DatabaseReference dataRefMainMan = connect_db("maintenance/"+user.getPhone());
         dataRefMainMan.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -743,7 +741,7 @@ public abstract class maintenance_controller {
             }
         });
     }
-    private static void delete_mal_from_mals(ProductExplanationUser peu, UserInt user){
+    private static void delete_mal_from_mals(ProductMalfunctionUser peu, UserInt user){
         DatabaseReference dataRefMalFunctions = connect_db("mals");
         dataRefMalFunctions.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

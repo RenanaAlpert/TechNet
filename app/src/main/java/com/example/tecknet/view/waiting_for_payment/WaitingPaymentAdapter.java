@@ -1,6 +1,6 @@
 package com.example.tecknet.view.waiting_for_payment;
 
-import static com.example.tecknet.controller.shared_controller.set_status_malfunction;
+import static com.example.tecknet.controller.SharedController.set_status_malfunction;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -17,17 +17,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.tecknet.R;
-import com.example.tecknet.controller.maintenance_controller;
-import com.example.tecknet.model.ProductExplanationUser;
+import com.example.tecknet.controller.MaintenanceController;
+import com.example.tecknet.model.ProductMalfunctionUser;
 
 import java.util.ArrayList;
 
-public class WaitingPaymentAdapter extends ArrayAdapter<ProductExplanationUser> {
+public class WaitingPaymentAdapter extends ArrayAdapter<ProductMalfunctionUser> {
     private Context mContext;
 
 
     // constructor for our list view adapter.
-    public WaitingPaymentAdapter(@NonNull Context context, int resource, ArrayList<ProductExplanationUser> dataModalArrayList) {
+    public WaitingPaymentAdapter(@NonNull Context context, int resource, ArrayList<ProductMalfunctionUser> dataModalArrayList) {
         super(context, resource, dataModalArrayList);
         mContext = context;
 
@@ -46,7 +46,7 @@ public class WaitingPaymentAdapter extends ArrayAdapter<ProductExplanationUser> 
         // after inflating an item of listview item
         // we are getting data from array list inside
         // our modal class.
-        ProductExplanationUser peu = getItem(position);
+        ProductMalfunctionUser peu = getItem(position);
 
         // initializing our UI components of list view item.
 
@@ -62,7 +62,7 @@ public class WaitingPaymentAdapter extends ArrayAdapter<ProductExplanationUser> 
         // below line is use to set data to our text view.
         malfunctionInfoTV.setText(peu.getMal().getExplanation());
 
-        techInfoTV.setText(maintenance_controller.techString(peu.getUser()));
+        techInfoTV.setText(MaintenanceController.techString(peu.getUser()));
 
         paymentTV.setText(Double.toString(peu.getMal().getPayment()));
         View finalConvertView = convertView;

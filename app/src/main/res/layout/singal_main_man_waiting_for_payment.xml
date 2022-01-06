@@ -13,7 +13,10 @@
         android:text="@string/malfunction_details_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+      android:layout_alignParentRight="true"
+      android:layout_marginLeft="15dp"
+      android:gravity="start" />
 
   <TextView
       android:id="@+id/malfunction_info_maintenance_payment"
@@ -25,7 +28,10 @@
       android:padding="3dp"
       android:text="@string/malfunction_details_txt"
       android:textAlignment="viewStart"
-      android:textColor="@color/black" />
+      android:textColor="@color/black"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="15dp"
+      android:gravity="start" />
     <TextView
         android:layout_width="402dp"
         android:layout_height="match_parent"
@@ -37,7 +43,10 @@
         android:text="@string/tech_details_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="15dp"
+        android:gravity="start" />
 
   <TextView
       android:id="@+id/tech_info_maintenance_payment"
@@ -50,7 +59,10 @@
       android:padding="3dp"
       android:text="@string/tech_details_txt"
       android:textAlignment="viewStart"
-      android:textColor="@color/black" />
+      android:textColor="@color/black"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="15dp"
+      android:gravity="start" />
 
   <TextView
       android:layout_width="402dp"
@@ -64,7 +76,9 @@
       android:text="@string/wanted_payment"
       android:textAlignment="viewStart"
       android:textColor="@color/black"
-      android:textStyle="bold" />
+      android:textStyle="bold"
+      android:layout_alignParentRight="true"
+      android:gravity="start" />
 
   <TextView
       android:id="@+id/payment"
@@ -77,7 +91,10 @@
       android:padding="3dp"
       android:text="@string/wanted_payment"
       android:textAlignment="viewStart"
-      android:textColor="@color/black" />
+      android:textColor="@color/black"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="15dp"
+      android:gravity="start" />
 
   <Button
       android:id="@+id/btn_payment"

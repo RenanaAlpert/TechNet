@@ -1,11 +1,9 @@
 package com.example.tecknet.view;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.tecknet.R;
 import com.example.tecknet.controller.ValidInputs;
-import com.example.tecknet.controller.maintenance_controller;
+import com.example.tecknet.controller.MaintenanceController;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.User;
 
@@ -68,7 +66,7 @@ public class MaintenanceManDetailsActivity extends AppCompatActivity {
 
                     //todo check sNumIns doesn't already exist
                     //call to controller
-                    maintenance_controller.set_institution(sNumIns, sNameIns, sAddressIns,
+                    MaintenanceController.set_institution(sNumIns, sNameIns, sAddressIns,
                             sCityIns, sArea, "", sPhoneInc, myUser.getPhone());
 
                     Intent intent = new Intent(MaintenanceManDetailsActivity.this, MainActivity.class);

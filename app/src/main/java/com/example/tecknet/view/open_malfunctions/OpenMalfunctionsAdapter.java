@@ -1,6 +1,6 @@
 package com.example.tecknet.view.open_malfunctions;
 
-import static com.example.tecknet.controller.shared_controller.loadMalImage;
+import static com.example.tecknet.controller.SharedController.loadMalImage;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -19,17 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.tecknet.R;
-import com.example.tecknet.controller.technician_controller;
+import com.example.tecknet.controller.TechnicianController;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.MalfunctionView;
 import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -97,7 +93,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
                         .setPositiveButton("לטיפול", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                technician_controller.take_malfunction(user.getPhone(), mal.getMal_id());
+                                TechnicianController.take_malfunction(user.getPhone(), mal.getMal_id());
                                 ListView list = (ListView) ((AppCompatActivity) mContext).findViewById(R.id.listview);
                                 list.removeFooterView(finalConvertView);
                                 //dialog.cancel();

@@ -1,16 +1,11 @@
 package com.example.tecknet.view.my_malfunctions;
 
-import static com.example.tecknet.controller.shared_controller.set_status_malfunction;
-import static android.content.ContentValues.TAG;
+import static com.example.tecknet.controller.SharedController.set_status_malfunction;
 
-import static com.google.android.material.internal.ContextUtils.*;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,26 +16,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 //import androidx.media.app.NotificationCompat;
 
 import com.example.tecknet.R;
-import com.example.tecknet.controller.technician_controller;
+import com.example.tecknet.controller.TechnicianController;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.MalfunctionView;
 import com.example.tecknet.view.HomeTechnician;
-import com.google.android.material.internal.ContextUtils;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.protocol.HTTP;
-import com.google.firebase.database.core.Tag;
 
 import java.util.ArrayList;
 
@@ -134,8 +121,8 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
                                 phoneNo = ins.getContact();
                                 System.out.println("hello there " + mal.getMal_id() + " " + payment);
                                 createSMS(payment);
-                                technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
-                                technician_controller.set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
+                                TechnicianController.set_payment_nalfunction(mal.getMal_id(), payment);
+                                TechnicianController.set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
                                 arrMals.clear(); /// yuval added this line to refresh the list view
                             }
                         }

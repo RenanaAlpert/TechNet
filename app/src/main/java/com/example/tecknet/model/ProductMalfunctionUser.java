@@ -1,6 +1,9 @@
 package com.example.tecknet.model;
 
-public class ProductExplanationUser {
+/**
+ * class used for display, contains a few other models
+ */
+public class ProductMalfunctionUser {
 
     private ProductDetailsInt prod;
     private UserInt user;
@@ -11,7 +14,7 @@ public class ProductExplanationUser {
     /**
      * default constructor
      */
-    public ProductExplanationUser() {
+    public ProductMalfunctionUser() {
     }
 
     /**
@@ -21,7 +24,7 @@ public class ProductExplanationUser {
      * @param user
      * @param mal
      */
-    public ProductExplanationUser(ProductDetailsInt prod, UserInt user, MalfunctionDetailsInt mal) {
+    public ProductMalfunctionUser(ProductDetailsInt prod, UserInt user, MalfunctionDetailsInt mal) {
         this.prod = prod;
         this.user = user;
         this.mal = mal;

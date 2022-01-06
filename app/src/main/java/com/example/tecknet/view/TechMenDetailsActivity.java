@@ -11,7 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.tecknet.R;
-import com.example.tecknet.controller.technician_controller;
+import com.example.tecknet.controller.TechnicianController;
 import com.example.tecknet.model.UserInt;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -49,7 +49,7 @@ public class TechMenDetailsActivity extends AppCompatActivity {
                 UserInt user = getIntent().getParcelableExtra("User");
 
                 if(check_area_input(sArea)) {
-                    technician_controller.new_tech(user.getPhone(), sArea);
+                    TechnicianController.new_tech(user.getPhone(), sArea);
 
                     Intent intent = new Intent(TechMenDetailsActivity.this, MainActivity.class);
                     startActivity(intent);

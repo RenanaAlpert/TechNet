@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.controller.maintenance_controller;
+import com.example.tecknet.controller.MaintenanceController;
 import com.example.tecknet.databinding.FragmentInventoryMaintenanceManBinding;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.UserInt;
@@ -59,7 +59,7 @@ public class InventoryFragment extends Fragment {
         delBut = binding.btnDelete;
         search = binding.searchButton;
         //call the function in controller to show the user inventory
-        maintenance_controller.show_inventory(phone ,  arrProd , list , root , search);
+        MaintenanceController.show_inventory(phone ,  arrProd , list , root , search);
 //        If the list is empty ( don't enter products to his inventory)  show msg
         list.setEmptyView(textView);
 
@@ -83,7 +83,7 @@ public class InventoryFragment extends Fragment {
                                         //Convert to product obj
                                         ProductDetails prod = (ProductDetails) parent.getAdapter().getItem(position);
                                         //Delete this product from his database
-                                        maintenance_controller.delete_product_from_inventory(prod, phone);
+                                        MaintenanceController.delete_product_from_inventory(prod, phone);
                                         //extract the adapter of the list view
                                         ArrayAdapter<ProductDetails> adapter = (ArrayAdapter<ProductDetails>)parent.getAdapter();
                                         arrProd.remove(wichItem); //Remove the item

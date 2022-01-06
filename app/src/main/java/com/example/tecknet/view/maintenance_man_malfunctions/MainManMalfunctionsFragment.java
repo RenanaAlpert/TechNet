@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,9 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
-import com.example.tecknet.controller.maintenance_controller;
+import com.example.tecknet.controller.MaintenanceController;
 import com.example.tecknet.databinding.FragmentManaintanceManMalfunctionsBinding;
-import com.example.tecknet.model.ProductExplanationUser;
+import com.example.tecknet.model.ProductMalfunctionUser;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
 
@@ -39,7 +38,7 @@ public class MainManMalfunctionsFragment extends Fragment {
 //    private TextView textView;
     private Button delBut;
     private ListView malfunctionsList;
-    private ArrayList<ProductExplanationUser> peuModalArrayList;
+    private ArrayList<ProductMalfunctionUser> peuModalArrayList;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,7 +59,7 @@ public class MainManMalfunctionsFragment extends Fragment {
 
         // here we are calling a method
         // to load data in our list view from data base.
-        maintenance_controller.loadDataInListview(user, peuModalArrayList, malfunctionsList, R.layout.single_malfunction_maintenace_display, this.getContext());
+        MaintenanceController.loadDataInListview(user, peuModalArrayList, malfunctionsList, R.layout.single_malfunction_maintenace_display, this.getContext());
 
         //If the list is empty ( don't enter products to his inventory)  show msg
 //        malfunctionsList.setEmptyView(textView);
@@ -82,11 +81,11 @@ public class MainManMalfunctionsFragment extends Fragment {
                                     @Override //If you pressed to delete
                                     public void onClick(DialogInterface dialog, int which) {
                                         //Convert to product obj
-                                        ProductExplanationUser peu = (ProductExplanationUser) parent.getAdapter().getItem(position);
+                                        ProductMalfunctionUser peu = (ProductMalfunctionUser) parent.getAdapter().getItem(position);
                                         //Delete this malfunction from his database
-                                        maintenance_controller.delete_malfunction(peu, user);
+                                        MaintenanceController.delete_malfunction(peu, user);
                                         //extract the adapter of the list view
-                                        ArrayAdapter<ProductExplanationUser> adapter = (ArrayAdapter<ProductExplanationUser>) parent.getAdapter();
+                                        ArrayAdapter<ProductMalfunctionUser> adapter = (ArrayAdapter<ProductMalfunctionUser>) parent.getAdapter();
                                         peuModalArrayList.remove(itemPos); //Remove the item
 
                                         adapter.notifyDataSetChanged();

@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.controller.shared_controller;
-import com.example.tecknet.controller.technician_controller;
+import com.example.tecknet.controller.SharedController;
+import com.example.tecknet.controller.TechnicianController;
 import com.example.tecknet.databinding.FragmentUpdateProfileTechnicianBinding;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
@@ -55,10 +55,10 @@ public class UpdateProfileTechnicianFragment extends Fragment {
                 if(check_valid_chang_pass(user , changePass.getText().toString(),changePass2.getText().toString()
                         , currPass.getText().toString())) {
                     //controller.update_user_details
-                    shared_controller.update_user_details(user.getPhone(), fName.getText().toString(), lName.getText().toString());
+                    SharedController.update_user_details(user.getPhone(), fName.getText().toString(), lName.getText().toString());
 
                     //controller.update_area
-                    technician_controller.update_technician_area(user.getPhone(), area);
+                    TechnicianController.update_technician_area(user.getPhone(), area);
                     clear_edit_text();
                     Toast.makeText(getActivity() , "עדכון פרופיל הצליח" , Toast.LENGTH_LONG).show();
                 }
@@ -89,8 +89,8 @@ public class UpdateProfileTechnicianFragment extends Fragment {
             if (user.getPass().equals(curr)) {
                 if (pass1.equals(pass2)) {
                     //call the controller
-                    shared_controller.update_user_pass(user.getPhone(), changePass);
-                    shared_controller.change_user_pass(user.getEmail(), pass1);
+                    SharedController.update_user_pass(user.getPhone(), changePass);
+                    SharedController.change_user_pass(user.getEmail(), pass1);
                     user.setPass(pass1);
                     return  true;
                 }

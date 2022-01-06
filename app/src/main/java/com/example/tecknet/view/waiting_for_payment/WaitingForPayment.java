@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
-import com.example.tecknet.controller.maintenance_controller;
+import com.example.tecknet.controller.MaintenanceController;
 import com.example.tecknet.databinding.FragmentMaintenanceWaitingForPaymentBinding;
-import com.example.tecknet.model.ProductExplanationUser;
+import com.example.tecknet.model.ProductMalfunctionUser;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
 
@@ -30,7 +30,7 @@ public class WaitingForPayment extends Fragment {
     // creating a variable for our list view,
     // arraylist and firebase Firestore.
     ListView malfunctionsList;
-    ArrayList<ProductExplanationUser> peuModalArrayList;
+    ArrayList<ProductMalfunctionUser> peuModalArrayList;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,7 +50,7 @@ public class WaitingForPayment extends Fragment {
 
         // here we are calling a method
         // to load data in our list view.
-        maintenance_controller.loadWaitingPaymentListview(user, peuModalArrayList, malfunctionsList, R.layout.singal_main_man_waiting_for_payment, this.getContext());
+        MaintenanceController.loadWaitingPaymentListview(user, peuModalArrayList, malfunctionsList, R.layout.singal_main_man_waiting_for_payment, this.getContext());
 
         return root;
     }

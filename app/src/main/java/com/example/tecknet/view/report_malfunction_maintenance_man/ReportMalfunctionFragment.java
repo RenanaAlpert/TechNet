@@ -3,23 +3,17 @@ package com.example.tecknet.view.report_malfunction_maintenance_man;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.service.voice.VoiceInteractionSession;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,38 +21,26 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.controller.maintenance_controller;
+import com.example.tecknet.controller.MaintenanceController;
 import com.example.tecknet.databinding.FragmentReportMalfunctionMaintenanceManBinding;
 
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
-import com.google.android.gms.auth.api.signin.internal.Storage;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.EventListener;
 import java.util.UUID;
 
 
@@ -115,7 +97,7 @@ public class ReportMalfunctionFragment extends Fragment {
 
 
         //show the inventory of this user in spinner
-        maintenance_controller.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
+        MaintenanceController.what_insNum_show_spinner_products(prodSpinner, user.getPhone(), root);
 
         //if user select item
         prodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -143,7 +125,7 @@ public class ReportMalfunctionFragment extends Fragment {
 
                                 uploadImage(); //upload img to storage if exist
                                 //add mal to DB
-                                maintenance_controller.add_mal_and_extract_istituId(user.getPhone(), deviceS, companyS, typeS, detailFaultS ,malStorageId);
+                                MaintenanceController.add_mal_and_extract_istituId(user.getPhone(), deviceS, companyS, typeS, detailFaultS ,malStorageId);
 
                                 clear_edit_text(); //clear from edit text
                                 Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
@@ -167,7 +149,7 @@ public class ReportMalfunctionFragment extends Fragment {
                                 //upload img to storage if exist
                                 uploadImage();
                                 //add this mal to database
-                                maintenance_controller.add_malfunction_with_exist_prod(prod, detailFaultS, user.getPhone() , malStorageId);
+                                MaintenanceController.add_malfunction_with_exist_prod(prod, detailFaultS, user.getPhone() , malStorageId);
 
                                 clear_edit_text();
                                 Toast.makeText(getActivity(), "Report success", Toast.LENGTH_LONG).show();
@@ -231,7 +213,7 @@ public class ReportMalfunctionFragment extends Fragment {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            maintenance_controller.add_gallery_to_storage(root , progressDialog ,filePath , malStorageId)
+            MaintenanceController.add_gallery_to_storage(root , progressDialog ,filePath , malStorageId)
                     .addOnProgressListener( new OnProgressListener<UploadTask.TaskSnapshot>() {
                         // Progress Listener for loading
                      // percentage on the dialog box
@@ -353,7 +335,7 @@ public class ReportMalfunctionFragment extends Fragment {
         progressDialog.setTitle("Uploading...");
         progressDialog.show();
 
-        maintenance_controller.add_cameraPic_to_storage(root , progressDialog ,contentUri , malStorageId)
+        MaintenanceController.add_cameraPic_to_storage(root , progressDialog ,contentUri , malStorageId)
                 .addOnProgressListener( new OnProgressListener<UploadTask.TaskSnapshot>() {
 
             // Progress Listener for loading

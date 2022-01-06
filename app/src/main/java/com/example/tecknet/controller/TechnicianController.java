@@ -7,11 +7,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 
 import com.example.tecknet.R;
-import com.example.tecknet.databinding.FragmentMyMalfunctionsBinding;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetails;
@@ -29,14 +26,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 
 
-public abstract class technician_controller {
+public abstract class TechnicianController {
 
     public static void new_tech(String phone, String area) {
-        DatabaseReference r = shared_controller.connect_db("Technician");
+        DatabaseReference r = SharedController.connect_db("Technician");
         TechnicianInt t = new Technician(phone, area);
         r.child(phone).setValue(t);
     }
@@ -45,7 +41,7 @@ public abstract class technician_controller {
     //////////////************ START TECH HOME PAGE ************//////////////
 
     public static void tech_homePage_see_sumJobs(TextView textJobs, String userPhone) {
-        DatabaseReference r = shared_controller.connect_db("Technician");
+        DatabaseReference r = SharedController.connect_db("Technician");
 
         r.addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,7 +62,7 @@ public abstract class technician_controller {
     }
 
     public static void move_on_mals_insId(TextView textJobs, String area, final int[] countMal) {
-        DatabaseReference mals = shared_controller.connect_db("mals");
+        DatabaseReference mals = SharedController.connect_db("mals");
         mals.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -87,7 +83,7 @@ public abstract class technician_controller {
     }
 
     public static void check_mal_area(TextView textJobs, String area, final int[] countMal, String malIns) {
-        DatabaseReference areaMal = shared_controller.connect_db("institution/" + malIns);//FirebaseDatabase.getInstance().getReference("institution/" + malIns);
+        DatabaseReference areaMal = SharedController.connect_db("institution/" + malIns);//FirebaseDatabase.getInstance().getReference("institution/" + malIns);
 
         areaMal.addValueEventListener(new ValueEventListener() {
             @Override
@@ -109,19 +105,19 @@ public abstract class technician_controller {
 
 
     public static void set_payment_nalfunction(String mal, double pay) {
-        DatabaseReference r = shared_controller.connect_db("mals/" + mal);
+        DatabaseReference r = SharedController.connect_db("mals/" + mal);
         r.child("payment").setValue(pay);
     }
 
     public static void set_status_malfunction(String mal, String status) {
-        DatabaseReference r = shared_controller.connect_db("mals/" + mal);
+        DatabaseReference r = SharedController.connect_db("mals/" + mal);
         r.child("status").setValue(status);
     }
 
     public static void take_malfunction(String tech, String mal) {
-        DatabaseReference r = shared_controller.connect_db("Technician");
+        DatabaseReference r = SharedController.connect_db("Technician");
         r.child(tech + "/my_mals").push().setValue(mal);
-        r = shared_controller.connect_db("mals/" + mal);
+        r = SharedController.connect_db("mals/" + mal);
         r.child("status").setValue("נלקח לטיפול");
         r.child("tech").setValue(tech);
         r.child("is_open").setValue(false);
@@ -129,14 +125,14 @@ public abstract class technician_controller {
     //////////////************ END TECH HOME PAGE ************//////////////
 
     public static void update_technician_area(String phone, Spinner area) {
-        DatabaseReference r = shared_controller.connect_db("Technician/" + phone);
+        DatabaseReference r = SharedController.connect_db("Technician/" + phone);
         String areaStr = area.getSelectedItem().toString();
         r.child("area").setValue(areaStr);
 
     }
 
     public static void load_open_malfunctions_list(UserInt user, Context root, ListView list) {
-        DatabaseReference r = shared_controller.connect_db("mals");
+        DatabaseReference r = SharedController.connect_db("mals");
         r.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -178,7 +174,7 @@ public abstract class technician_controller {
     }
 
     public static void load_my_malfunctions_list(UserInt user, Context root, ListView list) {
-        DatabaseReference r = shared_controller.connect_db("Technician");
+        DatabaseReference r = SharedController.connect_db("Technician");
         assert user != null;
         System.out.println("what are you din heree0");
         r.child(user.getPhone() + "/my_mals").addValueEventListener(new ValueEventListener() {

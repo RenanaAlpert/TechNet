@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.controller.technician_controller;
+import com.example.tecknet.controller.TechnicianController;
 import com.example.tecknet.databinding.FragmentHomeTechnicianBinding;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
@@ -63,7 +63,7 @@ public class HomeFragmentTechnician extends Fragment {
 
         //This text view is for print to the screen the sum of the open current jobs in my area
         TextView textJobs = binding.countWorkInMyArea;
-        technician_controller.tech_homePage_see_sumJobs(textJobs, user2.getPhone()); // in controller is make the count
+        TechnicianController.tech_homePage_see_sumJobs(textJobs, user2.getPhone()); // in controller is make the count
 
         return root;
     }

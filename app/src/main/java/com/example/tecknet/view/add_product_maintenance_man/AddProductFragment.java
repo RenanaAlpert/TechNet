@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.controller.maintenance_controller;
+import com.example.tecknet.controller.MaintenanceController;
 import com.example.tecknet.databinding.FragmentAddProductMaintenanceManBinding;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.ProductDetailsInt;
@@ -123,7 +123,7 @@ public class AddProductFragment extends Fragment {
                 //create product obj
                 ProductDetailsInt pd =new ProductDetails(deviceS, companyS, typeS, yearOfProductionS,dateOfResponsibilityS);
                 //add the product details to DB
-                maintenance_controller.add_product_inventory(user.getPhone() , pd);
+                MaintenanceController.add_product_inventory(user.getPhone() , pd);
                 //clear the edit text
                 clear_product_editext();
                 Toast.makeText(root.getContext(), "הוספת מוצר עבר בהצלחה" , Toast.LENGTH_LONG).show();

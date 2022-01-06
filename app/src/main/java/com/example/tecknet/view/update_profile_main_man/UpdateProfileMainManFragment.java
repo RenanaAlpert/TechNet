@@ -14,8 +14,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tecknet.controller.maintenance_controller;
-import com.example.tecknet.controller.shared_controller;
+import com.example.tecknet.controller.MaintenanceController;
+import com.example.tecknet.controller.SharedController;
 import com.example.tecknet.databinding.FragmentUpdateProfileMainManBinding;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
@@ -58,10 +58,10 @@ public class UpdateProfileMainManFragment extends Fragment {
                 if(check_valid_chang_pass(user , changePass.getText().toString(),changePass2.getText().toString()
                                             , currPass.getText().toString())) {
                     //controller.update_user_details
-                    shared_controller.update_user_details(user.getPhone(), fName.getText().toString(), lName.getText().toString());
+                    SharedController.update_user_details(user.getPhone(), fName.getText().toString(), lName.getText().toString());
 
                     //controller.update_ins_adrr
-                    maintenance_controller.update_institution_adrr(user.getPhone(), city, adrr, area);
+                    MaintenanceController.update_institution_adrr(user.getPhone(), city, adrr, area);
                     clear_edit_text();
                     Toast.makeText(getActivity() , "עדכון פרופיל הצליח" , Toast.LENGTH_LONG).show();
                 }
@@ -95,9 +95,9 @@ public class UpdateProfileMainManFragment extends Fragment {
             if (user.getPass().equals(curr)) {
                 if (pass1.equals(pass2)) {
                     //call the controller
-                    shared_controller.update_user_pass(user.getPhone(), changePass);
+                    SharedController.update_user_pass(user.getPhone(), changePass);
                     /////////////////
-                    shared_controller.change_user_pass(user.getEmail(), pass1);
+                    SharedController.change_user_pass(user.getEmail(), pass1);
                     ////////////////
                     user.setPass(pass1);
 

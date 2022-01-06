@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.tecknet.controller.ValidInputs;
-import com.example.tecknet.controller.shared_controller;
+import com.example.tecknet.controller.SharedController;
 
 //import com.google.android.gms.tasks.OnCompleteListener;
 //import com.google.android.gms.tasks.Task;
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity /**implements GoogleApiClie
                 String passwordS = pass.getText().toString(); // password string
                 if (if_enter_details(emailS, passwordS) && is_valid_detaild(emailS)) {
                     pBar.setVisibility(View.VISIBLE);
-                    shared_controller.login(v , emailS ,passwordS);
+                    SharedController.login(v , emailS ,passwordS);
 
 
 

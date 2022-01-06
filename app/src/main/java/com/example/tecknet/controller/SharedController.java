@@ -36,7 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public abstract class shared_controller {
+public abstract class SharedController {
 
 
 
@@ -110,7 +110,7 @@ public abstract class shared_controller {
      * @param s
      */
     public static void set_status_malfunction(String mal, String s){
-        DatabaseReference r = shared_controller.connect_db("mals/" + mal);
+        DatabaseReference r = SharedController.connect_db("mals/" + mal);
         r.child("status").setValue(s);
     }
 

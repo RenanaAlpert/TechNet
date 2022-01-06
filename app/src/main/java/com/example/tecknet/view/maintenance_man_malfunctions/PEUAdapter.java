@@ -11,18 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.tecknet.R;
-import com.example.tecknet.controller.maintenance_controller;
-import com.example.tecknet.model.ProductExplanationUser;
+import com.example.tecknet.controller.MaintenanceController;
+import com.example.tecknet.model.ProductMalfunctionUser;
 
 import java.util.ArrayList;
 
-public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
+public class PEUAdapter extends ArrayAdapter<ProductMalfunctionUser> {
     private Context mContext;
     private  int mResource;
-    ArrayList<ProductExplanationUser> datalist;
+    ArrayList<ProductMalfunctionUser> datalist;
 
     // constructor for our list view adapter.
-    public PEUAdapter(@NonNull Context context,  int resource,ArrayList<ProductExplanationUser> dataModalArrayList) {
+    public PEUAdapter(@NonNull Context context,  int resource,ArrayList<ProductMalfunctionUser> dataModalArrayList) {
         super(context, resource, dataModalArrayList);
         mContext = context;
         mResource = resource;
@@ -46,7 +46,7 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
         // after inflating an item of listview item
         // we are getting data from array list inside
         // our modal class.
-        ProductExplanationUser peu = getItem(position);
+        ProductMalfunctionUser peu = getItem(position);
 
         // initializing our UI components of list view item.
 
@@ -69,7 +69,7 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
         productTV.setText(peu.getProd().getDevice());
         companyTV.setText(peu.getProd().getCompany());
         malfunctionInfoTV.setText(peu.getMal().getExplanation());
-        techInfoTV.setText(maintenance_controller.techString(peu.getUser()));
+        techInfoTV.setText(MaintenanceController.techString(peu.getUser()));
         statusTV.setText(peu.getMal().getStatus());
 
         this.notifyDataSetChanged();
