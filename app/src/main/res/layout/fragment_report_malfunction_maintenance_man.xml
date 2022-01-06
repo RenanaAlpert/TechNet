@@ -4,42 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tow_layer_color"
     tools:context=".view.report_malfunction_maintenance_man.ReportMalfunctionFragment">
 
 
-    <ImageView
-        android:id="@+id/imageView"
+    <FrameLayout
+        android:id="@+id/report_malfunction_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
 
-        android:scaleType="centerCrop"
-        android:src="@drawable/tow_layer_color"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        <ImageView
+            android:id="@+id/display_img_view"
+            android:layout_width="76dp"
+            android:layout_height="67dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/company"
+            app:layout_constraintVertical_bias="0" />
+    </FrameLayout>
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".07"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+
+<!--        android:scaleType="centerCrop"-->
+<!--        android:src="@drawable/tow_layer_color"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHeight_percent=".07"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
 
     <TextView
         android:id="@+id/malfunction_detailes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="דיווח תקלה"
-        android:textColor="@color/black"
+        android:textColor="@color/teal_700"
         android:textSize="30sp"
 
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintTop_toTopOf="@+id/report_malfunction_fragment"
+        app:layout_constraintVertical_bias="0.05" />
+
 
     <Spinner
         android:id="@+id/products"
@@ -73,7 +92,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/products"
         app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintWidth_percent=".4" />
 
 
     <EditText
@@ -92,10 +112,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/device"
+        app:layout_constraintStart_toEndOf="@+id/device"
+        app:layout_constraintTop_toBottomOf="@id/products"
         app:layout_constraintVertical_bias="0"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".4" />
 
 
     <EditText
@@ -113,11 +133,11 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintHorizontal_bias=".15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/model"
         app:layout_constraintVertical_bias="0"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".4" />
 
 
     <!--    android:visibility="invisible"-->
@@ -141,54 +161,51 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/malfunction_detailes"
-        app:layout_constraintVertical_bias="0.032"
+        app:layout_constraintVertical_bias="0.02"
         app:layout_constraintWidth_percent=".8" />
 
     <ImageView
         android:id="@+id/mal_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="71dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_gallery"
         app:layout_constraintTop_toBottomOf="@id/company"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintWidth_percent=".8" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <Button
         android:id="@+id/button_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="13dp"
-        android:src="@android:drawable/ic_menu_camera"
+        android:text="מצלמה"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button_gallery"
-        app:layout_constraintEnd_toEndOf="@+id/mal_image"
-        app:layout_constraintHorizontal_bias="0.24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/company"
-        app:layout_constraintVertical_bias="0.22000003" />
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/mal_image"
+        app:layout_constraintEnd_toEndOf="parent"
 
-    <androidx.appcompat.widget.AppCompatImageButton
+        app:layout_constraintHorizontal_bias="0.2"
+
+        app:layout_constraintStart_toEndOf="@+id/button_gallery"
+        app:layout_constraintTop_toBottomOf="@+id/company" />
+
+    <Button
         android:id="@+id/button_gallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="13dp"
-        android:src="@android:drawable/ic_menu_gallery"
+        android:text="גלריה"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/mal_image"
-        app:layout_constraintHorizontal_bias="0.24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_camera"
-        app:layout_constraintVertical_bias="0.76" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/report_malfunction_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/company"
+        app:layout_constraintHorizontal_bias="0.1"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
         android:layout_width="0dp"
@@ -199,13 +216,15 @@
 
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/report_malfunction_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mal_image"
-        app:layout_constraintVertical_bias="0.52"
+        app:layout_constraintVertical_bias="0.3"
         app:layout_constraintWidth_percent=".8" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

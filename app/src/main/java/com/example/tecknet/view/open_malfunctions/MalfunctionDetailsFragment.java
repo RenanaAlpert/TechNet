@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.tecknet.R;
@@ -23,6 +24,9 @@ public class MalfunctionDetailsFragment extends Fragment {
     private String company;
     private String type;
     private String explain;
+
+    private EditText search;
+
 
 
     @Override

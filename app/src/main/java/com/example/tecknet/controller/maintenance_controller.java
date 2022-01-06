@@ -2,7 +2,9 @@ package com.example.tecknet.controller;
 
 import static com.example.tecknet.controller.shared_controller.connect_db;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,10 +15,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.tecknet.R;
 import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MaintenanceMan;
@@ -28,13 +32,20 @@ import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.ProductExplanationUser;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
+import com.example.tecknet.view.inventory_maintenance_man.InventoryFragment;
 import com.example.tecknet.view.maintenance_man_malfunctions.PEUAdapter;
 import com.example.tecknet.view.waiting_for_payment.WaitingPaymentAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -343,7 +354,7 @@ public abstract class maintenance_controller {
      * @param detailFault
      */
     public static void add_mal_and_extract_istituId(String userPhone, String model, String company,
-                                                    String type, String detailFault) {
+                                                    String type, String detailFault ,String malStorageId) {
         DatabaseReference dataRef = connect_db("maintenance");
         final String[] insSymbol = new String[1];
 
@@ -355,7 +366,7 @@ public abstract class maintenance_controller {
                     if (!(userPhone.isEmpty())) {
                         insSymbol[0] = dataSnapshot.child(userPhone).getValue(MaintenanceMan.class).getInstitution();
                         assert insSymbol[0] != null;
-                        new_malfunction(userPhone, insSymbol[0], model, company, type, detailFault);
+                        new_malfunction(userPhone, insSymbol[0], model, company, type, detailFault , malStorageId);
                     }
                 }
             }
@@ -376,10 +387,12 @@ public abstract class maintenance_controller {
      * @param explain
      */
     // TODO moriya fix
-    public static void new_malfunction(String phoneMainMan, String symbol, String device, String company, String type, String explain) {
+    public static void new_malfunction(String phoneMainMan, String symbol, String device, String company, String type, String explain
+                                        ,String malStorageId) {
         MalfunctionDetailsInt mal = new MalfunctionDetails(null, symbol, explain);
         DatabaseReference r = connect_db("mals");
 
+        mal.set_malPicId(malStorageId);
         // Generate a reference to a new location and add some data using push()
         DatabaseReference newMalRef = r.push();
         String malId = newMalRef.getKey(); //get string of the uniq key
@@ -409,7 +422,7 @@ public abstract class maintenance_controller {
      * @param explain
      * @param mainManKey
      */
-    public static void add_malfunction_with_exist_prod(ProductDetailsInt prod, String explain, String mainManKey) {
+    public static void add_malfunction_with_exist_prod(ProductDetailsInt prod, String explain, String mainManKey  ,String photoMalId) {
         DatabaseReference dataRef = connect_db("maintenance");
         final String[] insSymbol = new String[1];
         dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -418,7 +431,7 @@ public abstract class maintenance_controller {
                 if (dataSnapshot.child(mainManKey).exists()) {
                     //extract institution number
                     insSymbol[0] = dataSnapshot.child(mainManKey).getValue(MaintenanceMan.class).getInstitution();
-                    new_malfunction_with_existProd(mainManKey, prod, explain, insSymbol[0]);
+                    new_malfunction_with_existProd(mainManKey, prod, explain, insSymbol[0] , photoMalId);
                 }
             }
 
@@ -441,9 +454,10 @@ public abstract class maintenance_controller {
      * @param explain
      * @param insNumber
      */
-    private static void new_malfunction_with_existProd(String mainManKey, ProductDetailsInt prod, String explain, String insNumber) {
+    private static void new_malfunction_with_existProd(String mainManKey, ProductDetailsInt prod, String explain, String insNumber ,String photoMalId) {
         MalfunctionDetailsInt mal = new MalfunctionDetails(prod.getProduct_id(), insNumber, explain);
         DatabaseReference r = connect_db("mals");
+        mal.set_malPicId(photoMalId);
         // Generate a reference to a new location and add some data using push()
         DatabaseReference newMalRef = r.push();
         String malId = newMalRef.getKey(); //get string of the uniq key
@@ -747,6 +761,55 @@ public abstract class maintenance_controller {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+    }
+
+    public static StorageTask add_gallery_to_storage(View root , ProgressDialog progressDialog , Uri filePath , String malStorageId){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+
+        StorageReference ref = storageReference.child("mals_images/" +malStorageId);
+        return  ref.putFile(filePath).addOnSuccessListener(
+                new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Image uploaded successfully
+                        // Dismiss dialog
+                        progressDialog.dismiss();
+                        Toast.makeText(root.getContext(), "Image Uploaded!!", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                // Error, Image not uploaded
+                progressDialog.dismiss();
+                Toast.makeText(root.getContext(), "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+    public static StorageTask add_cameraPic_to_storage(View root , ProgressDialog progressDialog , Uri contentUri , String malStorageId){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+
+        StorageReference image = storageReference.child("mals_images/" + malStorageId );
+        return image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                progressDialog.dismiss();
+                Toast.makeText(root.getContext() ,  "העלה עברה בהצלחה" , Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(root.getContext() ,  "העלה נכשלה" , Toast.LENGTH_SHORT).show();
             }
         });
 

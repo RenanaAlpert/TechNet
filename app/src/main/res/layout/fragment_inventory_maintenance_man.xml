@@ -32,7 +32,8 @@
             android:gravity="center"
             android:text="לא קיימים מוצרים להצגה"
             android:textColor="#86C5C5"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_marginRight="0dp" />
     </LinearLayout>
 
     <ListView

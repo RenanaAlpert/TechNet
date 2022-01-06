@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text="@string/institution_detailes"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/teal_700"
         android:textAlignment="center"
 
         android:textAllCaps="true"
@@ -41,7 +41,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.05"
+        android:layout_gravity="center_horizontal" />
 
 
     <TextView
@@ -52,7 +53,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="10dp"
         android:text="@string/Fill_institution_detailes"
-        android:textColor="@color/teal_700"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -128,8 +129,8 @@
         android:hint="@string/address"
         android:minHeight="48dp"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:elevation="20dp"
         app:layout_constraintVertical_bias="0"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -166,9 +167,10 @@
         android:background="@drawable/edit_text_bg"
         android:hint="@string/phone"
         android:inputType="phone"
+        android:minHeight="48dp"
         android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:elevation="20dp"
         app:layout_constraintVertical_bias="0"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

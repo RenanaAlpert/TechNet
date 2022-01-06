@@ -7,9 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tecknet.R;
@@ -20,8 +23,10 @@ import com.example.tecknet.model.InstitutionDetails;
 import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetails;
 import com.example.tecknet.model.MalfunctionDetailsInt;
+import com.example.tecknet.model.MalfunctionView;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.UserInt;
+import com.example.tecknet.model.MalfunctionView;
 import com.example.tecknet.view.UserViewModel;
 import com.example.tecknet.model.MalfunctionView;
 import com.google.firebase.database.DataSnapshot;
@@ -53,8 +58,6 @@ public class MyMalfunctionsFragment extends Fragment {
 
         return root;
     }
-
-
 
     @Override
     public void onDestroyView() {

@@ -43,6 +43,7 @@ import com.google.firebase.database.core.Tag;
 import java.util.ArrayList;
 
 public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
+
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     private final Context mContext;
     private int mResource;
