@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.my_malfunctions.MyMalfunctionsFragment">
+    tools:context=".view.my_malfunctions.MyMalfunctionsFragment"
+    android:background="@drawable/tow_layer_color">
 
 
     <TextView
@@ -27,8 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:divider="#59FF00"
-        android:dividerHeight="2dip"
+
+        android:dividerHeight="5dip"
         android:textSize="50sp">
 
     </ListView>
