@@ -50,9 +50,6 @@ public class PEUAdapter extends ArrayAdapter<ProductMalfunctionUser> {
 
         // initializing our UI components of list view item.
 
-//        TextView fullTechNameTV = listitemView.findViewById(R.id.idTVtext);
-//        TextView techPhoneTV = listitemView.findViewById(R.id.idTVtext);
-//        TextView techEmailTV = listitemView.findViewById(R.id.idTVtext);
         TextView productTypeTV = convertView.findViewById(R.id.product_maintenance);
         TextView productTV = convertView.findViewById(R.id.device_maintenance);
         TextView companyTV = convertView.findViewById(R.id.company_maintenance);
@@ -60,33 +57,19 @@ public class PEUAdapter extends ArrayAdapter<ProductMalfunctionUser> {
         TextView techInfoTV = convertView.findViewById(R.id.tech_info_maintenance);
         TextView statusTV=convertView.findViewById(R.id.status_maintenance);
 
-//        ImageView courseIV = listitemView.findViewById(R.id.idIVimage);//TODO add picture
 
         // after initializing our items we are
         // setting data to our view.
         // below line is use to set data to our text view.
-        productTypeTV.setText(peu.getProd().getType());
-        productTV.setText(peu.getProd().getDevice());
+        productTypeTV.setText(peu.getProd().getDevice());
+        productTV.setText(peu.getProd().getType());
         companyTV.setText(peu.getProd().getCompany());
         malfunctionInfoTV.setText(peu.getMal().getExplanation());
         techInfoTV.setText(MaintenanceController.techString(peu.getUser()));
         statusTV.setText(peu.getMal().getStatus());
 
         this.notifyDataSetChanged();
-        // in below line we are using Picasso to
-        // load image from URL in our Image VIew.
-//        Picasso.get().load(dataModal.getImgUrl()).into(courseIV);
 
-        // below line is use to add item click listener
-        // for our item of list view.
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // on the item click on our list view.
-//                // we are displaying a toast message.
-//                Toast.makeText(getContext(), "Item clicked is : " + peu.getMalfunctionExplanation(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
         return convertView;
     }
 }

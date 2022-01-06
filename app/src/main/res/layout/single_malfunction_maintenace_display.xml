@@ -23,64 +23,65 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
+        android:gravity="start"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/product_type_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:gravity="start" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/product_maintenance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="start"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/product_type_txt"
         android:textAlignment="viewStart"
-        android:textColor="@color/black"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentRight="true"
-        android:gravity="start" />
+        android:textColor="@color/black" />
 
     <TextView
         android:layout_width="402dp"
         android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/product_maintenance"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="start"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/device_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:gravity="start" />
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/device_maintenance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_maintenance"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
+        android:gravity="start"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/device_txt"
         android:textAlignment="viewStart"
-        android:textColor="@color/black"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:gravity="start" />
+        android:textColor="@color/black" />
     <TextView
         android:layout_width="402dp"
         android:layout_height="match_parent"
@@ -177,23 +178,24 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
         android:gravity="start" />
+
     <TextView
         android:layout_width="402dp"
         android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/tech_info_maintenance"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="start"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:paddingBottom="10dp"
         android:text="@string/status_header_txt"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:gravity="start" />
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/status_maintenance"
         android:layout_width="wrap_content"
