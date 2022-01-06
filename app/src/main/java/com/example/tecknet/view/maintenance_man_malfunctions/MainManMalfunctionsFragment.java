@@ -54,7 +54,7 @@ public class MainManMalfunctionsFragment extends Fragment {
 
         // below line is use to initialize our variables
         textView = binding.malfunctionsDontExist;
-        delBut = binding.btnDeleteMalfunction;
+        delBut = binding.btnDelete;
         malfunctionsList = root.findViewById(R.id.listviewMainManMalfunctions);
         peuModalArrayList = new ArrayList<>();
 
