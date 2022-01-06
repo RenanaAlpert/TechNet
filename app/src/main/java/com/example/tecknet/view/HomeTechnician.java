@@ -1,7 +1,7 @@
 package com.example.tecknet.view;
 
-import static com.example.tecknet.view.MyMalfunctionsAdapter.MY_PERMISSIONS_REQUEST_SEND_SMS;
-import static com.example.tecknet.view.MyMalfunctionsAdapter.sendSMS;
+import static com.example.tecknet.view.my_malfunctions.MyMalfunctionsAdapter.MY_PERMISSIONS_REQUEST_SEND_SMS;
+import static com.example.tecknet.view.my_malfunctions.MyMalfunctionsAdapter.sendSMS;
 
 import android.Manifest;
 import android.app.AlertDialog;

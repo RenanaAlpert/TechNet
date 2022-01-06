@@ -21,7 +21,7 @@ import com.example.tecknet.model.Technician;
 import com.example.tecknet.model.TechnicianInt;
 import com.example.tecknet.model.User;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.model.malfunctionView;
+import com.example.tecknet.model.MalfunctionView;
 import com.example.tecknet.view.my_malfunctions.MyMalfunctionsAdapter;
 import com.example.tecknet.view.open_malfunctions.OpenMalfunctionsAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -140,7 +140,7 @@ public abstract class technician_controller {
         r.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<malfunctionView> arrMals = new ArrayList<>();
+                ArrayList<MalfunctionView> arrMals = new ArrayList<>();
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     MalfunctionDetailsInt mal = ds.getValue(MalfunctionDetails.class);
@@ -156,7 +156,7 @@ public abstract class technician_controller {
                                 } else {
                                     p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
                                 }
-                                arrMals.add(new malfunctionView(mal, p, ins, user));
+                                arrMals.add(new MalfunctionView(mal, p, ins, user));
                                 OpenMalfunctionsAdapter oma = new OpenMalfunctionsAdapter(root, R.layout.fragment_open_malfunctions_row, arrMals);
                                 list.setAdapter(oma);
 
@@ -184,7 +184,7 @@ public abstract class technician_controller {
         r.child(user.getPhone() + "/my_mals").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
-                ArrayList<malfunctionView> arrMals = new ArrayList<>();
+                ArrayList<MalfunctionView> arrMals = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : dataSnapshot1.getChildren()) {
                     String mal_id = dataSnapshot.getValue(String.class);
                     r.getDatabase().getReference("mals").addValueEventListener(new ValueEventListener() {
@@ -211,7 +211,7 @@ public abstract class technician_controller {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                 UserInt maintenance = dataSnapshot.child(ins.getContact()).getValue(User.class);
-                                                arrMals.add(new malfunctionView(mal, p, ins, maintenance));
+                                                arrMals.add(new MalfunctionView(mal, p, ins, maintenance));
                                                 MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root, R.layout.fragment_my_malfunctions_row, arrMals);
                                                 list.setAdapter(oma);
                                             }

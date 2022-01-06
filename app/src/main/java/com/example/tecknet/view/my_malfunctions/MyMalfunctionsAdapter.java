@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -34,18 +35,18 @@ import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.model.malfunctionView;
+import com.example.tecknet.model.MalfunctionView;
 import com.example.tecknet.view.HomeTechnician;
 import com.google.android.material.internal.ContextUtils;
 import com.google.firebase.database.core.Tag;
 
 import java.util.ArrayList;
 
-public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
+public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     private final Context mContext;
     private int mResource;
-    private ArrayList<malfunctionView> arrMals;
+    private ArrayList<MalfunctionView> arrMals;
     private MalfunctionDetailsInt mal;
     private ProductDetailsInt product;
     private InstitutionDetailsInt ins;
@@ -53,7 +54,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
     protected static String message;
 
 
-    public MyMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<malfunctionView> obj) {
+    public MyMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<MalfunctionView> obj) {
         super(context, resource, obj);
         mContext = context;
         mResource = resource;

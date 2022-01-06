@@ -1,13 +1,13 @@
 package com.example.tecknet.model;
 
-public class malfunctionView {
+public class MalfunctionView {
 
     private MalfunctionDetailsInt mal;
     private InstitutionDetailsInt ins;
     private ProductDetailsInt product;
     private UserInt maintenance;
 
-    public malfunctionView(MalfunctionDetailsInt mal, ProductDetailsInt product, InstitutionDetailsInt ins, UserInt user) {
+    public MalfunctionView(MalfunctionDetailsInt mal, ProductDetailsInt product, InstitutionDetailsInt ins, UserInt user) {
         this.mal = mal;
         this.product = product;
         this.ins = ins;

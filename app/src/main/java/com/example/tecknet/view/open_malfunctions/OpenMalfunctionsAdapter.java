@@ -22,11 +22,11 @@ import com.example.tecknet.model.InstitutionDetailsInt;
 import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetailsInt;
 import com.example.tecknet.model.UserInt;
-import com.example.tecknet.model.malfunctionView;
+import com.example.tecknet.model.MalfunctionView;
 
 import java.util.ArrayList;
 
-public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
+public class OpenMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
 
 
     private final Context mContext;
@@ -36,7 +36,7 @@ public class OpenMalfunctionsAdapter extends ArrayAdapter<malfunctionView> {
     private InstitutionDetailsInt ins;
     private UserInt user;
 
-    public OpenMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<malfunctionView> obj) {
+    public OpenMalfunctionsAdapter(@NonNull Context context, int resource, @NonNull ArrayList<MalfunctionView> obj) {
         super(context, resource, obj);
         mContext = context;
         mResource = resource;

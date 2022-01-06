@@ -1,4 +1,4 @@
-package com.example.tecknet.view;
+package com.example.tecknet.view.my_malfunctions;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -23,8 +23,7 @@ import com.example.tecknet.model.MalfunctionDetailsInt;
 import com.example.tecknet.model.ProductDetails;
 import com.example.tecknet.model.UserInt;
 import com.example.tecknet.view.UserViewModel;
-import com.example.tecknet.model.malfunctionView;
-import com.example.tecknet.view.my_malfunctions.MyMalfunctionsViewModel;
+import com.example.tecknet.model.MalfunctionView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,15 +34,12 @@ import java.util.ArrayList;
 
 public class MyMalfunctionsFragment extends Fragment {
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
-    private MyMalfunctionsViewModel myMalfunctionsViewModel;
     private FragmentMyMalfunctionsBinding binding;
     private View root;
     public ListView list;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        myMalfunctionsViewModel =
-                new ViewModelProvider(this).get(MyMalfunctionsViewModel.class);
 
         binding = FragmentMyMalfunctionsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
