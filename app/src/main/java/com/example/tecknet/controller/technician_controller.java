@@ -180,22 +180,30 @@ public abstract class technician_controller {
     public static void load_my_malfunctions_list(UserInt user, Context root, ListView list) {
         DatabaseReference r = shared_controller.connect_db("Technician");
         assert user != null;
+        System.out.println("what are you din heree0");
         r.child(user.getPhone() + "/my_mals").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
                 ArrayList<MalfunctionView> arrMals = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : dataSnapshot1.getChildren()) {
+                    arrMals.clear();
+                    System.out.println("what are you din hereee1");
                     String mal_id = dataSnapshot.getValue(String.class);
                     r.getDatabase().getReference("mals").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot ds) {
+                            System.out.println("what are you din hereee2");
+                            arrMals.clear();
                             assert mal_id != null;
                             MalfunctionDetailsInt mal = ds.child(mal_id).getValue(MalfunctionDetails.class);
                             assert mal != null;
                             if(!mal.getStatus().equals("שולם")) {
+                                arrMals.clear();
                                 r.getDatabase().getReference("institution/" + mal.getInstitution()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot das) {
+                                        System.out.println("what are you din hereee3");
+                                        arrMals.clear();
                                         InstitutionDetailsInt ins = das.getValue(InstitutionDetails.class);
                                         ProductDetails p;
                                         if (mal.getProduct_id() == null) {
@@ -203,15 +211,19 @@ public abstract class technician_controller {
                                         } else {
                                             p = das.child("inventory/" + mal.getProduct_id()).getValue(ProductDetails.class);
                                         }
+                                        arrMals.clear();
                                         assert ins != null;
 //                                        assert p != null;
                                         System.out.println("is nukk? " + p);
                                         if (p != null) {
+                                            arrMals.clear();
                                             r.getDatabase().getReference("users").addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                                                     UserInt maintenance = dataSnapshot.child(ins.getContact()).getValue(User.class);
                                                     arrMals.add(new MalfunctionView(mal, p, ins, maintenance));
+                                                    System.out.println("hereeeeeeee + arrMals.size :" + arrMals.size());
                                                     MyMalfunctionsAdapter oma = new MyMalfunctionsAdapter(root, R.layout.fragment_my_malfunctions_row, arrMals);
                                                     list.setAdapter(oma);
                                                 }
@@ -222,6 +234,8 @@ public abstract class technician_controller {
                                                 }
                                             });
                                         }
+                                        arrMals.clear();////
+
                                     }
 
                                     @Override

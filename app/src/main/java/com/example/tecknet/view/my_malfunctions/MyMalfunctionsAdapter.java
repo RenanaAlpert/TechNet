@@ -105,9 +105,12 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
             button.setEnabled(false);
         }
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                arrMals.clear();
+
                 if (button.getText().equals("התחל טיפול")) {
                     set_status_malfunction(mal.getMal_id(), "בטיפול");
                     button.setText("לסיום");
@@ -118,7 +121,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
                     alert.setMessage("\nעלות הטיפול:").setCancelable(false);
                     alert.setTitle("בקשת תשלום");
                     alert.setView(edittext);
-
+                    arrMals.clear();
                     alert.setPositiveButton("שלח", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             if (false) {
@@ -143,7 +146,6 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
 
                     alert.show();
                 }
-                arrMals.clear();
             }
         });
 

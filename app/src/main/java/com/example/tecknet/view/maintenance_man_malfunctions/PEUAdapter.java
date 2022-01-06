@@ -27,6 +27,7 @@ public class PEUAdapter extends ArrayAdapter<ProductExplanationUser> {
         mContext = context;
         mResource = resource;
         datalist = dataModalArrayList;
+        System.out.println("PEUAdapter con sizr =  " +dataModalArrayList.size());
 
     }
 
