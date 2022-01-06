@@ -130,7 +130,7 @@ public class HomeTechnician extends AppCompatActivity {
         if (requestCode == MY_PERMISSIONS_REQUEST_SEND_SMS) {
             // Request for camera permission.
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission has been granted. Start camera preview Activity.
+                // Permission has been granted. send sms.
                 Toast.makeText(getApplicationContext(), R.string.sms_permission_granted,
                         Toast.LENGTH_SHORT)
                         .show();
@@ -147,7 +147,7 @@ public class HomeTechnician extends AppCompatActivity {
 
     public void permissionsSMS() {
         // Check if the SMS permission has been granted
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
                 == PackageManager.PERMISSION_GRANTED) {
             // Permission is already available, start camera preview
             Toast.makeText(getApplicationContext(), R.string.sms_permission_available,

@@ -533,6 +533,7 @@ public abstract class maintenance_controller {
     /**
      * this function load list of malfunction of current user(maintenance man),
      * and put it inside adapter for display
+     * display only malfunction that weren't finished.
      *
      * @param user              - the current app user
      * @param peuModalArrayList - list of the data model to be displayed
@@ -548,20 +549,21 @@ public abstract class maintenance_controller {
             public void onDataChange(@NonNull DataSnapshot dsMainMan) {
                 DataSnapshot dsMalList = dsMainMan.child(user.getPhone());
                 peuModalArrayList.clear();
-
                 if (dsMalList.hasChild("malfunctions_list")) {
                     connect_db("mals").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dsMals) {
+                            peuModalArrayList.clear();
 
                             for (DataSnapshot ds_mal_id : dsMalList.child("malfunctions_list").getChildren()) {
-
+                                peuModalArrayList.clear();
                                 String mal_id = ds_mal_id.getValue(String.class);
-//                                assert dsMals.hasChild(mal_id);
                                 if(!dsMals.hasChild(mal_id) ) continue;
                                 MalfunctionDetailsInt mal = dsMals.child(mal_id).getValue(MalfunctionDetails.class);
 
                                 assert mal != null;
+                                //display only malfunctions before done
+                                if(!mal.getStatus().equals(WATES_PAYMENT)&&!mal.getStatus().equals(PAYED))
                                 connect_db("institution").addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dsIns) {
@@ -570,7 +572,6 @@ public abstract class maintenance_controller {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dsUsers) {
 
-                                                String explanation = mal.getExplanation();
                                                 ProductDetailsInt prod;
                                                 UserInt tech;
                                                 if (mal.getProduct_id() == null) {
@@ -588,6 +589,7 @@ public abstract class maintenance_controller {
                                                 peuModalArrayList.add(new ProductExplanationUser(prod, tech, mal));
                                                 PEUAdapter peuAdapter = new PEUAdapter(context, layout, peuModalArrayList);
                                                 malfunctionsList.setAdapter(peuAdapter);
+
                                             }
 
                                             @Override
@@ -698,8 +700,6 @@ public abstract class maintenance_controller {
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                         }//listener for mals
                     });
-
-//                Toast.makeText(MainManMalfunctionsFragment.this, "Fail to load data..", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -714,7 +714,6 @@ public abstract class maintenance_controller {
     //
     public static void delete_malfunction(ProductExplanationUser peu, UserInt user) {
         System.out.println("main man controller delete_malfunction");
-
         delete_mal_from_mals(peu , user);
         delete_mal_from_mainMan(peu , user);
 
@@ -730,11 +729,7 @@ public abstract class maintenance_controller {
                     for (DataSnapshot ds : dsMalsList.getChildren()) {
                         String malId = ds.getValue(String.class);
                         String key = ds.getKey();
-//                        System.out.println("peu.getMal().getMal_id() : " + peu.getMal().getMal_id());
                         if (malId.equals(peu.getMal().getMal_id())) {
-//                            System.out.println("mal id : " +malId);
-//                            System.out.println("mal key : " +key);
-
                             dataRefMainMan.child("malfunctions_list").child(key).removeValue();
                             break;
                         }
@@ -803,13 +798,13 @@ public abstract class maintenance_controller {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                 progressDialog.dismiss();
-                Toast.makeText(root.getContext() ,  "העלה עברה בהצלחה" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(root.getContext() ,  "העלאה עברה בהצלחה" , Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(root.getContext() ,  "העלה נכשלה" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(root.getContext() ,  "העלאה נכשלה" , Toast.LENGTH_SHORT).show();
             }
         });
 

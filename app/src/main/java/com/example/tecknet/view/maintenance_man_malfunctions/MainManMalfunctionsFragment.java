@@ -36,7 +36,7 @@ public class MainManMalfunctionsFragment extends Fragment {
     private UserViewModel uViewModel;
     private UserInt user;
     private View root;
-    private TextView textView;
+//    private TextView textView;
     private Button delBut;
     private ListView malfunctionsList;
     private ArrayList<ProductExplanationUser> peuModalArrayList;
@@ -53,7 +53,7 @@ public class MainManMalfunctionsFragment extends Fragment {
         user = uViewModel.getItem().getValue();
 
         // below line is use to initialize our variables
-        textView = binding.malfunctionsDontExist;
+//        textView = binding.malfunctionsDontExist;
         delBut = binding.btnDelete;
         malfunctionsList = root.findViewById(R.id.listviewMainManMalfunctions);
         peuModalArrayList = new ArrayList<>();
@@ -63,7 +63,7 @@ public class MainManMalfunctionsFragment extends Fragment {
         maintenance_controller.loadDataInListview(user, peuModalArrayList, malfunctionsList, R.layout.single_malfunction_maintenace_display, this.getContext());
 
         //If the list is empty ( don't enter products to his inventory)  show msg
-        malfunctionsList.setEmptyView(textView);
+//        malfunctionsList.setEmptyView(textView);
 
         //Click on delete button for delete mal
         delBut.setOnClickListener(new View.OnClickListener() {

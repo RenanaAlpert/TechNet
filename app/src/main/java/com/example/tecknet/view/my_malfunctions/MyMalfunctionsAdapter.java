@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ import com.example.tecknet.model.UserInt;
 import com.example.tecknet.model.MalfunctionView;
 import com.example.tecknet.view.HomeTechnician;
 import com.google.android.material.internal.ContextUtils;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.protocol.HTTP;
 import com.google.firebase.database.core.Tag;
 
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ import java.util.ArrayList;
 public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
 
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
-    private final Context mContext;
+    private static Context mContext;
     private int mResource;
     private ArrayList<MalfunctionView> arrMals;
     private MalfunctionDetailsInt mal;
@@ -152,12 +154,18 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
         return convertView;
     }
 
+    /**
+     * send messege after been called from check permission in activity
+     */
     public static void sendSMS() {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(phoneNo, null, message, null, null);
     }
 
-
+    /**
+     * create messege and then sent to check permissiones in activity
+     * @param pay
+     */
     private void createSMS(double pay) {
         message = " התקלה במכשיר " + product.getType() + " - " + mal.getExplanation()
                 + " תוקנה בהצלחה. מחיר הטיפול הינו " + pay + " ש\"ח\n";
