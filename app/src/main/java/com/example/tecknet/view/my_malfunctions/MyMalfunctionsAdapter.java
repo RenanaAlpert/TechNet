@@ -98,11 +98,9 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
         Button button = convertView.findViewById(R.id.button);
         if (mal.getStatus().equals("נלקח לטיפול")) {
             button.setText("התחל טיפול");
-        }
-        else if (mal.getStatus().equals("בטיפול")) {
+        } else if (mal.getStatus().equals("בטיפול")) {
             button.setText("לסיום");
-        }
-        else if (mal.getStatus().equals("מחכה לתשלום")){
+        } else if (mal.getStatus().equals("מחכה לתשלום")) {
             button.setEnabled(false);
         }
 
@@ -113,9 +111,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
                     set_status_malfunction(mal.getMal_id(), "בטיפול");
                     button.setText("לסיום");
                     arrMals.clear(); /// yuval added this line to refresh the list view
-                }
-
-                else if (button.getText().equals("לסיום")) {
+                } else if (button.getText().equals("לסיום")) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
                     final EditText edittext = new EditText(v.getContext());
                     alert.setMessage("\nעלות הטיפול:").setCancelable(false);
@@ -130,21 +126,17 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
                                 String pay = edittext.getText().toString();
                                 double payment = Double.parseDouble(pay);
                                 phoneNo = ins.getContact();
-                                try {
-                                    createSMS(payment);
-                                } finally {
-                                    System.out.println("hello there "+mal.getMal_id()+" "+ payment);
-                                    technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
-                                    technician_controller.set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
-                                }
-
-
+                                System.out.println("hello there " + mal.getMal_id() + " " + payment);
+                                createSMS(payment);
+                                technician_controller.set_payment_nalfunction(mal.getMal_id(), payment);
+                                technician_controller.set_status_malfunction(mal.getMal_id(), "מחכה לתשלום");
+                                arrMals.clear(); /// yuval added this line to refresh the list view
                             }
                         }
                     }).setNegativeButton("חזור", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             dialog.cancel();
-                            //arrMals.clear(); /// yuval added this line to refresh the list view
+                            arrMals.clear(); /// yuval added this line to refresh the list view
                         }
                     });
 
@@ -165,7 +157,7 @@ public class MyMalfunctionsAdapter extends ArrayAdapter<MalfunctionView> {
     private void createSMS(double pay) {
         message = " התקלה במכשיר " + product.getType() + " - " + mal.getExplanation()
                 + " תוקנה בהצלחה. מחיר הטיפול הינו " + pay + " ש\"ח\n";
-        ((HomeTechnician)mContext).permissionsSMS();
+        ((HomeTechnician) mContext).permissionsSMS();
 
     }
 
