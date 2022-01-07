@@ -176,19 +176,16 @@ public abstract class TechnicianController {
     public static void load_my_malfunctions_list(UserInt user, Context root, ListView list) {
         DatabaseReference r = SharedController.connect_db("Technician");
         assert user != null;
-        System.out.println("what are you din heree0");
         r.child(user.getPhone() + "/my_mals").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
                 ArrayList<MalfunctionView> arrMals = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : dataSnapshot1.getChildren()) {
                     arrMals.clear();
-                    System.out.println("what are you din hereee1");
                     String mal_id = dataSnapshot.getValue(String.class);
                     r.getDatabase().getReference("mals").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot ds) {
-                            System.out.println("what are you din hereee2");
                             arrMals.clear();
                             assert mal_id != null;
                             MalfunctionDetailsInt mal = ds.child(mal_id).getValue(MalfunctionDetails.class);
