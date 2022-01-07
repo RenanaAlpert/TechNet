@@ -39,9 +39,7 @@ public class PEUAdapter extends ArrayAdapter<ProductMalfunctionUser> {
         LayoutInflater linf = LayoutInflater.from(mContext);
         convertView = linf.inflate(R.layout.single_malfunction_maintenace_display, parent, false);
         System.out.println("PEUAdapter getView");
-//        if (listitemView == null) {
-//            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.single_malfunction_maintenace_display, parent, false);
-//        }
+
 
         // after inflating an item of listview item
         // we are getting data from array list inside

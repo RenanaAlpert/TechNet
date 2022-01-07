@@ -522,7 +522,7 @@ public abstract class MaintenanceController {
         if (user == null) {
             techStr += "לא הוקצה";
         } else {
-            techStr += "שם הטכנאי: " + user.getFirstName() + " " + user.getFirstName() + "\n";
+            techStr += "שם הטכנאי: " + user.getFirstName() + " " + user.getLastName() + "\n";
             techStr += "מס' טלפון: " + user.getPhone() + "\n" + "מייל: " + user.getEmail();
         }
         return techStr;
