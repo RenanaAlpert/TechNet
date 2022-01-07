@@ -24,9 +24,9 @@
         tools:layout="@layout/fragment_my_malfunctions" />
     <fragment
         android:id="@+id/nav_update_details"
-        android:name="com.example.tecknet.view.update_profile_main_man.UpdateProfileMainManFragment"
+        android:name="com.example.tecknet.view.update_profile_technician.UpdateProfileTechnicianFragment"
         android:label="@string/update_details"
-        tools:layout="@layout/fragment_update_profile_main_man" >
+        tools:layout="@layout/fragment_update_profile_technician" >
         <argument
             android:name="user"
             app:argType="com.example.tecknet.model.UserInt"
