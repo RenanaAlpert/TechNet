@@ -69,6 +69,7 @@
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/drawable/ic_year.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/drawable/logotech_background.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/drawable/menu_shape.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/drawable/rounded_buttons.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/drawable/shape.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/drawable/technetlogonew_background.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/drawable/tow_layer_color.xml" value="0.17864583333333334" />
@@ -78,8 +79,6 @@
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/layout/content_main_technician.xml" value="0.1118659420289855" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/layout/fragment_maintenance_waiting_for_payment.xml" value="0.1" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/layout/fragment_manaintance_man_malfunctions.xml" value="0.1" />
-        <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/layout/singal_main_man_waiting_for_payment.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/layout/single_malfunction_maintenace_display.xml" value="0.13405797101449277" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/layout/fragment_my_malfunctions.xml" value="0.1118659420289855" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/layout/fragment_my_malfunctions_row.xml" value="0.1" />
         <entry key="..\:/Users/moriy/Documents/software_engineering/app/src/main/res/layout/fragment_open_malfunctions.xml" value="0.1" />
@@ -152,26 +151,20 @@
         <entry key="..\:/temp/software_engineering/app/src/main/res/drawable/tow_layer_color.xml" value="0.19583333333333333" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/drawable/vie_bg.xml" value="0.19583333333333333" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_loading_screen.xml" value="0.1" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.16666666666666666" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_main_technician.xml" value="0.14666666666666667" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_maintenance_man_details.xml" value="0.26944444444444443" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_malfunction_details.xml" value="0.1" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_sign_up.xml" value="0.14666666666666667" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_tech_men_details.xml" value="0.1" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_main_main_man.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/activity_tech_men_details.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/app_bar_main_maintenance_man.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/app_bar_main_technician.xml" value="0.1796875" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/content_main_maintenance_man.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/content_main_technician.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_add_product_maintenance_man.xml" value="0.16666666666666666" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_home_maintenance_man.xml" value="0.1" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_report_malfunction_maintenance_man.xml" value="0.16666666666666666" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_report_not_in_stock.xml" value="0.1" />
-        <entry key="..\:/temp/software_engineering/app/src/main/res/layout/nav_header_main_maintenance_man.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_home_technician.xml" value="0.1" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_inventory_maintenance_man.xml" value="0.22" />
         <entry key="..\:/temp/software_engineering/app/src/main/res/layout/fragment_inventory_maintenancr_man_row.xml" value="0.16666666666666666" />
