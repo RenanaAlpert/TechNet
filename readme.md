@@ -42,9 +42,11 @@ At the moment, the application is only in Hebrew.
 #### From the technician side:
 ##### registration screen
 ![img.png](img.png)
-##### available jobs (malfunctions), pressing the button will take the job
+##### available jobs (malfunctions)
+pressing the button will take the job
 ![img_7.png](img_7.png)
 ##### jobs in progress 
-![img_8.png](img_8.png), pressing the button will request payment
+pressing the button will request payment
+![img_8.png](img_8.png) 
 ##### payment request (fake payment, only sms)
 ![img_9.png](img_9.png)
