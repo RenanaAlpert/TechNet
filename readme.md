@@ -20,7 +20,7 @@ With the help of the application, it will be possible to order a technician easi
 
 At the moment, the application is only in Hebrew.
 
-##Installation:
+## Installation:
 ```clone   ```
 ## screens
 #### From the maintenance person side:
@@ -35,8 +35,10 @@ At the moment, the application is only in Hebrew.
 ![img_4.png](img_4.png)
 ##### malfunction opened & managing payments
 ![img_5.png](img_5.png)
-##### inventory
 ![img_6.png](img_6.png)
+##### inventory
+![img_10.png](img_10.png)
+
 #### From the technician side:
 ##### registration screen
 ![img.png](img.png)
